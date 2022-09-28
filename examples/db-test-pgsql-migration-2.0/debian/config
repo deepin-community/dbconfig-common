@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+#set -x
+
+. /usr/share/debconf/confmodule
+
+if [ -f /usr/share/dbconfig-common/dpkg/config.pgsql ]; then
+	. /usr/share/dbconfig-common/dpkg/config.pgsql 
+	# the previous version (1.9) didn't use dbconfig-common.  this is
+	# how we accomodate users who already have this old version installed:
+	dbc_first_version="2.0"
+	dbc_load_include="sh:/etc/db-test-pgsql-migration/db.conf"
+	dbc_go db-test-pgsql-migration "$@"
+fi

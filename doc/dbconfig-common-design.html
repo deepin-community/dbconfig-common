@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>
+dbconfig-common: technical reference
+</title>
+</head>
+<body>
+
+<h1>
+dbconfig-common 
+</h1>
+<h2>
+Technical reference
+</h2>
+<p>Copyright &copy; 2004 sean finney</p>
+<p>This document is licensed under the <a href="https://spdx.org/licenses/AFL-2.1.html">Academic Free License, Version 2.1</a>.</p>
+
+<h3> Abstract </h3>
+
+<p>
+This document is a technical reference for developers who are curious
+regarding how dbconfig-common works. Before reading this document, it's
+highly recommended that you read the <a href="dbapp-policy.html">best practices for database applications</a> draft, as the implementation design is based on
+rationale detailed in that document. If you are a developer looking to
+use dbconfig-common in your packages, you should read <a
+href="dbconfig-common.html">using dbconfig-common in debian
+packages</a> first, as it will probably contain the information in which
+you're interested in a more condensed and accessible form.</p>
+
+<h3>Global maintainer script includes</h3>
+<hr>
+<ul>
+<li> /usr/share/dbconfig-common/dpkg</li>
+<li> /usr/share/dbconfig-common/dpkg/$script</li>
+<li> /usr/share/dbconfig-common/dpkg/$script.$dbtype</li>
+</ul>
+<hr>
+
+<p>
+For every maintainer script (.config, .postinst, etc) there are hunks
+of shell code which can be included by package maintainers. This way
+whatever the "best practices" are deemed to be, the latest version of
+this package and their scripts will implement it transparently for the
+packages which use them. For each maintainer script, there is a generic
+script and a database-specific script. That is,
+you will find scripts named:
+
+<ul>
+<li> /usr/share/dbconfig-common/dpkg/postinst</li>
+<li> /usr/share/dbconfig-common/dpkg/postinst.mysql</li>
+</ul>
+
+These scripts are sourced (not executed), so the lines in the package
+maintainer scripts should look like this
+
+<pre>
+<code>
+#!/bin/sh
+# postinst maintainer script for foo-mysql
+
+# source debconf stuff
+. /usr/share/debconf/confmodule
+# source dbconfig-common stuff
+. /usr/share/dbconfig-common/dpkg/postinst.mysql 
+dbc_go foo-mysql "$@"
+
+# ... rest of code ...
+</code>
+</pre>
+
+<p>
+Note the arguments passed when sourcing the script.</p>
+
+<h3> Per-package database installation code </h3>
+<hr>
+<li> /usr/share/dbconfig-common/data/$package/install/$dbtype
+<li> /usr/share/dbconfig-common/data/$package/install-dbadmin/$dbtype
+<li> /usr/share/dbconfig-common/scripts/$package/install/$dbtype
+</ul>
+<hr>
+
+<p>
+The skeletons for the underlying databases are found under
+this directory, in per-package subdirectories, underneath
+which are files specific to each of the individual supported
+database types. These scripts do not need to include the code
+necessary for creating database users or the databases themselves
+(this is taken care of elsewhere), only the data used to create
+the necessary tables and/or otherwise populate the database is
+needed here.</p>
+
+<h3> Per-package database upgrade code </h3>
+<hr>
+<li> /usr/share/dbconfig-common/data/$package/upgrade/$dbtype</li>
+<li> /usr/share/dbconfig-common/scripts/$package/upgrade/$dbtype</li>
+<li> /usr/share/dbconfig-common/data/$package/upgrade/$dbtype/$vers</li>
+<li> /usr/share/dbconfig-common/scripts/$package/upgrade/$dbtype/$vers</li>
+</ul>
+<hr>
+
+<p>
+Upgrades are probably the most complicated part of this common
+infrastructure. Often in the life of a database application the
+underlying database needs to be altered in some way. In this
+implementation, for every file that matches the form
+
+<pre>
+<code>
+/usr/share/dbconfig-common/data/$package/upgrade/$dbtype/$vers
+</code>
+</pre>
+
+<p>
+If $vers is more recent than the most recently configured version of
+the package (as passed to $2 in the postinst), then they are applied,
+in sorted order.
+
+
+<h3> Global and per-package configuration </h3>
+<hr>
+<ul>
+<li> /etc/dbconfig-common/config
+<li> /etc/dbconfig-common/$package.conf
+</ul>
+<hr>
+
+<p>
+Config contains the default global settings to be used during configuration.
+</p>
+
+<p>
+$package.conf contains the per-package settings for database applications.
+These settings are fed into debconf, so whether if debconf is set to
+non-interactive mode these will be the authoritative values, otherwise
+they will serve as pre-seeded defaults.
+</p>
+
+<p>
+All of these files are in a shell-script include format, such that they
+can be easily read and written by the common configuration scripts.
+They're generated and maintained via ucf, so this setup should be fairly
+friendly to the admin who wants to manually edit the files.
+</p>
+
+</body>
+</html>

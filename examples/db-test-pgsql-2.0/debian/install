@@ -1,0 +1,2 @@
+#! /usr/bin/dh-exec
+pgsql.sql             => usr/share/dbconfig-common/data/db-test-pgsql/install/pgsql

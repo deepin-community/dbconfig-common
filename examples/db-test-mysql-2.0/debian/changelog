@@ -1,0 +1,70 @@
+db-common-example (2.0) unstable; urgency=low
+
+  * okay, this should be the final version common across all db-test* 
+    packages, minus another version for testing upgrade paths one
+    more time.
+
+ -- sean finney <seanius@debian.org>  Wed, 16 Mar 2005 19:13:05 -0500
+
+db-common-example (1.1) unstable; urgency=low
+
+  * now testing script based mysql install/upgrades
+
+ -- Sean Finney <seanius@debian.org>  Fri, 04 Mar 2005 00:12:58 -0500
+
+db-common-example (0.9) unstable; urgency=low
+
+  * now testing automatic include file generation in db-test-mysql
+
+ -- Sean Finney <seanius@debian.org>  Thu, 24 Feb 2005 23:44:00 -0500
+
+db-common-example (0.8) unstable; urgency=low
+
+  * another test for upgrade path with db-test-pgsql
+
+ -- Sean Finney <seanius@debian.org>  Tue, 25 Jan 2005 00:06:29 -0500
+
+db-common-example (0.7) unstable; urgency=low
+
+  * test for upgrade path with db-test-pgsql
+
+ -- Sean Finney <seanius@debian.org>  Fri, 24 Dec 2004 22:50:35 -0800
+
+db-common-example (0.6) unstable; urgency=low
+
+  * db-test-pgsql now attempts to use postgres support.
+
+ -- Sean Finney <seanius@debian.org>  Sun, 05 Dec 2004 22:49:16 -0500
+
+db-common-example (0.5) unstable; urgency=low
+
+  * upgrade test for db-test-mysql
+
+ -- Sean Finney <seanius@debian.org>  Mon, 29 Nov 2004 01:36:33 -0500
+
+db-common-example (0.4) unstable; urgency=low
+
+  * baseline test for db-test-mysql
+
+ -- Sean Finney <seanius@debian.org>  Sat, 20 Nov 2004 20:51:45 -0500
+
+db-common-example (0.3) unstable; urgency=low
+
+  * lots of work done on the db-test-mysql package:
+    - config script with bulk of debconf questions
+    - postinst script which adds database user and creates
+      database
+
+ -- Sean Finney <seanius@debian.org>  Mon, 25 Oct 2004 22:18:08 -0400
+
+db-common-example (0.2) unstable; urgency=low
+
+  * seperate packages for generic, mysql, and pgsql
+
+ -- Sean Finney <seanius@debian.org>  Tue, 19 Oct 2004 00:17:28 -0400
+
+db-common-example (0.1) unstable; urgency=low
+
+  * initial version
+
+ -- Sean Finney <seanius@debian.org>  Sat, 09 Oct 2004 17:19:56 -0400

@@ -1,0 +1,2 @@
+creating database testdbname: success.
+verifying database testdbname exists: failed.

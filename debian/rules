@@ -1,0 +1,28 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# partially enable reproducible builds
+export FORCE_SOURCE_DATE=1
+
+%:
+	dh ${@}
+
+override_dh_auto_build-indep:
+	make -C doc
+	# The ordering of the files for processing depends on locale, so
+	# set it for reproducible builds
+	LC_ALL=C debian/credit-xlators > debian/TRANSLATORS
+
+override_dh_clean:
+	dh_clean
+	debconf-updatepo
+	make -C doc clean
+
+override_dh_compress:
+	dh_compress -Xusr/share/doc/dbconfig-common/examples
+
+override_dh_installdocs:
+	dh_installdocs --link-doc=dbconfig-common

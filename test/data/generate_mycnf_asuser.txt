@@ -1,0 +1,15 @@
+# temporary my.cnf generated for usage by dbconfig-common 
+# generated on Sun Oct 25 20:55:44 CET 2015
+# if you're reading this, it probably means something went wrong and
+# for some strange reason dbconfig-common was not able to clean up after itself.
+# you can safely delete this file
+
+[client]
+user            = 'testdbuser'
+password        = 'testdbpass'
+host            = 'testserver'
+port            = 'testport'
+
+[mysqldump]
+routines
+

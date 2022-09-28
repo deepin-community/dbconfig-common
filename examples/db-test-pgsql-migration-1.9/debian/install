@@ -1,0 +1,2 @@
+#! /usr/bin/dh-exec
+oldconf.conf => etc/db-test-pgsql-migration/db.conf

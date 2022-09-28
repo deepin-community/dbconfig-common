@@ -1,0 +1,2 @@
+dbc_hardcoded_dbtype=sqlite3
+. /usr/share/dbconfig-common/dpkg/postinst

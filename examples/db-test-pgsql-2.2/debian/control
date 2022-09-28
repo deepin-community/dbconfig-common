@@ -1,0 +1,15 @@
+Source: db-common-example
+Section: misc
+Priority: optional
+Maintainer: Paul Gevers <elbrus@debian.org>
+Build-Depends-Indep: debhelper (>= 9), dh-exec
+Standards-Version: 3.9.6
+
+Package: db-test-pgsql
+Architecture: all
+Depends: dbconfig-pgsql | dbconfig-no-thanks,
+ ${misc:Depends}
+Description: a package to test dbconfig-common (pgsql version)
+ This is a package to test the dbconfig-common package.
+ .
+ This version should work with postgresql database servers.

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+#set -x
+
+. /usr/share/debconf/confmodule
+. /usr/share/dbconfig-common/dpkg/postinst.mysql
+
+# you can set the default database encoding to something else
+dbc_mysql_createdb_encoding="UTF8"
+dbc_generate_include=php:/etc/db-test-mysql/debian-db.php
+dbc_go db-test-mysql "$@"
+
+#DEBHELPER#

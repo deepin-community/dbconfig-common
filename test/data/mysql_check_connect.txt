@@ -1,0 +1,1 @@
+'mysql' '--defaults-file=<TMPDIR>/dbconfig-common_my.cnf.XXXXXX'

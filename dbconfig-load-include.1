@@ -1,0 +1,67 @@
+.TH "dbconfig-load-include" "1" "March 2005" "sean finney " "dbconfig-common"
+.SH "NAME"
+dbconfig\-load\-include \- parse custom format db config files
+
+.SH "SYNOPSIS"
+.B dbconfig\-load\-include [\-hv] [\-a] [\-d[varname]] [\-u[varname]] [\-p[varname]] [\-s[varname]] [\-P[varname]] [\-t[varname]] \-f format infile
+.br 
+
+.SH "DESCRIPTION"
+.B dbconfig\-load\-include
+is a program to parse custom format include files containing the
+information necessary to connect a program to a database resource.  This
+is primarily intended to be used by the dbconfig\-common package to
+import database settings of packages with pre\-existing configurations
+that have migrated to dbconfig\-common.  for more information, please
+see /usr/share/doc/dbconfig\-common.
+
+.SH "OPTIONS"
+.TP 
+infile
+use the given config file as input
+.TP 
+\fB\-f\fR|\-\-format
+use the given output format (default: sh)
+.TP 
+\fB\-a\fR|\-\-all
+include all information in output (default)
+.TP 
+\fB\-d\fR|\-\-dbname
+include the dbname in the output
+.TP 
+\fB\-p\fR|\-\-dbpass
+include the dbpass in the output
+.TP 
+\fB\-s\fR|\-\-dbserver
+include the dbserver in the output
+.TP 
+\fB\-P\fR|\-\-dbport
+include the dbport in the output
+.TP 
+\fB\-u\fR|\-\-dbuser
+include the dbuser in the output
+.TP 
+\fB\-t\fR|\-\-dbtype
+include the dbtype in the output
+.TP 
+\fB\-h\fR|\-\-help
+display this helpful message
+.TP 
+\fB\-v\fR|\-\-version
+output the version and exit
+
+.PP 
+format is one of a list of include\-file style formats for various
+programming languages.  the current list includes:
+.TP 
+sh 
+/bin/sh style include file
+.TP 
+perl
+perl parseable include file
+.TP 
+php
+php parseable include file
+.TP 
+exec
+run the file as a script and interpret its output

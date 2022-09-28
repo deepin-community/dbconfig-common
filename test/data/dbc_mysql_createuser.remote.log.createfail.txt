@@ -1,0 +1,2 @@
+checking privileges on database testdbname for testdbuser@host2: user creation needed.
+granting access to database testdbname for testdbuser@host2: failed.

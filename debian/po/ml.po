@@ -1,0 +1,1486 @@
+# English translation of dbconfig.
+# Copyright (C) 2007 THE dbconfig'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the dbconfig package.
+# പ്രവീണ്‍|Praveen എ|A <pravi.a@gmail.com>, 2007.
+#
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: dbconfig 1.0\n"
+"Report-Msgid-Bugs-To: dbconfig-common@packages.debian.org\n"
+"POT-Creation-Date: 2019-08-18 20:35+0200\n"
+"PO-Revision-Date: 2007-05-26 15:24+0530\n"
+"Last-Translator: Swathanthra malayalam computing\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid "Will this server be used to access remote databases?"
+msgstr "ഈ സേവകനെ വിദൂരത്തിലുള്ള ഡാറ്റാബേസുകളെ സമീപിയ്ക്കാന്‍ ഉപയോഗിയ്ക്കുമോ?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+#, fuzzy
+#| msgid ""
+#| "For the database types that support it, dbconfig-common includes support "
+#| "for configuring databases on remote systems.  When installing a package's "
+#| "database via dbconfig-common, the questions related to remote "
+#| "configuration are asked with a priority such that they are skipped for "
+#| "most systems."
+msgid ""
+"For the database types that support it, dbconfig-common includes support for "
+"configuring databases on remote systems. When installing a package's "
+"database via dbconfig-common, the questions related to remote configuration "
+"are asked with a priority such that they are skipped for most systems."
+msgstr ""
+"വിദൂര സിസ്റ്റങ്ങളിലുള്ള ഡാറ്റാബേസുകളെ ക്രമീകരിയ്ക്കാനുള്ള, പിന്തുണയ്ക്കുന്ന ഡാറ്റാബേസ് തരങ്ങള്‍ക്ക് "
+"അതിനുള്ള പിന്തുണ dbconfig-common ഉ ള്‍‌ക്കൊള്ളുന്നു. dbconfig-common വഴി ഒരു പാക്കോജിന്റെ "
+"ഡാറ്റാബേസ് ഇന്‍സ്റ്റാള്‍ ചെയ്യുമ്പോള്‍ വിദൂര ക്രമീകരണത്തിനുള്ള ചോദ്യങ്ങള്‍ കൂടുതല്‍ സിസ്റ്റങ്ങള്‍ക്കും "
+"ഒഴിവാക്കപ്പെടുന്ന മുന്‍ഗണനയോടു കൂടിയാണ് ചോദിയ്ക്കുന്നത്."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+#, fuzzy
+#| msgid ""
+#| "If you select this option, the default behaviour will be to prompt you "
+#| "with questions related to remote database configuration when you install "
+#| "new packages."
+msgid ""
+"If you select this option, the default behavior will be to prompt you with "
+"questions related to remote database configuration when you install new "
+"packages."
+msgstr ""
+"ഈ ഐച്ഛികം നിങ്ങള്‍ തിരഞ്ഞെടുക്കുകയാണെങ്കില്‍ ഡിഫാള്‍ട്ട് പെരുമാറ്റം നിങ്ങള്‍ പുതിയ പാക്കേജുകള്‍ ഇന്‍"
+"സ്റ്റാള്‍ ചെയ്യുമ്പോള്‍ വിദൂര ഡാറ്റാബേസ് ക്രമീകരണത്തെക്കുറിച്ചുള്ള ചോദ്യങ്ങള്‍ നിങ്ങളോട് "
+"സൂചിപ്പിയ്ക്കുന്നതായിരിയ്ക്കും."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid "If you are unsure, you should not select this option."
+msgstr "നിങ്ങള്‍ക്കുറപ്പില്ലെങ്കില്‍ ഈ ഐച്ഛികം തിരഞ്ഞെടുക്കരുത്."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid "Remember database passwords permanently in debconf?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid ""
+"When you configure, upgrade, or remove applications with dbconfig-common, "
+"administrator-level database passwords are needed. By default, these "
+"passwords are not stored, so you will be prompted for them each time."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+#, fuzzy
+#| msgid ""
+#| "This behavior can be disabled, in which case the passwords will remain in "
+#| "the debconf password database.  The debconf password database is "
+#| "protected by unix file permissions, though this is less secure and thus "
+#| "not the default setting."
+msgid ""
+"Alternatively the passwords can be permanently remembered in the debconf "
+"database (which is protected by Unix file permissions), though this is less "
+"secure and thus not the default setting."
+msgstr ""
+"ഈ പെരുമാറ്റം പ്രാവര്‍ത്തികമല്ലാതാക്കാം, അങ്ങനെയുള്ള സന്ദര്‍ഭങ്ങളില്‍ അടയാളവാക്കുകള്‍ ഡെബ്കോണ്‍ഫ് "
+"അടയാളവാക്ക് ഡാറ്റാബേസില്‍ തന്നെയിരിയ്ക്കും. ഡെബ്കോണ്‍ഫ് അടയാളവാക്ക് ഡാറ്റാവേസ് യുണിക്സ് ഫയല്‍ "
+"അനുമതികളാല്‍ സംരക്ഷിയ്ക്കപ്പെട്ടിരിയ്ക്കുന്നു, എന്നാലും ഇത് സുരക്ഷ കുറഞ്ഞതായതിനാല്‍ ഡിഫാള്‍ട്ട് "
+"ക്രമീകരണമല്ല."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+#, fuzzy
+msgid ""
+"If you would rather not be bothered for an administrative password every "
+"time you upgrade a database application with dbconfig-common, you should "
+"choose this option. Otherwise, you should refuse this option."
+msgstr ""
+"dbconfig-common ഉപയോഗിച്ച് ഒരു ഡാറ്റാബേസ് പ്രയോഗം ഓരോ തവണയും പുതുക്കുമ്പോള്‍ ഒരു ഭരണ "
+"അടയാളവാക്കിനായി ശല്യപ്പെടുത്താന്‍ നിങ്ങളാഗ്രഹിയ്ക്കുന്നില്ലെങ്കില്‍ ഈ ഐച്ഛികം നിങ്ങള്‍ "
+"തിരഞ്ഞെടുക്കുക. അല്ലെങ്കില്‍ നിങ്ങളീ ഐച്ഛികം തള്ളിക്കളയണം."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid "Configure database for ${pkg} with dbconfig-common?"
+msgstr "dbconfig-common ഉപയോഗിച്ച്  ${pkg} ന്റെ ഡാറ്റാബേസ് ക്രമീകരിയ്ക്കട്ടേ? "
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+#, fuzzy
+#| msgid ""
+#| "${pkg} must have a database installed and configured before it can be "
+#| "used.  If you like, this can be handled with dbconfig-common."
+msgid ""
+"The ${pkg} package must have a database installed and configured before it "
+"can be used. This can be optionally handled with dbconfig-common."
+msgstr ""
+"${pkg} ഉപയോഗിച്ച് തുടങ്ങുന്നതിന് മുമ്പ് ഒരു ഡാറ്റാബേസ് ഇന്‍സ്റ്റാള്‍ ചെയ്തിരിയ്ക്കുകയും "
+"ക്രമീകരിച്ചിരിയ്ക്കുകയും വേണമെന്ന് നിര്‍ബന്ധമുണ്ട്. നിങ്ങള്‍ക്കിഷ്ടമാണെങ്കില്‍ ഇത് dbconfig-common "
+"ഉപയോഗിച്ച് കൈകാര്യം ചെയ്യാവുന്നതാണ്."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+#, fuzzy
+#| msgid ""
+#| "If you are an advanced database administrator and know that you want to "
+#| "perform this configuration manually, or if your database has already been "
+#| "installed and configured, you should refuse this option.  Details on what "
+#| "needs to be done should most likely be provided in /usr/share/doc/${pkg}."
+msgid ""
+"If you are an advanced database administrator and know that you want to "
+"perform this configuration manually, or if your database has already been "
+"installed and configured, you should refuse this option. Details on what "
+"needs to be done should most likely be provided in /usr/share/doc/${pkg}."
+msgstr ""
+"നിങ്ങളൊരു കേമനായ ഡാറ്റാബേസ് ഭരണാധികാരിയും ഈ ക്രമീകരണം തന്നത്താന്‍ ചെയ്യാനാഗ്രഹിക്കുന്നുണ്ട് "
+"അല്ലെങ്കില്‍ നിങ്ങളുടെ ഡാറ്റാബേസ് നേരത്തെ തന്നെ ഇന്‍സ്റ്റാള്‍ ചെയ്ത് ക്രമീകരിച്ചിട്ടുണ്ട് എന്നാണെങ്കില്‍ "
+"നിങ്ങള്‍ ഈ ഐച്ഛികം തള്ളിക്കളയണം. എന്താണ് ചെയ്യേണ്ടത് എന്ന വിവരങ്ങള്‍ /usr/share/doc/${pkg}ല്‍ "
+"നല്‍കിയിരിയ്ക്കാന്‍ വളരെയധികം സാധ്യതയുണ്ട്."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid "Otherwise, you should probably choose this option."
+msgstr "അങ്ങനെയല്ല എന്നുണ്ടെങ്കില്‍ നിങ്ങളൊരു പക്ഷേ ഈ ഐച്ഛികം തിരഞ്ഞെടുക്കണം."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+#, fuzzy
+#| msgid "Re-install database for ${pkg}?"
+msgid "Reinstall database for ${pkg}?"
+msgstr "${pkg} നായി ഡാറ്റാബേസ് വീണ്ടും ഇന്‍സ്റ്റാള്‍ ചെയ്യണോ?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Since you are reconfiguring ${pkg}, you may also want to reinstall the "
+"database which it uses."
+msgstr ""
+"നിങ്ങള്‍ ${pkg} പുനക്രമീകരിയ്ക്കുന്നതിനാല്‍ ഒരു പക്ഷേ ഇതുപയോഗിയ്ക്കുന്ന ഡാറ്റാബേസ് വീണ്ടും ഇന്‍സ്റ്റാള്‍ "
+"ചെയ്യാന്‍ നിങ്ങളാഗ്രഹിയ്ക്കുന്നുണ്ടാകാം."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+#, fuzzy
+#| msgid ""
+#| "If you wish to re-install the database for ${pkg}, you should select this "
+#| "option.  If you do not wish to do so (if you are reconfiguring the "
+#| "package for unrelated reasons), you should not select this option."
+msgid ""
+"If you wish to reinstall the database for ${pkg}, you should select this "
+"option. If you do not wish to do so (if you are reconfiguring the package "
+"for unrelated reasons), you should not select this option."
+msgstr ""
+"${pkg} നായി ഡാറ്റാബേസ് വീണ്ടും ഇന്‍സ്റ്റാള്‍ ചെയ്യാന്‍ നിങ്ങളാഗ്രഹിയ്ക്കുന്നുണ്ടെങ്കില്‍ നിങ്ങള്‍ ഈ "
+"ഐച്ഛികം തിരഞ്ഞെടുക്കണം. അങ്ങനെ ചെയ്യാന്‍ നിങ്ങളാഗ്രഹിക്കുന്നില്ലെങ്കില്‍ (ഇതുമായി ബന്ധമില്ലാത്ത "
+"കാരണങ്ങളാലാണ് നിങ്ങള്‍ പാക്കേജ് പുനക്രമീകരിയ്ക്കുന്നതെങ്കില്‍) നിങ്ങള്‍ ഈ ഐച്ഛികം തിരഞ്ഞെടുക്കരുത്."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Warning: if you opt to reinstall the database and install it under a name "
+"that already exists, the old database will be dropped without further "
+"questions. In that case a backup of the original database is made in /var/"
+"tmp/."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Warning: if you change the name of the database, the old database will not "
+"be removed. If you change the name of the user that connects to the "
+"database, the privileges of the original user will not be revoked."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+msgid "Perform upgrade on database for ${pkg} with dbconfig-common?"
+msgstr "dbconfig-common ഉപയോഗിച്ച്  ${pkg} നായി ഡാറ്റാബേസില്‍ പുതുക്കല്‍ നടത്തണോ?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+#, fuzzy
+#| msgid ""
+#| "According to the maintainer for this package, database upgrade operations "
+#| "need to be formed on ${pkg}.  Typically this is due to changes in how a "
+#| "new upstream version of the package needs to store its data."
+msgid ""
+"According to the maintainer for this package, database upgrade operations "
+"need to be performed on ${pkg}. Typically, this is due to changes in how a "
+"new upstream version of the package needs to store its data."
+msgstr ""
+"ഈ പാക്കേജിന്റെ ചുമതലക്കാരന്റെ അഭിപ്രായത്തില്‍ ${pkg} ല്‍ ഡാറ്റാബേസ് പുതുക്കല്‍ നടപടികള്‍ "
+"നടത്തേണ്ടതുണ്ട്. സാധാരണയായി ഇത് പുതിയ അപ്‌സ്ട്രീം പാക്കേജ് ലക്കം അതിന്റെ ഡാറ്റ സൂക്ഷിച്ചു "
+"വയ്ക്കുന്നതിലുള്ള മാറ്റം കൊണ്ടാണ്."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+#, fuzzy
+msgid ""
+"If you want to handle this process manually, you should refuse this option. "
+"Otherwise, you should choose this option. During the upgrade, a backup of "
+"the database will be made in /var/cache/dbconfig-common/backups, from which "
+"the database can be restored in the case of problems."
+msgstr ""
+"ഈ പ്രക്രിയ തന്നത്താന്‍ കൈകാര്യം ചെയ്യാനാണ് നിങ്ങളാഗ്രഹിയ്ക്കുന്നതെങ്കില്‍ ഈ ഐച്ഛികം നിങ്ങള്‍ "
+"തള്ളിക്കളയണം. അങ്ങനെയല്ല എന്നാണെങ്കില്‍ നിങ്ങള്‍ ഈ ഐച്ഛികം തിരഞ്ഞെടുക്കണം. പുതുക്കല്‍ സമയത്ത് "
+"നിങ്ങളുടെ ഡാറ്റാബേസിന്റെ ബാക്കപ്പ് /var/cache/dbconfig-common/backups ല്‍ സൂക്ഷിച്ച്  "
+"വച്ചിട്ടുണ്ടാകും, പ്രശ്നമുണ്ടാകുന്ന അവസരത്തില്‍ ഡാറ്റാബേസ് അതുപയോഗിച്ച് തിരിച്ചെടുക്കാവുന്നതാണ്."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid "Deconfigure database for ${pkg} with dbconfig-common?"
+msgstr "dbconfig-common ഉപയോഗിച്ച് ${pkg} ക്രമീകരണം കളയണോ?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+#, fuzzy
+msgid ""
+"Since you are removing ${pkg}, it's possible that you no longer want the "
+"underlying database and the privileges for the user associated with this "
+"package."
+msgstr ""
+"നിങ്ങള്‍ ${pkg} നീക്കം ചെയ്യുന്നതായത് കൊണ്ട് നിങ്ങള്‍ക്ക് ഉപയോഗിയ്ക്കാന്‍ ക്രമീകരിച്ച ബന്ധപ്പെട്ട "
+"ഡാറ്റാബേസ് ഇനിയും ആവശ്യമില്ലാതിരിയ്ക്കാന്‍ വഴിയുണ്ട്."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+#, fuzzy
+#| msgid "If you like, database removal can be handled with dbconfig-common."
+msgid ""
+"Please choose whether database removal and privilege revocation should be "
+"handled with dbconfig-common."
+msgstr ""
+"നിങ്ങളാഗ്രഹിയ്ക്കുന്നെങ്കില്‍ ഡാറ്റാബേസ് നീക്കം ചെയ്യുന്നത് dbconfig-common ഉപയോഗിച്ച് കൈകാര്യം "
+"ചെയ്യാം."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid ""
+"If you choose this option, dbconfig-common will check if ${pkg} provided "
+"scripts and database commands to undo package specific operations and run "
+"them if they exist. Then it will ask if you want to delete the ${pkg} "
+"database and revoke the standard privileges for the user of ${pkg}. If you "
+"don't want any of this, or if you want to handle this manually, you should "
+"refuse this option."
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid "Database type to be used by ${pkg}:"
+msgstr "${pkg} ഉപയോഗിയ്ക്കാന്‍ പോകുന്ന ഡാറ്റാബേസ് തരം:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+#, fuzzy
+#| msgid ""
+#| "${pkg} can be configured to use one of many database types. Below, you "
+#| "will be presented with the available choices."
+msgid ""
+"The ${pkg} package can be configured to use one of several database types. "
+"Below, you will be presented with the available choices."
+msgstr ""
+"പല ഡാറ്റാബേസ് തരങ്ങളിലൊന്ന് ഉപയോഗിയ്ക്കാനായി ${pkg} ക്രമീകരിയ്ക്കാവുന്നതാണ്. താഴെ "
+"ലഭ്യമായിട്ടുള്ള ചോയ്സുകള്‍ നിങ്ങളെ കാണിയ്ക്കുന്നതായിരിയ്ക്കും."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid ""
+"If other database types are supported by ${pkg} but not shown here, the "
+"reason for their omission is that the corresponding dbconfig-<database type> "
+"packages are not installed. If you know that you want the package to use "
+"another supported database type, your best option is to back out of the "
+"dbconfig-common questions and opt out of dbconfig-common assistance for this "
+"package for now. Install your preferred dbconfig-<database type> option from "
+"the list in the package dependencies, and then \"dpkg-reconfigure ${pkg}\" "
+"to select it."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+#, fuzzy
+#| msgid "Do you want to purge the database for ${pkg}?"
+msgid "Delete the database for ${pkg}?"
+msgstr "${pkg} ന് വേണ്ടി ഡാറ്റാബേസ് നശിപ്പിച്ച് കളയാന്‍ നിങ്ങളാഗ്രഹിയ്ക്കുന്നുണ്ടോ?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+#, fuzzy
+#| msgid ""
+#| "If you no longer need the database for ${pkg}, this is your chance to "
+#| "remove them."
+msgid ""
+"If you no longer need the database for ${pkg} and the privileges of the "
+"database user of ${pkg}, you can choose to delete the database and revoke "
+"the privileges now."
+msgstr ""
+"${pkg} ന് നിങ്ങള്‍ക്ക് ഡാറ്റാബേസ് ഇനിയാവളശ്യമില്ലെങ്കില്‍ അത് നീക്കം ചെയ്യാനുള്ള നിങ്ങളുടെ "
+"അവസരമാണിത്."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+#, fuzzy
+msgid ""
+"If you no longer have need of the data being stored by ${pkg}, you should "
+"choose this option. If you want to keep this data, or if you would rather "
+"handle this process manually, you should refuse this option. Either way, it "
+"won't affect your other databases."
+msgstr ""
+"${pkg} സൂക്ഷിച്ച് വച്ചിരിയ്ക്കുന്ന ഡാറ്റ നിങ്ങള്‍ക്ക് ഇനി മുതല്‍ ആവശ്യമില്ലെങ്കില്‍ നിങ്ങള് ഈ ഐച്ഛികം "
+"തിരഞ്ഞെടുക്കണം. നിങ്ങള്‍ പിന്നത്തേയ്ക്കായി ഈ ഡാറ്റ വയ്ക്കാനോ ഈ പ്രക്രിയ തന്നത്താന്‍ ചെയ്യാനോ "
+"ആഗ്രഹിയ്ക്കുന്നുണ്ടെങ്കില്‍ നിങ്ങള് ഈ ഐച്ഛികം നിരസിയ്ക്കണം."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:10001
+#, fuzzy
+#| msgid "Do you want to backup the database for ${pkg} before upgrading?"
+msgid "Back up the database for ${pkg} before upgrading?"
+msgstr ""
+"അപ്‌​ഗ്രേഡ് ചെയ്യുന്നതിന് മുമ്പേ ${pkg} ന് വേണ്ടിയുള്ള ഡാറ്റാബേസ് ബായ്ക്കപ്പ് ചെയ്യാന് "
+"നിങ്ങളാഗ്രഹിയ്ക്കുന്നുണ്ടോ?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:10001
+#, fuzzy
+#| msgid ""
+#| "The underlying database for ${pkg} needs to be upgraded as part of the "
+#| "installation progress.  Just in case, the database can be backed up "
+#| "before this is done, so that if something goes wrong, you can revert to "
+#| "the previous package version and repopulate your database."
+msgid ""
+"The underlying database for ${pkg} needs to be upgraded as part of the "
+"installation process. Just in case, the database can be backed up before "
+"this is done, so that if something goes wrong, you can revert to the "
+"previous package version and repopulate the database."
+msgstr ""
+"ഇന്‍സ്റ്റളേഷന്‍ മുന്നേറുന്നതിന്റെ ഭാഗമായി ${pkg} മായി ബന്ധപ്പെട്ട ഡാറ്റാബേസ് അപ്​ഗ്രേഡ് "
+"ചെയ്യേണ്ടതുണ്ട്. ഒരു മുന്‍കരുതലായി ഇത് ചെയ്യുന്നതിനു മുമ്പേ എന്തെങ്കിലും പിഴവ് സംഭവിച്ചാല്‍ നിങ്ങള്‍ "
+"പഴയ ലക്കത്തിലേയ്ക്ക് തിരിച്ചു പോയി നിങ്ങളുടെ ഡാറ്റാബേസ് വീണ്ടും നിറയ്ക്കാന്‍ അവസരം നല്‍"
+"കുന്നതിനായി ഡാറ്റാബേസ് ബായ്ക്കപ്പ് ചെയ്യാന്‍ പറ്റും."
+
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:11001 ../dbconfig-common.templates:12001
+msgid "Password confirmation:"
+msgstr "അടയാളവാക്ക് ഉറപ്പാക്കല്‍:"
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:13001
+#, fuzzy
+#| msgid "Passwords do not match."
+msgid "Password mismatch"
+msgstr "അടയാളവാക്കുകള്‍ ഒത്തില്ല."
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:13001
+#, fuzzy
+#| msgid "Passwords do not match."
+msgid "The password and its confirmation do not match."
+msgstr "അടയാളവാക്കുകള്‍ ഒത്തില്ല."
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "abort"
+msgstr "പിന്തിരിയുക"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "retry"
+msgstr "വീണ്ടും ശ്രമിയ്ക്കുക"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "retry (skip questions)"
+msgstr "(ചോദ്യങ്ങളൊഴിവാക്കി) വീണ്ടും ശ്രമിയ്ക്കുക"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "ignore"
+msgstr "അവഗണിയ്ക്കുക"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:14002
+msgid "Next step for database upgrade:"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:14002
+#, fuzzy
+#| msgid "An error seems to have occurred while removing the database."
+msgid "An error occurred while upgrading the database:"
+msgstr "ഡാറ്റാബേസ് ഇന്‍സ്റ്റാള്‍ ചെയ്യുമ്പോള്‍ ഒരു പിഴവ് പറ്റിയതായി തോന്നുന്നു."
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:14002
+msgid ""
+"Fortunately, ${dbfile} should hold a backup of the database, made just "
+"before the upgrade (unless the error occurred during backup creation, in "
+"which case no changes will have been applied yet). Your options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:15002
+#, fuzzy
+#| msgid "Name of your database's administrative user:"
+msgid "Next step for database installation:"
+msgstr "നിങ്ങളുടെ ഡാറ്റാബേസിന്റെ നടത്തിപ്പ്കാരനായ ഉപയോക്താവിന്റെ പേര്:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:15002
+#, fuzzy
+#| msgid "An error seems to have occurred while removing the database."
+msgid "An error occurred while installing the database:"
+msgstr "ഡാറ്റാബേസ് ഇന്‍സ്റ്റാള്‍ ചെയ്യുമ്പോള്‍ ഒരു പിഴവ് പറ്റിയതായി തോന്നുന്നു."
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:15002
+msgid ""
+"Your options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:16002
+msgid "Next step for database removal:"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:16002
+#, fuzzy
+#| msgid "An error seems to have occurred while removing the database."
+msgid "An error occurred while removing the database:"
+msgstr "ഡാറ്റാബേസ് ഇന്‍സ്റ്റാള്‍ ചെയ്യുമ്പോള്‍ ഒരു പിഴവ് പറ്റിയതായി തോന്നുന്നു."
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:16002
+msgid ""
+"As a result it was not possible to remove the database for ${pkg}. Your "
+"options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave the database and user privileges in place."
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:17001
+msgid "Next step:"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:17001
+msgid ""
+"Configuring the database for ${pkg} requires the package ${dbpackage} to be "
+"installed and configured first, which is not something that can be checked "
+"for automatically."
+msgstr ""
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#. Additionally, ${dbpackage} can be replaced with "mysql-server", so
+#. that length suits, but ${pkg} usually will expand more.
+#: ../dbconfig-common.templates:17001
+msgid ""
+"Your options are:\n"
+" * abort - Choose this when in doubt and install ${dbpackage} before\n"
+"   continuing with the configuration of this package. This causes the\n"
+"   installation of ${pkg} to fail for now.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+"   Choose this if you chose the wrong database type by mistake.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:18001
+msgid "Host name of the ${dbvendor} database server for ${pkg}:"
+msgstr "${pkg} നായി ${dbvendor} ഡാറ്റാബേസ് സെര്‍വറിന്റെ ഹോസ്റ്റ്നാമം:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:18001
+msgid ""
+"Please select the remote hostname to use, or select \"new host\" to enter a "
+"new host."
+msgstr ""
+"ദയവായി ഉപയോഗിയ്ക്കാനുള്ള വിദൂര ഹോസ്റ്റ്നാമം തിരഞ്ഞെടുക്കൂ അല്ലെങ്കില്‍ ഒരു പുതിയ ഹോസ്റ്റ് നല്‍"
+"കാനായി \"new host\" തിരഞ്ഞെടുക്കുക."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:19001
+msgid "Port number for the ${dbvendor} service:"
+msgstr "${dbvendor} സേവനത്തിന്റെ പോര്‍ട്ട് സംഖ്യ:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:19001
+#, fuzzy
+#| msgid ""
+#| "If the ${dbvendor} database on the remote host is running on a non-"
+#| "standard port, this is your opportunity to specify what it is.  To use "
+#| "the default port, leave this field blank."
+msgid ""
+"Please specify the port the ${dbvendor} database on the remote host is "
+"running on. To use the default port, leave this field blank."
+msgstr ""
+"വിദൂര ഹോസ്റ്റിലുള്ള ${dbvendor} ഡാറ്റാബേസ് ഒരു സാധാരണമല്ലാത്ത പോര്‍ട്ടിലാണ് പ്രവര്‍"
+"ത്തിച്ചുകൊണ്ടിരിയ്ക്കുന്നതെങ്കില്‍ അതേതാണെന്ന് സൂചിപ്പിയ്ക്കാന്‍ ഇതാണ് നിങ്ങള്‍ക്കുള്ള അവസരം. ഡിഫാള്‍ട്ട് "
+"പോര്‍ട്ട് ഉപയോഗിയ്ക്കാന്‍ ഈ കളം വെറുതെ ഇടുക."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid "Host running the ${dbvendor} server for ${pkg}:"
+msgstr "${pkg} നായി ${dbvendor} സെര്‍വര്‍ പ്രവര്‍ത്തിച്ചുകൊണ്ടിരിയ്ക്കുന്ന ഹോസ്റ്റ്:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid "Please provide the hostname of a remote ${dbvendor} server."
+msgstr "ദയവായി ഒരു വിദൂര ${dbvendor} സെര്‍വറിന്റെ ഹോസ്റ്റ്നാമം നല്‍കുക."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+#, fuzzy
+#| msgid ""
+#| "Note: you must have already arranged for the administrative account to be "
+#| "able to remotely create databases and grant privileges."
+msgid ""
+"You must have already arranged for the administrative account to be able to "
+"remotely create databases and grant privileges."
+msgstr ""
+"കുറിപ്പ്: നിങ്ങള്‍ നേരത്തെ തന്നെ ഭരണാധികാരി അക്കൌണ്ടിന് വിദൂരമായി ഡാറ്റാബേസുകള്‍ സൃഷ്ടിയ്ക്കാീനും "
+"അനുമതികള്‍ നല്‍കാനും കഴിയുന്ന തരത്തില്‍ ഒരുക്കേണ്ടതുണ്ട്."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:21001
+msgid "${dbvendor} database name for ${pkg}:"
+msgstr "${pkg} നായി ${dbvendor} ഡാറ്റാബേസ് നാമം:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:21001
+msgid ""
+"Please provide a name for the ${dbvendor} database to be used by ${pkg}."
+msgstr "ദയവായി ${pkg} ഉപയോഗിയ്ക്കാന്‍ പോകുന്ന് ${dbvendor} ഡാറ്റാബേസ് നാമം നല്‍കുക."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid "${dbvendor} username for ${pkg}:"
+msgstr "${pkg} നായി ${dbvendor} ഉപയോക്തൃനാമം:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+#, fuzzy
+#| msgid ""
+#| "Please provide a ${dbvendor} username for ${pkg} to register with the "
+#| "database server.  A ${dbvendor} user is not necessarily the same as a "
+#| "system login, especially if the database is on a remote server."
+msgid ""
+"Please provide a ${dbvendor} username for ${pkg} to register with the "
+"database server. A ${dbvendor} user is not necessarily the same as a system "
+"login, especially if the database is on a remote server."
+msgstr ""
+"ദയവായി ${pkg} ന് ഡാറ്റാബേസ് സെര്‍വറില്‍ പേര് ചേര്‍ക്കാന്‍ ഒരു ${dbvendor} ഉപയോക്തൃനാമം നല്‍കുക. "
+"${dbvendor} ഉപയോക്താവ് സിസ്റ്റം ലോഗിന്‍ തന്നെയായിരിയ്ക്കണമെന്നില്ല, പ്രത്യേകിച്ചും ഡാറ്റാബേസ് "
+"വിദൂര സെര്‍വറിലാണെങ്കില്‍."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+#, fuzzy
+#| msgid ""
+#| "This is the user which will own the database, tables and other objects to "
+#| "be created by this installation.  This user will have complete freedom to "
+#| "insert, change or delete data in the database."
+msgid ""
+"This is the user which will own the database, tables, and other objects to "
+"be created by this installation. This user will have complete freedom to "
+"insert, change, or delete data in the database."
+msgstr ""
+"ഈ ഉപയോക്താവാണ് ഈ ഇന്‍സ്റ്റളേഷന്‍ സൃഷ്ടിയ്ക്കാന്‍ പോകുന്ന ഡാറ്റാബേസുകളും പട്ടികകളും മറ്റ് വസ്തുക്കളുടേയും "
+"ഉടമയാകാന്‍ പോകുന്നത്. ഈ ഉപയോക്താവിന് ഡാറ്റ ചേര്‍ക്കാനും മാറ്റാനും അല്ലെങ്കില്‍ നീക്കം ചെയ്യാനും പൂര്‍"
+"ണ സ്വാതന്ത്ര്യമുണ്ടായിരിയ്ക്കും."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"If your username contains an @, you need to specify the domain as well (see "
+"below)."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"Advanced usage: if you need to define the domain that the user will log in "
+"from, you can write \"username@domain\"."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid "${dbvendor} storage directory for ${pkg}:"
+msgstr "${pkg} നായി  ${dbvendor} ശേഖരണ ഡയറക്റ്ററി:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+#, fuzzy
+msgid ""
+"Please provide a path where the ${dbvendor} database file for ${pkg} should "
+"be installed into."
+msgstr "ദയവായി ${pkg} ന്റെ ഡാറ്റാബേസ് ഫയല്‍ "
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid ""
+"The permissions for this directory will be set to match the permissions for "
+"the generated database file."
+msgstr ""
+"ഈ ഡയറക്റ്ററിയുടെ അനുമതികള്‍ ഉണ്ടാക്കിയ ഡാറ്റാബേസ് ഫയലിന്റെ അനുമതികളുമായി യോജിയ്ക്കുന്ന തരത്തില്‍ "
+"സെറ്റ് ചെയ്യുന്നതായിരിയ്ക്കും."
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:24001 ../dbconfig-common.templates:29001
+#, fuzzy
+#| msgid "unix socket"
+msgid "Unix socket"
+msgstr "യുണിക്സ് സോക്കറ്റ്"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:24001 ../dbconfig-common.templates:29001
+msgid "TCP/IP"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:24002
+msgid "Connection method for MySQL database of ${pkg}:"
+msgstr "${pkg} ന്റെ മൈസീക്വല്‍ (MySQL) ഡാറ്റാബേസിന് വേണ്ട ബന്ധ രീതി:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:24002
+#, fuzzy
+#| msgid ""
+#| "By default, ${pkg} will be configured to use a MySQL server through a "
+#| "local unix socket (this provides the best performance). However, if you "
+#| "would like to connect with a different method, or to a different server "
+#| "entirely, select an option from the choices below."
+msgid ""
+"By default, ${pkg} will be configured to use a MySQL server through a local "
+"Unix socket (this provides the best performance). To connect with a "
+"different method, or to a different server entirely, select the appropriate "
+"option from the choices here."
+msgstr ""
+"ഡിഫാള്‍ട്ടായി പ്രാദേശിക യുണിക്സ് സോക്കറ്റ് വഴി ഒരു മൈസീക്വല്‍ (MySQL) സെര്‍വര്‍ "
+"ഉപയോഗിയ്ക്കാനായിട്ടാണ് ${pkg} ക്രമീകരിയ്ക്കുന്നത് (ഇതാണ് ഏറ്റവും മികച്ച പ്രകടനം നല്‍കുന്നത്). "
+"എന്നിരുന്നാലും നിങ്ങള്‍ക്ക് മറ്റൊരു രീതിയുപയോഗിച്ച് ബന്ധപ്പെടണമെങ്കിലോ അല്ലെങ്കില്‍ തീര്‍ത്തും "
+"വ്യത്യസ്തമായ ഒരു സെര്‍വറുമായി ബന്ധപ്പെടണമെങ്കിലോ താഴെയുള്ള ചോയ്സുകളില്‍ നിന്നും  ഒരു ഐച്ഛികം "
+"തിരഞ്ഞെടുക്കുക. "
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:25001
+msgid "MySQL application password for ${pkg}:"
+msgstr "${pkg} നു വേണ്ട മൈസീക്വല്‍ (MySQL) പ്രയോഗ അടയാളവാക്ക്:"
+
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:25001 ../dbconfig-common.templates:30001
+#, fuzzy
+#| msgid ""
+#| "Please provide a password for ${pkg} to register with the database "
+#| "server.  If left blank, a random password will be generated for you."
+msgid ""
+"Please provide a password for ${pkg} to register with the database server. "
+"If left blank, a random password will be generated."
+msgstr ""
+"ദയവായി ${pkg} ന് ഡാറ്റാബേസ് സെര്‍വറുമായി രജിസ്റ്റര്‍ ചെയ്യാന്‍ ഒരു അടയാളവാക്ക് നല്‍കുക. വെറുതെ "
+"ഇടുകയാണെങ്കില്‍ നിങ്ങള്‍ക്കായി ഒരു റാന്‍ഡം അടയാളവാക്ക് ഉണ്ടാക്കുന്നതായിരിയ്ക്കും."
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001 ../dbconfig-common.templates:31001
+#, fuzzy
+#| msgid "Name of your database's administrative user:"
+msgid "Name of the database's administrative user:"
+msgstr "നിങ്ങളുടെ ഡാറ്റാബേസിന്റെ നടത്തിപ്പ്കാരനായ ഉപയോക്താവിന്റെ പേര്:"
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001 ../dbconfig-common.templates:31001
+#, fuzzy
+#| msgid ""
+#| "What is the name of the account with which this package should perform "
+#| "administrative actions?  This user is the one which is able to create new "
+#| "database users."
+msgid ""
+"Please provide the name of the account with which this package should "
+"perform administrative actions. This user is the one with the power to "
+"create new database users."
+msgstr ""
+"ഈ പാക്കേജ് നടത്തിപ്പുപരമായ നടപടികള്‍ ചെയ്യേണ്ട അക്കൌണ്ടിന്റെ പേരെന്താണ്? പുതിയ ഡാറ്റാബേസ് "
+"ഉപയോക്താക്കളെ സൃഷ്ടിയ്ക്കാന്‍ കഴിവുള്ള ഉപയോക്താവാണിത്."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001
+#, fuzzy
+#| msgid ""
+#| "For MySQL, this is almost always \"root\".  Note that this is NOT the "
+#| "same as the UNIX login 'root'."
+msgid ""
+"For MySQL, this is almost always \"root\". Note that this is not the same as "
+"the Unix login \"root\"."
+msgstr ""
+"മൈസീക്വലി (MySQL) നിത് ഏതാണ്ടെല്ലായ്പോഴും \"root\" ആണ്. യുണിക്സ് ലോഗിനായ 'root' ന് "
+"സമമല്ലിതെന്ന് പ്രത്യേകം ശ്രദ്ധിയ്ക്കുക."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:27001
+#, fuzzy
+#| msgid "Password of your database's administrative user:"
+msgid "Password of the database's administrative user:"
+msgstr "നിങ്ങളുടെ ഡാറ്റാബേസിന്റെ നടത്തിപ്പുകാരനായ ഉപയോക്താവിന്റെ അടയാളവാക്ക്:"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:27001
+#, fuzzy
+#| msgid ""
+#| "What is the password for the administrative account with which this "
+#| "package should create its MySQL database and user?"
+msgid ""
+"Please provide the password for the administrative account \"${dbadmin}\" "
+"with which this package should create its MySQL database and user."
+msgstr ""
+"ഈ പാക്കേജ് ഇതിന്റെ മൈസീക്വല്‍ (MySQL) ഡാറ്റാബേസും ഉപയോക്താവും സൃഷ്ടിനുപയോഗിയ്ക്കേണ്ട "
+"നടത്തിപ്പുകാരനായ ഉപയോക്താവിന്റെ അടയാളവാക്കെന്താണ്?"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:28001
+#, fuzzy
+#| msgid "Connection method for MySQL database of ${pkg}:"
+msgid "Authentication plugin for MySQL database:"
+msgstr "${pkg} ന്റെ മൈസീക്വല്‍ (MySQL) ഡാറ്റാബേസിന് വേണ്ട ബന്ധ രീതി:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:28001
+msgid ""
+"Database user accounts can be configured to use a variety of plugins for "
+"authentication with MySQL. If the server default won't work with this "
+"application, it is necessary to specify one that will. Please select one "
+"from the list of available plugins. Leaving the selection set to its "
+"original value should work unless a remote server is using unpredictable "
+"defaults, but other options may not be supported by ${pkg}. If problems "
+"arise, the package's documentation should give hints; see /usr/share/doc/"
+"${pkg}/."
+msgstr ""
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:28001
+msgid ""
+"Your options are:\n"
+" * default - use the default determined by the server.\n"
+" * mysql_native_password - no MySQL authentication plugin is used.\n"
+" * sha256_password - a more secure password encryption algorithm.\n"
+" * caching_sha2_password - SHA2 plus an in-memory authentication cache."
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:29001
+msgid "TCP/IP + SSL"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:29002
+msgid "Connection method for PostgreSQL database of ${pkg}:"
+msgstr "${pkg} ന്റെ പോസ്റ്റ്​ഗ്രെസീക്വല്‍ (PostgreSQL) ഡാറ്റാബേസിന് വേണ്ട ബന്ധരീതി:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:29002
+#, fuzzy
+#| msgid ""
+#| "By default, ${pkg} will be configured to use a PostgreSQL server through "
+#| "a local unix socket (this provides the best performance). However, if you "
+#| "would like to connect with a different method, or to a different server "
+#| "entirely, select an option from the choices below."
+msgid ""
+"By default, ${pkg} will be configured to use a PostgreSQL server through TCP/"
+"IP because that method works in most circumstances. To connect with a "
+"different method, select the appropriate option from the choices here."
+msgstr ""
+"ഡിഫാള്‍ട്ടായി പ്രാദേശിക യുണിക്സ് സോക്കറ്റ് വഴി ഒരു പോസ്റ്റ്​ഗ്രെസീക്വല്‍ (PostgreSQL) സെര്‍വര്‍ "
+"ഉപയോഗിയ്ക്കാനായിട്ടാണ് ${pkg} ക്രമീകരിയ്ക്കുന്നത് (ഇതാണ് ഏറ്റവും മികച്ച പ്രകടനം നല്‍കുന്നത്). "
+"എന്നിരുന്നാലും നിങ്ങള്‍ക്ക് മറ്റൊരു രീതിയുപയോഗിച്ച് ബന്ധപ്പെടണമെങ്കിലോ അല്ലെങ്കില്‍ തീര്‍ത്തും "
+"വ്യത്യസ്തമായ ഒരു സെര്‍വറുമായി ബന്ധപ്പെടണമെങ്കിലോ താഴെയുള്ള ചോയ്സുകളില്‍ നിന്നും  ഒരു ഐച്ഛികം "
+"തിരഞ്ഞെടുക്കുക. "
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:30001
+msgid "PostgreSQL application password for ${pkg}:"
+msgstr "${pkg} നു വേണ്ട പോസ്റ്റ്​ഗ്രെസീക്വല്‍ (PostgreSQL) പ്രയോഗ അടയാളവാക്ക്:"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:30001
+#, fuzzy
+#| msgid ""
+#| "If you are using \"ident\" based authentication, the supplied password "
+#| "will not be used and can be left blank.  Otherwise, PostgreSQL access may "
+#| "need to be reconfigured to allow password-authenticated access."
+msgid ""
+"If you are using \"ident\" authentication, the supplied password will not be "
+"used and can be left blank. Otherwise, PostgreSQL access may need to be "
+"reconfigured to allow password-authenticated access."
+msgstr ""
+"നിങ്ങള്‍ \"ഐഡന്റ് (ident)\" അധിഷ്ടിതമായ തിരിച്ചറിയലാണ് ഉപയോഗിയ്ക്കുന്നതെങ്കില്‍ നല്‍കിയ "
+"അടയാളവാക്ക് ഉപയോഗിയ്ക്കുന്നതല്ല എന്നത് കൊണ്ട് തന്നെ അത് വെറുതെ ഇടാവുന്നതാണ്. അതല്ല എന്നുണ്ടെങ്കില്‍ "
+"അടയാളവാക്കുപയോഗിച്ച്-തിരിച്ചറിഞ്ഞുള്ള സമീപനം അനുവദിയ്ക്കാനായി പോസ്റ്റ്​ഗ്രെസീക്വല്‍ "
+"(PostgreSQL) സമീപനം പുനക്രമീകരിയ്ക്കേണ്ടതായി വന്നേയ്ക്കാം."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+msgid "Password of your database's administrative user:"
+msgstr "നിങ്ങളുടെ ഡാറ്റാബേസിന്റെ നടത്തിപ്പുകാരനായ ഉപയോക്താവിന്റെ അടയാളവാക്ക്:"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+#, fuzzy
+#| msgid ""
+#| "What is the password for the administrative account with which this "
+#| "package should create its MySQL database and user?"
+msgid ""
+"Please provide the password for the ${dbadmin} account with which this "
+"package should perform administrative actions."
+msgstr ""
+"ഈ പാക്കേജ് ഇതിന്റെ മൈസീക്വല്‍ (MySQL) ഡാറ്റാബേസും ഉപയോക്താവും സൃഷ്ടിനുപയോഗിയ്ക്കേണ്ട "
+"നടത്തിപ്പുകാരനായ ഉപയോക്താവിന്റെ അടയാളവാക്കെന്താണ്?"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+#, fuzzy
+#| msgid ""
+#| "What is the password for the account with which this package should "
+#| "perform administrative actions?  (For a normal Debian PostgreSQL "
+#| "installation, a database password is not required, since authentication "
+#| "is done at the system level.)"
+msgid ""
+"For a standard PostgreSQL installation, a database password is not required, "
+"since authentication is done at the system level."
+msgstr ""
+"ഈ പാക്കേജ് നടത്തിപ്പുപരമായ നടപടികള്‍ ചെയ്യാന്‍ ഉപയോഗിയ്ക്കേണ്ട അക്കൌണ്ടിന്റെ അടയാളവാക്കെന്താണ്? "
+"(ഒരു സാധാരണ ഡെബിയന്‍ പോസ്റ്റ്​ഗ്രെസീക്വല്‍ (PostgreSQL) ഇന്‍സ്റ്റളേഷന് തിരിച്ചറിയല്‍ സിസ്റ്റം "
+"തലത്തില്‍ ചെയ്യുന്നത് കൊണ്ട് ഒരു ഡാറ്റാബേസ് അടയാളവാക്ക് ആവശ്യമില്ല.)"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:33001 ../dbconfig-common.templates:34001
+msgid "ident"
+msgstr "ഐഡന്റ് (ident)"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:33001 ../dbconfig-common.templates:34001
+msgid "password"
+msgstr "അടയാളവാക്ക്"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+#, fuzzy
+#| msgid "Method for authenticating PostgreSQL administrator:"
+msgid "Method for authenticating the PostgreSQL administrator:"
+msgstr "പോസ്റ്റ്​ഗ്രെസീക്വല്‍ (PostgreSQL) നടത്തിപ്പ്കാരനെ തിരിച്ചറിയാനുള്ള രീതി:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+#, fuzzy
+#| msgid ""
+#| "PostgreSQL servers provide several different mechanisms for "
+#| "authenticating connections.  Please select what method the administrative "
+#| "user should use when connecting to the server."
+msgid ""
+"PostgreSQL servers provide several different mechanisms for authenticating "
+"connections. Please select what method the administrative user should use "
+"when connecting to the server."
+msgstr ""
+"പോസ്റ്റ്​ഗ്രെസീക്വല്‍ (PostgreSQL) സെര്‍വറുകള്‍ തിരിച്ചറിയാനായി പല വ്യത്യസ്ത തിരിച്ചറിയല്‍ പ്രവര്‍"
+"ത്തനവിധങ്ങളും നല്‍കുന്നുണ്ട്. ദയവായി നടത്തിപ്പ്കാരനായ ഉപയോക്താവ്  സെര്‍വറുമായി ബന്ധപ്പെടുമ്പോള്‍ ഏത് "
+"രീതി ഉപയോഗിയ്ക്കണമെന്ന് തിരഞ്ഞെടുക്കുക."
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+#, fuzzy
+#| msgid ""
+#| "With \"ident\" authentication on the local machine, the server will check "
+#| "that the owner of the unix socket is allowed to connect."
+msgid ""
+"With \"ident\" authentication on the local machine, the server will check "
+"that the owner of the Unix socket is allowed to connect. PostgreSQL itself "
+"calls this peer authentication."
+msgstr ""
+"പ്രാദേശിക മഷീനിലെ \"ഐഡന്റ് (ident)\" തിരിച്ചറിയലില്‍ സെര്‍വര്‍ യുണിക്സ് സോക്കറ്റ് ഉടമ "
+"ബന്ധപ്പെടാന്‍ അനുമതിയുള്ളതാണോ എന്ന് പരിശോദിയ്ക്കും."
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+#, fuzzy
+#| msgid ""
+#| "With \"ident\" authentication to remote hosts, RFC 1413 based ident is "
+#| "used (note this can be considered a security risk)."
+msgid ""
+"With \"ident\" authentication to remote hosts, RFC-1413-based ident is used "
+"(which can be considered a security risk)."
+msgstr ""
+" വിദൂര ഹോസ്റ്റുകളിലേയ്ക്കുള്ള \"ഐഡന്റ് (ident)\" തിരിച്ചറിയലില്‍ ആര്‍എഫ്‌സി (RFC) 1413 "
+"അധിഷ്ടിത ഐഡന്റ് (ident) ആണ് ഉപയോഗിയ്ക്കുന്നത് (ഇത് ഒരു സുരക്ഷാ വിപത്‌സാധ്യതയായിട്ടാണ് "
+"കണക്കാക്കുന്നതെന്ന് പ്രത്യേകം ശ്രദ്ധിയ്ക്കുക)."
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+#, fuzzy
+#| msgid ""
+#| "With \"password\" authentication, a password will be passed to the server "
+#| "for use with some authentication backend (such as \"md5\" or \"pam\").  "
+#| "Note that the password is still passed in the clear across network-based "
+#| "connections if your connection is not configured to use SSL."
+msgid ""
+"With \"password\" authentication, a password will be passed to the server "
+"for use with some authentication backend (such as \"MD5\" or \"PAM\"). Note "
+"that the password is still passed in the clear across network connections if "
+"your connection is not configured to use SSL."
+msgstr ""
+"\"അടയാളവാക്ക് (password)\" ഉപയോഗിച്ചുള്ള തിരിച്ചറിയലില്‍ (\"എംഡിഫൈവ് (md5)\" "
+"അല്ലെങ്കില്‍  \"പാം (pam)\" മുതലായ) തിരിച്ചറിയല്‍ ബായ്ക്കെന്‍ഡുകളില്‍ ഉപയോഗിയ്ക്കാനായി ഒരു "
+"അടയാളവാക്ക് സെര്‍വറിലേയ്ക്ക് കൊടുക്കുന്നതായിരിയ്ക്കും. എന്നിരുന്നാലും നിങ്ങളുടെ ബന്ധം എസ്എസ്എല്‍ "
+"(SSL) ഉപയോഗിയ്ക്കാനായി ക്രമീകരിച്ചിട്ടില്ലെങ്കില്‍ അടയാളവാക്ക് ശൃംഘലാധിഷ്ടിത ബന്ധങ്ങളിലൂടെ "
+"തെളിച്ചാണ് (എന്‍ക്രിപ്റ്റ് ചെയ്യാതെ) കൊടുക്കുന്നത് എന്ന് പ്രത്യേകം ശ്രദ്ധിയ്ക്കുക."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+#, fuzzy
+#| msgid ""
+#| "For a default Debian PostgreSQL installation running on the same host, "
+#| "you probably want \"ident\"."
+msgid ""
+"For a standard PostgreSQL installation running on the same host, \"ident\" "
+"is recommended."
+msgstr ""
+"ഒരേ ഹോസ്റ്റില്‍ പ്രവര്‍ത്തിച്ചുകൊണ്ടിരിയ്ക്കുന്ന ഒരു ഡിഫാള്‍ട്ടായിട്ടുള്ള ഡെബിയന്‍ പോസ്റ്റ്​ഗ്രെസീക്വല്‍ "
+"(PostgreSQL) ഇന്‍സ്റ്റളേഷന് നിങ്ങള്‍ക്ക് വേണ്ടത് ഒരു പക്ഷേ \"ഐഡന്റ് (ident)\" ആയിരിയ്ക്കും."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+msgid "Method for authenticating PostgreSQL user:"
+msgstr "പോസ്റ്റ്​ഗ്രെസീക്വല്‍ (PostgreSQL) ഉപയോക്താവിനെ തിരിച്ചറിയാനുള്ള രീതി:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+#, fuzzy
+#| msgid ""
+#| "PostgreSQL servers provide several different mechanisms for "
+#| "authenticating connections.  Please select what method the database user "
+#| "should use when connecting to the server."
+msgid ""
+"PostgreSQL servers provide several different mechanisms for authenticating "
+"connections. Please select what method the database user should use when "
+"connecting to the server."
+msgstr ""
+"പോസ്റ്റ്​ഗ്രെസീക്വല്‍ (PostgreSQL) സെര്‍വറുകള്‍ ബന്ധങ്ങള്‍ തിരിച്ചറിയാനായി പല വ്യത്യസ്ത "
+"തിരിച്ചറിയല്‍ പ്രവര്‍ത്തനവിധങ്ങളും നല്‍കുന്നുണ്ട്. ദയവായി ഡാറ്റാബേസ് ഉപയോക്താവ്  സെര്‍വറുമായി "
+"ബന്ധപ്പെടുമ്പോള്‍ ഏത് രീതി ഉപയോഗിയ്ക്കണമെന്ന് തിരഞ്ഞെടുക്കുക."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+#, fuzzy
+#| msgid ""
+#| "For a default Debian PostgreSQL installation running on the same host, "
+#| "you probably want \"ident\"."
+msgid ""
+"For a standard PostgreSQL installation running on the same host, \"password"
+"\" is recommended, because typically the system username doesn't match the "
+"database username."
+msgstr ""
+"ഒരേ ഹോസ്റ്റില്‍ പ്രവര്‍ത്തിച്ചുകൊണ്ടിരിയ്ക്കുന്ന ഒരു ഡിഫാള്‍ട്ടായിട്ടുള്ള ഡെബിയന്‍ പോസ്റ്റ്​ഗ്രെസീക്വല്‍ "
+"(PostgreSQL) ഇന്‍സ്റ്റളേഷന് നിങ്ങള്‍ക്ക് വേണ്ടത് ഒരു പക്ഷേ \"ഐഡന്റ് (ident)\" ആയിരിയ്ക്കും."
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:35001
+#, fuzzy
+#| msgid "Choose a different PostgreSQL connection method?"
+msgid "PostgreSQL connection method error"
+msgstr "വ്യത്യസ്തമായൊരു പോസ്റ്റ്​ഗ്രെസീക്വല്‍ (PostgreSQL) ബന്ധ രീതി തിരഞ്ഞെടുക്കണോ?"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:35001
+msgid ""
+"Unfortunately, it seems that the database connection method you have "
+"selected for ${pkg} will not work, because it requires the existence of a "
+"local user that does not exist."
+msgstr ""
+"ദുര്‍ഭാഗ്യകരമെന്ന് പറയട്ടെ, ${pkg} നായി നിങ്ങള്‍ തിരഞ്ഞെടുത്ത ഡാറ്റാബേസ് ബന്ധരീതി പ്രവര്‍"
+"ത്തനക്ഷമമല്ലെന്ന് തോന്നുന്നു, കാരണം ഇതിന് നിലവിലില്ലാത്ത ഒരു പ്രാദേശിക ഉപയോക്താവിന്റെ നിലനില്‍"
+"പ് ആവശ്യമായിരിയ്ക്കുന്നു."
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:36001
+msgid "Change PostgreSQL configuration automatically?"
+msgstr "പോസ്റ്റ്​ഗ്രെസീക്വല്‍ (PostgreSQL) ക്രമീകരണം സ്വതേ മാറ്റണോ?"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:36001
+#, fuzzy
+#| msgid ""
+#| "It has been determined that the database installation for ${pkg} can not "
+#| "be automatically accomplished without making changes to your PostgreSQL "
+#| "server's access controls.  It is suggested that this be done by dbconfig-"
+#| "common when your package is installed.  If you would prefer that this be "
+#| "done manually (or not at all), please add the following line to your "
+#| "pg_hba.conf:"
+msgid ""
+"It has been determined that the database installation for ${pkg} cannot be "
+"automatically accomplished without making changes to the PostgreSQL server's "
+"access controls. It is suggested that this be done by dbconfig-common when "
+"the package is installed. If instead you would prefer to do it manually, the "
+"following line needs to be added to your pg_hba.conf:"
+msgstr ""
+"${pkg} നായുള്ള ഡാറ്റാബേസ് ഇന്‍സ്റ്റളേഷന്‍ പോസ്റ്റ്​ഗ്രെസീക്വല്‍ (PostgreSQL) സെര്‍വറിന്റെ സമീപന "
+"നിയന്ത്രണങ്ങളില്‍ മാറ്റം വരുത്താതെ സ്വതേ വിജയിയ്ക്കാന്‍ സാധ്യമല്ല എന്ന് കണ്ടുപിടിച്ചിരിയ്ക്കുന്നു. "
+"നിങ്ങളുടെ പാക്കേജ് ഇന്‍സ്റ്റാള്‍ ചെയ്യുമ്പോള്‍ dbconfig-commn നാല്‍ ഇത് ചെയ്യാനാണ് നിര്‍"
+"ദ്ദേശിയ്ക്കുന്നത്. നിങ്ങളിത് തന്നത്താന്‍ ചെയ്യാനാഗ്രഹിയ്ക്കുന്നെങ്കില്‍ (അല്ലെങ്കില്‍ ചെയ്യാനേ "
+"ആഗ്രഹമില്ലെങ്കില്‍) ദയവായി താഴെ കൊടുത്തിരിയ്ക്കുന്ന വരി pg_hba.conf ല്‍ കൂട്ടിച്ചേര്‍ക്കുക:"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:37001
+msgid "Revert PostgreSQL configuration automatically?"
+msgstr "പോസ്റ്റ്​ഗ്രെസീക്വല്‍ (PostgreSQL) ക്രമീകരണം സ്വതേ പഴയരൂപത്തിലേയ്ക്കാക്കണോ?"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:37001
+#, fuzzy
+#| msgid ""
+#| "As ${pkg} is now being removed, it may no longer be necessary to have an "
+#| "access control entry in your PostgreSQL server's configuration. While "
+#| "keeping such an entry will not break any software on your system, it may "
+#| "be seen as a potential security concern.  It is suggested that this be "
+#| "done by dbconfig-common when your package is removed.  If you would "
+#| "prefer that this be done manually (or not at all), please remove the "
+#| "following line from your pg_hba.conf:"
+msgid ""
+"As ${pkg} is now being removed, it may no longer be necessary to have an "
+"access control entry in the PostgreSQL server's configuration. While keeping "
+"such an entry will not break any software on the system, it may be seen as a "
+"potential security concern. It is suggested that this be done by dbconfig-"
+"common when the package is removed. If instead you would prefer to do it "
+"manually, the following line needs to be removed from your pg_hba.conf:"
+msgstr ""
+"${pkg} ഇപ്പേള്‍ നീക്കം ചെയ്തു കൊണ്ടിരിയ്ക്കുന്നതിനാല്‍ നിങ്ങളുടെ പോസ്റ്റ്​ഗ്രെസീക്വല്‍ (PostgreSQL) "
+"സെര്‍വറിന്റെ ക്രമീകരണത്തില്‍ ഒരു സമീപന നിയന്ത്രണ വരി ആവശ്യമില്ലെന്ന് വന്നേയ്ക്കാം. അങ്ങനെ ഒരു "
+"വരി സൂക്ഷിയ്ക്കുന്നത് നിങ്ങളുടെ സിസ്റ്റത്തിലെ ഒരു സോഫ്റ്റ്‌വെയറിനേയും പ്രവര്‍ത്തനരഹിതമാക്കില്ലെങ്കില്‍ "
+"കൂടി, അതൊരു സാധ്യമായ സുരക്ഷാ പ്രശ്നമായി കണ്ടേയ്ക്കാം. നിങ്ങളുടെ പാക്കേജ് നീക്കം ചെയ്യുമ്പോള്‍ "
+"തന്നെ dbconfig-common നാല്‍ ഇത് ചെയ്യണം എന്നാണ് നിര്‍ദ്ദേശിയ്ക്കപ്പെട്ടിരിയ്ക്കുന്നത്. നിങ്ങളിത് "
+"തന്നത്താന്‍ ചെയ്യാനാഗ്രഹിയ്ക്കുന്നെങ്കില്‍ (അല്ലെങ്കില്‍ ചെയ്യാനേ ആഗ്രഹമില്ലെങ്കില്‍) ദയവായി താഴെ "
+"കൊടുത്തിരിയ്ക്കുന്ന വരി pg_hba.conf ല്‍ നിന്നും നീക്കം ചെയ്യുക:"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:38001
+#, fuzzy
+#| msgid "Please change /etc/postgresql/pg_hba.conf"
+msgid "Modifications needed in /etc/postgresql/pg_hba.conf"
+msgstr "ദയവായി /etc/postgresql/pg_hba.conf മാറ്റുക"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:38001
+#, fuzzy
+#| msgid ""
+#| "To get the database for package ${pkg} bootstrapped you have to edit the "
+#| "configuration of your PostgreSQL server. You may be able to find help in "
+#| "the file /usr/share/doc/${pkg}/README.Debian."
+msgid ""
+"To get the database for package ${pkg} bootstrapped you have to edit the "
+"configuration of the PostgreSQL server. You may be able to find help in the "
+"file /usr/share/doc/${pkg}/README.Debian."
+msgstr ""
+"${pkg} നായി ഡാറ്റാബേസ് ബൂട്ട്സ്ട്രാപ് ചെയ്ത് കിട്ടാനായി നിങ്ങള്‍ക്ക് നിങ്ങളുടെ പോസ്റ്റ്​ഗ്രെസീക്വല്‍ "
+"(PostgreSQL) സെര്‍വറിന്റെ ക്രമീകരണം മാറ്റേണ്ടി വന്നേയ്ക്കും. നിങ്ങള്‍ക്ക് /usr/share/doc/"
+"${pkg}/README.Debian എന്ന ഫയലില്‍ സഹയം കാണാന്‍ കഴിഞ്ഞേയ്ക്കും."
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:39001
+msgid "Empty passwords unsupported with PostgreSQL"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Keep \"administrative\" database passwords in debconf?"
+#~ msgid "Keep \"administrative\" database passwords?"
+#~ msgstr "\"ഭരണ\" ഡാറ്റാബേസ് അടയാളവാക്കുകള്‍ ഡെബ്കോണ്‍ഫില്‍ സൂക്ഷിയ്ക്കണോ?"
+
+#, fuzzy
+#~| msgid ""
+#~| "By default, you will be prompted for all administrator-level database "
+#~| "passwords when you configure, upgrade, or remove applications with "
+#~| "dbconfig-common.  These passwords will not be stored in debconf for any "
+#~| "longer than they are needed."
+#~ msgid ""
+#~ "By default, you will be prompted for all administrator-level database "
+#~ "passwords when you configure, upgrade, or remove applications with "
+#~ "dbconfig-common. These passwords will be stored in debconf's "
+#~ "configuration database only for as long as they are needed."
+#~ msgstr ""
+#~ "dbconfig-common ഉപയോഗിച്ച് നിങ്ങള്‍ പ്രയോഗങ്ങള്‍ ക്രമീകരിയ്ക്കുകയോ പുതുക്കുകയോ അല്ലെങ്കില്‍ "
+#~ "നീക്കം ചെയ്യുകയോ ആണെങ്കില്‍ ഭരണ-തലത്തിലുള്ള ഡാറ്റാബേസ് അടയാളവാക്കുകള്‍ക്കായി സൂചന നല്‍"
+#~ "കുന്നതായിരിയ്ക്കും. ഈ അടയാളവാക്കുകള്‍ ആവശ്യമുള്ളതില്‍ കൂടുതല്‍ സമയത്തേയ്ക്ക് ഡെബ്കോണ്‍ഫില്‍ "
+#~ "സൂക്ഷിയ്ക്കുന്നതല്ല, ഇതാണ് ഡിഫാള്‍ട്ട്."
+
+#~ msgid ""
+#~ "If you know that you do want to keep this database, or if you want to "
+#~ "handle the removal of this database manually, you should refuse this "
+#~ "option."
+#~ msgstr ""
+#~ "ഈ ഡാറ്റാബേസ് സൂക്ഷിയ്ക്കണമെന്നോ ഡാറ്റാബേസ് നീക്കം ചെയ്യുന്നത് തന്നത്താന്‍ ചെയ്യണമെന്നോ നിങ്ങള്‍"
+#~ "ക്കറിയാമെങ്കില്‍ നിങ്ങള്‍ ഈ ഐച്ഛികം നിരസിയ്ക്കണം."
+
+#, fuzzy
+#~| msgid ""
+#~| "Fortunately, there should be a backup of the database made just before "
+#~| "the upgrade in ${dbfile}."
+#~ msgid ""
+#~ "Fortunately, ${dbfile} holds a backup of the database, made just before "
+#~ "the upgrade."
+#~ msgstr "ഭാഗ്യത്തിന് അപ്‌‌ഗ്രേഡിന് തൊട്ടു മുമ്പെടുത്ത ഒരു ബായ്ക്കപ്പ് ${dbfile} ല്‍ ഉണ്ട്."
+
+#, fuzzy
+#~| msgid ""
+#~| "At this point, you have the option to retry or abort the operation. If "
+#~| "you choose \"retry\", you will be prompted with all the configuration "
+#~| "questions once more and another attempt will be made at performing the "
+#~| "operation. \"retry (skip questions)\" will immediately attempt the "
+#~| "operation again, skipping all questions.  If you choose \"abort\", the "
+#~| "operation will fail and you will need to downgrade, reinstall, "
+#~| "reconfigure this package, or otherwise manually intervene to continue "
+#~| "using it."
+#~ msgid ""
+#~ "If at this point you choose \"retry\", you will be prompted with all the "
+#~ "configuration questions once more and another attempt will be made at "
+#~ "performing the operation. \"retry (skip questions)\" will immediately "
+#~ "attempt the operation again, skipping all questions.  If you choose "
+#~ "\"abort\", the operation will fail and you will need to downgrade, "
+#~ "reinstall, reconfigure this package, or otherwise manually intervene to "
+#~ "continue using it."
+#~ msgstr ""
+#~ "ഇവിടെ വച്ച് ഈ പ്രവൃത്തി വീണ്ടും ശ്രമിയ്ക്കാനോ ഇതില്‍ നിന്നും പിന്തിരിയാനോ നിങ്ങള്‍ക്കവസരമുണ്ട്. "
+#~ "നിങ്ങള്‍ \"വീണ്ടും ശ്രമിയ്ക്കുക\" എന്ന് തിരഞ്ഞെടുത്താല്‍ എല്ലാ ക്രമീകരണ ചോദ്യങ്ങള്‍ക്കായും "
+#~ "സൂചിപ്പിച്ച് കൊണ്ട് ഈ പ്രവൃത്തി വീണ്ടും ചെയ്യാനായി ഒരിയ്ക്കല്‍ കൂടി ശ്രമിയ്ക്കുന്നതായിരിയ്ക്കും. "
+#~ "\"(ചോദ്യങ്ങളൊഴിവാക്കി) വീണ്ടും ശ്രമിയ്ക്കുക\" എന്നാണെങ്കില്‍ ഇപ്പോള്‍ തന്നെ എല്ലാ "
+#~ "ചോദ്യങ്ങളുമൊഴിവാക്കി വീണ്ടും ശ്രമിയ്ക്കുന്നതായിരിയ്ക്കും. നിങ്ങള്‍ \"പിന്തിരിയുക\" എന്ന് "
+#~ "തിരഞ്ഞെടുത്താല്‍ ഈ പ്രവൃത്തി പരാജയപ്പെടുകയും നിങ്ങള്‍ക്ക് ഈ പാക്കേജ് ഡൌണ്‍‌ഗ്രേഡ് പുനരിന്‍സ്റ്റാള്‍ "
+#~ "പുനക്രമീകരണം അല്ലെങ്കില്‍ തന്നത്താനുള്ള ഇടപെടല്‍ ഇവയിലേതെങ്കിലും ചെയ്താല്‍ മാത്രമേ ഇത് തുടര്‍"
+#~ "ന്നുപയോഗിയ്ക്കാന്‍ സാധിയ്ക്കൂ."
+
+#, fuzzy
+#~| msgid ""
+#~| "At this point, you have the option to retry or abort the operation. If "
+#~| "you choose \"retry\", you will be prompted with all the configuration "
+#~| "questions once more and another attempt will be made at performing the "
+#~| "operation. \"retry (skip questions)\" will immediately attempt the "
+#~| "operation again, skipping all questions.  If you choose \"abort\", the "
+#~| "operation will fail and you will need to downgrade, reinstall, "
+#~| "reconfigure this package, or otherwise manually intervene to continue "
+#~| "using it.  If you choose \"ignore\", the operation will continue, "
+#~| "ignoring further errors from dbconfig-common."
+#~ msgid ""
+#~ "If at this point you choose \"retry\", you will be prompted with all the "
+#~ "configuration questions once more and another attempt will be made at "
+#~ "performing the operation. \"retry (skip questions)\" will immediately "
+#~ "attempt the operation again, skipping all questions.  If you choose "
+#~ "\"abort\", the operation will fail and you will need to downgrade, "
+#~ "reinstall, reconfigure this package, or otherwise manually intervene to "
+#~ "continue using it.  If you choose \"ignore\", the operation will "
+#~ "continue, ignoring further errors from dbconfig-common."
+#~ msgstr ""
+#~ "ഇവിടെ വച്ച് ഈ പ്രവൃത്തി വീണ്ടും ശ്രമിയ്ക്കാനോ ഇതില്‍ നിന്നും പിന്തിരിയാനോ നിങ്ങള്‍ക്കവസരമുണ്ട്. "
+#~ "നിങ്ങള്‍ \"വീണ്ടും ശ്രമിയ്ക്കുക\" എന്ന് തിരഞ്ഞെടുത്താല്‍ എല്ലാ ക്രമീകരണ ചോദ്യങ്ങള്‍ക്കായും "
+#~ "സൂചിപ്പിച്ച് കൊണ്ട് ഈ പ്രവൃത്തി വീണ്ടും ചെയ്യാനായി ഒരിയ്ക്കല്‍ കൂടി ശ്രമിയ്ക്കുന്നതായിരിയ്ക്കും. "
+#~ "\"(ചോദ്യങ്ങളൊഴിവാക്കി) വീണ്ടും ശ്രമിയ്ക്കുക\" എന്നാണെങ്കില്‍ ഇപ്പോള്‍ തന്നെ എല്ലാ "
+#~ "ചോദ്യങ്ങളുമൊഴിവാക്കി വീണ്ടും ശ്രമിയ്ക്കുന്നതായിരിയ്ക്കും. നിങ്ങള്‍ \"പിന്തിരിയുക\" എന്ന് "
+#~ "തിരഞ്ഞെടുത്താല്‍ ഈ പ്രവൃത്തി പരാജയപ്പെടുകയും നിങ്ങള്‍ക്ക് ഈ പാക്കേജ് ഡൌണ്‍‌ഗ്രേഡ് പുനരിന്‍സ്റ്റാള്‍ "
+#~ "പുനക്രമീകരണം അല്ലെങ്കില്‍ തന്നത്താനുള്ള ഇടപെടല്‍ ഇവയിലേതെങ്കിലും ചെയ്താല്‍ മാത്രമേ ഇത് തുടര്‍"
+#~ "ന്നുപയോഗിയ്ക്കാന്‍ സാധിയ്ക്കൂ. നിങ്ങള്‍ \"അവഗണിയ്ക്കുക\" എന്നാണ് തിരഞ്ഞെടുത്തതെങ്കില്‍ dbconfig-"
+#~ "common ല്‍ നിന്നുള്ള എല്ലാ പിഴവുകളും അവഗണിച്ചുകൊണ്ട് പ്രവൃത്തി തുടരുന്നതായിരിയ്ക്കും."
+
+#, fuzzy
+#~| msgid ""
+#~| "For some reason it was not possible to perform some of the actions "
+#~| "necessary to remove the database for ${pkg}.  At this point you have two "
+#~| "options: you can find out what has caused this error and fix it, or you "
+#~| "can refuse the offer for help removing the database (the latter implies "
+#~| "you will have to remove the database manually).  If it's of any help, "
+#~| "this was the error encountered:"
+#~ msgid ""
+#~ "For some reason it was not possible to perform some of the actions "
+#~ "necessary to remove the database for ${pkg}.  At this point you have two "
+#~ "options: you can find out what has caused this error and fix it, or you "
+#~ "can refuse the offer for help removing the database (the latter implies "
+#~ "you will have to remove the database manually)."
+#~ msgstr ""
+#~ "ഏതോ ചില കാരണങ്ങളാല്‍ ${pkg} നായി ഡാറ്റാബേസ് നീക്കംചെയ്യുന്നതിനാവശ്യമായ ചില "
+#~ "നടപടികളുകളുമായി മുന്നോട്ട് പോകാന്‍ സാധിച്ചില്ല. ഇവിടെ വച്ച് നിങ്ങള്‍ക്ക് രണ്ട് വഴികളുണ്ട്: നിങ്ങള്‍"
+#~ "ക്ക് ഈ പിഴവ് പറ്റാന്‍ കാരണമെന്താണെന്ന് കണ്ടുപിടിച്ച് തിരുത്തുകയോ അല്ലെങ്കില്‍ ഡാറ്റാബേസ് നീക്കം "
+#~ "ചെയ്യാന്‍ സഹായത്തിനായുള്ള ഈ വാഗ്ദാനം നിരസിയ്ക്കാം (രണ്ടാമത്തേതിനര്‍ത്ഥം നിങ്ങള്‍ തന്നത്താന്‍ "
+#~ "ഡാറ്റാബേസ് നീക്കം ചെയ്യേണ്ടി വരുമെന്നാണ്). ഇതാണ് പറ്റിയ പിഴവ്, ഇതെന്തിനെങ്കിലും "
+#~ "സഹായിയ്ക്കുമെങ്കില്‍:"
+
+#~ msgid "tcp/ip"
+#~ msgstr "ടിസിപി/ഐപി (tcp/ip)"
+
+#~ msgid "tcp/ip + ssl"
+#~ msgstr "ടിസിപി/ഐപി + എസ്എസ്എല്‍ (tcp/ip + ssl)"
+
+#~ msgid "Otherwise, you should choose this option."
+#~ msgstr "അല്ലെങ്കില്‍ നിങ്ങള്‍ ഈ ഐച്ഛികം തിരഞ്ഞെടുക്കണം."
+
+#~ msgid "The passwords you supplied do not match.  Please try again."
+#~ msgstr "നിങ്ങള്‍ നല്‍കിയ അടയാളവാക്കുകള്‍ ഒത്തില്ല. ദയവായി വീണ്ടും ശ്രമിയ്ക്കുക."
+
+#~ msgid "Error upgrading database for ${pkg}.  Retry?"
+#~ msgstr "${pkg} നായി ഡാറ്റാബേസ് അപ്​ഗ്രേഡ് ചെയ്യുന്നതില്‍ പിഴവ്. വീണ്ടും ശ്രമീയ്ക്കണോ?"
+
+#~ msgid ""
+#~ "An error seems to have occurred while upgrading the database. If it's of "
+#~ "any help, this was the error encountered:"
+#~ msgstr ""
+#~ "ഡാറ്റാബേസ് അപ്‌‌ഗ്രേഡ് ചെയ്യുമ്പോള്‍ ഒരു പിഴവ് പറ്റിയതായി തോന്നുന്നു. ഇതാണ് പറ്റിയ പിഴവ്, "
+#~ "ഇതെന്തിനെങ്കിലും സഹായിയ്ക്കുമെങ്കില്‍:"
+
+#~ msgid "${error}"
+#~ msgstr "${error}"
+
+#~ msgid "Error installing database for ${pkg}.  Retry?"
+#~ msgstr "${pkg} നായി ഡാറ്റാബേസ് ഇന്‍സ്റ്റാള്‍ ചെയ്യുന്നതില്‍ പിഴവ്. വീണ്ടും ശ്രമീയ്ക്കണോ?"
+
+#~ msgid ""
+#~ "An error seems to have occurred while installing the database. If it's of "
+#~ "any help, this was the error encountered:"
+#~ msgstr ""
+#~ "ഡാറ്റാബേസ് ഇന്‍സ്റ്റാള്‍ ചെയ്യുമ്പോള്‍ ഒരു പിഴവ് പറ്റിയതായി തോന്നുന്നു. ഇതാണ് പറ്റിയ പിഴവ്, "
+#~ "ഇതെന്തിനെങ്കിലും സഹായിയ്ക്കുമെങ്കില്‍:"
+
+#~ msgid "Error removing database for ${pkg}.  Retry?"
+#~ msgstr "${pkg} നായി ഡാറ്റാബേസ് നീക്കം ചെയ്യുന്നതില്‍ പിഴവ്. വീണ്ടും ശ്രമീയ്ക്കണോ?"
+
+#~ msgid ""
+#~ "If you would like to reconfigure your application to use a different "
+#~ "method, you should choose this option.  If you know for certain that this "
+#~ "method will work and you want to continue without changing your choice, "
+#~ "you should refuse this option."
+#~ msgstr ""
+#~ "മറ്റൊരു രീതി ഉപയോഗിയ്ക്കാനായി നിങ്ങളുടെ പ്രയോഗത്തെ പുനഃക്രമീകരിയ്ക്കാന്‍ "
+#~ "നിങ്ങളാഗ്രഹിയ്ക്കുന്നെങ്കില്‍ നിങ്ങള്‍ ഈ ഐച്ഛികം തിരഞ്ഞെടുക്കണം. ഇത് പ്രവര്‍ത്തനക്ഷമമാണെന്ന് നിങ്ങള്‍"
+#~ "ക്കുറപ്പായും അറിയുമെന്നും നിങ്ങളുടെ ചോയ്സ് മാറ്റാതെ തന്നെ തുടരണമെന്നുമാണെങ്കില്‍ നിങ്ങള്‍ ഈ "
+#~ "ഐച്ഛികം നിരസിയ്ക്കണം."
+
+#~ msgid "${pghbaline}"
+#~ msgstr "${pghbaline}"
+
+#~ msgid "PostgreSQL does not support empty passwords."
+#~ msgstr "പോസ്റ്റ്​ഗ്രെസീക്വല്‍ (PostgreSQL) ശൂന്യ അടയാളവാക്കുകളെ പിന്തുണയ്ക്കുന്നില്ല."

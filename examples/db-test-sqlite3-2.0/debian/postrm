@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+#set -x
+
+if [ -f /usr/share/debconf/confmodule ]; then
+    . /usr/share/debconf/confmodule
+fi
+if [ -f /usr/share/dbconfig-common/dpkg/postrm.sqlite3 ]; then
+    . /usr/share/dbconfig-common/dpkg/postrm.sqlite3
+    dbc_go db-test-sqlite3 "$@"
+fi
+
+if [ "$1" = "purge" ]; then
+	rm -f /etc/db-test-sqlite3/debian-db.php
+	if command -v ucf >/dev/null; then
+		ucf --purge /etc/db-test-sqlite3/debian-db.php
+		ucfr --purge db-test-sqlite3 /etc/db-test-sqlite3/debian-db.php
+	fi
+fi
+
+#DEBHELPER#

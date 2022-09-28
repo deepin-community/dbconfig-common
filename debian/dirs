@@ -1,0 +1,4 @@
+etc/dbconfig-common
+usr/share/dbconfig-common/data
+var/cache/dbconfig-common/backups
+var/log/dbconfig-common

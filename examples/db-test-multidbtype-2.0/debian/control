@@ -1,0 +1,15 @@
+Source: db-common-example
+Section: misc
+Priority: optional
+Maintainer: Paul Gevers <elbrus@debian.org>
+Build-Depends-Indep: debhelper (>= 9), dh-exec
+Standards-Version: 3.9.6
+
+Package: db-test-multidbtype
+Architecture: all
+Depends: dbconfig-mysql | dbconfig-pgsql | dbconfig-sqlite3 | dbconfig-no-thanks,
+ ${misc:Depends}
+Description: a package to test dbconfig-common (generic version)
+ This is a package to test the dbconfig-common package.
+ .
+ This version should work with any database supported by dbconfig-common.

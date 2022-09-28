@@ -1,0 +1,118 @@
+Source: dbconfig-common
+Section: admin
+Priority: optional
+Maintainer: Paul Gevers <elbrus@debian.org>
+Build-Depends:
+ debhelper-compat (= 12),
+ debiandoc-sgml,
+ ghostscript,
+ po-debconf,
+ texlive-fonts-recommended,
+ texlive-latex-extra,
+ texlive-latex-recommended
+Standards-Version: 4.2.1
+Rules-Requires-Root: no
+Vcs-Git: https://salsa.debian.org/debian/dbconfig-common.git
+Vcs-Browser: https://salsa.debian.org/debian/dbconfig-common
+
+Package: dbconfig-common
+Architecture: all
+Depends:
+ ucf,
+ ${misc:Depends}
+Suggests:
+ dbconfig-mysql | dbconfig-pgsql | dbconfig-sqlite3 | dbconfig-no-thanks
+Breaks:
+ bandwidthd-pgsql (<< 2.0.1+cvs20090917-9~)
+Description: framework that helps packages to manage databases
+ This package contains the core of the dbconfig-common framework. This
+ framework presents a policy and implementation for managing various databases
+ used by applications included in Debian packages.
+ .
+ It can:
+  - support MySQL/MariaDB, PostgreSQL, and SQLite3 based applications;
+  - create or remove databases and database users;
+  - access local or remote databases;
+  - upgrade/modify databases when upstream changes database structure;
+  - generate config files in many formats with the database info;
+  - import configs from packages previously managing databases on their own;
+  - prompt users with a set of normalized, pre-translated questions;
+  - handle failures gracefully, with an option to retry;
+  - do all the hard work automatically;
+  - work for package maintainers with little effort on their part;
+  - work for local admins with little effort on their part;
+  - comply with an agreed upon set of standards for behavior;
+  - do absolutely nothing if that is the whim of the local admin;
+  - perform all operations from within the standard flow of
+    package management (no additional skill is required of the local
+    admin).
+
+Package: dbconfig-mysql
+Architecture: all
+Depends:
+ dbconfig-common,
+ default-mysql-client | virtual-mysql-client,
+ ${misc:Depends}
+Suggests:
+ default-mysql-server | virtual-mysql-server
+Conflicts:
+ dbconfig-no-thanks
+Description: dbconfig-common MySQL/MariaDB support
+ This package ensures MySQL/MariaDB support in the dbconfig-common framework,
+ and should be in the depends list of packages that require MySQL support from
+ dbconfig-common.
+ .
+ System administrators that don't want dbconfig-common to handle the database
+ management should install dbconfig-no-thanks instead.
+
+Package: dbconfig-pgsql
+Architecture: all
+Depends:
+ dbconfig-common,
+ postgresql-client,
+ ${misc:Depends}
+Suggests:
+ postgresql
+Conflicts:
+ dbconfig-no-thanks
+Description: dbconfig-common PostgreSQL support
+ This package ensures PostgreSQL support in the dbconfig-common framework, and
+ should be in the depends list of packages that require PostgreSQL support from
+ dbconfig-common.
+ .
+ System administrators that don't want dbconfig-common to handle the database
+ management should install dbconfig-no-thanks instead.
+
+Package: dbconfig-sqlite3
+Architecture: all
+Depends:
+ dbconfig-common,
+ sqlite3,
+ ${misc:Depends}
+Conflicts:
+ dbconfig-no-thanks
+Description: dbconfig-common SQLite3 support
+ This package ensures SQLite3 support in the dbconfig-common framework, and
+ should be in the depends list of packages that require SQLite3 support from
+ dbconfig-common.
+ .
+ System administrators that don't want dbconfig-common to handle the database
+ management should install dbconfig-no-thanks instead.
+
+Package: dbconfig-no-thanks
+Architecture: all
+Depends:
+ dbconfig-common,
+ ${misc:Depends}
+Conflicts:
+ dbconfig-mysql,
+ dbconfig-pgsql,
+ dbconfig-sqlite,
+ dbconfig-sqlite3
+Description: dbconfig-common bypass
+ If a package relies on the dbconfig-common framework for database setup and
+ maintenance, installing dbconfig-no-thanks instead of one of dbconfig's
+ database-specific packages will block this function. It is intended for cases
+ where the system administrator desires or requires full control of the
+ database or where dbconfig-common makes bad choices, and typically leaves
+ the depending packages non-functional until manually configured.

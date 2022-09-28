@@ -1,0 +1,1408 @@
+# Translation of dbconfig-common debconf templates to German
+# Copyright (C) Andreas Tille <tille@debian.org>, 2005.
+# Copyright (C) Helge Kreutzmann <debian@helgefjell.de>, 2006, 2009, 2015, 2016, 2019.
+# This translation is distributed under the same terms as dbconfig-common
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: dbconfig-common 2.0.12\n"
+"Report-Msgid-Bugs-To: dbconfig-common@packages.debian.org\n"
+"POT-Creation-Date: 2019-08-18 20:35+0200\n"
+"PO-Revision-Date: 2019-08-24 16:33+0200\n"
+"Last-Translator: Helge Kreutzmann <debian@helgefjell.de>\n"
+"Language-Team: de <debian-l10n-german@lists.debian.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid "Will this server be used to access remote databases?"
+msgstr ""
+"Wird dieser Server zum Zugriff auf entfernte Datenbanken verwendet werden?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid ""
+"For the database types that support it, dbconfig-common includes support for "
+"configuring databases on remote systems. When installing a package's "
+"database via dbconfig-common, the questions related to remote configuration "
+"are asked with a priority such that they are skipped for most systems."
+msgstr ""
+"Für die Datenbanktypen, die dies unterstützen, enthält Dbconfig-common "
+"Unterstützung für die Konfiguration von Datenbanken auf anderen Systemen. "
+"Bei der Installation einer Datenbank eines Pakets mittels dbconfig-common "
+"werden die Fragen bezüglich einer Datenbank auf einem anderen System mit "
+"solch einer Priorität gestellt, dass sie auf den meisten Systemen "
+"ausgelassen werden."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid ""
+"If you select this option, the default behavior will be to prompt you with "
+"questions related to remote database configuration when you install new "
+"packages."
+msgstr ""
+"Falls Sie diese Option wählen, werden Ihnen standardmäßig Fragen mit Bezug "
+"auf die Konfiguration von Datenbanken auf anderen Systemen gestellt, wenn "
+"Sie neue Pakete installieren."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid "If you are unsure, you should not select this option."
+msgstr ""
+"Falls Sie sich unsicher sind, sollten Sie diese Option nicht auswählen."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid "Remember database passwords permanently in debconf?"
+msgstr "Datenbankpassworte dauerhaft in Debconf ablegen?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid ""
+"When you configure, upgrade, or remove applications with dbconfig-common, "
+"administrator-level database passwords are needed. By default, these "
+"passwords are not stored, so you will be prompted for them each time."
+msgstr ""
+"Wenn Sie Anwendungen mit dbconfig-common konfigurieren, entfernen oder ein "
+"Upgrade dieser Anwendungen damit durchführen, werden Datenbanken mit "
+"Passwörten für administrative Tätigkeiten benötigt. Standardmäßig werden "
+"diese Passwörter nicht gespeichert und daher werden Sie jedes Mal nach Ihnen "
+"gefragt."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid ""
+"Alternatively the passwords can be permanently remembered in the debconf "
+"database (which is protected by Unix file permissions), though this is less "
+"secure and thus not the default setting."
+msgstr ""
+"Alternativ können die Passwörter dauerhaft in der Debconf-Datenbank (die von "
+"Unix-Dateirechten geschützt wird) abgelegt werden. Dies ist allerdings nicht "
+"so sicher und daher nicht die Standard-Einstellung."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid ""
+"If you would rather not be bothered for an administrative password every "
+"time you upgrade a database application with dbconfig-common, you should "
+"choose this option. Otherwise, you should refuse this option."
+msgstr ""
+"Falls das administrative Passwort nicht bei jedem Upgrade der Datenbank-"
+"Anwendung mit dbconfig-common aktualisiert werden soll, so wählen Sie diese "
+"Option. Andernfalls sollten Sie diese Option ablehnen."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid "Configure database for ${pkg} with dbconfig-common?"
+msgstr "Konfigurieren der Datenbank für ${pkg} mit dbconfig-common?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid ""
+"The ${pkg} package must have a database installed and configured before it "
+"can be used. This can be optionally handled with dbconfig-common."
+msgstr ""
+"Für das Paket ${pkg} muss eine Datenbank installiert und konfiguriert sein, "
+"bevor es benutzt werden kann. Dies kann optional mit Hilfe von dbconfig-"
+"common geschehen."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid ""
+"If you are an advanced database administrator and know that you want to "
+"perform this configuration manually, or if your database has already been "
+"installed and configured, you should refuse this option. Details on what "
+"needs to be done should most likely be provided in /usr/share/doc/${pkg}."
+msgstr ""
+"Falls Sie ein erfahrener Datenbankadministrator sind und wissen, dass Sie "
+"diese Konfiguration manuell durchführen möchten oder, falls Ihre Datenbank "
+"bereits installiert und konfiguriert ist, verwerfen Sie diese Option. "
+"Details zur manuellen Installation sind üblicherweise in /usr/share/doc/"
+"${pkg} zu finden."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid "Otherwise, you should probably choose this option."
+msgstr "Andernfalls sollte diese Option wahrscheinlich gewählt werden."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid "Reinstall database for ${pkg}?"
+msgstr "Datenbank für ${pkg} neu installieren?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Since you are reconfiguring ${pkg}, you may also want to reinstall the "
+"database which it uses."
+msgstr ""
+"Da Sie ${pkg} neu konfigurieren, möchten Sie vielleicht auch die Datenbank, "
+"die es verwendet, neu installieren."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"If you wish to reinstall the database for ${pkg}, you should select this "
+"option. If you do not wish to do so (if you are reconfiguring the package "
+"for unrelated reasons), you should not select this option."
+msgstr ""
+"Falls Sie die Datenbank für ${pkg} neu installieren wollen, sollten Sie "
+"diese Option wählen. Falls Sie dies nicht wünschen (falls Sie das Paket aus "
+"anderen Gründen neu konfigurieren), sollten Sie diese Option nicht wählen."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Warning: if you opt to reinstall the database and install it under a name "
+"that already exists, the old database will be dropped without further "
+"questions. In that case a backup of the original database is made in /var/"
+"tmp/."
+msgstr ""
+"Warnung: Falls Sie sich dazu entscheiden, die Datenbank neu unter einem "
+"bereits existierenden Namen zu installieren, wird die alte Datenbank ohne "
+"weitere Fragen entfernt. In diesem Fall wird unter /var/tmp/ eine "
+"Sicherungskopie der ursprünglichen Datenbank angelegt."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Warning: if you change the name of the database, the old database will not "
+"be removed. If you change the name of the user that connects to the "
+"database, the privileges of the original user will not be revoked."
+msgstr ""
+"Warnung: Falls Sie den Namen der Datenbank ändern wird die alte Datenbank "
+"nicht entfernt. Falls Sie den Namen des Benutzers ändern, der sich mit der "
+"Datenbank verbindet, werden die Rechte des ursprünglichen Benutzers nicht "
+"entfernt."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+msgid "Perform upgrade on database for ${pkg} with dbconfig-common?"
+msgstr "Upgrade der Datenbank für ${pkg} mit dbconfig-common durchführen?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+msgid ""
+"According to the maintainer for this package, database upgrade operations "
+"need to be performed on ${pkg}. Typically, this is due to changes in how a "
+"new upstream version of the package needs to store its data."
+msgstr ""
+"Der Betreuer des Paketes ${pkg} hält es für erforderlich, dass Operationen "
+"zum Upgrade der Datenbank durchgeführt werden. Typischerweise ist das in "
+"Änderungen, wie eine neue Version der Anwendung ihre Daten speichert, "
+"begründet."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+msgid ""
+"If you want to handle this process manually, you should refuse this option. "
+"Otherwise, you should choose this option. During the upgrade, a backup of "
+"the database will be made in /var/cache/dbconfig-common/backups, from which "
+"the database can be restored in the case of problems."
+msgstr ""
+"Falls Sie diesen Prozess manuell durchführen möchten, lehnen Sie diese "
+"Option ab. Andernfalls sollte diese Option gewählt werden. Während des "
+"Upgrades wird ein Backup der existierenden Datenbank im Verzeichnis /var/"
+"cache/dbconfig-common/backups angelegt, von dem die Datenbank im Falle "
+"auftretender Probleme wiederhergestellt werden kann."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid "Deconfigure database for ${pkg} with dbconfig-common?"
+msgstr "Dekonfigurieren der Datenbank für ${pkg} mit dbconfig-common?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid ""
+"Since you are removing ${pkg}, it's possible that you no longer want the "
+"underlying database and the privileges for the user associated with this "
+"package."
+msgstr ""
+"Da das Paket ${pkg} entfernt werden soll, ist es möglich, dass die "
+"eingerichtete Datenbank und die Privilegien des dem Pakets zugeordneten "
+"Benutzers nicht mehr benötigt werden."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid ""
+"Please choose whether database removal and privilege revocation should be "
+"handled with dbconfig-common."
+msgstr ""
+"Bitte wählen Sie aus, ob die Entfernung der Datenbank und der Privilegien "
+"mittels Dbconfig-common gehandhabt werden soll."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid ""
+"If you choose this option, dbconfig-common will check if ${pkg} provided "
+"scripts and database commands to undo package specific operations and run "
+"them if they exist. Then it will ask if you want to delete the ${pkg} "
+"database and revoke the standard privileges for the user of ${pkg}. If you "
+"don't want any of this, or if you want to handle this manually, you should "
+"refuse this option."
+msgstr ""
+"Falls Sie diese Option auswählen, wird dbconfig-common prüfen, ob ${pkg} "
+"Skripte und Datenbankbefehle bereitstellt, um die paketspezifischen "
+"Operationen rückgängig zu machen und diese ggf. auszuführen. Danach werden "
+"Sie gefragt, ob Sie die Datenbank ${pkg} löschen möchten und die "
+"Standardprivilegien für den Benutzer von ${pkg} zurücksetzen. Falls Sie dies "
+"alles nicht möchten oder falls Sie dies selbst durchführen wollen, sollten "
+"Sie diese Option ablehnen."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid "Database type to be used by ${pkg}:"
+msgstr "Datenbanktyp, der durch das Paket ${pkg} benutzt werden soll:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid ""
+"The ${pkg} package can be configured to use one of several database types. "
+"Below, you will be presented with the available choices."
+msgstr ""
+"Das Paket ${pkg} kann zur Verwendung verschiedener Datenbanktypen "
+"konfiguriert werden. Unten sind die verschiedenen Möglichkeiten aufgelistet."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid ""
+"If other database types are supported by ${pkg} but not shown here, the "
+"reason for their omission is that the corresponding dbconfig-<database type> "
+"packages are not installed. If you know that you want the package to use "
+"another supported database type, your best option is to back out of the "
+"dbconfig-common questions and opt out of dbconfig-common assistance for this "
+"package for now. Install your preferred dbconfig-<database type> option from "
+"the list in the package dependencies, and then \"dpkg-reconfigure ${pkg}\" "
+"to select it."
+msgstr ""
+"Falls andere Datenbanktypen durch ${pkg} unterstützt aber nicht hier "
+"angezeigt werden, liegt dies daran, dass das entsprechende Paket dbconfig-"
+"<Datenbanktyp> nicht installiert ist. Falls Sie sich sicher sind, dass das "
+"Paket einen anderen unterstützen Datenbanktyp verwenden soll, ist es am "
+"besten, aus der Dbconfig-common-Frage zurückzugehen und derzeit die "
+"Unterstützung durch Dbconfig-common nicht zu verwenden. Installieren Sie die "
+"bevorzugte dbconfig-<Datenbanktyp>-Variante aus der Liste der "
+"Paketabhängigkeiten und wählen Sie dann diese mittels »dpkg-reconfigure "
+"${pkg}« aus."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+msgid "Delete the database for ${pkg}?"
+msgstr "Die Datenbank für ${pkg} löschen?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+msgid ""
+"If you no longer need the database for ${pkg} and the privileges of the "
+"database user of ${pkg}, you can choose to delete the database and revoke "
+"the privileges now."
+msgstr ""
+"Falls die Datenbank für ${pkg} und die Privilegien der Datenbankbenutzer von "
+"${pkg} nicht mehr benötigt werden sollten, können Sie jetzt deren Löschung "
+"auswählen."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+msgid ""
+"If you no longer have need of the data being stored by ${pkg}, you should "
+"choose this option. If you want to keep this data, or if you would rather "
+"handle this process manually, you should refuse this option. Either way, it "
+"won't affect your other databases."
+msgstr ""
+"Falls es keine Verwendung mehr für die durch ${pkg} gespeicherten Daten "
+"geben sollte, wählen Sie diese Option. Falls Sie die Daten aufbewahren "
+"möchten oder dieser Prozess manuell durchgeführt werden soll, lehnen Sie "
+"diese Option ab. Unabhängig von der Auswahl wird Ihre Datenbank davon nicht "
+"betroffen sein."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:10001
+msgid "Back up the database for ${pkg} before upgrading?"
+msgstr "Backup der Datenbank für ${pkg} vor dem Upgrade durchführen?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:10001
+msgid ""
+"The underlying database for ${pkg} needs to be upgraded as part of the "
+"installation process. Just in case, the database can be backed up before "
+"this is done, so that if something goes wrong, you can revert to the "
+"previous package version and repopulate the database."
+msgstr ""
+"Für die dem Paket ${pkg} zu Grunde liegende Datenbank muss während des "
+"Installationsprozesses ein Upgrade durchgeführt werden. Für den Fall der "
+"Fälle kann vorher ein Backup der Datenbank erstellt werden, so dass zu der "
+"alten Version des Paketes zurückgekehrt werden kann und die alten Daten "
+"wieder eingespielt werden können."
+
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:11001 ../dbconfig-common.templates:12001
+msgid "Password confirmation:"
+msgstr "Passwort-Bestätigung:"
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:13001
+msgid "Password mismatch"
+msgstr "Die Passwörter stimmen nicht überein."
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:13001
+msgid "The password and its confirmation do not match."
+msgstr "Das Passwort und seine Bestätigung stimmen nicht überein."
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "abort"
+msgstr "Abbruch"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "retry"
+msgstr "Wiederholen"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "retry (skip questions)"
+msgstr "Wiederholen (Fragen überspringen)"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "ignore"
+msgstr "Ignorieren"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:14002
+msgid "Next step for database upgrade:"
+msgstr "Nächster Schritt beim Upgrade der Datenbank:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:14002
+msgid "An error occurred while upgrading the database:"
+msgstr "Es ist ein Fehler beim Upgrade der Datenbank aufgetreten:"
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:14002
+msgid ""
+"Fortunately, ${dbfile} should hold a backup of the database, made just "
+"before the upgrade (unless the error occurred during backup creation, in "
+"which case no changes will have been applied yet). Your options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+"Glücklicherweise sollte ${dbfile} eine Sicherung, die genau vor dem Upgrade "
+"durchgeführt wurde, Ihrer Datenbank enthalten (es sei denn, der Fehler trat "
+"beim Erstellen der Sicherungskopie auf - in diesem Falle wurden keine "
+"Änderungen angewandt). Ihre Optionen sind:\n"
+" * Abbruch - Damit schlägt die Operation fehl; Sie müssen dann ein\n"
+"   Downgrade durchführen, das Paket reinstallieren, das Paket neu\n"
+"   konfigurieren oder auf andere Weise manuell eingreifen, um das Paket\n"
+"   weiterzuverwenden. Damit wird normalerweise auch Ihre Möglichkeit,\n"
+"   andere Pakete zu installieren, beeinträchtigt, bis der\n"
+"   Installationsfehler behoben wurde.\n"
+" * Nochmal versuchen - Die Abfragen mit allen Konfigurationsfragen erfolgen\n"
+"   erneut (darunter auch die, die aufgrund der Debconf-Priorität von Ihnen\n"
+"   bisher nicht gesehen wurden) und dann erfolgt ein erneuter Versuch zur\n"
+"   Durchführung der Operation.\n"
+" * Nochmal versuchen (Fragen überspringen) -  Versucht die Operation sofort\n"
+"   erneut, alle Fragen werden übersprungen. Dies ist normalerweise nur\n"
+"   nützlich, falls Sie nach dem Auftreten des Fehlers das zugrundeliegende\n"
+"   Problem behoben haben.\n"
+" * Ignorieren - Führt mit der Operation fort und ignoriert die Fehler von\n"
+"   dbconfig-common. Damit verbleibt das Paket typischerweise ohne\n"
+"   funktionierende Datenbank."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:15002
+msgid "Next step for database installation:"
+msgstr "Nächster Schritt bei der Datenbankinstallation:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:15002
+msgid "An error occurred while installing the database:"
+msgstr "Ein Fehler ist beim Installieren der Datenbank aufgetreten:"
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:15002
+msgid ""
+"Your options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+"Ihre Optionen sind:\n"
+" * Abbruch - Damit schlägt die Operation fehl; Sie müssen dann ein\n"
+"   Downgrade durchführen, das Paket reinstallieren, das Paket neu\n"
+"   konfigurieren oder auf andere Weise manuell eingreifen, um das Paket\n"
+"   weiterzuverwenden. Damit wird normalerweise auch Ihre Möglichkeit,\n"
+"   andere Pakete zu installieren, beeinträchtigt, bis der\n"
+"   Installationsfehler behoben wurde.\n"
+" * Nochmal versuchen - Die Abfragen mit allen Konfigurationsfragen erfolgen\n"
+"   erneut (darunter auch die, die aufgrund der Debconf-Priorität von Ihnen\n"
+"   bisher nicht gesehen wurden) und dann erfolgt ein erneuter Versuch zur\n"
+"   Durchführung der Operation.\n"
+" * Nochmal versuchen (Fragen überspringen) -  Versucht die Operation sofort\n"
+"   erneut, alle Fragen werden übersprungen. Dies ist normalerweise nur\n"
+"   nützlich, falls Sie nach dem Auftreten des Fehlers das zugrundeliegende\n"
+"   Problem behoben haben.\n"
+" * Ignorieren - Führt mit der Operation fort und ignoriert die Fehler von\n"
+"   dbconfig-common. Damit verbleibt das Paket typischerweise ohne\n"
+"   funktionierende Datenbank."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:16002
+msgid "Next step for database removal:"
+msgstr "Nächster Schritt beim Entfernen der Datenbank:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:16002
+msgid "An error occurred while removing the database:"
+msgstr "Während des Entfernens der Datenbank ist ein Fehler aufgetreten:"
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:16002
+msgid ""
+"As a result it was not possible to remove the database for ${pkg}. Your "
+"options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave the database and user privileges in place."
+msgstr ""
+"Im Ergebnis war es nicht möglich, die Datenbank für ${pkg} zu entfernen. "
+"Ihre Optionen sind:\n"
+" * Abbruch - Damit schlägt die Operation fehl; Sie müssen dann ein\n"
+"   Downgrade durchführen, das Paket reinstallieren, das Paket neu\n"
+"   konfigurieren oder auf andere Weise manuell eingreifen, um das Paket\n"
+"   weiterzuverwenden. Damit wird normalerweise auch Ihre Möglichkeit,\n"
+"   andere Pakete zu installieren, beeinträchtigt, bis der\n"
+"   Installationsfehler behoben wurde.\n"
+" * Nochmal versuchen - Die Abfragen mit allen Konfigurationsfragen erfolgen\n"
+"   erneut (darunter auch die, die aufgrund der Debconf-Priorität von Ihnen\n"
+"   bisher nicht gesehen wurden) und dann erfolgt ein erneuter Versuch zur\n"
+"   Durchführung der Operation.\n"
+" * Nochmal versuchen (Fragen überspringen) -  Versucht die Operation sofort\n"
+"   erneut, alle Fragen werden übersprungen. Dies ist normalerweise nur\n"
+"   nützlich, falls Sie nach dem Auftreten des Fehlers das zugrundeliegende\n"
+"   Problem behoben haben.\n"
+" * Ignorieren - Führt mit der Operation fort und ignoriert die Fehler von\n"
+"   dbconfig-common. Damit verbleiben die Datenbank und die\n"
+"   Benutzerprivilegien typischerweise erhalten."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:17001
+msgid "Next step:"
+msgstr "Nächster Schritt:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:17001
+msgid ""
+"Configuring the database for ${pkg} requires the package ${dbpackage} to be "
+"installed and configured first, which is not something that can be checked "
+"for automatically."
+msgstr ""
+"Um die Datenbank für ${pkg} zu konfigurieren, muss zuerst das Paket "
+"${dbpackage} installiert und konfiguriert werden. Dies kann nicht "
+"automatisch überprüft werden."
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#. Additionally, ${dbpackage} can be replaced with "mysql-server", so
+#. that length suits, but ${pkg} usually will expand more.
+#: ../dbconfig-common.templates:17001
+msgid ""
+"Your options are:\n"
+" * abort - Choose this when in doubt and install ${dbpackage} before\n"
+"   continuing with the configuration of this package. This causes the\n"
+"   installation of ${pkg} to fail for now.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+"   Choose this if you chose the wrong database type by mistake.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+"Ihre Optionen sind:\n"
+" * Abbruch - Wählen Sie dies im Zweifelsfall und installieren Sie\n"
+"   ${dbpackage} bevor Sie mit der Konfiguration dieses Pakets fortfahren.\n"
+"   Dies führt jetzt dazu, dass die Installation von ${pkg} fehlschlägt.\n"
+" * Nochmal versuchen - Die Abfragen mit allen Konfigurationsfragen erfolgen\n"
+"   erneut (darunter auch die, die aufgrund der Debconf-Priorität von Ihnen\n"
+"   bisher nicht gesehen wurden) und dann erfolgt ein erneuter Versuch zur\n"
+"   Durchführung der Operation. Wählen Sie dies, falls Sie versehentlich die\n"
+"   falsche Datenbank ausgewählt haben.\n"
+" * Ignorieren - Führt mit der Operation fort und ignoriert die Fehler von\n"
+"   dbconfig-common. Damit verbleibt das Paket typischerweise ohne\n"
+"   funktionierende Datenbank."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:18001
+msgid "Host name of the ${dbvendor} database server for ${pkg}:"
+msgstr "Rechnername des ${dbvendor}-Datenbankservers für ${pkg}:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:18001
+msgid ""
+"Please select the remote hostname to use, or select \"new host\" to enter a "
+"new host."
+msgstr ""
+"Bitte wählen Sie den Namen des zu verwendenden anderen Rechners aus oder "
+"wählen Sie »new host«, um einen neuen Rechner einzugeben."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:19001
+msgid "Port number for the ${dbvendor} service:"
+msgstr "Portnummer für den ${dbvendor}-Dienst:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:19001
+msgid ""
+"Please specify the port the ${dbvendor} database on the remote host is "
+"running on. To use the default port, leave this field blank."
+msgstr ""
+"Bitte geben Sie den Port an, an dem die ${dbvendor}-Datenbank auf dem "
+"anderen Rechner auf Anfragen wartet. Um den Standard-Port zu verwenden, "
+"lassen Sie das Feld leer."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid "Host running the ${dbvendor} server for ${pkg}:"
+msgstr "Computer auf dem der ${dbvendor}-Server für ${pkg} läuft:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid "Please provide the hostname of a remote ${dbvendor} server."
+msgstr "Bitte geben Sie den Rechnernamen des anderen ${dbvendor}-Servers ein."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid ""
+"You must have already arranged for the administrative account to be able to "
+"remotely create databases and grant privileges."
+msgstr ""
+"Sie müssen bereits einen Administrationszugang auf dem anderen Rechner so "
+"eingerichtet haben, dass das Erstellen der Datenbank und das Einrichten der "
+"Zugriffsrechte ermöglicht worden ist."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:21001
+msgid "${dbvendor} database name for ${pkg}:"
+msgstr "${dbvendor}-Datenbankname für ${pkg}:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:21001
+msgid ""
+"Please provide a name for the ${dbvendor} database to be used by ${pkg}."
+msgstr ""
+"Bitte einen Namen für die ${dbvendor}-Datenbank, die vom Paket ${pkg} "
+"verwendet werden soll, eingeben."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid "${dbvendor} username for ${pkg}:"
+msgstr "${dbvendor}-Benutzername für ${pkg}:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"Please provide a ${dbvendor} username for ${pkg} to register with the "
+"database server. A ${dbvendor} user is not necessarily the same as a system "
+"login, especially if the database is on a remote server."
+msgstr ""
+"Bitte geben Sie einen ${dbvendor}-Benutzernamen ein, mit dem sich das "
+"Programm ${pkg} am Datenbank-Server anmelden soll. Ein ${dbvendor}-Benutzer "
+"ist nicht unbedingt ein System-Anmeldename, insbesondere wenn die Datenbank "
+"auf einem anderen Server läuft."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"This is the user which will own the database, tables, and other objects to "
+"be created by this installation. This user will have complete freedom to "
+"insert, change, or delete data in the database."
+msgstr ""
+"Dieser Benutzer wird der Eigentümer der Datenbank, der Tabellen und anderer "
+"Objekte sein, die bei der Installation erzeugt werden. Dieser Benutzer hat "
+"alle Rechte, Daten in die Datenbank einzufügen, in ihr zu verändern oder aus "
+"ihr zu löschen."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"If your username contains an @, you need to specify the domain as well (see "
+"below)."
+msgstr ""
+"Falls Ihr Benutzername ein »@« enthält, müssen Sie auch die Domäne angeben "
+"(siehe unten)."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"Advanced usage: if you need to define the domain that the user will log in "
+"from, you can write \"username@domain\"."
+msgstr ""
+"Fortgeschrittene Verwendung: Falls Sie die Domäne, aus der sich der Benutzer "
+"anmelden wird, festlegen müssen, können Sie »Benutzer@Domäne« schreiben."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid "${dbvendor} storage directory for ${pkg}:"
+msgstr "${dbvendor}-Speicherverzeichnis für ${pkg}:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid ""
+"Please provide a path where the ${dbvendor} database file for ${pkg} should "
+"be installed into."
+msgstr ""
+"Bitte geben Sie einen Pfad an, unter dem die ${dbvendor}-Datenbankdatei für "
+"${pkg} installiert werden soll."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid ""
+"The permissions for this directory will be set to match the permissions for "
+"the generated database file."
+msgstr ""
+"Die Rechte für dieses Verzeichnis werden so gesetzt, dass sie zu den Rechten "
+"der generierten Datenbank passen."
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:24001 ../dbconfig-common.templates:29001
+msgid "Unix socket"
+msgstr "Unix-Socket"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:24001 ../dbconfig-common.templates:29001
+msgid "TCP/IP"
+msgstr "TCP/IP"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:24002
+msgid "Connection method for MySQL database of ${pkg}:"
+msgstr "Verbindungsmethode an die MySQL-Datenbank von ${pkg}:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:24002
+msgid ""
+"By default, ${pkg} will be configured to use a MySQL server through a local "
+"Unix socket (this provides the best performance). To connect with a "
+"different method, or to a different server entirely, select the appropriate "
+"option from the choices here."
+msgstr ""
+"Standardmäßig wird ${pkg} so konfiguriert, dass ein MySQL-Server über einen "
+"lokalen UNIX-Socket angesprochen wird (ermöglicht die beste "
+"Geschwindigkeit). Um sich mit einer anderen Methode anzumelden oder einen "
+"komplett anderen Server zu verwenden, wählen Sie aus den Optionen hier die "
+"geeignete aus."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:25001
+msgid "MySQL application password for ${pkg}:"
+msgstr "MySQL-Anwendungspasswort für ${pkg}:"
+
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:25001 ../dbconfig-common.templates:30001
+msgid ""
+"Please provide a password for ${pkg} to register with the database server. "
+"If left blank, a random password will be generated."
+msgstr ""
+"Bitte geben Sie ein Passwort ein, mit dem sich ${pkg} beim Datenbankserver "
+"anmelden kann. Falls Sie das Feld frei lassen, wird automatisch ein "
+"zufälliges Passwort erzeugt."
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001 ../dbconfig-common.templates:31001
+msgid "Name of the database's administrative user:"
+msgstr "Name des administrativen Datenbank-Benutzers:"
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001 ../dbconfig-common.templates:31001
+msgid ""
+"Please provide the name of the account with which this package should "
+"perform administrative actions. This user is the one with the power to "
+"create new database users."
+msgstr ""
+"Bitte geben Sie den Namen des Kontos an, mit dem dieses Paket die "
+"administrativen Vorgänge ausführen soll. Dieser Benutzer verfügt über die "
+"Berechtigung, neue Datenbank-Benutzer anzulegen."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001
+msgid ""
+"For MySQL, this is almost always \"root\". Note that this is not the same as "
+"the Unix login \"root\"."
+msgstr ""
+"Für MySQL ist dies fast immer »root«. Beachten Sie, dass dies nicht dasselbe "
+"wie der UNIX-Benutzer »root« ist."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:27001
+msgid "Password of the database's administrative user:"
+msgstr "Passwort des administrativen Datenbank-Benutzers:"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:27001
+msgid ""
+"Please provide the password for the administrative account \"${dbadmin}\" "
+"with which this package should create its MySQL database and user."
+msgstr ""
+"Bitte geben Sie das Passwort für das administrative Konto »${dbadmin}« an, "
+"mit dem dieses Paket seine MySQL-Datenbank und -Benutzer einrichten soll."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:28001
+msgid "Authentication plugin for MySQL database:"
+msgstr "Authentifizierungserweiterung für die MySQL-Datenbank:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:28001
+msgid ""
+"Database user accounts can be configured to use a variety of plugins for "
+"authentication with MySQL. If the server default won't work with this "
+"application, it is necessary to specify one that will. Please select one "
+"from the list of available plugins. Leaving the selection set to its "
+"original value should work unless a remote server is using unpredictable "
+"defaults, but other options may not be supported by ${pkg}. If problems "
+"arise, the package's documentation should give hints; see /usr/share/doc/"
+"${pkg}/."
+msgstr ""
+"Datenbankbenutzerkonten können mit einer Vielzahl von Erweiterungungen für "
+"die Authentifizierung mit MySQL konfiguriert werden. Falls der Server mit "
+"dieser Anwendung nicht funktionieren sollte, ist die Angabe einer "
+"funktionierenden notwendig. Bitte wählen Sie eine aus der Liste der "
+"verfügbaren Erweiterungen aus. Bleibt die Auswahl auf seinem ursprünglichen "
+"Wert, sollte dies funktionieren, außer ein ferner Server verwendet "
+"unvorhersagbare Vorgaben, aber andere Optionen werden möglicherweise von ${pkg} nicht "
+"unterstützt. Falls Problem auftauchen, sollte die Anleitung des "
+"Pakets Tipps geben; siehe /usr/share/doc/${pkg}/."
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:28001
+msgid ""
+"Your options are:\n"
+" * default - use the default determined by the server.\n"
+" * mysql_native_password - no MySQL authentication plugin is used.\n"
+" * sha256_password - a more secure password encryption algorithm.\n"
+" * caching_sha2_password - SHA2 plus an in-memory authentication cache."
+msgstr ""
+"Ihre Optionen sind:\n"
+" * default - verwendet die durch den Server ermittelte Vorgabe.\n"
+" * mysql_native_password - es wird keine MySQL-Authentifizierungerweiterung verwandt.\n"
+" * sha256_password - ein sicherer Passwortverschlüsselungsalgorithmus.\n"
+" * caching_sha2_password - SHA2 ergänzt um einen speicherinternen Authentifizierungszwischenspeicher."
+
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:29001
+msgid "TCP/IP + SSL"
+msgstr "TCP/IP + SSL"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:29002
+msgid "Connection method for PostgreSQL database of ${pkg}:"
+msgstr "Verbindungsmethode für die PostgreSQL-Datenbank von ${pkg}:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:29002
+msgid ""
+"By default, ${pkg} will be configured to use a PostgreSQL server through TCP/"
+"IP because that method works in most circumstances. To connect with a "
+"different method, select the appropriate option from the choices here."
+msgstr ""
+"Standardmäßig wird ${pkg} so konfiguriert, dass ein PostgreSQL-Server über "
+"TCP/IP angesprochen wird, da dies in den meisten Fällen funktioniert. Um "
+"eine Verbindung mit einer anderen Methode durchzuführen, wählen Sie aus den "
+"Optionen hier die geeignete aus."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:30001
+msgid "PostgreSQL application password for ${pkg}:"
+msgstr "PostgreSQL-Anwendungspasswort für ${pkg}:"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:30001
+msgid ""
+"If you are using \"ident\" authentication, the supplied password will not be "
+"used and can be left blank. Otherwise, PostgreSQL access may need to be "
+"reconfigured to allow password-authenticated access."
+msgstr ""
+"Falls Sie die »ident«-Authentifizierung verwenden, wird das übergebene "
+"Passwort nicht verwendet und kann leer bleiben. Andernfalls müsste der "
+"PostgreSQL-Zugriff eventuell neu konfiguriert werden, um Passwort-"
+"Authentifizierungszugriff zu erlauben."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+msgid "Password of your database's administrative user:"
+msgstr "Passwort des Datenbank-Administrators:"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+msgid ""
+"Please provide the password for the ${dbadmin} account with which this "
+"package should perform administrative actions."
+msgstr ""
+"Bitte geben Sie das Passwort für das administrative Konto ${dbadmin} an, "
+"unter dem dieses Paket seine administrativen Vorgänge durchführen soll."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+msgid ""
+"For a standard PostgreSQL installation, a database password is not required, "
+"since authentication is done at the system level."
+msgstr ""
+"Bei einer normalen PostgreSQL-Installation ist kein Datenbank-Passwort "
+"erforderlich, da die Authentifizierung auf Systemebene erfolgt."
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:33001 ../dbconfig-common.templates:34001
+msgid "ident"
+msgstr "Ident"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:33001 ../dbconfig-common.templates:34001
+msgid "password"
+msgstr "Passwort"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+msgid "Method for authenticating the PostgreSQL administrator:"
+msgstr "Authentifizierungsmethode des PostgreSQL-Administrators:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+msgid ""
+"PostgreSQL servers provide several different mechanisms for authenticating "
+"connections. Please select what method the administrative user should use "
+"when connecting to the server."
+msgstr ""
+"PostgreSQL-Server bieten unterschiedliche Mechanismen für die Anmeldung. "
+"Bitte wählen Sie die Methode aus, mit der sich der Administrator am Server "
+"anmelden soll."
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+msgid ""
+"With \"ident\" authentication on the local machine, the server will check "
+"that the owner of the Unix socket is allowed to connect. PostgreSQL itself "
+"calls this peer authentication."
+msgstr ""
+"Bei der »Ident«-Methode zur Anmeldung an der lokalen Maschine prüft der "
+"Server, ob der Eigentümer des UNIX-Sockets eine Erlaubnis zum Verbinden hat. "
+"PostgreSQL nennt dies selber »Peer Authentication«."
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+msgid ""
+"With \"ident\" authentication to remote hosts, RFC-1413-based ident is used "
+"(which can be considered a security risk)."
+msgstr ""
+"Bei der »Ident«-Methode zur Anmeldung an anderen Rechnern wird eine RFC-1413-"
+"basierte Ident-Methode benutzt. (Dies kann ein Sicherheitsrisiko darstellen.)"
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+msgid ""
+"With \"password\" authentication, a password will be passed to the server "
+"for use with some authentication backend (such as \"MD5\" or \"PAM\"). Note "
+"that the password is still passed in the clear across network connections if "
+"your connection is not configured to use SSL."
+msgstr ""
+"Bei der »Passwort«-Anmeldung wird ein Passwort zum Server übermittelt und "
+"dort an ein Anmeldungs-Backend (z.B. »MD5« oder »PAM«) übergeben. Beachten "
+"Sie, dass das Passwort dennoch im Klartext über das Netz gesendet wird, "
+"falls der Server nicht für die Benutzung von SSL konfiguriert wurde."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+msgid ""
+"For a standard PostgreSQL installation running on the same host, \"ident\" "
+"is recommended."
+msgstr ""
+"Für eine Standard-PostgreSQL-Installation, die auf demselben Rechner läuft, "
+"wird »Ident« empfohlen."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+msgid "Method for authenticating PostgreSQL user:"
+msgstr "Authentifizierungsmethode der PostgreSQL-Benutzer:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+msgid ""
+"PostgreSQL servers provide several different mechanisms for authenticating "
+"connections. Please select what method the database user should use when "
+"connecting to the server."
+msgstr ""
+"PostgreSQL-Server bieten verschiedene unterschiedliche Mechanismen für die "
+"Anmeldung. Bitte wählen Sie die Methode aus, mit der sich der "
+"Datenbankbenutzer am Server anmelden soll."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+msgid ""
+"For a standard PostgreSQL installation running on the same host, \"password"
+"\" is recommended, because typically the system username doesn't match the "
+"database username."
+msgstr ""
+"Für eine Standard-PostgreSQL-Installation, die auf demselben Rechner läuft, "
+"wird »password« empfohlen, da typischerweise der Benutzername im System "
+"nicht zu dem Datenbank-Benutzernamen passt."
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:35001
+msgid "PostgreSQL connection method error"
+msgstr "PostgreSQL-Verbindungsmethodenfehler"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:35001
+msgid ""
+"Unfortunately, it seems that the database connection method you have "
+"selected for ${pkg} will not work, because it requires the existence of a "
+"local user that does not exist."
+msgstr ""
+"Es scheint leider so, als würde die für ${pkg} ausgewählte "
+"Datenbankverbindung nicht funktionieren, da sie die Existenz eines lokalen "
+"Benutzers voraussetzt, der aber nicht existiert."
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:36001
+msgid "Change PostgreSQL configuration automatically?"
+msgstr "Soll die PostgreSQL-Konfiguration automatisch geändert werden?"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:36001
+msgid ""
+"It has been determined that the database installation for ${pkg} cannot be "
+"automatically accomplished without making changes to the PostgreSQL server's "
+"access controls. It is suggested that this be done by dbconfig-common when "
+"the package is installed. If instead you would prefer to do it manually, the "
+"following line needs to be added to your pg_hba.conf:"
+msgstr ""
+"Es hat sich herausgestellt, dass die Installation der Datenbank für ${pkg} "
+"nicht automatisch durchgeführt werden kann, ohne die Zugriffskontrolle des "
+"PostgreSQL-Servers zu ändern. Es wird empfohlen, dass dies durch dbconfig-"
+"common durchgeführt wird, sobald das Paket installiert ist. Falls Sie es "
+"stattdessen vorziehen, dies manuell durchzuführen, muss die folgende Zeile "
+"zu der Datei ph_hba.conf hinzugefügt werden:"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:37001
+msgid "Revert PostgreSQL configuration automatically?"
+msgstr "Soll die PostgreSQL-Konfiguration automatisch zurückgesetzt werden?"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:37001
+msgid ""
+"As ${pkg} is now being removed, it may no longer be necessary to have an "
+"access control entry in the PostgreSQL server's configuration. While keeping "
+"such an entry will not break any software on the system, it may be seen as a "
+"potential security concern. It is suggested that this be done by dbconfig-"
+"common when the package is removed. If instead you would prefer to do it "
+"manually, the following line needs to be removed from your pg_hba.conf:"
+msgstr ""
+"Da ${pkg} nun gelöscht wird, ist es möglich, dass der Eintrag für die "
+"Zugriffskontrolle in der PostgreSQL-Serverkonfiguration nicht länger "
+"benötigt wird. Zwar wird es der Software auf Ihrem System nicht unmittelbar "
+"schaden, wenn Sie den Eintrag beibehalten, doch könnte sich dieser nicht "
+"mehr benötigte Zugang zu Ihrem System als Sicherheitsproblem erweisen. Daher "
+"wird empfohlen, den Eintrag mittels Dbconfig-common zu entfernen, sobald das "
+"Paket gelöscht wird. Falls Sie es stattdessen vorziehen, dies manuell "
+"durchzuführen, muss die folgende Zeile aus der Datei ph_hba.conf entfernt "
+"werden:"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:38001
+msgid "Modifications needed in /etc/postgresql/pg_hba.conf"
+msgstr "Anpassungen in der Datei /etc/postgresql/pg_hba.conf notwendig."
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:38001
+msgid ""
+"To get the database for package ${pkg} bootstrapped you have to edit the "
+"configuration of the PostgreSQL server. You may be able to find help in the "
+"file /usr/share/doc/${pkg}/README.Debian."
+msgstr ""
+"Um die PostgreSQL-Datenbank für ${pkg} zu initialisieren, muss die "
+"Konfiguration des PostgreSQL-Servers geändert werden. Eine detaillierte "
+"Anleitung dazu finden Sie unter /usr/share/doc/${pkg}/README.Debian."
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:39001
+msgid "Empty passwords unsupported with PostgreSQL"
+msgstr "PostgreSQL unterstützt keine leeren Passwörter"
+
+#~ msgid "Keep \"administrative\" database passwords?"
+#~ msgstr "»Administrative« Datenbank-Passwörter speichern?"
+
+#~ msgid ""
+#~ "By default, you will be prompted for all administrator-level database "
+#~ "passwords when you configure, upgrade, or remove applications with "
+#~ "dbconfig-common. These passwords will be stored in debconf's "
+#~ "configuration database only for as long as they are needed."
+#~ msgstr ""
+#~ "Standardmäßig werden alle administrativen Datenbank-Passwörter während "
+#~ "der Konfiguration, dem Upgrade oder dem Löschen von Anwendungen mit "
+#~ "dbconfig-common abgefragt. Diese Passwörter werden in der Debconfs-"
+#~ "Konfigurationsdatenbank nur so lange wie notwendig gespeichert."
+
+#~ msgid ""
+#~ "If you know that you do want to keep this database, or if you want to "
+#~ "handle the removal of this database manually, you should refuse this "
+#~ "option."
+#~ msgstr ""
+#~ "Falls Sie wissen, dass Sie diese Datenbank erhalten wollen oder wenn Sie "
+#~ "das Löschen manuell durchführen wollen, lehnen Sie diese Option ab."
+
+#~ msgid ""
+#~ "Fortunately, ${dbfile} holds a backup of the database, made just before "
+#~ "the upgrade."
+#~ msgstr ""
+#~ "Glücklicherweise enthält ${dbfile} ein Backup der Datenbank, das "
+#~ "unmittelbar vor dem Upgrade erstellt wurde."
+
+#~ msgid ""
+#~ "If at this point you choose \"retry\", you will be prompted with all the "
+#~ "configuration questions once more and another attempt will be made at "
+#~ "performing the operation. \"retry (skip questions)\" will immediately "
+#~ "attempt the operation again, skipping all questions.  If you choose "
+#~ "\"abort\", the operation will fail and you will need to downgrade, "
+#~ "reinstall, reconfigure this package, or otherwise manually intervene to "
+#~ "continue using it."
+#~ msgstr ""
+#~ "Falls zu diesem Zeitpunkt die Option »Wiederholen« gewählt wird, werden "
+#~ "alle Konfigurationsfragen noch einmal gestellt und ein erneuter Versuch "
+#~ "vorgenommen, die Operation durchzuführen. Die Option »Wiederholen (Fragen "
+#~ "überspringen)« wird die Operation sofort versuchen und alle Fragen "
+#~ "überspringen. Wenn »Abbruch« gewählt wird, schlägt die Operation fehl und "
+#~ "Sie müssen ein Downgrade, eine Reinstallation, eine Neukonfiguration "
+#~ "dieses Pakets durchführen oder anders manuelle eingreifen, damit Sie das "
+#~ "Paket weiter benutzen können."
+
+#~ msgid ""
+#~ "If at this point you choose \"retry\", you will be prompted with all the "
+#~ "configuration questions once more and another attempt will be made at "
+#~ "performing the operation. \"retry (skip questions)\" will immediately "
+#~ "attempt the operation again, skipping all questions.  If you choose "
+#~ "\"abort\", the operation will fail and you will need to downgrade, "
+#~ "reinstall, reconfigure this package, or otherwise manually intervene to "
+#~ "continue using it.  If you choose \"ignore\", the operation will "
+#~ "continue, ignoring further errors from dbconfig-common."
+#~ msgstr ""
+#~ "Falls Sie zu diesem Zeitpunkt die Option »Wiederholen« wählen, werden "
+#~ "alle Konfigurationsfragen noch einmal gestellt und ein erneuter Versuch "
+#~ "vorgenommen, die Operation durchzuführen. Die Option »Wiederholen (Fragen "
+#~ "überspringen)« wird die Operation sofort versuchen und alle Fragen "
+#~ "überspringen. Wenn »Abbruch« gewählt wird, schlägt die Operation fehl und "
+#~ "Sie müssen ein Downgrade, eine Reinstallation, eine Neukonfiguration "
+#~ "dieses Pakets durchführen oder anders manuelle eingreifen, damit Sie das "
+#~ "Paket weiter benutzen können. Falls Sie »Ignorieren« auswählen, wird "
+#~ "diese Operation weitergeführt und dabei werden weitere Fehler von "
+#~ "dbconfig-common ignoriert."
+
+#~ msgid ""
+#~ "For some reason it was not possible to perform some of the actions "
+#~ "necessary to remove the database for ${pkg}.  At this point you have two "
+#~ "options: you can find out what has caused this error and fix it, or you "
+#~ "can refuse the offer for help removing the database (the latter implies "
+#~ "you will have to remove the database manually)."
+#~ msgstr ""
+#~ "Aus irgend einem Grund war es nicht möglich, einige der zum Löschen der "
+#~ "Datenbank von ${pkg} erforderlichen Aktionen durchzuführen. An diesem "
+#~ "Punkt gibt es zwei Möglichkeiten: Sie können herausfinden, was das "
+#~ "Problem verursacht hat und dieses lösen oder die Hilfe zum Entfernen der "
+#~ "Datenbank ablehnen (natürlich bedeutet letzteres, dass die Datenbank "
+#~ "manuell entfernt werden muss)."
+
+#~ msgid ""
+#~ "If in doubt, you should choose \"abort\", and install ${dbpackage} before "
+#~ "continuing with the configuration of this package.  If you choose \"retry"
+#~ "\", you will be allowed to choose different answers (in case you chose "
+#~ "the wrong database type by mistake).  If you choose \"ignore\", then "
+#~ "installation will continue as normal."
+#~ msgstr ""
+#~ "Im Zweifelsfall sollten Sie »Abbruch« auswählen und zuerst ${dbpackage} "
+#~ "installieren, bevor Sie mit der Konfiguration dieses Paketes fortfahren. "
+#~ "Falls Sie »Wiederholen« auswählen, können Sie andere Antworten geben "
+#~ "(falls Sie versehentlich den falschen Datenbanktyp ausgewählt haben). "
+#~ "Falls Sie »Ignorieren« auswählen, wird diese Installation normal "
+#~ "fortfahren."
+
+#~ msgid "tcp/ip"
+#~ msgstr "TCP/IP"
+
+#~ msgid "tcp/ip + ssl"
+#~ msgstr "TCP/IP + SSL"
+
+#~ msgid "Otherwise, you should choose this option."
+#~ msgstr "Andernfalls sollte diese Option gewählt werden."
+
+#~ msgid "The passwords you supplied do not match.  Please try again."
+#~ msgstr ""
+#~ "Die eingegebenen Passwörter stimmen nicht überein. Bitte versuchen Sie es "
+#~ "noch einmal!"
+
+#~ msgid "Error upgrading database for ${pkg}.  Retry?"
+#~ msgstr "Fehler beim Upgrade der Datenbank von ${pkg}. Wiederholen?"
+
+#~ msgid ""
+#~ "An error seems to have occurred while upgrading the database. If it's of "
+#~ "any help, this was the error encountered:"
+#~ msgstr ""
+#~ "Es scheint ein Fehler beim Upgrade der Datenbank aufgetreten zu sein. Als "
+#~ "Hilfestellung hier die aufgetretene Fehlermeldung:"
+
+#~ msgid "${error}"
+#~ msgstr "${error}"
+
+#~ msgid "Error installing database for ${pkg}.  Retry?"
+#~ msgstr "Fehler bei der Installation der Datenbank für ${pkg}. Wiederholen?"
+
+#~ msgid ""
+#~ "An error seems to have occurred while installing the database. If it's of "
+#~ "any help, this was the error encountered:"
+#~ msgstr ""
+#~ "Es scheint ein Fehler bei der Installation der Datenbank aufgetreten zu "
+#~ "sein. Als Hilfestellung hier die aufgetretene Fehlermeldung:"
+
+#~ msgid "Error removing database for ${pkg}.  Retry?"
+#~ msgstr "Fehler beim Löschen der Datenbank von ${pkg}. Wiederholen?"
+
+#~ msgid ""
+#~ "If you would like to reconfigure your application to use a different "
+#~ "method, you should choose this option.  If you know for certain that this "
+#~ "method will work and you want to continue without changing your choice, "
+#~ "you should refuse this option."
+#~ msgstr ""
+#~ "Wenn Sie die Anwendung derart umkonfigurieren möchten, dass eine andere "
+#~ "Methode benutzt wird, dann wählen Sie diese Option. Falls Sie sicher "
+#~ "sind, dass diese Methode funktioniert und Sie Ihre Auswahl nicht ändern "
+#~ "möchten, dann lehnen Sie diese Option ab."
+
+#~ msgid "${pghbaline}"
+#~ msgstr "${pghbaline}"
+
+#~ msgid "PostgreSQL does not support empty passwords."
+#~ msgstr "PostgreSQL unterstützt keine leeren Passwörter."
+
+#~ msgid "dbconfig-common will attempt to load existing settings"
+#~ msgstr ""
+#~ "dbconfig-common wird versuchen, existierende Einstellungen zu setzen."
+
+#~ msgid ""
+#~ "dbconfig-common will now attempt to load the pre-existing settings of "
+#~ "${pkg}.  Later, these settings will be validated, and if there is any "
+#~ "problem with loading or using them you will be given the option to enter "
+#~ "them again later."
+#~ msgstr ""
+#~ "dbconfig-common wird nun versuchen, die bereits existierenden "
+#~ "Einstellungen von ${pkg} zu laden. Diese Einstellungen werden später "
+#~ "validiert. Falls ein Problem beim Laden auftritt, so wird Ihnen die "
+#~ "Möglichkeit gegeben, sie später erneut einzugeben."

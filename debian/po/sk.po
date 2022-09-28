@@ -1,0 +1,1337 @@
+# Slovak translation for dbconfig-common debconf template.
+# Copyright (C) 2016 dbconfig-common.
+# This file is distributed under the same license as the dbconfig-common package.
+# Ivan Masár <helix84@centrum.sk>, 2007, 2009, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: dbconfig-common\n"
+"Report-Msgid-Bugs-To: dbconfig-common@packages.debian.org\n"
+"POT-Creation-Date: 2019-08-18 20:35+0200\n"
+"PO-Revision-Date: 2016-12-15 12:00+0200\n"
+"Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
+"Language-Team: x\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Virtaal 0.7.1\n"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid "Will this server be used to access remote databases?"
+msgstr "Bude sa z tohto systému pristupovať k vzdialeným databázam?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid ""
+"For the database types that support it, dbconfig-common includes support for "
+"configuring databases on remote systems. When installing a package's "
+"database via dbconfig-common, the questions related to remote configuration "
+"are asked with a priority such that they are skipped for most systems."
+msgstr ""
+"dbconfig-common obsahuje podporu pre konfiguráciu databázy na vzdialenom "
+"systéme pre tie typy databáz, ktoré to umožňujú. Pri inštalácii databázy "
+"balíka pomocou dbconfig-common sa tento pýta otázky týkajúce sa vzdialenej "
+"konfigurácie prioritne, takže na väčšine systémov budú preskočené."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid ""
+"If you select this option, the default behavior will be to prompt you with "
+"questions related to remote database configuration when you install new "
+"packages."
+msgstr ""
+"Ak vyberiete túto možnosť, štandardné správanie bude pýtať sa otázky "
+"týkajúce sa konfigurácie vzdialenej databázy počas inštalácie nových balíkov."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid "If you are unsure, you should not select this option."
+msgstr "Ak si nie ste istý, nemali by ste voliť túto možnosť."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid "Remember database passwords permanently in debconf?"
+msgstr "Pamätať si heslá k databázam trvale v debconf?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid ""
+"When you configure, upgrade, or remove applications with dbconfig-common, "
+"administrator-level database passwords are needed. By default, these "
+"passwords are not stored, so you will be prompted for them each time."
+msgstr ""
+"Pri konfigurácii, aktualizácii alebo odstraňovaní aplikácie pomocou dbconfig-"
+"common sú potrebné heslá k databáze na úrovni správcu. V predvolenom "
+"nastavení sa tieto heslá neukladajú, takže budete vždy vyzvaní, aby ste ich "
+"zadali."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid ""
+"Alternatively the passwords can be permanently remembered in the debconf "
+"database (which is protected by Unix file permissions), though this is less "
+"secure and thus not the default setting."
+msgstr ""
+"Namiesto toho je možné si heslá trvale zapamätať v databáze debconf (ktorú "
+"chránia unixové povolenia prístupu k súborom), aj keď to je menej bezpečné a "
+"preto to nie je štandardné nastavenie."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid ""
+"If you would rather not be bothered for an administrative password every "
+"time you upgrade a database application with dbconfig-common, you should "
+"choose this option. Otherwise, you should refuse this option."
+msgstr ""
+"Ak by ste boli radšej, keby vás dbconfig-common neobťažoval pýtaním hesla "
+"zakaždým, keď vykonávate aktualizáciu databázovej aplikácie, mali by ste "
+"zvoliť túto možnosť. Inak by ste mali túto možnosť odmietnuť."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid "Configure database for ${pkg} with dbconfig-common?"
+msgstr "Konfigurovať databázu balíka ${pkg} pomocou dbconfig-common?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid ""
+"The ${pkg} package must have a database installed and configured before it "
+"can be used. This can be optionally handled with dbconfig-common."
+msgstr ""
+"Balík ${pkg} musí mať nainštalovanú a nakonfigurovanú databázu predtým, než "
+"ho bude možné používať. Ak chcete, môže sa o to postarať dbconfig-common."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid ""
+"If you are an advanced database administrator and know that you want to "
+"perform this configuration manually, or if your database has already been "
+"installed and configured, you should refuse this option. Details on what "
+"needs to be done should most likely be provided in /usr/share/doc/${pkg}."
+msgstr ""
+"Ak ste pokročilý správca a viete, že chcete vykonať túto konfiguráciu "
+"manuálne alebo ak je vaša databáza už nainštalovaná a nakonfigurovaná, mali "
+"by ste túto možnosť odmietnuť. Podrobnosti o tom, čo treba spraviť by mali "
+"pravdepodobne byť v /usr/share/doc/${pkg}."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid "Otherwise, you should probably choose this option."
+msgstr "Inak by ste mali pravdepodobne zvoliť túto možnosť."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid "Reinstall database for ${pkg}?"
+msgstr "Reinštalovať databázu balíka ${pkg}?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Since you are reconfiguring ${pkg}, you may also want to reinstall the "
+"database which it uses."
+msgstr ""
+"Keďže vykonávate rekonfiguráciu balíka ${pkg}, možno tiež chcete "
+"reinštalovať databázu, ktorú používa."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"If you wish to reinstall the database for ${pkg}, you should select this "
+"option. If you do not wish to do so (if you are reconfiguring the package "
+"for unrelated reasons), you should not select this option."
+msgstr ""
+"Ak chcete reinštalovať databázu balíka ${pkg}, mali by ste zvoliť túto "
+"možnosť. Ak si to neželáte (ak vykonávate rekonfiguráciu z iných dôvodov), "
+"nemali by ste zvoliť túto možnosť."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Warning: if you opt to reinstall the database and install it under a name "
+"that already exists, the old database will be dropped without further "
+"questions. In that case a backup of the original database is made in /var/"
+"tmp/."
+msgstr ""
+"Upozornenie: Ak ste sa rozhodli databázu reinštalovať a nainštalujte ju pod "
+"názvom, ktorý už existuje, stará databáza bude bez ďalších otázok zrušená. V "
+"takom prípade sa vykoná záloha pôvodnej databázy do /var/tmp/."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Warning: if you change the name of the database, the old database will not "
+"be removed. If you change the name of the user that connects to the "
+"database, the privileges of the original user will not be revoked."
+msgstr ""
+"Upozornenie: Ak zmeníte názov databázy, stará databáza nebudú odstránená. Ak "
+"zmeníte meno používateľa, ktorý sa pripája k databáze, nebude oprávnenia "
+"pôvodného používateľa nebudú odvolané."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+msgid "Perform upgrade on database for ${pkg} with dbconfig-common?"
+msgstr "Vykonať aktualizáciu databázy balíka ${pkg} pomocou dbconfig-common?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+msgid ""
+"According to the maintainer for this package, database upgrade operations "
+"need to be performed on ${pkg}. Typically, this is due to changes in how a "
+"new upstream version of the package needs to store its data."
+msgstr ""
+"Podľa správcu tohto balíka je potrebné vykonať aktualizáciu databázy balíka "
+"${pkg}. Toto je zvyčajne kvôli zmene v spôsobe, ktorým nová upstream verzia "
+"balíka ukladá svoje dáta."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+msgid ""
+"If you want to handle this process manually, you should refuse this option. "
+"Otherwise, you should choose this option. During the upgrade, a backup of "
+"the database will be made in /var/cache/dbconfig-common/backups, from which "
+"the database can be restored in the case of problems."
+msgstr ""
+"Ak chcete vykonať tento proces ručne, mali by ste túto možnosť odmietnuť. "
+"Inak by ste ju mali zvoliť. Počas aktualizácie sa vytvorí v adresári /var/"
+"cache/dbconfig-common/backups záloha vašej databázy, z ktorej je ju možné v "
+"prípade problémov obnoviť."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid "Deconfigure database for ${pkg} with dbconfig-common?"
+msgstr "Dekonfigurovať databázu balíka ${pkg} pomocou dbconfig-common?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid ""
+"Since you are removing ${pkg}, it's possible that you no longer want the "
+"underlying database and the privileges for the user associated with this "
+"package."
+msgstr ""
+"Keďže odstraňujete balík ${pkg}, je možné, že už nebudete potrebovať "
+"databázu, ktorú používal a oprávnenia používateľa súvisiaceho s týmto "
+"balíkom."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid ""
+"Please choose whether database removal and privilege revocation should be "
+"handled with dbconfig-common."
+msgstr ""
+"Prosím, zvoľte, čo sa o odstránenie databázy a odvolanie oprávnená "
+"používateľa má postarať dbconfig-common."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid ""
+"If you choose this option, dbconfig-common will check if ${pkg} provided "
+"scripts and database commands to undo package specific operations and run "
+"them if they exist. Then it will ask if you want to delete the ${pkg} "
+"database and revoke the standard privileges for the user of ${pkg}. If you "
+"don't want any of this, or if you want to handle this manually, you should "
+"refuse this option."
+msgstr ""
+"Ak zvolíte túto možnosť, dbconfig-common skontroluje, či ${pkg} obsahoval "
+"skripty skripty a príkazy databázy na vrátenie operácií balíka a ak "
+"existujú, spustí ich. Potom sa spýta, či chcete odstrániť databázu  balíka "
+"${pkg} a odvolať štandardné oprávnenia používateľa balíka ${pkg}. Ak nič z "
+"toho nechcete alebo ak to chcete urobiť ručne, mali by ste túto možnosť "
+"odmietnuť."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid "Database type to be used by ${pkg}:"
+msgstr "Typ databázy, ktorý balík ${pkg} používa:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid ""
+"The ${pkg} package can be configured to use one of several database types. "
+"Below, you will be presented with the available choices."
+msgstr ""
+"Balík ${pkg} je možné nakonfigurovať, aby používal jeden z niekoľkých typov "
+"databáz. Dolu sú zobrazené dostupné možnosti."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid ""
+"If other database types are supported by ${pkg} but not shown here, the "
+"reason for their omission is that the corresponding dbconfig-<database type> "
+"packages are not installed. If you know that you want the package to use "
+"another supported database type, your best option is to back out of the "
+"dbconfig-common questions and opt out of dbconfig-common assistance for this "
+"package for now. Install your preferred dbconfig-<database type> option from "
+"the list in the package dependencies, and then \"dpkg-reconfigure ${pkg}\" "
+"to select it."
+msgstr ""
+"Ak ${pkg} podporuje ďalšie typy databáz, ktoré tu nie sú zobrazené, dôvodom "
+"ich vynechania je, že zodpovedajúce balíky dbconfig-<typ databázy> nie sú "
+"nainštalované. Ak viete, že chcete, aby balík použil iný podporovaný typ "
+"databázy, najlepšou možnosťou je vycúvať z otázok dbconfig-common a nateraz "
+"nepoužiť ponúkanú pomoc dbconfig-common pomoc s týmto balíkom. Zo zoznamu "
+"závislostí balíka nainštalujte preferovanú možnosť dbconfig-<typ databázy> a "
+"potom ju vyberte spustením „dpkg-reconfigure ${pkg}“."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+msgid "Delete the database for ${pkg}?"
+msgstr "Odstrániť databázu balíka ${pkg}?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+msgid ""
+"If you no longer need the database for ${pkg} and the privileges of the "
+"database user of ${pkg}, you can choose to delete the database and revoke "
+"the privileges now."
+msgstr ""
+"Ak už nebudete potrebovať databázu ${pkg} a oprávnenia databázového "
+"používateľa balíka ${pkg}, teraz máte možnosť databázu odstrániť a "
+"oprávnenia odvolať."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+msgid ""
+"If you no longer have need of the data being stored by ${pkg}, you should "
+"choose this option. If you want to keep this data, or if you would rather "
+"handle this process manually, you should refuse this option. Either way, it "
+"won't affect your other databases."
+msgstr ""
+"Ak už nebudete potrebovať dáta, ktoré používal balík ${pkg}, mali by ste "
+"zvoliť túto možnosť. Ak chcete tieto dáta zachovať na inokedy alebo sa o to "
+"chcete postarať manuálne, mali by ste túto možnosť odmietnuť. V každom "
+"prípade to nebude mať vplyv na vaše ďalšie databázy."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:10001
+msgid "Back up the database for ${pkg} before upgrading?"
+msgstr "Zálohovať databázu balíka ${pkg} predtým, než ho aktualizujete?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:10001
+msgid ""
+"The underlying database for ${pkg} needs to be upgraded as part of the "
+"installation process. Just in case, the database can be backed up before "
+"this is done, so that if something goes wrong, you can revert to the "
+"previous package version and repopulate the database."
+msgstr ""
+"Ako súčasť inštalačného procesu je potrebné vykonať aktualizáciu databázy "
+"${pkg}. Iba pre istotu je možné predtým túto databázu zálohovať, aby ste v "
+"prípade, že sa niečo pokazí, mohli vrátiť predchádzajúcu verziu balíka a "
+"znovu naplniť vašu databázu."
+
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:11001 ../dbconfig-common.templates:12001
+msgid "Password confirmation:"
+msgstr "Potvrdenie hesla:"
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:13001
+msgid "Password mismatch"
+msgstr "Heslá sa nezhodujú"
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:13001
+msgid "The password and its confirmation do not match."
+msgstr "Heslo a potvrdenie hesla sa nezhodujú."
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "abort"
+msgstr "prerušiť"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "retry"
+msgstr "znovu"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "retry (skip questions)"
+msgstr "znovu (preskočiť otázky)"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "ignore"
+msgstr "ignorovať"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:14002
+msgid "Next step for database upgrade:"
+msgstr "Ďalší krok aktualizácie databázy:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:14002
+msgid "An error occurred while upgrading the database:"
+msgstr "Vyskytla sa chyba počas odstraňovania databázy:"
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:14002
+msgid ""
+"Fortunately, ${dbfile} should hold a backup of the database, made just "
+"before the upgrade (unless the error occurred during backup creation, in "
+"which case no changes will have been applied yet). Your options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+"Našťastie ${dbfile} by mal obsahovať zálohu databázy vytvorenú tesne pred "
+"aktualizáciou (ak sa chyba nevyskytla priamo počas vytvárania zálohy - v tom "
+"prípade by sa neaplikovali žiadne zmeny databázy). Máte nasledovné "
+"možnosti:\n"
+" * abort (zrušiť) - Spôsobí zlyhanie operácie. Budete musieť prejsť\n"
+"   na nižšiu verziu, reinštalovať a znovu nakonfigurovať tento balík\n"
+"   alebo inak manuálne zasiahnuť, aby ste mohli pokračovať v jeho\n"
+"   používaní. To zvyčajne ovplyvní aj vašu schopnosť inštalovať\n"
+"   iné balíky do vyriešenia zlyhanej inštalácie.\n"
+" * retry (skúsiť znova) - Znova sa vás spýta všetky konfiguračné\n"
+"   otázky (vrátane tých, ktoré sa pôvodne nezobrazili kvôli priorite\n"
+"   debconf) a znova sa pokúsi vykonať operáciu.\n"
+" * retry (skúsiť znova a preskočiť otázky) - Okamžite sa pokúsi\n"
+"   zopakovať s preskočením všetkých otázok. To zvyčajne pomôže iba\n"
+"   v prípade, že ste od výskytu chyby vyriešili jej príčinu.\n"
+" * ignore (ignorovať) - Pokračuje v operácii a ignoruje chyby\n"
+"   dbconfig-common. To zvyčajne ponechá balík bez funkčnej databázy."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:15002
+msgid "Next step for database installation:"
+msgstr "Ďalší krok inštalácie databázy:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:15002
+msgid "An error occurred while installing the database:"
+msgstr "Vyskytla sa chyba počas inštalácie databázy:"
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:15002
+msgid ""
+"Your options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+"Máte nasledovné možnosti:\n"
+" * abort (zrušiť) - Spôsobí zlyhanie operácie. Budete musieť prejsť\n"
+"   na nižšiu verziu, reinštalovať a znovu nakonfigurovať tento balík\n"
+"   alebo inak manuálne zasiahnuť, aby ste mohli pokračovať v jeho\n"
+"   používaní. To zvyčajne ovplyvní aj vašu schopnosť inštalovať\n"
+"   iné balíky do vyriešenia zlyhanej inštalácie.\n"
+" * retry (skúsiť znova) - Znova sa vás spýta všetky konfiguračné\n"
+"   otázky (vrátane tých, ktoré sa pôvodne nezobrazili kvôli priorite\n"
+"   debconf) a znova sa pokúsi vykonať operáciu.\n"
+" * retry (skúsiť znova a preskočiť otázky) - Okamžite sa pokúsi\n"
+"   zopakovať s preskočením všetkých otázok. To zvyčajne pomôže iba\n"
+"   v prípade, že ste od výskytu chyby vyriešili jej príčinu.\n"
+" * ignore (ignorovať) - Pokračuje v operácii a ignoruje chyby\n"
+"   dbconfig-common. To zvyčajne ponechá balík bez funkčnej databázy."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:16002
+msgid "Next step for database removal:"
+msgstr "Ďalší krok odstránenia databázy:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:16002
+msgid "An error occurred while removing the database:"
+msgstr "Vyskytla sa chyba počas odstraňovania databázy:"
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:16002
+msgid ""
+"As a result it was not possible to remove the database for ${pkg}. Your "
+"options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave the database and user privileges in place."
+msgstr ""
+"Výsledkom je, že nebolo možné odstrániť databázu balíka ${pkg}. Máte "
+"nasledovné možnosti:\n"
+" * abort (zrušiť) - Spôsobí zlyhanie operácie. Budete musieť prejsť\n"
+"   na nižšiu verziu, reinštalovať a znovu nakonfigurovať tento balík\n"
+"   alebo inak manuálne zasiahnuť, aby ste mohli pokračovať v jeho\n"
+"   používaní. To zvyčajne ovplyvní aj vašu schopnosť inštalovať\n"
+"   iné balíky do vyriešenia zlyhanej inštalácie.\n"
+" * retry (skúsiť znova) - Znova sa vás spýta všetky konfiguračné\n"
+"   otázky (vrátane tých, ktoré sa pôvodne nezobrazili kvôli priorite\n"
+"   debconf) a znova sa pokúsi vykonať operáciu.\n"
+" * retry (skúsiť znova a preskočiť otázky) - Okamžite sa pokúsi\n"
+"   zopakovať s preskočením všetkých otázok. To zvyčajne pomôže iba\n"
+"   v prípade, že ste od výskytu chyby vyriešili jej príčinu.\n"
+" * ignore (ignorovať) - Pokračuje v operácii a ignoruje chyby\n"
+"   dbconfig-common. To zvyčajne ponechá databázu a oprávnenia\n"
+"   používateľa bez zmeny."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:17001
+msgid "Next step:"
+msgstr "Ďalší krok:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:17001
+msgid ""
+"Configuring the database for ${pkg} requires the package ${dbpackage} to be "
+"installed and configured first, which is not something that can be checked "
+"for automatically."
+msgstr ""
+"Konfigurácia databázy balíka ${pkg} vyžaduje, aby bol najskôr nainštalovaný "
+"a nastavený balík ${dbpackage}, čo nie je možné automaticky overiť."
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#. Additionally, ${dbpackage} can be replaced with "mysql-server", so
+#. that length suits, but ${pkg} usually will expand more.
+#: ../dbconfig-common.templates:17001
+msgid ""
+"Your options are:\n"
+" * abort - Choose this when in doubt and install ${dbpackage} before\n"
+"   continuing with the configuration of this package. This causes the\n"
+"   installation of ${pkg} to fail for now.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+"   Choose this if you chose the wrong database type by mistake.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+"Máte nasledovné možnosti:\n"
+" * abort (zrušiť) - Zvoľte, keď máte pochybnosti a nainštalujte balík\n"
+"   ${dbpackage} predtým, než budete pokračovať v konfigurácii tohto\n"
+"   balíka. So spôsobí, že inštalácia balíka ${pkg} nateraz zlyhá.\n"
+" * retry (skúsiť znova) - Znova sa vás spýta všetky konfiguračné\n"
+"   otázky (vrátane tých, ktoré sa pôvodne nezobrazili kvôli priorite\n"
+"   debconf) a znova sa pokúsi vykonať operáciu.\n"
+" * ignore (ignorovať) - Pokračuje v operácii a ignoruje chyby\n"
+"   dbconfig-common. To zvyčajne ponechá balík bez funkčnej databázy."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:18001
+msgid "Host name of the ${dbvendor} database server for ${pkg}:"
+msgstr "Názov počítača databázového servera ${dbvendor} pre balík ${pkg}:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:18001
+msgid ""
+"Please select the remote hostname to use, or select \"new host\" to enter a "
+"new host."
+msgstr ""
+"Prosím, vyberte názov počítača, ktorý sa má použiť alebo zvoľte „nový "
+"počítač“ a zadajte nový počítač."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:19001
+msgid "Port number for the ${dbvendor} service:"
+msgstr "Číslo portu služby ${dbvendor}:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:19001
+msgid ""
+"Please specify the port the ${dbvendor} database on the remote host is "
+"running on. To use the default port, leave this field blank."
+msgstr ""
+"Prosím, zadajte port na vzdialenom počítači, na ktorom beží databáza "
+"${dbvendor}. Ak chcete použiť štandardný port, nechajte toto pole prázdne."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid "Host running the ${dbvendor} server for ${pkg}:"
+msgstr "Počítač, na ktorom beží server ${dbvendor} balíka ${pkg}:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid "Please provide the hostname of a remote ${dbvendor} server."
+msgstr "Prosím, zadajte názov počítača vzdialeného servera ${dbvendor}."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid ""
+"You must have already arranged for the administrative account to be able to "
+"remotely create databases and grant privileges."
+msgstr ""
+"Musíte mať už zariadený správcovský účet, aby ste mohli vytvárať vzdialené "
+"databázy a udeľovať práva."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:21001
+msgid "${dbvendor} database name for ${pkg}:"
+msgstr "Názov databázy ${dbvendor} balíka ${pkg}:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:21001
+msgid ""
+"Please provide a name for the ${dbvendor} database to be used by ${pkg}."
+msgstr ""
+"Prosím, zadajte názov databázy ${dbvendor}, ktorú bude používať balík ${pkg}."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid "${dbvendor} username for ${pkg}:"
+msgstr "Používateľské meno ${dbvendor} balíka ${pkg}:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"Please provide a ${dbvendor} username for ${pkg} to register with the "
+"database server. A ${dbvendor} user is not necessarily the same as a system "
+"login, especially if the database is on a remote server."
+msgstr ""
+"Prosím, zadajte používateľské meno ${dbvendor} balíka ${pkg} pre registráciu "
+"u databázového servera. Používateľ ${dbvendor} nie je nutne rovnaký ako "
+"používateľ systému, zvlášť ak sa databáza nachádza na vzdialenom serveri."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"This is the user which will own the database, tables, and other objects to "
+"be created by this installation. This user will have complete freedom to "
+"insert, change, or delete data in the database."
+msgstr ""
+"Toto je používateľ, ktorý bude vlastníkom databázy, tabuliek a ostatných "
+"objektov, ktoré táto inštalácia vytvorí. Tento používateľ bude mať úplnú "
+"voľnosť vkladať, meniť a mazať dáta v databáze."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"If your username contains an @, you need to specify the domain as well (see "
+"below)."
+msgstr ""
+"Ak vaše používateľské meno obsahuje @, musíte zadať aj doménu (pozri nižšie)."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"Advanced usage: if you need to define the domain that the user will log in "
+"from, you can write \"username@domain\"."
+msgstr ""
+"Rozšírené použitie: Ak musíte zadať doménu, z ktorej sa bude používateľ "
+"prihlasovať, môžete napísať „meno@doména“."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid "${dbvendor} storage directory for ${pkg}:"
+msgstr "Adresár ${dbvendor} balíka ${pkg}:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid ""
+"Please provide a path where the ${dbvendor} database file for ${pkg} should "
+"be installed into."
+msgstr ""
+"Prosím, zadajte cestu, kde sa má nainštalovať súbor databázy ${dbvendor} "
+"balíka ${pkg}."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid ""
+"The permissions for this directory will be set to match the permissions for "
+"the generated database file."
+msgstr ""
+"Prístupové práva tohto adresára budú nastavené tak, aby sa zhodovali s "
+"prístupovými právami vytvoreného databázového súboru."
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:24001 ../dbconfig-common.templates:29001
+msgid "Unix socket"
+msgstr "unixový socket"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:24001 ../dbconfig-common.templates:29001
+msgid "TCP/IP"
+msgstr "TCP/IP"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:24002
+msgid "Connection method for MySQL database of ${pkg}:"
+msgstr "Spôsob pripojenia k k MySQL databáze balíka ${pkg}:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:24002
+msgid ""
+"By default, ${pkg} will be configured to use a MySQL server through a local "
+"Unix socket (this provides the best performance). To connect with a "
+"different method, or to a different server entirely, select the appropriate "
+"option from the choices here."
+msgstr ""
+"Štandardne bude balík ${pkg} nakonfigurovaný, aby používal MySQL server "
+"pomocou lokálnych unix socketov (čo poskytuje najlepší výkon). Avšak sa "
+"chcete pripojiť inou metódou alebo sa pripájať k úplne inému serveru, zvoľte "
+"si z tu uvedených možností."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:25001
+msgid "MySQL application password for ${pkg}:"
+msgstr "Heslo MySQL aplikácie balíka ${pkg}:"
+
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:25001 ../dbconfig-common.templates:30001
+msgid ""
+"Please provide a password for ${pkg} to register with the database server. "
+"If left blank, a random password will be generated."
+msgstr ""
+"Prosím, zadajte heslo pre balík ${pkg} na registráciu u databázového "
+"servera. Ak ho necháte nevyplnené, vygeneruje sa pre vás náhodné heslo."
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001 ../dbconfig-common.templates:31001
+msgid "Name of the database's administrative user:"
+msgstr "Používateľské meno účtu správcu databázy:"
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001 ../dbconfig-common.templates:31001
+msgid ""
+"Please provide the name of the account with which this package should "
+"perform administrative actions. This user is the one with the power to "
+"create new database users."
+msgstr ""
+"Aké je používateľské meno účtu, z ktorého má balík vykonávať činnosti "
+"správy? Tento používateľ musí byť schopný vytvárať nové účty používateľov "
+"databázy."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001
+msgid ""
+"For MySQL, this is almost always \"root\". Note that this is not the same as "
+"the Unix login \"root\"."
+msgstr ""
+"Pre MySQL je to takmer vždy „root“. Pamätajte, že to NIE JE rovnaký "
+"používateľ ako unixový používateľ „root“."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:27001
+msgid "Password of the database's administrative user:"
+msgstr "Heslo správcovského účtu vašej databázy:"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:27001
+msgid ""
+"Please provide the password for the administrative account \"${dbadmin}\" "
+"with which this package should create its MySQL database and user."
+msgstr ""
+"Aké je heslo správcovského účtu „${dbadmin}“, pomocou ktorého môže tento "
+"balík vytvoriť svoju databázu a používateľov MySQL?"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:28001
+#, fuzzy
+#| msgid "Connection method for MySQL database of ${pkg}:"
+msgid "Authentication plugin for MySQL database:"
+msgstr "Spôsob pripojenia k k MySQL databáze balíka ${pkg}:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:28001
+msgid ""
+"Database user accounts can be configured to use a variety of plugins for "
+"authentication with MySQL. If the server default won't work with this "
+"application, it is necessary to specify one that will. Please select one "
+"from the list of available plugins. Leaving the selection set to its "
+"original value should work unless a remote server is using unpredictable "
+"defaults, but other options may not be supported by ${pkg}. If problems "
+"arise, the package's documentation should give hints; see /usr/share/doc/"
+"${pkg}/."
+msgstr ""
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:28001
+msgid ""
+"Your options are:\n"
+" * default - use the default determined by the server.\n"
+" * mysql_native_password - no MySQL authentication plugin is used.\n"
+" * sha256_password - a more secure password encryption algorithm.\n"
+" * caching_sha2_password - SHA2 plus an in-memory authentication cache."
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:29001
+msgid "TCP/IP + SSL"
+msgstr "TCP/IP + SSL"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:29002
+msgid "Connection method for PostgreSQL database of ${pkg}:"
+msgstr "Spôsob pripojenia databázy PostgreSQL balíka ${pkg}:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:29002
+msgid ""
+"By default, ${pkg} will be configured to use a PostgreSQL server through TCP/"
+"IP because that method works in most circumstances. To connect with a "
+"different method, select the appropriate option from the choices here."
+msgstr ""
+"Štandardne bude balík ${pkg} nakonfigurovaný, aby používal server PostgreSQL "
+"pomocou TCP/IP, pretože to je spôsob, ktorý funguje vo väčšine prípadov. "
+"Avšak ak budete chcieť použiť inú metódu pripojenia, zvoľte si z tu "
+"uvedených možností."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:30001
+msgid "PostgreSQL application password for ${pkg}:"
+msgstr "Heslo PostgreSQL aplikácie balíka ${pkg}:"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:30001
+msgid ""
+"If you are using \"ident\" authentication, the supplied password will not be "
+"used and can be left blank. Otherwise, PostgreSQL access may need to be "
+"reconfigured to allow password-authenticated access."
+msgstr ""
+"Ak používate overovanie založené na „ident“, poskytnuté heslo nebude použité "
+"a môžete ho nechať nevyplnené. Inak môže byť potrebné prekonfigurovať "
+"PostgreSQL prístup, aby umožnil prístup pomocou overenia heslom."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+msgid "Password of your database's administrative user:"
+msgstr "Heslo správcovského účtu vašej databázy:"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+msgid ""
+"Please provide the password for the ${dbadmin} account with which this "
+"package should perform administrative actions."
+msgstr ""
+"Aké je heslo účtu „${dbadmin}“, pomocou ktorého môže tento balík vytvárať "
+"správcovské operácie?"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+msgid ""
+"For a standard PostgreSQL installation, a database password is not required, "
+"since authentication is done at the system level."
+msgstr ""
+"Bežná inštalácia PostgreSQL nevyžaduje databázové heslo, keďže overovanie "
+"prebieha na úrovni systému."
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:33001 ../dbconfig-common.templates:34001
+msgid "ident"
+msgstr "ident"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:33001 ../dbconfig-common.templates:34001
+msgid "password"
+msgstr "heslo"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+msgid "Method for authenticating the PostgreSQL administrator:"
+msgstr "Metóda overenia správcu PostgreSQL:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+msgid ""
+"PostgreSQL servers provide several different mechanisms for authenticating "
+"connections. Please select what method the administrative user should use "
+"when connecting to the server."
+msgstr ""
+"PostgreSQL servery poskytujú niekoľko rôznych mechanizmov na overovanie "
+"spojení. Prosím, zvoľte, ktorú metódu má použiť správca pri pripájaní k "
+"serveru."
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+msgid ""
+"With \"ident\" authentication on the local machine, the server will check "
+"that the owner of the Unix socket is allowed to connect. PostgreSQL itself "
+"calls this peer authentication."
+msgstr ""
+"Pri overovaní „ident“ na lokálnom počítači server skontroluje, či má "
+"vlastník unix socketu povolenie pripojiť sa. Samotný PostgreSQL to nazýva "
+"„peer authentication“."
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+msgid ""
+"With \"ident\" authentication to remote hosts, RFC-1413-based ident is used "
+"(which can be considered a security risk)."
+msgstr ""
+"Pri overovaní „ident“ u vzdialených počítačov sa použije ident založený na "
+"RFC 1413 (toto je však možné považovať za bezpečnostné riziko)."
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+msgid ""
+"With \"password\" authentication, a password will be passed to the server "
+"for use with some authentication backend (such as \"MD5\" or \"PAM\"). Note "
+"that the password is still passed in the clear across network connections if "
+"your connection is not configured to use SSL."
+msgstr ""
+"Pri overení „heslom“ sa serveru pošle heslo, ktoré overí nejaký externý "
+"overovací mechanizmus (ako „MD5“ alebo „PAM“). Heslo však stále prechádza v "
+"tvare čistého textu sieťovým spojením, ak spojenie nie je nakonfigurované s "
+"SSL."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+msgid ""
+"For a standard PostgreSQL installation running on the same host, \"ident\" "
+"is recommended."
+msgstr ""
+"V prípade štandardnej inštalácie PostgreSQL bežiacej na rovnakom počítači sa "
+"odporúča „ident“."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+msgid "Method for authenticating PostgreSQL user:"
+msgstr "Metóda overenia používateľa PostgreSQL:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+msgid ""
+"PostgreSQL servers provide several different mechanisms for authenticating "
+"connections. Please select what method the database user should use when "
+"connecting to the server."
+msgstr ""
+"Servery PostgreSQL poskytujú niekoľko rôznych mechanizmov na overenie "
+"spojení. Prosím, zvoľte, ktorú metódu má použiť používateľ na pripájanie k "
+"serveru."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+msgid ""
+"For a standard PostgreSQL installation running on the same host, \"password"
+"\" is recommended, because typically the system username doesn't match the "
+"database username."
+msgstr ""
+"V prípade štandardnej inštalácie PostgreSQL bežiacej na rovnakom počítači sa "
+"odporúča „password“, pretože sa používateľské meno v systéme typicky "
+"nezhoduje s používateľským menom v databáze."
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:35001
+msgid "PostgreSQL connection method error"
+msgstr "Chyba metódy pripojenia k PostgreSQL"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:35001
+msgid ""
+"Unfortunately, it seems that the database connection method you have "
+"selected for ${pkg} will not work, because it requires the existence of a "
+"local user that does not exist."
+msgstr ""
+"Nanešťastie sa zdá, že metóda pripojenia k databáze, ktorú ste zvolili pre "
+"${pkg} nebude fungovať, pretože vyžaduje existenciu lokálneho používateľa, "
+"ktorý neexistuje."
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:36001
+msgid "Change PostgreSQL configuration automatically?"
+msgstr "Automaticky zmeniť konfiguráciu PostgreSQL?"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:36001
+msgid ""
+"It has been determined that the database installation for ${pkg} cannot be "
+"automatically accomplished without making changes to the PostgreSQL server's "
+"access controls. It is suggested that this be done by dbconfig-common when "
+"the package is installed. If instead you would prefer to do it manually, the "
+"following line needs to be added to your pg_hba.conf:"
+msgstr ""
+"Bolo určené, že inštaláciu databázy balíka ${pkg} nie je možné vykonať "
+"automaticky bez vykonania zmien v záznamoch pre riadenie prístupu vášho "
+"PostgreSQL servera. Odporúča sa, aby to vykonal balík počas inštalácie "
+"balíka dbconfig-common. Ak to však chcete vykonať manuálne (alebo vôbec), "
+"pridajte prosím nasledovný riadok do svojho pg_hba.conf:"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:37001
+msgid "Revert PostgreSQL configuration automatically?"
+msgstr "Vrátiť automaticky konfiguráciu PostgreSQL?"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:37001
+msgid ""
+"As ${pkg} is now being removed, it may no longer be necessary to have an "
+"access control entry in the PostgreSQL server's configuration. While keeping "
+"such an entry will not break any software on the system, it may be seen as a "
+"potential security concern. It is suggested that this be done by dbconfig-"
+"common when the package is removed. If instead you would prefer to do it "
+"manually, the following line needs to be removed from your pg_hba.conf:"
+msgstr ""
+"Keďže ${pkg} sa teraz odstraňuje, je možné, že už nebude potrebný záznam pre "
+"riadenie prístupu v konfiguračnom súbore vášho PostgreSQL servera. Hoci "
+"ponechanie tohto záznamu nespôsobí nefunkčnosť žiadneho softvéru vášho "
+"systému, je možné sa naň pozerať ako na potenciálne bezpečnostné riziko. "
+"Odporúča sa, aby ho počas odstraňovania balíka dbconfig-common odstránil. Ak "
+"to však chcete vykonať manuálne (alebo vôbec), odstráňte prosím nasledovný "
+"riadok zo svojho pg_hba.conf:"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:38001
+msgid "Modifications needed in /etc/postgresql/pg_hba.conf"
+msgstr "Je potrebné upraviť /etc/postgresql/pg_hba.conf"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:38001
+msgid ""
+"To get the database for package ${pkg} bootstrapped you have to edit the "
+"configuration of the PostgreSQL server. You may be able to find help in the "
+"file /usr/share/doc/${pkg}/README.Debian."
+msgstr ""
+"Aby ste sprevádzkovali databázu balíka ${pkg}, musíte upraviť konfiguráciu "
+"svojho PostgreSQL servera. Pomoc by ste mali nájsť v súbore/usr/share/doc/"
+"${pkg}/README.Debian."
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:39001
+msgid "Empty passwords unsupported with PostgreSQL"
+msgstr "PostgreSQL nepodporuje prázdne heslá."
+
+#~ msgid "Keep \"administrative\" database passwords?"
+#~ msgstr "Udržiavať „správcovské“ heslá k databáze?"
+
+#, fuzzy
+#~| msgid ""
+#~| "By default, you will be prompted for all administrator-level database "
+#~| "passwords when you configure, upgrade, or remove applications with "
+#~| "dbconfig-common.  These passwords will not be stored in the "
+#~| "configuration database (debconf) for any longer than they are needed."
+#~ msgid ""
+#~ "By default, you will be prompted for all administrator-level database "
+#~ "passwords when you configure, upgrade, or remove applications with "
+#~ "dbconfig-common. These passwords will be stored in debconf's "
+#~ "configuration database only for as long as they are needed."
+#~ msgstr ""
+#~ "Štandardne sa bude dbconfig-common pýtať na všetky heslá k databáze "
+#~ "úrovne správca pri konfigurácii, aktualizácii alebo odoberaní aplikácií "
+#~ "pomocou dbconfig-common. Tieto heslá sa nebudú ukladať v konfiguračnej "
+#~ "databáze (debconf) dlhšie, než bude potrebné."
+
+#~ msgid ""
+#~ "If you know that you do want to keep this database, or if you want to "
+#~ "handle the removal of this database manually, you should refuse this "
+#~ "option."
+#~ msgstr ""
+#~ "Ak viete, že chcete zachovať databázu alebo sa chcete o odstránenie "
+#~ "databázy postarať ručne, mali by ste túto možnosť odmietnuť."
+
+#~ msgid ""
+#~ "Fortunately, ${dbfile} holds a backup of the database, made just before "
+#~ "the upgrade."
+#~ msgstr ""
+#~ "Našťastie, by mala v ${dbfile} existovať záloha databázy, ktorú ste "
+#~ "spravili tesne pred aktualizáciou."
+
+#~ msgid ""
+#~ "If at this point you choose \"retry\", you will be prompted with all the "
+#~ "configuration questions once more and another attempt will be made at "
+#~ "performing the operation. \"retry (skip questions)\" will immediately "
+#~ "attempt the operation again, skipping all questions.  If you choose "
+#~ "\"abort\", the operation will fail and you will need to downgrade, "
+#~ "reinstall, reconfigure this package, or otherwise manually intervene to "
+#~ "continue using it."
+#~ msgstr ""
+#~ "V tomto momente máte možnosť znovu skúsiť alebo prerušiť operáciu. Ak "
+#~ "zvolíte skúsiť „znova“, všetky konfiguračné otázky budú položené znova a "
+#~ "uskutoční sa ďalší pokus o vykonanie operácie. „znova (preskočiť otázky)“ "
+#~ "sa okamžite pokúsi znova vykonať konfiguráciu bez toho, aby vám znova "
+#~ "boli položené otázky. Ak zvolíte „zrušiť“, operácia zlyhá a budete musieť "
+#~ "vykonať zníženie verzie, reinštaláciu, rekonfiguráciu tohto balíka, či "
+#~ "inak manuálne zasiahnuť, aby ste ho mohli naďalej používať."
+
+#~ msgid ""
+#~ "If at this point you choose \"retry\", you will be prompted with all the "
+#~ "configuration questions once more and another attempt will be made at "
+#~ "performing the operation. \"retry (skip questions)\" will immediately "
+#~ "attempt the operation again, skipping all questions.  If you choose "
+#~ "\"abort\", the operation will fail and you will need to downgrade, "
+#~ "reinstall, reconfigure this package, or otherwise manually intervene to "
+#~ "continue using it.  If you choose \"ignore\", the operation will "
+#~ "continue, ignoring further errors from dbconfig-common."
+#~ msgstr ""
+#~ "V tomto momente máte možnosť znovu skúsiť alebo prerušiť operáciu. Ak "
+#~ "zvolíte skúsiť „znova“, všetky konfiguračné otázky budú položené znova a "
+#~ "uskutoční sa ďalší pokus o vykonanie operácie. „znova (preskočiť otázky)“ "
+#~ "sa okamžite pokúsi znova vykonať konfiguráciu bez toho, aby vám boli "
+#~ "znova položené otázky. Ak zvolíte „zrušiť“, operácia zlyhá a budete "
+#~ "musieť vykonať zníženie verzie, reinštaláciu, rekonfiguráciu tohto "
+#~ "balíka, či inak zasiahnuť, aby ste ho mohli naďalej používať. Ak zvolíte "
+#~ "„ignorovať“, operácia bude pokračovať a ignorovať ďalšie chyby od "
+#~ "dbconfig-common."
+
+#~ msgid ""
+#~ "For some reason it was not possible to perform some of the actions "
+#~ "necessary to remove the database for ${pkg}.  At this point you have two "
+#~ "options: you can find out what has caused this error and fix it, or you "
+#~ "can refuse the offer for help removing the database (the latter implies "
+#~ "you will have to remove the database manually)."
+#~ msgstr ""
+#~ "Z nejakého dôvodu nebolo možné vykonať niektoré z činností potrebných na "
+#~ "odstránenie databázy balíka ${pkg}. V tomto momente máte dve možnosti: "
+#~ "môžete zistiť, čo spôsobilo túto chybu a opraviť ju alebo môžete "
+#~ "odmietnuť ponuku pomoci a odstrániť databázu (čo by znamenalo, že budete "
+#~ "musieť odstrániť databázu ručne)."
+
+#~ msgid ""
+#~ "If in doubt, you should choose \"abort\", and install ${dbpackage} before "
+#~ "continuing with the configuration of this package.  If you choose \"retry"
+#~ "\", you will be allowed to choose different answers (in case you chose "
+#~ "the wrong database type by mistake).  If you choose \"ignore\", then "
+#~ "installation will continue as normal."
+#~ msgstr ""
+#~ "Ak si nie ste istý, zvoľte „zrušiť“ a nainštalujte balík ${dbpackage} "
+#~ "predtým, než budete pokračovať. Ak zvolíte „znova“, bude vám umožnené "
+#~ "zvoliť iné odpovede (v prípade, že omylom vyberiete nesprávny typ "
+#~ "databázy). Ak zvolíte „ignorovať“, inštalácia bude ihneď pokračovať ďalej."
+
+#~ msgid "tcp/ip"
+#~ msgstr "tcp/ip"
+
+#~ msgid "tcp/ip + ssl"
+#~ msgstr "tcp/ip + ssl"
+
+#~ msgid "Otherwise, you should choose this option."
+#~ msgstr "Inak by ste mali túto možnosť zvoliť."
+
+#~ msgid "The passwords you supplied do not match.  Please try again."
+#~ msgstr "Heslá, ktoré ste zadali sa nezhodujú. Prosím, skúste to znova."
+
+#~ msgid "Error upgrading database for ${pkg}.  Retry?"
+#~ msgstr "Chyba pri upgrade databázy balíka ${pkg}. Skúsiť znova?"
+
+#~ msgid ""
+#~ "An error seems to have occurred while upgrading the database. If it's of "
+#~ "any help, this was the error encountered:"
+#~ msgstr ""
+#~ "Zdá sa, že počas upgrade databázy sa vyskytla chyba. Ak to pomôže, tu je "
+#~ "popis tejto chyby:"
+
+#~ msgid "${error}"
+#~ msgstr "${error}"
+
+#~ msgid "Error installing database for ${pkg}.  Retry?"
+#~ msgstr "Chyba pri inštalácii databázy balíka ${pkg}. Skúsiť znova?"
+
+#~ msgid ""
+#~ "An error seems to have occurred while installing the database. If it's of "
+#~ "any help, this was the error encountered:"
+#~ msgstr ""
+#~ "Zdá sa, že počas inštalácie databázy sa vyskytla chyba. Ak to pomôže, tu "
+#~ "je popis tejto chyby:"
+
+#~ msgid "Error removing database for ${pkg}.  Retry?"
+#~ msgstr "Chyba pri odstraňovaní databázy balíka ${pkg}. Skúsiť znova?"
+
+#~ msgid ""
+#~ "If you would like to reconfigure your application to use a different "
+#~ "method, you should choose this option.  If you know for certain that this "
+#~ "method will work and you want to continue without changing your choice, "
+#~ "you should refuse this option."
+#~ msgstr ""
+#~ "Ak chcete rekonfigurovať aplikáciu, aby používala inú metódu, mali by ste "
+#~ "zvoliť túto možnosť. Ak naisto viete, že táto metóda bude fungovať a "
+#~ "chcete pokračovať bez zmeny vašej voľby, mali by ste zvoliť možnosť "
+#~ "odmietnuť."
+
+#~ msgid "${pghbaline}"
+#~ msgstr "${pghbaline}"
+
+#~ msgid "PostgreSQL does not support empty passwords."
+#~ msgstr "PostgreSQL nepodporuje prázdne heslá."

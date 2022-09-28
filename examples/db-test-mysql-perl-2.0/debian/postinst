@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+#set -x
+
+. /usr/share/debconf/confmodule
+. /usr/share/dbconfig-common/dpkg/postinst.mysql 
+dbc_generate_include=perl:/etc/db-test-mysql-perl/debian-db.pm
+dbc_go db-test-mysql-perl "$@"
+
+#DEBHELPER#

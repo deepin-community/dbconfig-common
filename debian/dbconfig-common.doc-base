@@ -1,0 +1,19 @@
+Document: dbconfig-common
+Title: Usage documentation for dbconfig-common
+Author: Sean Finney
+Abstract: This document describes how to use dbconfig-common
+ to configure databases for use by Debian packages
+Section: Debian
+
+Format: HTML
+Index: /usr/share/doc/dbconfig-common/dbconfig-common.html/index.html
+Files: /usr/share/doc/dbconfig-common/dbconfig-common.html/*.html
+
+Format: PDF
+Files: /usr/share/doc/dbconfig-common/dbconfig-common.pdf.gz
+
+Format: Text
+Files: /usr/share/doc/dbconfig-common/dbconfig-common.txt.gz
+
+Format: PostScript
+Files: /usr/share/doc/dbconfig-common/dbconfig-common.ps.gz

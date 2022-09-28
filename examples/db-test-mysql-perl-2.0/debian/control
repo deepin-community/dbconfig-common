@@ -1,0 +1,17 @@
+Source: db-common-example
+Section: misc
+Priority: optional
+Maintainer: Paul Gevers <elbrus@debian.org>
+Build-Depends-Indep: debhelper (>= 9), dh-exec
+Standards-Version: 3.9.6
+
+Package: db-test-mysql-perl
+Architecture: all
+Depends: dbconfig-mysql | dbconfig-no-thanks, libdbd-mysql-perl,
+ ${misc:Depends},
+ ${perl:Depends}
+Description: a package to test dbconfig-common (mysql+perl version)
+ This is a package to test the dbconfig-common package.
+ .
+ This version should work with mysql database servers, using a perl
+ script instead of just sql code.

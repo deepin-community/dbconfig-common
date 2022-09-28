@@ -1,0 +1,533 @@
+# These templates have been reviewed by the debian-l10n-english
+# team
+#
+# If modifications/additions/rewording are needed, please ask
+# debian-l10n-english@lists.debian.org for advice.
+#
+# Even minor modifications require translation updates and such
+# changes should be coordinated with translators and reviewers.
+
+Template: dbconfig-common/remote-questions-default
+Type: boolean
+Default: false
+_Description: Will this server be used to access remote databases?
+ For the database types that support it, dbconfig-common includes support
+ for configuring databases on remote systems. When installing a package's
+ database via dbconfig-common, the questions related to remote
+ configuration are asked with a priority such that they are
+ skipped for most systems.
+ .
+ If you select this option, the default behavior will be to prompt you
+ with questions related to remote database configuration when you install
+ new packages.
+ .
+ If you are unsure, you should not select this option.
+
+Template: dbconfig-common/remember-admin-pass
+Type: boolean
+Default: false
+_Description: Remember database passwords permanently in debconf?
+ When you configure, upgrade, or remove applications with dbconfig-common,
+ administrator-level database passwords are needed. By default, these
+ passwords are not stored, so you will be prompted for them each time.
+ .
+ Alternatively the passwords can be permanently remembered in the debconf
+ database (which is protected by Unix file permissions), though this is
+ less secure and thus not the default setting.
+ .
+ If you would rather not be bothered for an administrative password
+ every time you upgrade a database application with dbconfig-common,
+ you should choose this option. Otherwise, you should refuse this option.
+
+Template: dbconfig-common/dbconfig-install
+Type: boolean
+Default: true
+_Description: Configure database for ${pkg} with dbconfig-common?
+ The ${pkg} package must have a database installed and configured before
+ it can be used. This can be optionally handled with dbconfig-common.
+ .
+ If you are an advanced database administrator and know that you want
+ to perform this configuration manually, or if your database has already
+ been installed and configured, you should refuse this option. Details on what
+ needs to be done should most likely be provided in /usr/share/doc/${pkg}.
+ .
+ Otherwise, you should probably choose this option.
+
+Template: dbconfig-common/dbconfig-reinstall
+Type: boolean
+Default: false
+_Description: Reinstall database for ${pkg}?
+ Since you are reconfiguring ${pkg}, you may also want to reinstall the
+ database which it uses.
+ .
+ If you wish to reinstall the database for ${pkg}, you should select
+ this option. If you do not wish to do so (if you are reconfiguring
+ the package for unrelated reasons), you should not select this option.
+ .
+ Warning: if you opt to reinstall the database and install it under a
+ name that already exists, the old database will be dropped without
+ further questions. In that case a backup of the original database is
+ made in /var/tmp/.
+ .
+ Warning: if you change the name of the database, the old database will
+ not be removed. If you change the name of the user that connects to
+ the database, the privileges of the original user will not be revoked.
+
+Template: dbconfig-common/dbconfig-upgrade
+Type: boolean
+Default: true
+_Description: Perform upgrade on database for ${pkg} with dbconfig-common?
+ According to the maintainer for this package, database upgrade
+ operations need to be performed on ${pkg}. Typically, this is due to
+ changes in how a new upstream version of the package needs to store
+ its data.
+ .
+ If you want to handle this process manually, you should
+ refuse this option. Otherwise, you should choose this option.
+ During the upgrade, a backup of the database will be made in
+ /var/cache/dbconfig-common/backups, from which the database can
+ be restored in the case of problems.
+
+Template: dbconfig-common/dbconfig-remove
+Type: boolean
+Default: true
+_Description: Deconfigure database for ${pkg} with dbconfig-common?
+ Since you are removing ${pkg}, it's possible that you no longer
+ want the underlying database and the privileges for the user
+ associated with this package.
+ .
+ Please choose whether database removal and privilege revocation should be
+ handled with dbconfig-common.
+ .
+ If you choose this option, dbconfig-common will check if ${pkg} provided
+ scripts and database commands to undo package specific operations and run them
+ if they exist. Then it will ask if you want to delete the ${pkg} database and
+ revoke the standard privileges for the user of ${pkg}. If you don't want any
+ of this, or if you want to handle this manually, you should refuse this
+ option.
+
+Template: dbconfig-common/database-type
+Type: select
+Choices: ${database_types}
+_Description: Database type to be used by ${pkg}:
+ The ${pkg} package can be configured to use one of several database types.
+ Below, you will be presented with the available choices.
+ .
+ If other database types are supported by ${pkg} but not shown here, the reason
+ for their omission is that the corresponding dbconfig-<database type> packages
+ are not installed. If you know that you want the package to use another
+ supported database type, your best option is to back out of the
+ dbconfig-common questions and opt out of dbconfig-common assistance for this
+ package for now. Install your preferred dbconfig-<database type> option from
+ the list in the package dependencies, and then "dpkg-reconfigure ${pkg}" to
+ select it.
+
+Template: dbconfig-common/purge
+Type: boolean
+Default: false
+_Description: Delete the database for ${pkg}?
+ If you no longer need the database for ${pkg} and the privileges of
+ the database user of ${pkg}, you can choose to delete the database and
+ revoke the privileges now.
+ .
+ If you no longer have need of the data being stored by ${pkg}, you
+ should choose this option. If you want to keep this data,
+ or if you would rather handle this process manually, you should
+ refuse this option. Either way, it won't affect your other databases.
+
+Template: dbconfig-common/upgrade-backup
+Type: boolean
+Default: true
+_Description: Back up the database for ${pkg} before upgrading?
+ The underlying database for ${pkg} needs to be upgraded as part of the
+ installation process. Just in case, the database can be backed up
+ before this is done, so that if something goes wrong, you can revert
+ to the previous package version and repopulate the database.
+
+Template: dbconfig-common/password-confirm
+Type: password
+_Description: Password confirmation:
+
+Template: dbconfig-common/app-password-confirm
+Type: password
+_Description: Password confirmation:
+
+Template: dbconfig-common/passwords-do-not-match
+Type: error
+_Description: Password mismatch
+ The password and its confirmation do not match.
+
+Template: dbconfig-common/upgrade-error
+Type: select
+__Choices: abort, retry, retry (skip questions), ignore
+Default: abort
+#flag:translate!:3
+#flag:comment:4
+# Translators, note that the bullets have a leading space which means
+# that debconf will not word-wrap those lines. This means that you
+# will have to make sure that all lines in the list end with \n and
+# you will have to keep the lines below 72 characters to avoid problems.
+_Description: Next step for database upgrade:
+ An error occurred while upgrading the database:
+ .
+ ${error}
+ .
+ Fortunately, ${dbfile} should hold a backup of the database, made just before
+ the upgrade (unless the error occurred during backup creation, in which case
+ no changes will have been applied yet). Your options are:
+  * abort - Causes the operation to fail; you will need to downgrade,
+    reinstall, reconfigure this package, or otherwise manually intervene
+    to continue using it. This will usually also impact your ability to
+    install other packages until the installation failure is resolved.
+  * retry - Prompts once more with all the configuration questions
+    (including ones you may have missed due to the debconf priority
+    setting) and makes another attempt at performing the operation.
+  * retry (skip questions) - Immediately attempts the operation again,
+    skipping all questions. This is normally useful only if you have
+    solved the underlying problem since the time the error occurred.
+  * ignore - Continues the operation ignoring dbconfig-common errors.
+    This will usually leave this package without a functional database.
+
+Template: dbconfig-common/install-error
+Type: select
+__Choices: abort, retry, retry (skip questions), ignore
+Default: abort
+#flag:translate!:3
+#flag:comment:4
+# Translators, note that the bullets have a leading space which means
+# that debconf will not word-wrap those lines. This means that you
+# will have to make sure that all lines in the list end with \n and
+# you will have to keep the lines below 72 characters to avoid problems.
+_Description: Next step for database installation:
+ An error occurred while installing the database:
+ .
+ ${error}
+ . 
+ Your options are:
+  * abort - Causes the operation to fail; you will need to downgrade,
+    reinstall, reconfigure this package, or otherwise manually intervene
+    to continue using it. This will usually also impact your ability to
+    install other packages until the installation failure is resolved.
+  * retry - Prompts once more with all the configuration questions
+    (including ones you may have missed due to the debconf priority
+    setting) and makes another attempt at performing the operation.
+  * retry (skip questions) - Immediately attempts the operation again,
+    skipping all questions. This is normally useful only if you have
+    solved the underlying problem since the time the error occurred.
+  * ignore - Continues the operation ignoring dbconfig-common errors.
+    This will usually leave this package without a functional database.
+
+Template: dbconfig-common/remove-error
+Type: select
+__Choices: abort, retry, retry (skip questions), ignore
+Default: abort
+#flag:translate!:3
+#flag:comment:4
+# Translators, note that the bullets have a leading space which means
+# that debconf will not word-wrap those lines. This means that you
+# will have to make sure that all lines in the list end with \n and
+# you will have to keep the lines below 72 characters to avoid problems.
+_Description: Next step for database removal:
+ An error occurred while removing the database:
+ .
+ ${error}
+ .
+ As a result it was not possible to remove the database for ${pkg}. Your
+ options are:
+  * abort - Causes the operation to fail; you will need to downgrade,
+    reinstall, reconfigure this package, or otherwise manually intervene
+    to continue using it. This will usually also impact your ability to
+    install other packages until the installation failure is resolved.
+  * retry - Prompts once more with all the configuration questions
+    (including ones you may have missed due to the debconf priority
+    setting) and makes another attempt at performing the operation.
+  * retry (skip questions) - Immediately attempts the operation again,
+    skipping all questions. This is normally useful only if you have
+    solved the underlying problem since the time the error occurred.
+  * ignore - Continues the operation ignoring dbconfig-common errors.
+    This will usually leave the database and user privileges in place.
+
+Template: dbconfig-common/missing-db-package-error
+Type: select
+Choices: abort, retry, ignore
+Default: abort
+#flag:comment:3
+# Translators, note that the bullets have a leading space which means
+# that debconf will not word-wrap those lines. This means that you
+# will have to make sure that all lines in the list end with \n and
+# you will have to keep the lines below 72 characters to avoid problems.
+# Additionally, ${dbpackage} can be replaced with "mysql-server", so
+# that length suits, but ${pkg} usually will expand more.
+_Description: Next step:
+ Configuring the database for ${pkg} requires the package ${dbpackage}
+ to be installed and configured first, which is not something that can be
+ checked for automatically.
+ .
+ Your options are:
+  * abort - Choose this when in doubt and install ${dbpackage} before
+    continuing with the configuration of this package. This causes the
+    installation of ${pkg} to fail for now.
+  * retry - Prompts once more with all the configuration questions
+    (including ones you may have missed due to the debconf priority
+    setting) and makes another attempt at performing the operation.
+    Choose this if you chose the wrong database type by mistake.
+  * ignore - Continues the operation ignoring dbconfig-common errors.
+    This will usually leave this package without a functional database.
+
+Template: dbconfig-common/remote/host
+Type: select
+Choices: ${hosts}
+Default: localhost
+_Description: Host name of the ${dbvendor} database server for ${pkg}:
+ Please select the remote hostname to use, or select "new host" to
+ enter a new host.
+
+Template: dbconfig-common/remote/port
+Type: string
+_Description: Port number for the ${dbvendor} service:
+ Please specify the port the ${dbvendor} database on the remote host is
+ running on. To use the default port, leave this field blank.
+
+Template: dbconfig-common/remote/newhost
+Type: string
+_Description: Host running the ${dbvendor} server for ${pkg}:
+ Please provide the hostname of a remote ${dbvendor} server.
+ .
+ You must have already arranged for the administrative
+ account to be able to remotely create databases and grant
+ privileges.
+
+Template: dbconfig-common/db/dbname
+Type: string
+_Description: ${dbvendor} database name for ${pkg}:
+ Please provide a name for the ${dbvendor} database to be used by ${pkg}.
+
+Template: dbconfig-common/db/app-user
+Type: string
+_Description: ${dbvendor} username for ${pkg}:
+ Please provide a ${dbvendor} username for ${pkg} to register with the
+ database server. A ${dbvendor} user is not necessarily the same as a
+ system login, especially if the database is on a remote server.
+ .
+ This is the user which will own the database, tables, and other
+ objects to be created by this installation. This user will have
+ complete freedom to insert, change, or delete data in the database.
+ .
+ If your username contains an @, you need to specify the domain as well
+ (see below).
+ .
+ Advanced usage: if you need to define the domain that the user will log
+ in from, you can write "username@domain".
+
+Template: dbconfig-common/db/basepath
+Type: string
+_Description: ${dbvendor} storage directory for ${pkg}:
+ Please provide a path where the ${dbvendor} database file for ${pkg}
+ should be installed into.
+ .
+ The permissions for this directory will be set to match the permissions
+ for the generated database file.
+
+Template: dbconfig-common/mysql/method
+Type: select
+__Choices: Unix socket, TCP/IP
+Default: Unix socket
+_Description: Connection method for MySQL database of ${pkg}:
+ By default, ${pkg} will be configured to use a MySQL server
+ through a local Unix socket (this provides the best performance).
+ To connect with a different method, or to a different server entirely,
+ select the appropriate option from the choices here.
+
+Template: dbconfig-common/mysql/app-pass
+Type: password
+_Description: MySQL application password for ${pkg}:
+ Please provide a password for ${pkg} to register with the
+ database server. If left blank, a random password will be
+ generated.
+
+Template: dbconfig-common/mysql/admin-user
+Type: string
+_Description: Name of the database's administrative user:
+ Please provide the name of the account with which this package should perform
+ administrative actions. This user is the one with the power to create new
+ database users.
+ .
+ For MySQL, this is almost always "root". Note that this is not the
+ same as the Unix login "root".
+
+Template: dbconfig-common/mysql/admin-pass
+Type: password
+_Description: Password of the database's administrative user:
+ Please provide the password for the administrative account "${dbadmin}" with
+ which this package should create its MySQL database and user.
+
+Template: dbconfig-common/mysql/authplugin
+Type: select
+Choices: default, mysql_native_password, sha256_password, caching_sha2_password
+Default: default
+#flag:comment:3
+# Translators, note that the bullets have a leading space which means
+# that debconf will not word-wrap those lines. This means that you
+# will have to make sure that all lines in the list end with \n and
+# you will have to keep the lines below 72 characters to avoid problems.
+_Description: Authentication plugin for MySQL database:
+ Database user accounts can be configured to use a variety of plugins
+ for authentication with MySQL. If the server default won't work with
+ this application, it is necessary to specify one that will. Please
+ select one from the list of available plugins. Leaving the selection
+ set to its original value should work unless a remote server is using
+ unpredictable defaults, but other options may not be supported by
+ ${pkg}. If problems arise, the package's documentation should give
+ hints; see /usr/share/doc/${pkg}/.
+ .
+ Your options are:
+  * default - use the default determined by the server.
+  * mysql_native_password - no MySQL authentication plugin is used.
+  * sha256_password - a more secure password encryption algorithm.
+  * caching_sha2_password - SHA2 plus an in-memory authentication cache.
+
+Template: dbconfig-common/pgsql/method
+Type: select
+__Choices: Unix socket, TCP/IP, TCP/IP + SSL
+Default: TCP/IP
+_Description: Connection method for PostgreSQL database of ${pkg}:
+ By default, ${pkg} will be configured to use a PostgreSQL server through
+ TCP/IP because that method works in most circumstances. To connect with a
+ different method, select the appropriate option from the choices here.
+
+Template: dbconfig-common/pgsql/app-pass
+Type: password
+_Description: PostgreSQL application password for ${pkg}:
+ Please provide a password for ${pkg} to register with the database
+ server. If left blank, a random password will be generated.
+ .
+ If you are using "ident" authentication, the supplied password will not
+ be used and can be left blank. Otherwise, PostgreSQL access may need to
+ be reconfigured to allow password-authenticated access.
+
+Template: dbconfig-common/pgsql/admin-user
+Type: string
+Default: postgres
+_Description: Name of the database's administrative user:
+ Please provide the name of the account with which this package should perform
+ administrative actions. This user is the one with the power to create new
+ database users.
+
+Template: dbconfig-common/pgsql/admin-pass
+Type: password
+_Description: Password of your database's administrative user:
+ Please provide the password for the ${dbadmin} account with which this package
+ should perform administrative actions.
+ .
+ For a standard PostgreSQL installation, a database password is not
+ required, since authentication is done at the system level.
+
+Template: dbconfig-common/pgsql/authmethod-admin
+Type: select
+__Choices: ident, password
+Default: ident
+_Description: Method for authenticating the PostgreSQL administrator:
+ PostgreSQL servers provide several different mechanisms for authenticating
+ connections. Please select what method the administrative user should use
+ when connecting to the server.
+ .
+ With "ident" authentication on the local machine, the server will
+ check that the owner of the Unix socket is allowed to connect.
+ PostgreSQL itself calls this peer authentication.
+ .
+ With "ident" authentication to remote hosts, RFC-1413-based ident is
+ used (which can be considered a security risk).
+ .
+ With "password" authentication, a password will be passed to the server
+ for use with some authentication backend (such as "MD5" or "PAM"). Note
+ that the password is still passed in the clear across network
+ connections if your connection is not configured to use SSL.
+ .
+ For a standard PostgreSQL installation running on the same host,
+ "ident" is recommended.
+
+Template: dbconfig-common/pgsql/authmethod-user
+Type: select
+__Choices: ident, password
+Default: password
+_Description: Method for authenticating PostgreSQL user:
+ PostgreSQL servers provide several different mechanisms for authenticating
+ connections. Please select what method the database user should use
+ when connecting to the server.
+ .
+ With "ident" authentication on the local machine, the server will
+ check that the owner of the Unix socket is allowed to connect.
+ PostgreSQL itself calls this peer authentication.
+ .
+ With "ident" authentication to remote hosts, RFC-1413-based ident is
+ used (which can be considered a security risk).
+ .
+ With "password" authentication, a password will be passed to the server
+ for use with some authentication backend (such as "MD5" or "PAM"). Note
+ that the password is still passed in the clear across network
+ connections if your connection is not configured to use SSL.
+ .
+ For a standard PostgreSQL installation running on the same host,
+ "password" is recommended, because typically the system username
+ doesn't match the database username.
+
+Template: dbconfig-common/pgsql/no-user-choose-other-method
+Type: note
+# This template is currently unused
+_Description: PostgreSQL connection method error
+ Unfortunately, it seems that the database connection method you
+ have selected for ${pkg} will not work, because it requires the existence
+ of a local user that does not exist.
+
+Template: dbconfig-common/pgsql/changeconf
+Type: boolean
+Default: false
+#flag:translate!:3
+# This template is currently unused
+_Description: Change PostgreSQL configuration automatically?
+ It has been determined that the database installation for ${pkg}
+ cannot be automatically accomplished without making changes to
+ the PostgreSQL server's access controls. It is suggested that this
+ be done by dbconfig-common when the package is installed. If
+ instead you would prefer to do it manually, the following line needs
+ to be added to your pg_hba.conf:
+ .
+ ${pghbaline}
+
+Template: dbconfig-common/pgsql/revertconf
+Type: boolean
+Default: false
+#flag:translate!:3
+# This template is currently unused
+_Description: Revert PostgreSQL configuration automatically?
+ As ${pkg} is now being removed, it may no longer be necessary to
+ have an access control entry in the PostgreSQL server's configuration.
+ While keeping such an entry will not break any software on the
+ system, it may be seen as a potential security concern. It is suggested
+ that this be done by dbconfig-common when the package is removed.
+ If instead you would prefer to do it manually, the following line
+ needs to be removed from your pg_hba.conf:
+ .
+ ${pghbaline}
+
+Template: dbconfig-common/pgsql/manualconf
+Type: note
+# This template is currently unused
+_Description: Modifications needed in /etc/postgresql/pg_hba.conf
+ To get the database for package ${pkg} bootstrapped you have
+ to edit the configuration of the PostgreSQL server. You may be able to
+ find help in the file /usr/share/doc/${pkg}/README.Debian.
+
+Template: dbconfig-common/pgsql/no-empty-passwords
+Type: error
+_Description: Empty passwords unsupported with PostgreSQL
+
+Template: dbconfig-common/internal/reconfiguring
+Type: boolean
+Default: false
+Description: for internal use.
+
+Template: dbconfig-common/internal/skip-preseed
+Type: boolean
+Default: false
+Description: for internal use.

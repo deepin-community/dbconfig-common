@@ -1,0 +1,1 @@
+revoking access to database testdbname from testdbuser@host2: success.

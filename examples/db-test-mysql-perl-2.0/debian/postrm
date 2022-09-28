@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+#set -x
+
+if [ -f /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+fi
+if [ -f /usr/share/dbconfig-common/dpkg/postrm.mysql ]; then
+	. /usr/share/dbconfig-common/dpkg/postrm.mysql 
+	dbc_go db-test-mysql-perl "$@"
+fi
+
+if [ "$1" = "purge" ]; then
+	rm -f /etc/db-test-mysql-perl/debian-db.pm
+	if command -v ucf >/dev/null; then
+		ucf -p /etc/db-test-mysql-perl/debian-db.pm
+    ucfr -p db-test-mysql-perl /etc/db-test-mysql-perl/debian-db.pm
+	fi
+fi
+
+#DEBHELPER#

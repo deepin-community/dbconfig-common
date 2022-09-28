@@ -1,0 +1,21 @@
+i'd like to extend my gratitude to a few folks for their contributions:
+
+to ola lundqvist, for wwwconfig-common, whose code served as an initial
+base for much of the underlying db management functions.
+
+to andreas tille for template suggestions, german debconf translations
+and spending the time discussing the some potential real-world aspects
+of dbconfig-common.
+
+likewise to karsten hilbert, also for additional postgres specific suggestions
+
+to oliver elphick for much postgres specific knowledge, and a few other ideas
+
+to christian perrier for many suggestions on the debconf templates
+concerning grammar, punctuation, and translator friendliness.
+
+to tobias grimm, julien blache, and miguel gea milvaques for testing,
+ideas, and patches.
+
+all the other list members of debian-devel who shared their ideas and thoughts
+

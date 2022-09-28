@@ -1,0 +1,3 @@
+#This doesn't make sense:
+creating postgres user testdbuser:  already exists.
+resetting password:  failed.

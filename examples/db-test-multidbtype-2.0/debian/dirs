@@ -1,0 +1,3 @@
+etc/db-test-multidbtype
+usr/share/dbconfig-common/data/db-test-multidbtype/upgrade/mysql
+usr/share/dbconfig-common/data/db-test-multidbtype/upgrade/pgsql

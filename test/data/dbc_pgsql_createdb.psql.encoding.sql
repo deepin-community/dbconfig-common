@@ -1,0 +1,1 @@
+CREATE DATABASE "testdbname" WITH TEMPLATE = "template0" ENCODING = 'UTF-8'

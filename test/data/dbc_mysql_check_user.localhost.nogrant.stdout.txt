@@ -1,0 +1,3 @@
+Grants for testdbuser@localhost
+GRANT USAGE ON *.* TO 'testdbuser'@'localhost' IDENTIFIED BY PASSWORD 'blah'
+GRANT ALL PRIVILEGES ON `testdbname2`.* TO 'testdbuser'@'localhost'

@@ -1,0 +1,9 @@
+Document: dbconfig-common-design
+Title: Design documentation for dbconfig-common
+Author: Sean Finney
+Abstract: This document describes the design of dbconfig-common
+Section: Debian
+
+Format: HTML
+Index: /usr/share/doc/dbconfig-common/dbconfig-common-design.html
+Files: /usr/share/doc/dbconfig-common/dbconfig-common-design.html

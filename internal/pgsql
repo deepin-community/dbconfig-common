@@ -1,0 +1,489 @@
+# -*- mode: sh -*-
+###
+### postgresql bindings for dbconfig-common
+###
+###	all variables and functions fall under the namespace "dbc_foo" and
+###	"_dbc_foo", depending on whether or not they are "external"
+###
+
+# get some common functions
+. /usr/share/dbconfig-common/internal/common
+
+_dbc_psql_local_username(){
+    # determine proper local system user as whom to run commands.
+    #	- if _dbc_asuser set and ident/localhost,
+    #     - if $dbc_dbuser exists as a system account, use it
+    #	- else ident/localhost: $dbc_dbadmin
+    #	- all others: no change (root)
+    if [ "${_dbc_asuser:-}" ]; then
+        if [ "${dbc_authmethod_user:-}" = "ident" ] && _dbc_islocalhost ; then
+            if [ "${dbc_dbuser:-}" ] && id $dbc_dbuser >/dev/null 2>&1; then
+                echo $dbc_dbuser
+                return 0
+            else
+                dbc_error="ident method specified but local account doesn't exist. mapping isn't supported"
+                return 1
+            fi
+        fi
+    elif [ "${dbc_authmethod_admin:-}" = "ident" ] && _dbc_islocalhost ; then
+        echo $dbc_dbadmin
+        return 0
+    fi
+    echo root
+}
+
+_dbc_psql_remote_username(){
+    # determine proper remote user for connection requests
+    #	- if _dbc_asuser set: $dbc_dbuser
+    #	- else: $dbc_dbadmin
+    if [ "${_dbc_asuser:-}" ]; then
+        echo $dbc_dbuser
+    else
+        echo $dbc_dbadmin
+    fi
+}
+
+_dbc_psql_cmd_setup(){
+    local localuser remoteuser remotepass
+    localuser=$(_dbc_psql_local_username)
+    remoteuser=$(_dbc_psql_remote_username)
+    _dbc_pgsql_tmpdir=$(mktemp -dt dbconfig-common.psql_home.XXXXXX)
+    if [ $? -ne 0 ]; then return 1; fi
+    if [ "$remoteuser" = "$dbc_dbadmin" ]; then
+        remotepass="$dbc_dbadmpass"
+    else
+        remotepass="$dbc_dbpass"
+    fi
+    touch "${_dbc_pgsql_tmpdir}/.pgpass"
+    chmod 600 "${_dbc_pgsql_tmpdir}/.pgpass"
+    cat << EOF > "${_dbc_pgsql_tmpdir}/.pgpass"
+*:*:*:$remoteuser:$remotepass
+EOF
+    if [ "$localuser" ] && [ "$localuser" != "root" ]; then
+        chown -R "$localuser" "$_dbc_pgsql_tmpdir"
+    fi
+}
+
+_dbc_psql_cmd_args(){
+    local extra
+
+    # all connections require a host, except local peer connections
+    extra="-h '${dbc_dbserver:-localhost}'"; # initialize default
+    if _dbc_islocalhost ; then
+        if [ "${_dbc_asuser:-}" ] && [ "$dbc_authmethod_user" = "ident" ]; then
+            extra="";
+        elif [ ! "${_dbc_asuser:-}" ] && [ ! "${dbc_dbadmpass:-}" ]; then
+            extra="";
+        fi
+    fi
+
+    # add port settings if nonempty
+    if [ "${dbc_dbport:-}" ]; then extra="$extra -p '$dbc_dbport'"; fi
+    # determine the database user name
+    extra="$extra -U '$(_dbc_psql_remote_username)'"
+
+    echo $extra
+}
+
+_dbc_psql_cmd_cleanup(){
+    if [ "$_dbc_pgsql_tmpdir" ] && [ -d "$_dbc_pgsql_tmpdir" ]; then
+        rm -f "${_dbc_pgsql_tmpdir}/.pgpass"
+        rmdir "$_dbc_pgsql_tmpdir"
+    fi
+}
+
+_dbc_psql(){
+    local extra retval PGSSLMODE localuser
+    localuser=$(_dbc_psql_local_username)
+    PGSSLMODE="prefer"
+    retval=0
+    _dbc_psql_cmd_setup
+    if [ "${dbc_ssl:-}" ]; then PGSSLMODE="require"; fi
+    extra=$(_dbc_psql_cmd_args)
+    _dbc_debug "runuser --user $localuser -- /bin/sh -c \"env HOME='${_dbc_pgsql_tmpdir}' PGPASSFILE='${_dbc_pgsql_tmpdir}/.pgpass' PGSSLMODE='$PGSSLMODE' psql --set \\\"ON_ERROR_STOP=1\\\" -q $extra ${*:-}\" 2>&1"
+    dbc_error=$(runuser --user $localuser -- /bin/sh -c "env HOME='${_dbc_pgsql_tmpdir}' PGPASSFILE='${_dbc_pgsql_tmpdir}/.pgpass' PGSSLMODE='$PGSSLMODE' psql --set \"ON_ERROR_STOP=1\" -q $extra ${*:-}" 2>&1) || retval=$?
+    _dbc_psql_cmd_cleanup
+    return $retval
+}
+
+_dbc_createdb(){
+    local extra extrasql retval PGSSLMODE localuser _dbc_asuser template
+    local _dbc_nodb
+    localuser=$(_dbc_psql_local_username)
+    PGSSLMODE="prefer"
+    retval=0
+    if [ "${dbc_ssl:-}" ]; then PGSSLMODE="require"; fi
+    extra=$(_dbc_psql_cmd_args)
+    if [ "${dbc_pgsql_createdb_encoding:-}" ]; then
+        extrasql=" WITH TEMPLATE = \"template0\"";
+        extrasql="$extrasql ENCODING = '$dbc_pgsql_createdb_encoding'";
+    fi
+    _dbc_nodb="yes"
+    _dbc_pgsql_exec_command "CREATE DATABASE \"$dbc_dbname\"${extrasql:-}"
+    retval=$?
+    _dbc_nodb=""
+    return $retval
+}
+
+_dbc_dropdb(){
+    local extra retval PGSSLMODE localuser _dbc_asuser
+    localuser=$(_dbc_psql_local_username)
+    PGSSLMODE="prefer"
+    retval=0
+    _dbc_psql_cmd_setup
+    if [ "${dbc_ssl:-}" ]; then PGSSLMODE="require"; fi
+    extra=$(_dbc_psql_cmd_args)
+    _dbc_debug "runuser --user $localuser -- /bin/sh -c \"env HOME='$_dbc_pgsql_tmpdir' PGPASSFILE='$_dbc_pgsql_tmpdir/.pgpass' PGSSLMODE='$PGSSLMODE' dropdb $extra $*\" 2>&1"
+    dbc_error=$(runuser --user $localuser -- /bin/sh -c "env HOME='$_dbc_pgsql_tmpdir' PGPASSFILE='$_dbc_pgsql_tmpdir/.pgpass' PGSSLMODE='$PGSSLMODE' dropdb $extra $*" 2>&1) || retval=$?
+    _dbc_psql_cmd_cleanup
+    return $retval
+}
+
+_dbc_createuser(){
+    local extra dbc_dbname retval PGSSLMODE localuser _dbc_asuser
+    localuser=$(_dbc_psql_local_username)
+    PGSSLMODE="prefer"
+    retval=0
+    if [ "${dbc_ssl:-}" ]; then PGSSLMODE="require"; fi
+    extra=$(_dbc_psql_cmd_args)
+    dbc_dbname="template1"
+    _dbc_pgsql_exec_command "CREATE USER \"$dbc_dbuser\" WITH PASSWORD '$(dbc_pgsql_escape_str $dbc_dbpass)'" || retval=$?
+    return $retval
+}
+
+_dbc_dropuser(){
+    local extra retval PGSSLMODE localuser _dbc_asuser
+    localuser=$(_dbc_psql_local_username)
+    PGSSLMODE="prefer"
+    retval=0
+    _dbc_psql_cmd_setup
+    if [ "${dbc_ssl:-}" ]; then PGSSLMODE="require"; fi
+    extra=$(_dbc_psql_cmd_args)
+    _dbc_debug "runuser --user $localuser -- /bin/sh -c \"env HOME='$_dbc_pgsql_tmpdir' PGPASSFILE='$_dbc_pgsql_tmpdir/.pgpass' PGSSLMODE='$PGSSLMODE' dropuser $extra $*\" 2>&1"
+    dbc_error=$(runuser --user $localuser -- /bin/sh -c "env HOME='$_dbc_pgsql_tmpdir' PGPASSFILE='$_dbc_pgsql_tmpdir/.pgpass' PGSSLMODE='$PGSSLMODE' dropuser $extra $*" 2>&1) || retval=$?
+    _dbc_psql_cmd_cleanup
+    return $retval
+}
+
+_dbc_pg_dump(){
+    local extra retval PGSSLMODE localuser _dbc_asuser dumpfile old_umask
+    dumpfile=$1
+    localuser=$(_dbc_psql_local_username)
+    PGSSLMODE="prefer"
+    retval=0
+    _dbc_psql_cmd_setup
+    if [ "${dbc_ssl:-}" ]; then PGSSLMODE="require"; fi
+    old_umask=$(umask)
+    umask 0066
+    touch $dumpfile
+    chown $localuser $dumpfile
+    extra=$(_dbc_psql_cmd_args)
+    extra="-f \"$dumpfile\" $extra"
+    _dbc_debug "runuser --user $localuser -- /bin/sh -c \"env HOME='$_dbc_pgsql_tmpdir' PGPASSFILE='$_dbc_pgsql_tmpdir/.pgpass' PGSSLMODE='$PGSSLMODE' pg_dump $extra $dbc_dbname\" 2>&1"
+    dbc_error=$(runuser --user $localuser -- /bin/sh -c "env HOME='$_dbc_pgsql_tmpdir' PGPASSFILE='$_dbc_pgsql_tmpdir/.pgpass' PGSSLMODE='$PGSSLMODE' pg_dump $extra $dbc_dbname" 2>&1) || retval=$?
+    umask $old_umask
+    _dbc_psql_cmd_cleanup
+    return $retval
+}
+
+##
+## check that we can actually connect to the specified postgres server
+##
+_dbc_pgsql_check_connect(){
+    local constat extra _dbc_asuser
+    constat="bad"
+    if ! _dbc_psql ${extra:-} template1 < /dev/null; then
+        dbc_logline "unable to connect to postgresql server"
+        return 1
+    fi
+}
+
+##
+## Revoke connect rights on the database
+##
+_dbc_revoke_connect(){
+    local retval
+    retval=0
+    _dbc_pgsql_exec_command "REVOKE CONNECT ON DATABASE \"$dbc_dbname\" FROM PUBLIC, \"$dbc_dbuser\"" || retval=$?
+    return $retval
+}
+
+##
+## Terminate all active connections to the database
+##
+_dbc_terminate_connections(){
+    local retval server_ver
+    retval=0
+    # First we need to determine which version of PostgreSQL is running on the
+    # server because the column name changed in 9.2.
+    # We are asking for server_version_num to do the comparison, but that was
+    # introduced in 8.2, so if that fails, let's assume the version is older.
+    server_ver="$(_dbc_pgsql_exec_command "SHOW server_version_num")" || true
+    if [ $((${server_ver:-80199} < 90200)) = 0 ] ; then
+        _dbc_pgsql_exec_command "SELECT pg_terminate_backend(procpid) FROM pg_stat_activity WHERE procpid <> pg_backend_pid() AND datname = '$dbc_dbname'" || retval=$?
+    else
+        _dbc_pgsql_exec_command "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = '$dbc_dbname'" || retval=$?
+    fi
+    return $retval
+}
+
+##
+## execute a file with pgsql commands
+##
+##	note this is done without passing any sensitive info on the cmdline
+##
+dbc_pgsql_exec_file(){
+    local l_sqlfile l_dbname retval
+    l_sqlfile=$1
+
+    if [ ! "$l_sqlfile" ]; then
+        dbc_error="no file supplied to execute"
+        return 1
+    elif [ ! -f "$l_sqlfile" ]; then
+        dbc_error="file $l_sqlfile missing"
+        return 1
+    fi
+
+    l_dbname=
+    if [ ! "${_dbc_nodb:-}" ]; then
+        l_dbname="$dbc_dbname"
+    fi
+
+    _dbc_psql ${l_dbname:-} < "$l_sqlfile"
+    retval=$?
+    return $retval
+}
+
+##
+## execute a specific pgsql command
+##
+##	note this is done without passing any sensitive info on the cmdline,
+##	including the sql command itself
+##
+_dbc_pgsql_exec_command(){
+    local statement l_sqlfile l_dbname retval
+    retval=0
+    statement="$@"
+    l_sqlfile=$(dbc_mktemp dbconfig-common_sqlfile.XXXXXX)
+    if [ -z "${_dbc_nodb:-}" ]; then
+        l_dbname="$dbc_dbname"
+    fi
+
+    cat << EOF > "$l_sqlfile"
+$statement
+EOF
+    _dbc_psql ${extra:-} ${l_dbname:-} < "$l_sqlfile" || retval=$?
+    rm -f "$l_sqlfile"
+    return $retval
+}
+
+##
+## check for the existance of a specified database
+##
+_dbc_pgsql_check_database(){
+    local dbc_dbname _dbc_asuser extra
+    dbc_dbname=$1
+    _dbc_psql ${extra:-} $dbc_dbname </dev/null 2>/dev/null
+    return $?
+}
+
+##
+## check for access for a specific user
+##
+##	this works by checking the grants for the user, so we can verify that
+##	not only does the user exist, but that it should be able to connect
+##
+dbc_pgsql_check_user(){
+    local dbc_dbname l_retval _dbc_asuser extra
+    dbc_dbname="template1"
+    _dbc_pgsql_exec_command "ALTER USER \"$dbc_dbuser\""
+    l_retval=$?
+    return $l_retval
+}
+
+###
+### externally supplied functions
+###
+###	included inline are some slightly modified / corrected comments from
+###	the respective original	functions provided by wwwconfig-common, and
+###	comments of similar style for now functions
+###
+###	all functions return non-zero on error
+###
+
+# File:         pgsql-createdb.sh
+# Description:  Creates a database.
+# Needs:        $dbc_dbname
+#               $dbc_dbadmin
+# Sets:         $dbc_error = error message
+
+dbc_pgsql_createdb(){
+    _dbc_sanity_check dbname dbadmin psql dbuser createdb || return 1
+    _dbc_pgsql_check_connect || return 1
+
+    dbc_logpart "creating database $dbc_dbname:"
+
+    if _dbc_pgsql_check_database "$dbc_dbname"; then
+        dbc_logline "already exists"
+    else
+        if _dbc_createdb $dbc_dbname ; then
+            dbc_logline "success"
+            dbc_logpart "verifying database $dbc_dbname exists:"
+            if ! _dbc_pgsql_check_database "$dbc_dbname"; then
+                dbc_logline "failed"
+                return 1
+            else
+                dbc_logline "success"
+            fi
+        else
+            dbc_logline "failed"
+            return 1
+        fi
+    fi
+
+}
+
+# File:		pgsql-dropdb.sh
+# Needs:	$dbc_dbname    - the database that user should have access to.
+#		$dbc_dbserver  - the server to connect to.
+#		$dbc_dbadmin   - the administrator name.
+#		$dbc_dbadmpass - the administrator password.
+# Description:	drops a database.
+# Sets:		$dbc_error = error message
+
+dbc_pgsql_dropdb(){
+    _dbc_sanity_check dbname dbadmin dropdb dbuser || return 1
+    _dbc_pgsql_check_connect || return 1
+
+    dbc_logpart "dropping database $dbc_dbname:"
+
+    if _dbc_pgsql_check_database "$dbc_dbname"; then
+        if ! _dbc_revoke_connect "$dbc_dbname" "$dbc_dbuser"; then
+            # Let's not fail on revoking connection rights as we may be lucky
+            # and no connections are made in the mean time, while revoking
+            # fails if the database user doesn't exist (anymore).
+            dbc_logpart "(revoking connect rights failed, but try to drop anyways)"
+        fi
+        if _dbc_terminate_connections "$dbc_dbname"; then
+            if _dbc_dropdb "$dbc_dbname"; then
+                dbc_logline "success"
+                dbc_logpart "verifying database $dbc_dbname was dropped:"
+                if _dbc_pgsql_check_database "$dbc_dbname"; then
+                    dbc_logline "failed"
+                else
+                    dbc_logline "success"
+                fi
+            else
+                dbc_logline "does not exist"
+            fi
+        else
+            dbc_logline "terminating active connections failed"
+        fi
+    else
+        dbc_logline "database does not exist"
+    fi
+}
+
+# File:		pgsql-createuser.sh
+# Description:	Creates or replaces a database user.
+# Needs:	$dbc_dbuser    - the user name to create (or replace).
+#		$dbc_dballow   - what hosts to allow. defaults to localhost/hostname
+#		$dbc_dbname    - the database that user should have access to.
+#		$dbc_dbpass    - the password to use.
+#		$dbc_dbserver  - the server to connect to (defaults to localhost).
+#		$dbc_dbadmin   - the administrator name.
+#		$dbc_dbadmpass - the administrator password.
+# Sets:		$dbc_error = error message
+
+dbc_pgsql_createuser(){
+    local dbc_dbname
+
+    dbc_dbname=template1
+
+    _dbc_sanity_check dbuser dbadmin dballow createuser || return 1
+    _dbc_pgsql_check_connect || return 1
+
+    dbc_logpart "creating postgres user $dbc_dbuser: "
+
+    if dbc_pgsql_check_user; then
+        dbc_logline "already exists"
+        if [ "$dbc_dbpass" ]; then
+            dbc_logpart "resetting password: "
+            if _dbc_pgsql_exec_command "ALTER USER \"$dbc_dbuser\" WITH PASSWORD '$dbc_dbpass'"; then
+                dbc_logline "success"
+            else
+                dbc_logline "failed"
+                return 1
+            fi
+        fi
+    elif _dbc_createuser; then
+        dbc_logline "success"
+        dbc_logpart "verifying creation of user:"
+        if ! dbc_pgsql_check_user ; then
+            dbc_logline "failed"
+            return 1
+        else
+            dbc_logline "success"
+        fi
+    else
+        dbc_logline "failed"
+        return 1
+    fi
+}
+
+# File:		pgsql-dropuser.sh
+# Needs:	$dbc_dbuser    - the user name to create (or replace).
+#		$dbc_dballow   - what hosts to allow (defaults to %).
+#		$dbc_dbname    - the database that user should have access to.
+#		$dbc_dbserver  - the server to connect to.
+#		$dbc_dbadmin   - the administrator name.
+#		$dbc_dbadmpass - the administrator password.
+# Description:	drops a database user.
+# Sets:		$dbc_error = error message
+
+dbc_pgsql_dropuser(){
+    _dbc_sanity_check dbuser dbname dbadmin dballow dropuser || return 1
+    _dbc_pgsql_check_connect || return 1
+
+    dbc_logpart "revoking access to database $dbc_dbname from $dbc_dbuser@$dbc_dballow:"
+    if ! dbc_pgsql_check_user; then
+        dbc_logline "access does not exist"
+    else
+        if _dbc_dropuser $dbc_dbuser 2>/dev/null; then
+            dbc_logline "success"
+        else
+            dbc_logline "failed"
+        fi
+    fi
+}
+
+##
+## perform pg_dump
+##
+dbc_pgsql_dump(){
+    local dumpfile
+    dumpfile=$1
+    _dbc_sanity_check dbuser dbname dbadmin pg_dump || return 1
+    _dbc_pgsql_check_connect || return 1
+    if _dbc_pgsql_check_database "$dbc_dbname"; then
+        _dbc_pg_dump $dumpfile
+    else
+        dbc_logline "database does not exist"
+    fi
+}
+
+##
+## basic installation check
+##
+dbc_pgsql_db_installed(){
+    test -n "$(find /etc/init.d -name 'postgresql*')"
+}
+
+##
+## dbc_pgsql_escape_str: properly escape strings passed to pgsql queries
+##
+dbc_pgsql_escape_str(){
+    sed -e 's,\\,\\&,g' -e "s,',\\\\&,g" << EOF
+$1
+EOF
+}

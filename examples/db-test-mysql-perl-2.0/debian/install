@@ -1,0 +1,3 @@
+#! /usr/bin/dh-exec
+mysql-install.pl => usr/share/dbconfig-common/scripts/db-test-mysql-perl/install/mysql
+

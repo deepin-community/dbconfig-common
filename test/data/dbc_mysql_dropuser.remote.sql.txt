@@ -1,0 +1,2 @@
+REVOKE ALL PRIVILEGES ON `testdbname`.* FROM 'testdbuser'@'host2';
+FLUSH PRIVILEGES;

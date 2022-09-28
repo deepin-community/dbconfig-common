@@ -1,0 +1,2 @@
+dropping database testdbname: (revoking connect rights failed, but try to drop anyways) success.
+verifying database testdbname was dropped: success.

@@ -1,0 +1,246 @@
+#!/bin/sh
+
+# set some defaults
+dbuser_varname="dbuser"
+dbpass_varname="dbpass"
+dbname_varname="dbname"
+dbserver_varname="dbserver"
+dbport_varname="dbport"
+dbtype_varname="dbtype"
+basepath_varname="basepath"
+
+# the version will always be < the package version
+VERSION="2.0"
+
+version(){
+	prog=$(basename $0)
+	cat << EOF
+
+$prog v$VERSION 
+copyright (c) 2005 sean finney <seanius@debian.org>
+
+EOF
+}
+
+usage(){
+	version
+	cat << EOF
+usage: $prog [-hv] [-a] [-d[varname]] [-u[varname]] [-p[varname]] [-s[varname]] [-P[varname]] [-t[varname]] -f format infile
+
+	infile            use the given dbconfig-common config file as input
+	-f|--format       use the given output format (must be specified)
+	-a|--all          include all information in output (default)
+	-b|--basepath     include the basepath in the output
+	-d|--dbname       include the dbname in the output
+	-p|--dbpass       include the dbpass in the output
+	-s|--dbserver     include the dbserver in the output
+	-P|--dbport       include the dbport in the output
+	-u|--dbuser       include the dbuser in the output
+	-t|--dbtype       include the dbtype in the output
+	-h|--help         display this helpful message
+	-v|--version      output the version and exit
+
+	format is one of a list of include-file style formats for various
+	programming languages.  the current list includes:
+		sh - /bin/sh style include file
+		perl - perl parseable include file
+		php - php parseable include file
+		exec - run the file as a script and interpret its output.
+EOF
+}
+
+TEMP=$(getopt -o af:hb::d::p::u::s::t::P::v -l help,dbuser::,dbname::,dbpass::,dbport::,dbserver::,dbtype::,basepath::,format:,version -n $0 -- "$@")
+
+if [ $? != 0 ] ; then usage >&2 ; exit 1 ; fi
+
+eval set -- "$TEMP"
+
+while true; do
+	case "$1" in
+	-a|--all)
+		use_all="yes"
+		shift
+	;;
+	-b|--basepath)
+		use_basepath="yes"
+		if [ ! -z "$2" ]; then
+			basepath_varname="$2"
+		fi
+		shift 2
+	;;
+	-d|--dbname)
+		use_dbname="yes"
+		if [ ! -z "$2" ]; then
+			dbname_varname="$2"
+		fi
+		shift 2
+	;;
+	-u|--dbuser)
+		use_dbuser="yes"
+		if [ ! -z "$2" ]; then
+			dbuser_varname="$2"
+		fi
+		shift 2
+	;;
+	-p|--dbpass)
+		use_dbpass="yes"
+		if [ ! -z "$2" ]; then
+			dbpass_varname="$2"
+		fi
+		shift 2
+	;;
+	-s|--dbserver)
+		use_dbserver="yes"
+		if [ ! -z "$2" ]; then
+			dbserver_varname="$2"
+		fi
+		shift 2
+	;;
+	-P|--dbport)
+		use_dbport="yes"
+		if [ ! -z "$2" ]; then
+			dbport_varname="$2"
+		fi
+		shift 2
+	;;
+	-t|--dbtype)
+		use_dbtype="yes"
+		if [ ! -z "$2" ]; then
+			dbtype_varname="$2"
+		fi
+		shift 2
+	;;
+	-f|--format)
+		format="$2"
+		shift 2
+	;;
+	-h|--help)
+		usage
+		exit
+	;;
+	-v|--version)
+		version
+		exit
+	;;
+	--)
+		shift
+		break
+	;;
+	*)
+		echo "eh? $1" >&2
+		exit 1
+	;;
+	esac
+done
+
+# if they asked for all vars, or didn't ask for anything (which defaults to all)
+if [ "$use_all" ] || [ ! "${use_dbuser}${use_dbpass}${use_basepath}${use_dbname}${use_dbserver}${use_dbtype}${use_dbport}" ]; then
+		use_dbuser="yes"
+		use_dbpass="yes"
+		use_basepath="yes"
+		use_dbname="yes"
+		use_dbserver="yes"
+		use_dbport="yes"
+		use_dbtype="yes"
+fi
+
+inputfile=$1
+rv=0
+
+if [ ! "$inputfile" ]; then
+	echo "error: you must specify an inputfile" >&2
+	usage >&2
+	exit 1
+fi
+
+if [ ! -f "$inputfile" ] || [ ! -r "$inputfile" ]; then
+	echo "unable to read input file $inputfile" >&2
+	exit 1
+fi
+
+if [ ! "$format" ]; then
+	echo "error: you must specify a format!" >&2
+	usage >&2
+	exit 1
+fi
+
+case $format in
+sh)
+	cat << EOF | sh
+. $inputfile
+use_dbuser="$use_dbuser";
+use_dbpass="$use_dbpass";
+use_basepath="$use_basepath";
+use_dbname="$use_dbname";
+use_dbserver="$use_dbserver";
+use_dbport="$use_dbport";
+use_dbtype="$use_dbtype";
+
+[ "$use_dbuser" ] && cat << FOO
+dbc_dbuser='\$$dbuser_varname'
+FOO
+[ "$use_dbpass" ] && cat << FOO
+dbc_dbpass='\$$dbpass_varname'
+FOO
+	[ "$use_basepath" ] && echo "dbc_basepath='\$$basepath_varname'"
+	[ "$use_dbname" ] && echo "dbc_dbname='\$$dbname_varname'"
+	[ "$use_dbserver" ] && echo "dbc_dbserver='\$$dbserver_varname'"
+	[ "$use_dbport" ] && echo "dbc_dbport='\$$dbport_varname'"
+	[ "$use_dbtype" ] && echo "dbc_dbtype='\$$dbtype_varname'"
+EOF
+;;
+
+php)
+	if ! command -v php >/dev/null; then
+		echo "error: php format but i can't find a php binary!" >&2
+		exit 1
+	fi
+	cat << EOF | php
+<?php
+	require_once "$inputfile";
+
+	\$use_dbuser="$use_dbuser";
+	\$use_dbpass="$use_dbpass";
+	\$use_basepath="$use_basepath";
+	\$use_dbname="$use_dbname";
+	\$use_dbserver="$use_dbserver";
+	\$use_dbport="$use_dbport";
+	\$use_dbtype="$use_dbtype";
+
+	if(!empty(\$use_dbuser) && isset(\$$dbuser_varname)) 
+		echo "dbc_dbuser='\$$dbuser_varname';\n";
+	if(!empty(\$use_dbpass) && isset(\$$dbpass_varname)) 
+		echo "dbc_dbpass='\$$dbpass_varname';\n";
+	if(!empty(\$use_basepath) && isset(\$$basepath_varname)) 
+		echo "dbc_basepath='\$$basepath_varname';\n";
+	if(!empty(\$use_dbname) && isset(\$$dbname_varname)) 
+		echo "dbc_dbname='\$$dbname_varname';\n";
+	if(!empty(\$use_dbserver) && isset(\$$dbserver_varname)) 
+		echo "dbc_dbserver='\$$dbserver_varname';\n";
+	if(!empty(\$use_dbport) && isset(\$$dbport_varname)) 
+		echo "dbc_dbport='\$$dbport_varname';\n";
+	if(!empty(\$use_dbtype) && isset(\$$dbtype_varname)) 
+		echo "dbc_dbtype='\$$dbtype_varname';\n";
+EOF
+;;
+
+perl)
+( cat $inputfile; cat << EOF ) | perl
+print "dbc_dbuser='\$$dbuser_varname'\n" if("$use_dbuser");
+print "dbc_dbpass='\$$dbpass_varname'\n" if("$use_dbpass");
+print "dbc_basepath='\$$basepath_varname'\n" if("$use_basepath");
+print "dbc_dbname='\$$dbname_varname'\n" if("$use_dbname");
+print "dbc_dbserver='\$$dbserver_varname'\n" if("$use_dbserver");
+print "dbc_dbport='\$$dbport_varname'\n" if("$use_dbport");
+print "dbc_dbtype='\$$dbtype_varname'\n" if("$use_dbtype");
+EOF
+;;
+
+exec)
+	sh -c $inputfile
+	rv="$?"
+;;
+
+esac
+
+exit $rv

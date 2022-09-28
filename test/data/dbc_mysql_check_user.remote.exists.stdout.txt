@@ -1,0 +1,3 @@
+Grants for testdbuser@host2
+GRANT USAGE ON *.* TO 'testdbuser'@'host2'
+GRANT ALL PRIVILEGES ON `testdbname`.* TO 'testdbuser'@'host2'

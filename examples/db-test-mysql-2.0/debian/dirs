@@ -1,0 +1,2 @@
+etc/db-test-mysql
+usr/share/dbconfig-common/data/db-test-mysql/upgrade/mysql

@@ -1,0 +1,4 @@
+CREATE USER IF NOT EXISTS 'testdbuser'@'host2';
+ALTER USER 'testdbuser'@'host2' IDENTIFIED BY 'testdbpass';
+GRANT ALL PRIVILEGES ON `testdbname`.* TO 'testdbuser'@'host2';
+FLUSH PRIVILEGES;

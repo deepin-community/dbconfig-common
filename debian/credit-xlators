@@ -1,0 +1,79 @@
+#!/bin/sh
+
+# credit-xlators - v0.6 
+# copyright (c) 2005 sean finney <seanius@debian.org>
+# you may use, copy, modify, or redistribute this software under the terms of
+# any DFSG-compliant software license 
+# (see http://www.debian.org/social_contract#guidelines)
+#
+# usage:
+#	credit-xlators [podir]
+# where [podir] defaults to debian/po
+
+TEMP=$(getopt -o ct -n $0 -- "$@")
+if [ $? != 0 ] ; then echo "only option i know if is -t" >&2 ; exit 1 ; fi
+eval set -- "$TEMP"
+
+while true; do
+	case "$1" in
+	-c)
+		do_commas="y"
+	;;
+	-t)
+		do_terse="y"
+	;;
+	--)
+		shift
+		break
+	;;
+	*)
+		echo "eh? $1" >&2
+		exit 1
+	;;
+	esac
+	shift
+done
+
+if [ "$1" ]; then
+	podir="$1"
+else
+	podir="debian/po"
+fi
+
+if [ ! "$do_terse" ]; then
+	cat << EOF
+The maintainer of this package greatly appreciates the work of the many
+volunteers who have contributed their time and efforts into translating
+the debconf templates in this package.  Thanks for your work!
+
+================================================================================
+Translators who have most recently contributed, sorted by language:
+================================================================================
+EOF
+
+	for f in $(ls "$podir"/*.po | sort); do
+		l=$(basename $f .po)
+		xl=$(grep '^"Last-Translator' $f | sed -e 's,^[^:]*: \([^\\]*\).*,\1,')
+		if [ ! "$xl" ]; then
+			xl="(unknown or not specified in the po file)"
+		fi
+		echo $l: $xl
+	done
+else
+	(
+	for f in $(ls "$podir"/*.po | sort); do
+		xl=$(grep '^"Last-Translator' $f | sed -e 's,^[^:]*: \([^\\]*\).*,\1,')
+		if [ "$xl" ]; then
+			if [ "$do_commas" ]; then
+				xl="$xl, "
+				echo_args="-n"
+			fi
+			echo $echo_args $xl
+		fi
+	done
+	if [ "$do_commas" ]; then
+		echo
+	fi
+	) | sed -e '$s/,$//'
+fi
+

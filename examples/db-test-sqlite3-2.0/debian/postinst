@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+#set -x
+
+. /usr/share/debconf/confmodule
+. /usr/share/dbconfig-common/dpkg/postinst.sqlite3 
+dbc_generate_include=php:/etc/db-test-sqlite3/debian-db.php
+
+# Uncomment the following lines if you want to set different permissions
+# on the installed database file
+#dbc_dbfile_owner="root:www-data"
+#dbc_dbfile_perms="0644"
+
+dbc_go db-test-sqlite3 "$@"
+
+#DEBHELPER#

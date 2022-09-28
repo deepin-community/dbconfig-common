@@ -1,0 +1,101 @@
+##
+## dbconfig-common includes example packages with its documentation.
+## these are harmless false-positives, because of the examples.
+##
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-multidbtype-2.0/debian/config
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-multidbtype-2.0/debian/postinst
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-multidbtype-2.0/debian/postrm
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-multidbtype-2.0/debian/prerm
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-mysql-2.0/debian/config
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-mysql-2.0/debian/postinst
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-mysql-2.0/debian/postrm
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-mysql-2.0/debian/prerm
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-mysql-2.1/debian/config
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-mysql-2.1/debian/postinst
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-mysql-2.1/debian/postrm
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-mysql-2.1/debian/prerm
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-mysql-frontend-2.0/debian/config
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-mysql-frontend-2.0/debian/postinst
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-mysql-frontend-2.0/debian/postrm
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-mysql-frontend-2.0/debian/prerm
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-mysql-perl-2.0/debian/config
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-mysql-perl-2.0/debian/postinst
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-mysql-perl-2.0/debian/postrm
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-mysql-perl-2.0/debian/prerm
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-pgsql-2.0/debian/config
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-pgsql-2.0/debian/postinst
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-pgsql-2.0/debian/postrm
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-pgsql-2.0/debian/prerm
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-pgsql-2.1/debian/config
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-pgsql-2.1/debian/postinst
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-pgsql-2.1/debian/postrm
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-pgsql-2.1/debian/prerm
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-pgsql-migration-2.0/debian/config
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-pgsql-migration-2.0/debian/postinst
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-pgsql-migration-2.0/debian/postrm
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-pgsql-migration-2.0/debian/prerm
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-sqlite3-2.0/debian/config
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-sqlite3-2.0/debian/postinst
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-sqlite3-2.0/debian/postrm
+dbconfig-common: debconf-is-not-a-registry usr/share/doc/dbconfig-common/examples/db-test-sqlite3-2.0/debian/prerm
+
+#
+# The following templates are used by packages that use dbconfig-common
+# to configure themselves.
+# Override as suggested by the lintian information text.
+#
+dbconfig-common: unused-debconf-template dbconfig-common/dbconfig-install
+dbconfig-common: unused-debconf-template dbconfig-common/dbconfig-reinstall
+dbconfig-common: unused-debconf-template dbconfig-common/dbconfig-upgrade
+dbconfig-common: unused-debconf-template dbconfig-common/dbconfig-remove
+dbconfig-common: unused-debconf-template dbconfig-common/database-type
+dbconfig-common: unused-debconf-template dbconfig-common/purge
+dbconfig-common: unused-debconf-template dbconfig-common/upgrade-backup
+dbconfig-common: unused-debconf-template dbconfig-common/password-confirm
+dbconfig-common: unused-debconf-template dbconfig-common/app-password-confirm
+dbconfig-common: unused-debconf-template dbconfig-common/passwords-do-not-match
+dbconfig-common: unused-debconf-template dbconfig-common/upgrade-error
+dbconfig-common: unused-debconf-template dbconfig-common/install-error
+dbconfig-common: unused-debconf-template dbconfig-common/remove-error
+dbconfig-common: unused-debconf-template dbconfig-common/missing-db-package-error
+dbconfig-common: unused-debconf-template dbconfig-common/remote/host
+dbconfig-common: unused-debconf-template dbconfig-common/remote/port
+dbconfig-common: unused-debconf-template dbconfig-common/remote/newhost
+dbconfig-common: unused-debconf-template dbconfig-common/db/dbname
+dbconfig-common: unused-debconf-template dbconfig-common/db/app-user
+dbconfig-common: unused-debconf-template dbconfig-common/db/basepath
+dbconfig-common: unused-debconf-template dbconfig-common/mysql/method
+dbconfig-common: unused-debconf-template dbconfig-common/mysql/app-pass
+dbconfig-common: unused-debconf-template dbconfig-common/mysql/admin-user
+dbconfig-common: unused-debconf-template dbconfig-common/mysql/admin-pass
+dbconfig-common: unused-debconf-template dbconfig-common/pgsql/method
+dbconfig-common: unused-debconf-template dbconfig-common/pgsql/app-pass
+dbconfig-common: unused-debconf-template dbconfig-common/pgsql/admin-user
+dbconfig-common: unused-debconf-template dbconfig-common/pgsql/admin-pass
+dbconfig-common: unused-debconf-template dbconfig-common/pgsql/authmethod-admin
+dbconfig-common: unused-debconf-template dbconfig-common/pgsql/authmethod-user
+dbconfig-common: unused-debconf-template dbconfig-common/pgsql/no-user-choose-other-method
+dbconfig-common: unused-debconf-template dbconfig-common/pgsql/changeconf
+dbconfig-common: unused-debconf-template dbconfig-common/pgsql/revertconf
+dbconfig-common: unused-debconf-template dbconfig-common/pgsql/manualconf
+dbconfig-common: unused-debconf-template dbconfig-common/pgsql/no-empty-passwords
+dbconfig-common: unused-debconf-template dbconfig-common/internal/reconfiguring
+dbconfig-common: unused-debconf-template dbconfig-common/internal/skip-preseed
+
+#
+# The following directory is used by packages that use dbconfig-common
+# to configure themselves.
+# Override as suggested by the lintian information text.
+#
+dbconfig-common: package-contains-empty-directory usr/share/dbconfig-common/data/
+
+#
+# Our examples packages share the same changelog file, so this is harmless
+#
+dbconfig-common: duplicate-changelog-files
+
+#
+# Our examples contain duplicate files, but they need to be consistent within
+# one package, so this is needed, while not worth the effort to e.g. hardlink.
+#
+dbconfig-common: duplicate-files

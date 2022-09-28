@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+if [ $1 = "purge" ]; then
+	rm -f /etc/dbconfig-common/config || true
+  if command -v ucf >/dev/null; then
+    ucf -p /etc/dbconfig-common/config
+    ucfr -p dbconfig-common /etc/dbconfig-common/config
+  fi
+	# purge the various default logfile/logdir locations
+	rm -f /var/log/dbconfig-common/dbc.log
+  for d in /etc /var/log /var/lib; do
+    if [ -d "$d/dbconfig-common" ]; then
+	    rmdir --ignore-fail-on-non-empty "$d/dbconfig-common" 
+    fi
+  done
+fi
+
+#DEBHELPER#

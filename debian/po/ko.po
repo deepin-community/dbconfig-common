@@ -1,0 +1,1185 @@
+# Korean translations for dbconfig-common package
+# dbconfig-common 패키지 한국어 번역문.
+# Copyright (C) 2007 THE dbconfig-common'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the dbconfig-common package.
+# Sunjae Park <darehanl@gmail.com>, 2007.
+# Changwoo Ryu <cwryu@debian.org>, 2009, 2015, 2016, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: dbconfig-common\n"
+"Report-Msgid-Bugs-To: dbconfig-common@packages.debian.org\n"
+"POT-Creation-Date: 2019-08-18 20:35+0200\n"
+"PO-Revision-Date: 2019-08-19 04:04+0900\n"
+"Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
+"Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid "Will this server be used to access remote databases?"
+msgstr "이 서버가 원격 데이터베이스에 접속합니까?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid ""
+"For the database types that support it, dbconfig-common includes support for "
+"configuring databases on remote systems. When installing a package's "
+"database via dbconfig-common, the questions related to remote configuration "
+"are asked with a priority such that they are skipped for most systems."
+msgstr ""
+"원격 연결을 지원하는 데이터베이스의 경우, dbconfig-common에서 원격 시스템의 "
+"데이터베이스를 설정할 수 있습니다. dbconfig-common을 통해 패키지 데이터베이스"
+"를 설치하는 경우, 대부분 시스템에서 원격 설정과 관련한 질문은 넘어가도록 우"
+"선 순위가 설정되어 있습니다."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid ""
+"If you select this option, the default behavior will be to prompt you with "
+"questions related to remote database configuration when you install new "
+"packages."
+msgstr ""
+"이 옵션을 선택하면, 새 패키지를 설치할 때 기본적으로 원격 데이터베이스 설정"
+"에 관련한 질문을 묻습니다."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid "If you are unsure, you should not select this option."
+msgstr "잘 모르겠으면 이 옵션을 선택하지 마십시오."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid "Remember database passwords permanently in debconf?"
+msgstr "debconf에 데이터베이스 암호를 계속 저장합니까?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid ""
+"When you configure, upgrade, or remove applications with dbconfig-common, "
+"administrator-level database passwords are needed. By default, these "
+"passwords are not stored, so you will be prompted for them each time."
+msgstr ""
+"dbconfig-common으로 애플리케이션을 설정/업그레이드/제거하는 경우, 관리자 수준"
+"의 데이터베이스 암호를 입력해야 합니다. 기본값으로 이 암호는 저장하지 않기 때"
+"문에, 매번 입력창이 나타납니다."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid ""
+"Alternatively the passwords can be permanently remembered in the debconf "
+"database (which is protected by Unix file permissions), though this is less "
+"secure and thus not the default setting."
+msgstr ""
+"아니면 암호를 debconf 데이터베이스에 계속 저장할 수도 있습니다. (유닉스 파일 "
+"권한으로 보호됩니다.) 이 방식은 보안상 별로 안전하지 않으므로 기본값이 아닙니"
+"다."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid ""
+"If you would rather not be bothered for an administrative password every "
+"time you upgrade a database application with dbconfig-common, you should "
+"choose this option. Otherwise, you should refuse this option."
+msgstr ""
+"dbconfig-common을 통해 데이터베이스 응용 프로그램을 업그레이드할 때마다 관리"
+"자용 암호를 입력하고 싶지 않다면, 이 옵션을 선택하십시오. 그렇지 않다면 이 옵"
+"션을 선택하지 마십시오."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid "Configure database for ${pkg} with dbconfig-common?"
+msgstr "${pkg}의 데이터베이스를 dbconfig-common으로 설정하시겠습니까?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid ""
+"The ${pkg} package must have a database installed and configured before it "
+"can be used. This can be optionally handled with dbconfig-common."
+msgstr ""
+"${pkg} 패키지를 사용하려면 먼저 데이터베이스를 설치해 설정해야 합니다. 선택하"
+"면 dbconfig-common을 이용해 데이터베이스를 설정할 수 있습니다."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid ""
+"If you are an advanced database administrator and know that you want to "
+"perform this configuration manually, or if your database has already been "
+"installed and configured, you should refuse this option. Details on what "
+"needs to be done should most likely be provided in /usr/share/doc/${pkg}."
+msgstr ""
+"경험 많은 데이터베이스 관리자라서 이 설정을 직접 하고 싶다면, 혹은 데이터베이"
+"스를 이미 설치하고 설정한 경우, 이 옵션을 사용하지 마십시오. 설정하는 데 필요"
+"한 내용은 /usr/share/doc/${pkg} 아래 들어 있을 것입니다."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid "Otherwise, you should probably choose this option."
+msgstr "그렇지 않다면 이 옵션을 선택하십시오."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid "Reinstall database for ${pkg}?"
+msgstr "${pkg}의 데이터베이스를 다시 설치하시겠습니까?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Since you are reconfiguring ${pkg}, you may also want to reinstall the "
+"database which it uses."
+msgstr ""
+"${pkg} 패키지를 다시 설정하고 있으므로, 이 패키지가 사용하는 데이터베이스도 "
+"다시 설치할 수 있습니다."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"If you wish to reinstall the database for ${pkg}, you should select this "
+"option. If you do not wish to do so (if you are reconfiguring the package "
+"for unrelated reasons), you should not select this option."
+msgstr ""
+"${pkg}의 데이터베이스를 다시 설치하고 싶으시면 이 옵션을 선택하십시오. 그렇"
+"지 않다면 (어떤 이유로 패키지를 다시 설정하는 경우) 이 옵션을 선택하지 마십시"
+"오."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Warning: if you opt to reinstall the database and install it under a name "
+"that already exists, the old database will be dropped without further "
+"questions. In that case a backup of the original database is made in /var/"
+"tmp/."
+msgstr ""
+"주의: 데이터베이스를 다시 설치하겠다고 선택한 다음 기존의 데이터베이스와 같"
+"은 이름으로 설치하면, 기존의 설정 데이터베이스를 지웁니다. 이 경우 기존 데이"
+"터베이스의 백업이 /var/tmp/ 위치에 만들어집니다."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Warning: if you change the name of the database, the old database will not "
+"be removed. If you change the name of the user that connects to the "
+"database, the privileges of the original user will not be revoked."
+msgstr ""
+"주의: 데이터베이스의 이름을 바꾸면, 기존 데이터베이스를 제거하지 않습니다. 데"
+"이터베이스에 연결하는 사용자의 이름을 바꾸면, 기존 사용자의 권한을 취소하지 "
+"않습니다."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+msgid "Perform upgrade on database for ${pkg} with dbconfig-common?"
+msgstr ""
+"dbconfig-common을 이용해 ${pkg}의 데이터베이스를 업그레이드하시겠습니까?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+msgid ""
+"According to the maintainer for this package, database upgrade operations "
+"need to be performed on ${pkg}. Typically, this is due to changes in how a "
+"new upstream version of the package needs to store its data."
+msgstr ""
+"이 패키지의 관리자가 알린 정보에 따르면, ${pkg}에 데이터베이스 업그레이드 작"
+"업을 수행할 필요가 있습니다. 보통 이 업그레이드 작업은 패키지에서 정보를 저장"
+"하는 방식이 바뀌었을 경우에 필요합니다."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+msgid ""
+"If you want to handle this process manually, you should refuse this option. "
+"Otherwise, you should choose this option. During the upgrade, a backup of "
+"the database will be made in /var/cache/dbconfig-common/backups, from which "
+"the database can be restored in the case of problems."
+msgstr ""
+"이 작업을 수동으로 하려면, 이 옵션을 선택하지 마십시오. 그렇지 않다면 이 옵션"
+"을 선택하십시오. 업그레이드하는 중에 데이터베이스의 백업본을 /var/cache/"
+"dbconfig-common/backups 아래에 만드므로, 문제가 발생하면 백업을 이용해 데이터"
+"베이스를 복구할 수 있습니다."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid "Deconfigure database for ${pkg} with dbconfig-common?"
+msgstr ""
+"${pkg}의 데이터베이스 설정을 이제 dbconfig-common에서 하지 않으시겠습니까? "
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid ""
+"Since you are removing ${pkg}, it's possible that you no longer want the "
+"underlying database and the privileges for the user associated with this "
+"package."
+msgstr ""
+"${pkg} 패키지를 제거할 예정이므로, 이 패키지의 데이터베이스와 이 패키지와 관"
+"련된 사용자 권한이 필요 없을 수도 있습니다."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid ""
+"Please choose whether database removal and privilege revocation should be "
+"handled with dbconfig-common."
+msgstr ""
+"설정 데이터베이스 제거와 권한 취소를 dbconfig-common에서 처리할지 여부를 선택"
+"하십시오."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid ""
+"If you choose this option, dbconfig-common will check if ${pkg} provided "
+"scripts and database commands to undo package specific operations and run "
+"them if they exist. Then it will ask if you want to delete the ${pkg} "
+"database and revoke the standard privileges for the user of ${pkg}. If you "
+"don't want any of this, or if you want to handle this manually, you should "
+"refuse this option."
+msgstr ""
+"이 옵션을 선택하면, dbconfig-common에서는 ${pkg}에 패키지별 실행 취소 스크립"
+"트와 데이터베이스 명령이 있는지 확인하고, 있으면 실행합니다. 그러면 데이터베"
+"이스를 삭제할지 여부를 물어보고, ${pkg} 패키지와 관련된 사용자 권한을 취소합"
+"니다. 이렇게 하지 않고 싶거나 이 과정을 수동으로 하고 싶으면, 이 옵션을 거절"
+"하십시오."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid "Database type to be used by ${pkg}:"
+msgstr "${pkg}에서 사용할 데이터베이스 종류:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid ""
+"The ${pkg} package can be configured to use one of several database types. "
+"Below, you will be presented with the available choices."
+msgstr ""
+"${pkg} 패키지는 여러가지 데이터베이스 중 하나를 사용하도록 설정할 수 있습니"
+"다. 선택할 수 있는 데이터베이스 목록은 아래에 있습니다."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid ""
+"If other database types are supported by ${pkg} but not shown here, the "
+"reason for their omission is that the corresponding dbconfig-<database type> "
+"packages are not installed. If you know that you want the package to use "
+"another supported database type, your best option is to back out of the "
+"dbconfig-common questions and opt out of dbconfig-common assistance for this "
+"package for now. Install your preferred dbconfig-<database type> option from "
+"the list in the package dependencies, and then \"dpkg-reconfigure ${pkg}\" "
+"to select it."
+msgstr ""
+"${pkg}에서 다른 데이터베이스 종류를 지원하지만 여기 표시되지 않은 경우, 빠진 "
+"이유는 해당 dbconfig-<데이터베이스종류> 패키지가 설치되지 않았기 때문입니다. "
+"패키지에서 다른 데이터베이스 종류를 사용하기를 바란다면, 가장 좋은 방법은 "
+"dbconfig-common 질문창에서 빠져나와 일단 이 패키지에 대해 dbconfig-common 설"
+"정을 하지 않는 것입니다. 원하는 dbconfig-<데이터베이스종류> 패키지를 패키지 "
+"의존성에서 선택하고, \"dpkg-reconfigure ${pkg}\" 명령으로 데이터베이스를 선택"
+"하십시오."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+msgid "Delete the database for ${pkg}?"
+msgstr "${pkg}의 데이터베이스를 삭제하시겠습니까?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+msgid ""
+"If you no longer need the database for ${pkg} and the privileges of the "
+"database user of ${pkg}, you can choose to delete the database and revoke "
+"the privileges now."
+msgstr ""
+"${pkg}에서 사용하는 데이터베이스와 ${pkg}의 사용자 권한이 필요없으면, 지금 데"
+"이터베이스를 삭제하고 권한을 철회할 수 있습니다."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+msgid ""
+"If you no longer have need of the data being stored by ${pkg}, you should "
+"choose this option. If you want to keep this data, or if you would rather "
+"handle this process manually, you should refuse this option. Either way, it "
+"won't affect your other databases."
+msgstr ""
+"${pkg}에서 저장한 정보가 이제 필요없다면 이 옵션을 선택하십시오. 나중을 위해 "
+"이 정보를 유지하거나, 이 작업을 수동으로 하려면, 이 옵션을 선택하지 마십시"
+"오. 어떻게든 다른 데이터베이스에는 영향을 미치지 않습니다."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:10001
+msgid "Back up the database for ${pkg} before upgrading?"
+msgstr "업그레이드하기 전에 ${pkg}의 데이터베이스를 백업하시겠습니까?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:10001
+msgid ""
+"The underlying database for ${pkg} needs to be upgraded as part of the "
+"installation process. Just in case, the database can be backed up before "
+"this is done, so that if something goes wrong, you can revert to the "
+"previous package version and repopulate the database."
+msgstr ""
+"설치 과정 중에 ${pkg}에서 사용하는 데이터베이스를 업그레이드해야 합니다. 만일"
+"을 위해 이 작업을 수행하기 전에 데이터베이스를 백업할 수 있습니다. 만약 일이 "
+"잘못되더라도 이전 버전의 패키지로 돌아가서 데이터베이스를 다시 이용할 수 있습"
+"니다."
+
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:11001 ../dbconfig-common.templates:12001
+msgid "Password confirmation:"
+msgstr "암호 확인:"
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:13001
+msgid "Password mismatch"
+msgstr "암호가 일치하지 않습니다."
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:13001
+msgid "The password and its confirmation do not match."
+msgstr "암호와 암호 확인이 일치하지 않습니다."
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "abort"
+msgstr "중지"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "retry"
+msgstr "다시 시도"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "retry (skip questions)"
+msgstr "다시 시도 (질문 건너 뛰기)"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "ignore"
+msgstr "무시"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:14002
+msgid "Next step for database upgrade:"
+msgstr "데이터베이스 업그레이드 다음 단계:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:14002
+msgid "An error occurred while upgrading the database:"
+msgstr "데이터베이스를 업그레이드하는 중 오류가 발생했습니다:"
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:14002
+msgid ""
+"Fortunately, ${dbfile} should hold a backup of the database, made just "
+"before the upgrade (unless the error occurred during backup creation, in "
+"which case no changes will have been applied yet). Your options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+"다행히, ${dbfile}에 업그레이드 전에 만든 데이터베이스 백업이 들어 있습니다. "
+"(백업을 만들 때 오류가 발생하지 않았다면. 오류가 발생했다면 아무 것도 만들지 "
+"않습니다.) 다음 중 하나를 할 수 있습니다:\n"
+" * 중지 - 작업을 실패한 상태로 중지합니다. 이 상태에서는 이 패키지를\n"
+"   다운그레이드, 다시 설치, 다시 설정하거나 수동으로 무언가 해야\n"
+"   사용할 수 있습니다. 이 상태를 해결하지 않으면 다른 패키지 설치에\n"
+"   문제가 발생할 수도 있습니다.\n"
+" * 다시 시도 - 설정 질문을 다시 한번 더 하고 (debconf 우선 순위 설정\n"
+"   때문에 건너 뛴 질문까지 포함) 같은 작업을 한 번 더 시도합니다.\n"
+" * 다시 시도 (질문 건너뛰기) - 질문을 건너뛰고, 즉시 같은 동작을 다시\n"
+"   시도합니다. 오류가 발생했을 때 문제점을 내부에서 수정한 경우에\n"
+"   사용합니다.\n"
+" * 무시 - dbconfig-common 오류를 무시하고 작업을 계속합니다. 이렇게\n"
+"   하면 보통 이 패키지에 올바른 설정 데이터베이스가 없는 상태가 됩니다."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:15002
+msgid "Next step for database installation:"
+msgstr "데이터베이스 설치 다음 단계:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:15002
+msgid "An error occurred while installing the database:"
+msgstr "데이터베이스를 설치하는 중 오류가 발생했습니다:"
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:15002
+msgid ""
+"Your options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+"다음 중 하나를 할 수 있습니다:\n"
+" * 중지 - 작업을 실패한 상태로 중지합니다. 이 상태에서는 이 패키지를\n"
+"   다운그레이드, 다시 설치, 다시 설정하거나 수동으로 무언가 해야\n"
+"   사용할 수 있습니다. 이 상태를 해결하지 않으면 다른 패키지 설치에\n"
+"   문제가 발생할 수도 있습니다.\n"
+" * 다시 시도 - 설정 질문을 다시 한번 더 하고 (debconf 우선 순위 설정\n"
+"   때문에 건너 뛴 질문까지 포함) 같은 작업을 한 번 더 시도합니다.\n"
+" * 다시 시도 (질문 건너뛰기) - 질문을 건너뛰고, 즉시 같은 동작을 다시\n"
+"   시도합니다. 오류가 발생했을 때 문제점을 내부에서 수정한 경우에\n"
+"   사용합니다.\n"
+" * 무시 - dbconfig-common 오류를 무시하고 작업을 계속합니다. 이렇게\n"
+"   하면 보통 이 패키지에 올바른 설정 데이터베이스가 없는 상태가 됩니다."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:16002
+msgid "Next step for database removal:"
+msgstr "데이터베이스 제거 다음 단계:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:16002
+msgid "An error occurred while removing the database:"
+msgstr "데이터베이스를 제거하는 중 오류가 발생했습니다:"
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:16002
+msgid ""
+"As a result it was not possible to remove the database for ${pkg}. Your "
+"options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave the database and user privileges in place."
+msgstr ""
+"결과적으로 ${pkg}의 데이터베이스를 제거할 수 없었습니다. 다음 중 하나를 할 "
+"수 있습니다:\n"
+" * 중지 - 작업을 실패한 상태로 중지합니다. 이 상태에서는 이 패키지를\n"
+"   다운그레이드, 다시 설치, 다시 설정하거나 수동으로 무언가 해야\n"
+"   사용할 수 있습니다. 이 상태를 해결하지 않으면 다른 패키지 설치에\n"
+"   문제가 발생할 수도 있습니다.\n"
+" * 다시 시도 - 설정 질문을 다시 한번 더 하고 (debconf 우선 순위 설정\n"
+"   때문에 건너 뛴 질문까지 포함) 같은 작업을 한 번 더 시도합니다.\n"
+" * 다시 시도 (질문 건너뛰기) - 질문을 건너뛰고, 즉시 같은 동작을 다시\n"
+"   시도합니다. 오류가 발생했을 때 문제점을 내부에서 수정한 경우에\n"
+"   사용합니다.\n"
+" * 무시 - dbconfig-common 오류를 무시하고 작업을 계속합니다. 이렇게\n"
+"   하면 보통 이 패키지에 올바른 설정 데이터베이스가 없는 상태가 됩니다."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:17001
+msgid "Next step:"
+msgstr "다음 단계:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:17001
+msgid ""
+"Configuring the database for ${pkg} requires the package ${dbpackage} to be "
+"installed and configured first, which is not something that can be checked "
+"for automatically."
+msgstr ""
+"${pkg}에서 사용하는 데이터베이스를 설정하려면 ${dbpackage} 패키지를 설치하고 "
+"설정해야 합니다. 이 작업은 자동으로 할 수 없습니다."
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#. Additionally, ${dbpackage} can be replaced with "mysql-server", so
+#. that length suits, but ${pkg} usually will expand more.
+#: ../dbconfig-common.templates:17001
+msgid ""
+"Your options are:\n"
+" * abort - Choose this when in doubt and install ${dbpackage} before\n"
+"   continuing with the configuration of this package. This causes the\n"
+"   installation of ${pkg} to fail for now.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+"   Choose this if you chose the wrong database type by mistake.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+"다음 중 하나를 할 수 있습니다:\n"
+" * 중지 - 잘 모르겠으면 이 옵션을 선택하십시오. 이 패키지의 설정을\n"
+"   계속하기 전에 ${dbpackage} 패키지를 설치합니다. ${pkg} 패키지\n"
+"   설치를 실패로 취급합니다.\n"
+" * 다시 시도 - 설정 질문을 다시 한번 더 하고 (debconf 우선 순위 설정\n"
+"   때문에 건너 뛴 질문까지 포함) 같은 작업을 한 번 더 시도합니다.\n"
+"   실수로 데이터베이스 종류를 잘못 선택했다면 이 옵션을 선택하십시오.\n"
+" * 무시 - dbconfig-common 오류를 무시하고 작업을 계속합니다. 이렇게\n"
+"   하면 보통 이 패키지에 올바른 설정 데이터베이스가 없는 상태가 됩니다."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:18001
+msgid "Host name of the ${dbvendor} database server for ${pkg}:"
+msgstr "${pkg}에서 사용하는 ${dbvendor} 데이터베이스 서버의 호스트 이름:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:18001
+msgid ""
+"Please select the remote hostname to use, or select \"new host\" to enter a "
+"new host."
+msgstr ""
+"사용하려는 원격 호스트 이름을 선택하거나, \"new host\"를 선택해 새 호스트 이"
+"름을 입력하십시오."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:19001
+msgid "Port number for the ${dbvendor} service:"
+msgstr "${dbvendor} 서비스의 포트 번호:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:19001
+msgid ""
+"Please specify the port the ${dbvendor} database on the remote host is "
+"running on. To use the default port, leave this field blank."
+msgstr ""
+"원격 호스트에 있는 ${dbvendor} 데이터베이스의 포트 번호를 지정하십시오. 기본 "
+"포트 번호를 사용하려면 비워 두십시오."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid "Host running the ${dbvendor} server for ${pkg}:"
+msgstr "${pkg}에서 사용하는 ${dbvendor} 서버의 호스트:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid "Please provide the hostname of a remote ${dbvendor} server."
+msgstr "원격 ${dbvendor} 서버의 호스트 이름을 입력하십시오."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid ""
+"You must have already arranged for the administrative account to be able to "
+"remotely create databases and grant privileges."
+msgstr ""
+"원격에서 데이터베이스를 생성하고 권한을 부여하려면 미리 관리자 계정을 준비했"
+"어야 합니다."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:21001
+msgid "${dbvendor} database name for ${pkg}:"
+msgstr "${pkg}에서 사용하는 ${dbvendor}의 데이터베이스 이름:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:21001
+msgid ""
+"Please provide a name for the ${dbvendor} database to be used by ${pkg}."
+msgstr "${pkg}에서 사용하는 ${dbvendor} 데이터베이스의 이름을 지정하십시오."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid "${dbvendor} username for ${pkg}:"
+msgstr "${pkg}에서 사용하는 ${dbvendor} 사용자 이름:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"Please provide a ${dbvendor} username for ${pkg} to register with the "
+"database server. A ${dbvendor} user is not necessarily the same as a system "
+"login, especially if the database is on a remote server."
+msgstr ""
+"데이터베이스 서버에 등록할 때 ${pkg}에서 사용할 ${dbvendor} 사용자 이름을 입"
+"력하십시오. ${dbvendor} 사용자는 시스템 로그인 사용자와 같을 필요는 없습니"
+"다. 특히 원격 서버일 경우에는 더 다를 가능성이 높습니다."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"This is the user which will own the database, tables, and other objects to "
+"be created by this installation. This user will have complete freedom to "
+"insert, change, or delete data in the database."
+msgstr ""
+"이 사용자는 데이터베이스, 테이블 등 설치 과정에서 생성한 모든 데이터를 소유하"
+"는 사용자입니다. 이 사용자는 데이터베이스에 정보를 마음대로 추가하거나 바꾸거"
+"나 삭제할 수 있습니다."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"If your username contains an @, you need to specify the domain as well (see "
+"below)."
+msgstr ""
+"사용자 이름에 @ 문자가 들어 있는 경우, 도메인도 같이 써야 합니다. (아래 참"
+"고.)"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"Advanced usage: if you need to define the domain that the user will log in "
+"from, you can write \"username@domain\"."
+msgstr ""
+"고급 사용: 사용자의 로그인 위치를 뜻하는 도메인을 지정하려면 "
+"\"username@domain\" 같이 쓰십시오."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid "${dbvendor} storage directory for ${pkg}:"
+msgstr "${pkg}에서 사용할 ${dbvendor} 저장 디렉터리:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid ""
+"Please provide a path where the ${dbvendor} database file for ${pkg} should "
+"be installed into."
+msgstr "${pkg}의 ${dbvendor} 데이터베이스 파일을 설치할 경로를 입력하십시오."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid ""
+"The permissions for this directory will be set to match the permissions for "
+"the generated database file."
+msgstr "이 디렉터리의 권한은 생성된 데이터베이스 파일에 맞게 변경할 것입니다."
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:24001 ../dbconfig-common.templates:29001
+msgid "Unix socket"
+msgstr "유닉스 소켓"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:24001 ../dbconfig-common.templates:29001
+msgid "TCP/IP"
+msgstr "TCP/IP"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:24002
+msgid "Connection method for MySQL database of ${pkg}:"
+msgstr "${pkg}에서 사용할 MySQL 데이터베이스에 접속할 방식:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:24002
+msgid ""
+"By default, ${pkg} will be configured to use a MySQL server through a local "
+"Unix socket (this provides the best performance). To connect with a "
+"different method, or to a different server entirely, select the appropriate "
+"option from the choices here."
+msgstr ""
+"기본적으로 ${pkg} 패키지는 기본적으로 로컬 유닉스 소켓을 이용해 MySQL 서버에 "
+"접속하도록 설정되어 있습니다. (이 방법이 가장 성능이 좋습니다.) 하지만 다른 "
+"방식을 이용해 접속하거나, 전혀 다른 서버에 접속하려면 아래 중에서 고르십시오."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:25001
+msgid "MySQL application password for ${pkg}:"
+msgstr "${pkg}에서 사용할 MySQL 응용 프로그램의 암호:"
+
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:25001 ../dbconfig-common.templates:30001
+msgid ""
+"Please provide a password for ${pkg} to register with the database server. "
+"If left blank, a random password will be generated."
+msgstr ""
+"${pkg} 패키지에서 데이터베이스 서버에 등록할 암호를 입력하십시오. 이 항목을 "
+"비워 두면 임의의 암호를 자동으로 생성합니다."
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001 ../dbconfig-common.templates:31001
+msgid "Name of the database's administrative user:"
+msgstr "데이터베이스 관리자의 계정의 이름:"
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001 ../dbconfig-common.templates:31001
+msgid ""
+"Please provide the name of the account with which this package should "
+"perform administrative actions. This user is the one with the power to "
+"create new database users."
+msgstr ""
+"이 패키지가 관리 작업을 할 때 사용할 계정 이름을 입력하십시오. 이 사용자 이름"
+"은 새 데이터베이스 사용자를 만들 수 있는 이름입니다."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001
+msgid ""
+"For MySQL, this is almost always \"root\". Note that this is not the same as "
+"the Unix login \"root\"."
+msgstr ""
+"MySQL에서는 대부분 \"root\"입니다. 참고로 이 계정은 유닉스의 \"root\" 로그인"
+"과는 다릅니다."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:27001
+msgid "Password of the database's administrative user:"
+msgstr "데이터베이스 관리자 계정의 암호:"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:27001
+msgid ""
+"Please provide the password for the administrative account \"${dbadmin}\" "
+"with which this package should create its MySQL database and user."
+msgstr ""
+"이 패키지가 MySQL 데이터베이스와 사용자를 생성할 때 사용할 관리자 계정 "
+"\"${dbadmin}\"의 암호를 입력하십시오."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:28001
+msgid "Authentication plugin for MySQL database:"
+msgstr "MySQL 데이터베이스 인증 플러그인:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:28001
+msgid ""
+"Database user accounts can be configured to use a variety of plugins for "
+"authentication with MySQL. If the server default won't work with this "
+"application, it is necessary to specify one that will. Please select one "
+"from the list of available plugins. Leaving the selection set to its "
+"original value should work unless a remote server is using unpredictable "
+"defaults, but other options may not be supported by ${pkg}. If problems "
+"arise, the package's documentation should give hints; see /usr/share/doc/"
+"${pkg}/."
+msgstr ""
+"데이터베이스 사용자 계정은 여러가지 MySQL 인증 플러그인을 사용하도록 설정할 "
+"수 있습니다. 서버 기본값이 응용 프로그램과 동작하지 않는 경우, 동작하는 플러"
+"그인을 하나 지정해야 합니다. 사용할 수 있는 플러그인의 목록에서 하나를 선택하"
+"십시오. 원격 서버에서 예상치 못한 기본값을 사용하는 예외적인 경우가 아니라"
+"면, 원래 있던 값으로 선택을 놔 두면 동작할 것입니다. 하지만 다른 옵션은 "
+"${pkg}에서 지원하지 않을 수도 있습니다. 문제가 발생할 경우, 해당 패키지의 문"
+"서에 힌트가 들어 있을 것입니다. /usr/share/doc/${pkg}/ 안의 문서를 참고하십시"
+"오."
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:28001
+msgid ""
+"Your options are:\n"
+" * default - use the default determined by the server.\n"
+" * mysql_native_password - no MySQL authentication plugin is used.\n"
+" * sha256_password - a more secure password encryption algorithm.\n"
+" * caching_sha2_password - SHA2 plus an in-memory authentication cache."
+msgstr ""
+"사용할 수 있는 값은:\n"
+" * default - 서버에서 결정한 기본값 사용.\n"
+" * mysql_native_password - MySQL 인증 플러그인 사용하지 않음.\n"
+" * sha256_password - 좀 더 안전한 비밀번호 암호화 알고리즘.\n"
+" * caching_sha2_password - 메모리 상의 인증 캐시와 SHA2 사용 ."
+
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:29001
+msgid "TCP/IP + SSL"
+msgstr "TCP/IP + SSL"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:29002
+msgid "Connection method for PostgreSQL database of ${pkg}:"
+msgstr "${pkg}에서 사용할 PostgreSQL 데이터베이스에 접속할 방식:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:29002
+msgid ""
+"By default, ${pkg} will be configured to use a PostgreSQL server through TCP/"
+"IP because that method works in most circumstances. To connect with a "
+"different method, select the appropriate option from the choices here."
+msgstr ""
+"기본적으로 ${pkg} 패키지는 기본적으로 TCP/IP를 이용해 PostgreSQL 서버에 접속"
+"하도록 설정되어 있습니다. 이 방법이 대부분의 경우 잘 동작하기 때문입니다. 다"
+"른 방식을 이용해 접속하려면 아래 중에서 고르십시오."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:30001
+msgid "PostgreSQL application password for ${pkg}:"
+msgstr "${pkg}의 PostgreSQL 응용프로그램 암호:"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:30001
+msgid ""
+"If you are using \"ident\" authentication, the supplied password will not be "
+"used and can be left blank. Otherwise, PostgreSQL access may need to be "
+"reconfigured to allow password-authenticated access."
+msgstr ""
+"\"ident\" 인증 방식을 사용할 경우, 암호는 사용하지 않으므로 비워 두어도 됩니"
+"다. 다른 인증 방식을 사용하는 경우 암호 인증 방식을 사용하도록 PostgreSQL 접"
+"속을 다시 설정해야 합니다."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+msgid "Password of your database's administrative user:"
+msgstr "데이터베이스 관리자 계정의 암호:"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+msgid ""
+"Please provide the password for the ${dbadmin} account with which this "
+"package should perform administrative actions."
+msgstr ""
+"이 패키지가 관리 작업을 수행할 때 사용할 ${dbadmin} 관리자 계정의 암호를 입력"
+"하십시오."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+msgid ""
+"For a standard PostgreSQL installation, a database password is not required, "
+"since authentication is done at the system level."
+msgstr ""
+"PostgreSQL 기본 설치에서는 시스템 수준에서 인증 작업을 처리하므로 데이터베이"
+"스 암호가 필요 없습니다."
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:33001 ../dbconfig-common.templates:34001
+msgid "ident"
+msgstr "ident"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:33001 ../dbconfig-common.templates:34001
+msgid "password"
+msgstr "암호"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+msgid "Method for authenticating the PostgreSQL administrator:"
+msgstr "PostgreSQL 관리자를 인증하는 방식:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+msgid ""
+"PostgreSQL servers provide several different mechanisms for authenticating "
+"connections. Please select what method the administrative user should use "
+"when connecting to the server."
+msgstr ""
+"PostgreSQL 서버에서 접속을 인증하는 방식은 여러 가지가 있습니다. 데이터베이"
+"스 관리자가 서버에 접속할 때 사용할 인증 방식을 선택하십시오."
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+msgid ""
+"With \"ident\" authentication on the local machine, the server will check "
+"that the owner of the Unix socket is allowed to connect. PostgreSQL itself "
+"calls this peer authentication."
+msgstr ""
+"로컬 컴퓨터에 \"ident\" 인증 방식을 사용하는 경우, 서버는 유닉스 소켓의 소유"
+"자가 접속을 허가하는 지 확인합니다. PostgreSQL에서 자체적으로 피어 인증을 호"
+"출합니다."
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+msgid ""
+"With \"ident\" authentication to remote hosts, RFC-1413-based ident is used "
+"(which can be considered a security risk)."
+msgstr ""
+"원격 호스트에 \"ident\" 인증 방식을 사용하는 경우, RFC 1413 방식 ident를 사용"
+"합니다. (이 방식은 보안상 위험할 수도 있으니 주의하십시오.)"
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+msgid ""
+"With \"password\" authentication, a password will be passed to the server "
+"for use with some authentication backend (such as \"MD5\" or \"PAM\"). Note "
+"that the password is still passed in the clear across network connections if "
+"your connection is not configured to use SSL."
+msgstr ""
+"\"암호\" 인증을 사용하는 경우 암호를 서버에 전달해 인증용 백엔드에서 "
+"(\"md5\"나 \"pam\" 등에서) 처리합니다. 참고로 연결에 SSL을 사용하도록 설정하"
+"지 않으면, 네트워크에 평문으로 암호를 전달합니다."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+msgid ""
+"For a standard PostgreSQL installation running on the same host, \"ident\" "
+"is recommended."
+msgstr ""
+"같은 호스트에서 동작 중인 PostgreSQL 기본 설치의 경우, \"ident\"를 추천합니"
+"다."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+msgid "Method for authenticating PostgreSQL user:"
+msgstr "PostgreSQL 사용자 인증 방식:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+msgid ""
+"PostgreSQL servers provide several different mechanisms for authenticating "
+"connections. Please select what method the database user should use when "
+"connecting to the server."
+msgstr ""
+"PostgreSQL 서버에서 접속을 인증하는 방식에는 여러 가지가 있습니다. 데이터베이"
+"스 사용자가 서버에 접속할 때 사용할 인증 방식을 선택하십시오."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+msgid ""
+"For a standard PostgreSQL installation running on the same host, \"password"
+"\" is recommended, because typically the system username doesn't match the "
+"database username."
+msgstr ""
+"같은 호스트에서 동작 중인 PostgreSQL 기본 설치의 경우, \"password\"를 추천합"
+"니다. 시스템 사용자 이름은 데이터베이스 사용자 이름과 다른 게 보통이기 때문입"
+"니다."
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:35001
+msgid "PostgreSQL connection method error"
+msgstr "PostgreSQL 접속 방식 오류"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:35001
+msgid ""
+"Unfortunately, it seems that the database connection method you have "
+"selected for ${pkg} will not work, because it requires the existence of a "
+"local user that does not exist."
+msgstr ""
+"아쉬게도 ${pkg}에서 사용하기로 지정하신 데이터베이스 접속 방식은 사용할 수 없"
+"습니다. 로컬 사용자가 필요하지만 없기 때문입니다."
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:36001
+msgid "Change PostgreSQL configuration automatically?"
+msgstr "PostgreSQL 설정을 자동으로 변경하시겠습니까?"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:36001
+msgid ""
+"It has been determined that the database installation for ${pkg} cannot be "
+"automatically accomplished without making changes to the PostgreSQL server's "
+"access controls. It is suggested that this be done by dbconfig-common when "
+"the package is installed. If instead you would prefer to do it manually, the "
+"following line needs to be added to your pg_hba.conf:"
+msgstr ""
+"PostgreSQL 서버의 접근 제어 설정을 변경하지 않고는 ${pkg}의 데이터베이스 설치"
+"를 자동으로 완료하지 못하는 것으로 판명되었습니다. 패키지를 설치할 때 "
+"dbconfig-common을 통해 이 작업을 할 것을 권합니다. 이 작업을 수동으로 하려"
+"면, pg_hba.conf 파일에 다음 줄을 추가하십시오:"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:37001
+msgid "Revert PostgreSQL configuration automatically?"
+msgstr "PostgreSQL 설정을 이전으로 되돌리시겠습니까?"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:37001
+msgid ""
+"As ${pkg} is now being removed, it may no longer be necessary to have an "
+"access control entry in the PostgreSQL server's configuration. While keeping "
+"such an entry will not break any software on the system, it may be seen as a "
+"potential security concern. It is suggested that this be done by dbconfig-"
+"common when the package is removed. If instead you would prefer to do it "
+"manually, the following line needs to be removed from your pg_hba.conf:"
+msgstr ""
+"${pkg} 패키지를 제거할 예정이므로, 이제 PostgreSQL 서버 설정에 이 패키지를 위"
+"한 접근 제어 항목을 둘 필요가 없습니다. 이 항목을 그대로 둬도 시스템의 소프트"
+"웨어에 별다른 문제를 일으키지 않지만, 잠재적인 보안 문제가 될 수도 있습니다. "
+"패키지를 제거할 때 dbconfig-common에서 이 접근 제어 항목을 삭제할 것을 권장합"
+"니다. 수동으로 하고 싶다면, pg_hba.conf 파일의 다음 줄을 제거하십시오:"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:38001
+msgid "Modifications needed in /etc/postgresql/pg_hba.conf"
+msgstr "/etc/postgresql/pg_hba.conf 파일을 수정해야 합니다"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:38001
+msgid ""
+"To get the database for package ${pkg} bootstrapped you have to edit the "
+"configuration of the PostgreSQL server. You may be able to find help in the "
+"file /usr/share/doc/${pkg}/README.Debian."
+msgstr ""
+"${pkg} 패키지에서 사용하는 데이터베이스의 초기 설정을 마치려면 PostgreSQL 서"
+"버의 설정을 변경해야 합니다. 도움말은 /usr/share/doc/${pkg}/README.Debian에 "
+"있을 것입니다."
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:39001
+msgid "Empty passwords unsupported with PostgreSQL"
+msgstr "PostgreSQL에서 빈 문자열 암호는 지원하지 않습니다"
+
+#~ msgid "Keep \"administrative\" database passwords?"
+#~ msgstr "\"관리자용\" 데이터베이스 암호를 debconf에 저장해 두시겠습니까?"
+
+#~ msgid ""
+#~ "By default, you will be prompted for all administrator-level database "
+#~ "passwords when you configure, upgrade, or remove applications with "
+#~ "dbconfig-common. These passwords will be stored in debconf's "
+#~ "configuration database only for as long as they are needed."
+#~ msgstr ""
+#~ "기본값을 사용하는 경우에는 dbconfig-common을 통해 응용프로그램을 설정하거"
+#~ "나, 업그레이드하거나, 제거할 때마다 관리자용 데이터베이스의 암호를 물어봅"
+#~ "니다. 암호는 debconf의 설정 데이터베이스에 저장하지 않습니다."

@@ -1,0 +1,151 @@
+# -*- mode: sh -*-
+###
+### some global variables etc
+###
+dbc_go(){
+    local need_admin_pw dumpfile nowtime rmscript rmsql purgescript purgesql tsubstfile
+
+    . /usr/share/dbconfig-common/dpkg/common
+    _dbc_debug "(prerm) dbc_go() $@"
+
+    ## With dbconfig-no-thanks installed we don't need to do anything.
+    if dbc_no_thanks ; then
+        return 0
+    fi
+
+    dbc_config "$@" || return $?
+
+    ###
+    ### get all the settings we need
+    ###
+    dbc_read_package_config || return $?
+    # and re-run config for db-specific settings
+    dbc_set_dbtype_defaults $dbc_dbtype || return $?
+
+    if echo "$dbc_authenticated_dbtypes" | grep -q "$dbc_dbtype"; then
+        if [ "$dbc_dbtype" = "pgsql" ] && \
+               [ "$dbc_authmethod_admin" = "ident" ];
+        then
+            need_admin_pw=""
+        else
+            need_admin_pw="yup"
+            # Note: dpkg/config has the same code
+            if [ "$dbc_dbtype" = mysql ] && _dbc_mysql_get_debian_sys_maint ; then
+                db_set $dbc_package/$dbc_dbtype/admin-user "$dbc_dbadmin"
+                db_fset $dbc_package/$dbc_dbtype/admin-user seen true
+                db_set $dbc_package/$dbc_dbtype/admin-pass "$dbc_dbadmpass"
+                db_fset $dbc_package/$dbc_dbtype/admin-pass seen true
+            fi
+        fi
+    else
+        need_admin_pw=""
+    fi
+
+    if [ "$dbc_command" = "remove" ] && [ ! "$dbc_frontend" ]; then
+        ###
+        ### if they didn't want our help installing,  we should assume
+        ### they don't want our help removing either
+        ###
+        if [ "$dbc_install" != "true" ]; then return 0; fi
+
+        ###
+        ### ask the admin if we should help with removal
+        ### but only if they didn't see the question before
+        ### or if we are here after an error
+        ###
+        if [ "$dbc_remove" ]; then
+            db_set $dbc_package/dbconfig-remove "$dbc_remove"
+        fi
+        db_input $dbc_prio_high $dbc_package/dbconfig-remove || true
+        db_go || true
+        db_get $dbc_package/dbconfig-remove && dbc_remove="$RET"
+
+        if [ "$dbc_remove" != "true" ]; then
+            return 0;
+        fi
+
+        ###
+        ###	package removal hooks
+        ###
+        rmscript=/usr/share/dbconfig-common/scripts/$dbc_package/remove/$dbc_dbtype
+        rmsql=/usr/share/dbconfig-common/data/$dbc_package/remove/$dbc_dbtype
+        # run the script if it exists
+        if [ -f "$rmscript" ]; then
+            # get the admin user password; required by documentation
+            if [ "$need_admin_pw" ]; then
+                dbc_get_admin_pass || return $?
+            fi
+            dbc_logpart "running maintainer removal script hook... "
+            if ! sh -c "$rmscript \"$@\""; then
+                dbc_error="$rmscript existed with non-zero status"
+                dbc_remove_error "running maintainer removal hook" || return $?
+                [ "$dbc_tried_again" ] && return 0
+            fi
+            dbc_logline "done"
+        fi
+        # run the sql if it exists
+        if [ -f "$rmsql" ]; then
+            # get the admin user password; required by documentation
+            if [ "$need_admin_pw" ]; then
+                dbc_get_admin_pass || return $?
+            fi
+            dbc_logpart "running maintainer removal sql hook... "
+            if [ ! "$dbc_sql_substitutions" ]; then
+                $dbc_sqlfile_cmd $rmsql || \
+                    dbc_remove_error "running maintainer removal sql hook" || \
+                    return $?
+                [ "$dbc_tried_again" ] && return 0
+            else
+                tsubstfile=$(dbc_mktemp)
+                /usr/sbin/dbconfig-generate-include -f template -o template_infile=$rmsql $dbc_packageconfig > $tsubstfile
+                $dbc_sqlfile_cmd $tsubstfile || \
+                    dbc_remove_error "running maintainer removal sql hook" || \
+                    return $?
+                rm -f $tsubstfile
+                [ "$dbc_tried_again" ] && return 0
+            fi
+            dbc_logline "done"
+        fi
+
+        ###
+        ### ask the admin if the database should be purged
+        ### but only if they didn't see the question before
+        ### or if we are here after an error
+        ###
+        db_input $dbc_prio_high $dbc_package/purge || true
+        db_go || true
+        db_get $dbc_package/purge
+        dbc_purge="$RET"
+
+        if [ "$dbc_purge" = "true" ]; then
+            # get the admin user password
+            if [ "$need_admin_pw" ]; then
+                dbc_get_admin_pass || return $?
+            fi
+
+            # dump the database into a temporary file
+            # Note: nearly equal logic exists in postinst; probably
+            # should stay in sync
+            nowtime=$(date +%Y-%m-%d-%H.%M)
+            if [ ! $(dirname /var/tmp/$dbc_package) = /var/tmp ]; then
+                mkdir -p $(dirname /var/tmp/$dbc_package)
+            fi
+            dumpfile=$(mktemp /var/tmp/$dbc_package.$dbc_dbname.$nowtime.$dbc_dbtype.XXXXXX)
+            if [ ! -f $dumpfile ]; then
+                dbc_remove_error "creating temporary file for database dump" || \
+                    return $?
+                [ "$dbc_tried_again" ] && return 0
+            fi
+            dbc_logline "dbconfig-common: dumping $dbc_dbtype database $dbc_dbname to $dumpfile"
+            $dbc_dump_cmd $dumpfile || dbc_remove_error "dumping database" || \
+                return $?
+            [ "$dbc_tried_again" ] && return 0
+            dbc_logline "dbconfig-common: dropping $dbc_dbtype database $dbc_dbname"
+            $dbc_dropdb_cmd || dbc_remove_error "dropping database" || return $?
+            [ "$dbc_tried_again" ] && return 0
+
+            dbc_logline "dbconfig-common: revoking privileges for user $dbc_dbuser on $dbc_dbname"
+            $dbc_dropuser_cmd
+        fi
+    fi
+}

@@ -1,0 +1,5 @@
+dbconfig-generate-include   usr/sbin
+dbconfig-load-include       usr/sbin
+dpkg                        usr/share/dbconfig-common
+internal/common             usr/share/dbconfig-common/internal/
+internal/*sql*              usr/share/dbconfig-common/internal/

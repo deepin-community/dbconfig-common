@@ -1,0 +1,129 @@
+- the code is "in the process of" getting a cleanup.  there are still a
+  few globally scoped variables that ought to be removed and/or replaced
+  by local scoped variables.
+
+- testing various corner cases:
+  - errors dumping during upgrade
+  - errors dumping during purge
+
+- multiple instance support for many databases from one package.  the
+  idea is to create seperate "package configurations" that are derived
+  from the main configuration, using something to keep them in a namespace
+  that won't conflict with the standard package configurations.  something
+  like /etc/dbconfig-common/package_instance.conf etc.  most of dbconfig's
+  code could escape needing a rewrite then, as we could internally "trick"
+  the code into thinking that was the actual package name.
+
+- provide a normal-user-accessible script for setting up databases
+  (for running out of public_html type directories etc).
+
+- think about how this should tie in with the webapps-common.
+
+- begin discussion on having the "best-practices" document incorporated
+  in some form as debian policy. <- DebConf 2016 people agreed
+
+- ask if the user is to be completely deleted or only have privileges
+  revoked in mysql.  this is the default in pgsql, but in pgsql the drop
+  will fail if the user owns other databases (not so in mysql).
+  See bug #400566
+
+- mysql does not support ssl for the time being (see bug #291945) <-
+  fixed... (need to investigate how we can support this out of the box)
+
+*  Add testcase that tests admin remove scripts (#705222)
+
+*  Provide config parsers (as requested in 690390(?) against debconf)
+
+*  Remove some of the upgrade code if no package depends on it make things easier
+
+*  More databases (e.g. mongodb)
+
+*  Support DSN: apparently python has multiple ways of making the connection
+   https://anonscm.debian.org/cgit/openstack/openstack-pkg-tools.git/tree/pkgos_func
+
+*  Investigate if ENCODING is done properly, maybe needs more care:
+   http://www.postgresql.org/docs/current/static/multibyte.html
+
+*  Fix unittest framework for posh, now a "mock" version breaks the "real"
+   version with:
+   "mock-mysql-tests.sh: mysql: can't find function definition file."
+   No idea why pgsql works though. (it doesn't anymore)
+
+*  fix bug 808370 by resetting properly when dbc_command = reconfigure
+
+*  Check if postgresql users are limited to dbc_dballow (doesn't look like it)
+
+*  Check if PostgreSQL users are limited to their own database (doesn't look
+   like it)
+
+*  Add documentation for packages on changing the default for backups
+
+*  Investigate which databases could/should be supported (list from adodb site):
+    Access
+    ADO
+    CSV
+    Firebird
+    Frontbase
+    IBM DB2
+    Informix
+    Interbase
+    LDAP
+    Microsoft SQL Server
+    Netezza
+    ODBC
+    ODBTP
+    Oracle
+    PDO
+    SAP ADS
+    SAP ASE
+    SAP Maxdb
+    SAP Sqlanywhere
+    Sybase
+    Plain Text
+    Visual Foxpro
+
+* Error handling during purge:
+    dbconfig-common: dumping mysql database dbtestmysql to /var/tmp/db-test-mysql.dbtestmysql.2015-12-29-09.19.mysql.AtWDDt.
+    _dbc_detect_installed_dbtype() mysql.
+    ERROR 1045 (28000): Access denied for user 'debian-sys-maint'@'localhost' (using password: YES).
+    unable to connect to mysql server.
+    error encountered dumping database:
+
+    -> into configure?
+
+    -> part of dpkg error handling? See policy/maint-guide?
+
+    dpkg: error processing package db-test-mysql (--purge):
+     subprocess installed pre-removal script returned error exit status 1
+    debconf (developer): frontend started
+    debconf (developer): frontend running, package name is db-test-mysql
+    debconf (developer): starting /var/lib/dpkg/info/db-test-mysql.config configure
+    (config) dbc_go() db-test-mysql configure .
+
+* [tests] Revisit expect test cases. E.g. add test against host 192.168.x.y
+  (after configuring mysql to listen there.
+
+* [tests] Split testcases such that they can be called per dbtype.
+
+* Purge recovery issue: fix via _dbc_no_act? Is this worth fixing? Looks like
+  it is simple, but it needs to process the var in the beginning of postinst
+  though.
+
+* Write down requirements for dbtype_commands like:
+  - dump/drop should not fail when db doesn't exist
+  - commands that don't _require_ administrator privileges must be implemented
+    such that it can be called as user (e.g. via _dbc_asuser)
+  - required commands + interface
+
+* Create dh-dbconfig helper to fill the dh script template
+
+* Idea: warning in msg 74 (item (3))
+  https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=830888#74
+  for the case where the user/db already exists.
+
+* Rethink config logic for Unix socket/peer (at least for PostgreSQL).
+
+* Check if MySQL/MariaDB is doing the right thing with respect to Unix
+  sockets/TCP. We don't use the --protocol option, localhost defaults to
+  socket. I wonder what e.g. php-adodb makes of that:
+  https://dev.mysql.com/doc/refman/5.6/en/connecting.html

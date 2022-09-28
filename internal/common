@@ -1,0 +1,266 @@
+# -*- mode: sh -*-
+###
+### common bindings for dbconfig-common
+###
+###	all variables and functions fall under the namespace "dbc_foo" and
+###	"_dbc_foo", depending on whether or not they are "external"
+###
+
+[ "$_dbc_logfile" ] || _dbc_logfile="/var/log/dbconfig-common/dbc.log"
+
+##
+## dbc_logpart: log interal messages (without newline)
+##
+dbc_logpart(){
+    printf "$* " >&2
+    # in principle this file should exist, but some people put
+    # /var/log on tmpfs (bug 705335), so lets not crash on that
+    if [ -f "$_dbc_logfile" ] ; then
+        printf "$* " >> $_dbc_logfile
+    fi
+}
+
+##
+## dbc_logline: log interal messages
+##
+dbc_logline(){
+    printf "$*.\n" >&2
+    # in principle this file should exist, but some people put
+    # /var/log on tmpfs (bug 705335), so lets not crash on that
+    if [ -f "$_dbc_logfile" ] ; then
+        printf "$*.\n" >> $_dbc_logfile
+    fi
+}
+
+###
+### simple debugging function
+###
+_dbc_debug(){
+    if [ "${dbc_debug:-}" ]; then
+        dbc_logline "$@"
+    fi
+}
+
+##
+## internal check for an installed db client package
+##
+_dbc_detect_installed_dbtype(){
+    # Since the dbconfig-<database> split these checks are in principle a lot
+    # simpler, but keep the old checks as fallback for 1) packages still
+    # depending on dbc and 2) the multidb supported case where the used
+    # dbc-<dbtype> is removed.
+    _dbc_debug "_dbc_detect_installed_dbtype() $@"
+    case "$1" in
+        mysql)
+            if [ ! -f /usr/share/dbconfig-common/internal/dbc-mysql ] ; then
+                if ! command -v mysql >/dev/null; then
+                    return 1
+                fi
+            fi
+            ;;
+        pgsql|psql)
+            if [ ! -f /usr/share/dbconfig-common/internal/dbc-pgsql ] ; then
+                if ! command -v psql >/dev/null; then
+                    return 1
+                fi
+            fi
+            ;;
+        sqlite)
+            if [ ! -f /usr/share/dbconfig-common/internal/dbc-sqlite ] ; then
+                if ! command -v sqlite >/dev/null; then
+                    return 1
+                fi
+            fi
+            ;;
+        sqlite3)
+            if [ ! -f /usr/share/dbconfig-common/internal/dbc-sqlite3 ] ; then
+                if ! command -v sqlite3 >/dev/null; then
+                    return 1
+                fi
+            fi
+            ;;
+        *)
+            dbc_logline "_dbc_detect_installed_dbtype() called for unknown dbtype $@"
+            return 1
+            ;;
+    esac
+    return 0
+}
+
+##
+## internal sanity check for certain important variables
+##
+_dbc_sanity_check(){
+    while [ $# -ne 0 ]; do
+        case "$1" in
+            "package")
+                if [ -z "$dbc_package" ]; then
+                    dbc_error="dbconfig-common can not determine the
+                    name of the package it is configuring."
+                    dbc_logline "sanity check failed for dbc_package"
+                    return 1
+                fi
+                ;;
+            "packageconfig")
+                if [ -z "$dbc_packageconfig" ]; then
+                    dbc_error="dbconfig-common can not determine the
+                    name of the package configuration file."
+                    dbc_logline "sanity check failed for dbc_packageconfig"
+                    return 1
+                fi
+                ;;
+            "dbtype")
+                if [ -z "$dbc_dbtype" ]; then
+                    dbc_error="dbconfig-common can not determine the
+                    database type."
+                    dbc_logline "sanity check failed for dbc_dbtype"
+                    return 1
+                fi
+                ;;
+            "command")
+                if [ -z "$dbc_command" ]; then
+                    dbc_error="dbconfig-common can not determine the
+                    maintainer script running it."
+                    dbc_logline "sanity check failed for dbc_command"
+                    return 1
+                fi
+                ;;
+            "dbname")
+                if [ -z "$dbc_dbname" ]; then
+                    dbc_error="No database name specified. Have
+                       to know the name to create it."
+                    dbc_logline "sanity check failed for dbc_dbname"
+                    return 1
+                fi
+                ;;
+            "dbadmin")
+                if [ -z "$dbc_dbadmin" ]; then
+                    dbc_error="No database administrator specified."
+                    dbc_logline "sanity check failed for dbc_dbadmin"
+                    return 1
+                fi
+                ;;
+            "dballow")
+                if [ -z "$dbc_dballow" ]; then
+                    dbc_error="No allowed login server specified."
+                    dbc_logline "sanity check failed for dbc_dballow"
+                    return 1
+                fi
+                ;;
+            "dbuser")
+                if [ -z "$dbc_dbuser" ]; then
+                    dbc_error="No database user specified."
+                    dbc_logline "sanity check failed for dbc_dbuser"
+                    return 1
+                fi
+                ;;
+            "dbpass")
+                if [ -z "$dbc_dbpass" ]; then
+                    dbc_error="No database password specified."
+                    dbc_logline "sanity check failed for dbc_dbpass"
+                    return 1
+                fi
+                ;;
+            "mysql"|"psql"|"sqlite"|"sqlite3")
+                if ! _dbc_detect_installed_dbtype $1; then
+                    dbc_error="No $1 client to execute. Did you
+                       install the dbconfig-${dbc_dbtype:-$1} package?)"
+                    dbc_logline "sanity check failed for $1"
+                    return 1
+                fi
+                ;;
+            "createdb")
+                if ! command -v createdb >/dev/null; then
+                    dbc_error="No pgsql createdb to execute.  (have
+                       you installed postgresql-client?"
+                    dbc_logline "sanity check failed for createdb"
+                    return 1
+                fi
+                ;;
+            "dropdb")
+                if ! command -v dropdb >/dev/null; then
+                    dbc_error="No pgsql dropdb to execute.  (have
+                       you installed postgresql-client?"
+                    dbc_logline "sanity check failed for dropdb"
+                    return 1
+                fi
+                ;;
+            "createuser")
+                if ! command -v createuser >/dev/null; then
+                    dbc_error="No pgsql createuser to execute.  (have
+                       you installed postgresql-client?"
+                    dbc_logline "sanity check failed for createuser"
+                    return 1
+                fi
+                ;;
+            "dropuser")
+                if ! command -v dropuser >/dev/null; then
+                    dbc_error="No pgsql dropuser to execute.  (have
+                       you installed postgresql-client?"
+                    dbc_logline "sanity check failed for dropuser"
+                    return 1
+                fi
+                ;;
+            "pg_dump")
+                if ! command -v pg_dump >/dev/null; then
+                    dbc_error="No pgsql pg_dump to execute.  (have
+                       you installed postgresql-client?"
+                    dbc_logline "sanity check failed for pg_dump"
+                    return 1
+                fi
+                ;;
+            "mysqldump")
+                if ! command -v mysqldump >/dev/null; then
+                    dbc_error="No mysqldump to execute.  (have
+                       you installed mysql-client?"
+                    dbc_logline "sanity check failed for mysqldump"
+                    return 1
+                fi
+                ;;
+            *)
+                dbc_error="don't know how to sanity check for $1"
+                dbc_logline "don't know how to sanity check for $1"
+                return 1
+                ;;
+        esac
+        shift
+    done
+}
+
+dbc_mktemp(){
+    local tfile ttemplate
+    if [ "${1:-}" ]; then
+        ttemplate="$1";
+    else
+        ttemplate="dbconfig-common.XXXXXX";
+    fi
+
+    tfile=$(mktemp -t "$ttemplate")
+    if [ ! -f "$tfile" ]; then
+        dbc_error="error creating temporary file"
+        dbc_logline "error creating temporary file"
+        return 1
+    else
+        echo $tfile
+    fi
+}
+
+# Function that returns true if dbc_dbserver is the localhost, i.e. it is empty
+# or the string localhost or the loopback IP address: 127.0.0.0/8 (IPv4) or ::1
+# (IPv6)
+_dbc_islocalhost(){
+        if [ ! "${dbc_dbserver:-}" ]; then
+            return 0
+        elif [ "${dbc_dbserver:-}" = "localhost" ]; then
+            return 0
+            # We need to check if dbserver is an IP number instead of an
+            # address and we need to see if it starts with 127. We could check
+            # for validity, but why would we do that here?
+        elif echo "${dbc_dbserver:-}" | \
+                grep -qE "^127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$" ; then
+            return 0
+        elif [ "${dbc_dbserver:-}" = "::1" ]; then
+            return 0
+        fi
+        return 1
+}

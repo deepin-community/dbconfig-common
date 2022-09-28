@@ -1,0 +1,3 @@
+#! /usr/bin/dh-exec
+mysql.sql             => usr/share/dbconfig-common/data/db-test-mysql/install/mysql
+mysql-upgrade_2.1.sql => usr/share/dbconfig-common/data/db-test-mysql/upgrade/mysql/2.1

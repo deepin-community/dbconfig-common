@@ -1,0 +1,15 @@
+Source: db-common-example
+Section: misc
+Priority: optional
+Maintainer: Paul Gevers <elbrus@debian.org>
+Build-Depends-Indep: debhelper (>= 9), dh-exec
+Standards-Version: 3.9.6
+
+Package: db-test-sqlite3
+Architecture: all
+Depends: dbconfig-sqlite3 | dbconfig-no-thanks,
+ ${misc:Depends}
+Description: a package to test dbconfig-common (sqlite3 version)
+ This is a package to test the dbconfig-common package.
+ .
+ This version should work with the sqlite3 database engine

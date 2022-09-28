@@ -1,0 +1,1178 @@
+# Copyright (C) 2008-2009 Sean Finney <seanius@debian.org>
+# as dbconfig-common Debian package's copyright holder. 
+# This file is distributed under the same license as the dbconfig-common package.
+# Hideki Yamane (Debian-JP) <henrich@debian.or.jp>, 2008-2009.
+# Takuma Yamada <tyamada@takumayamada.com>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: dbconfig-common 2.0.6\n"
+"Report-Msgid-Bugs-To: dbconfig-common@packages.debian.org\n"
+"POT-Creation-Date: 2019-08-18 20:35+0200\n"
+"PO-Revision-Date: 2016-12-15 06:03+0900\n"
+"Last-Translator: Takuma Yamada\n"
+"Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Gtranslator 2.91.6\n"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid "Will this server be used to access remote databases?"
+msgstr "このサーバをリモートのデータベースへの接続に使いますか?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid ""
+"For the database types that support it, dbconfig-common includes support for "
+"configuring databases on remote systems. When installing a package's "
+"database via dbconfig-common, the questions related to remote configuration "
+"are asked with a priority such that they are skipped for most systems."
+msgstr ""
+"サポートするデータベースの種類について、dbconfig-common はリモートシステム上"
+"のデータベースを設定するためのサポートが含まれています。dbconfig-common 経由"
+"でパッケージのデータベースをインストールする場合には、リモート設定に関する質"
+"問が優先的に求められます。それらの質問は、ほとんどのシステムではスキップされ"
+"ます。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid ""
+"If you select this option, the default behavior will be to prompt you with "
+"questions related to remote database configuration when you install new "
+"packages."
+msgstr ""
+"このオプションを選択した場合、デフォルトの動作では、新しいパッケージをインス"
+"トールするときにリモートデータベース設定に関連する質問が現れます。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid "If you are unsure, you should not select this option."
+msgstr "不明な点がある場合は、このオプションを選択しないでください。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid "Remember database passwords permanently in debconf?"
+msgstr "データベースのパスワードを debconf に恒久的に記憶させますか?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid ""
+"When you configure, upgrade, or remove applications with dbconfig-common, "
+"administrator-level database passwords are needed. By default, these "
+"passwords are not stored, so you will be prompted for them each time."
+msgstr ""
+"dbconfig-common でアプリケーションを設定、アップグレード、削除する際には管理"
+"者レベルのデータベース用パスワードが必要となります。このパスワードはデフォル"
+"トでは記憶されないため、毎回聞かれることになります。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid ""
+"Alternatively the passwords can be permanently remembered in the debconf "
+"database (which is protected by Unix file permissions), though this is less "
+"secure and thus not the default setting."
+msgstr ""
+"パスワードを debconf データベースに恒久的に記憶させることもできます (UNIX の"
+"ファイルパーミッションで保護されています) が、安全性が低いためデフォルトの設"
+"定ではありません。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid ""
+"If you would rather not be bothered for an administrative password every "
+"time you upgrade a database application with dbconfig-common, you should "
+"choose this option. Otherwise, you should refuse this option."
+msgstr ""
+"dbconfig-common でデータベースアプリケーションをアップグレードする都度、管理"
+"用パスワードを毎回入力するのが煩わしくないのであれば、このオプションを選択し"
+"てください。それ以外の場合は、このオプションを拒否するべきです。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid "Configure database for ${pkg} with dbconfig-common?"
+msgstr "${pkg} 用のデータベースを dbconfig-common で設定しますか?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid ""
+"The ${pkg} package must have a database installed and configured before it "
+"can be used. This can be optionally handled with dbconfig-common."
+msgstr ""
+"${pkg} パッケージを使用する前に、データベースをインストールして設定する必要が"
+"あります。これは必要に応じて dbconfig-common で処理することもできます。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid ""
+"If you are an advanced database administrator and know that you want to "
+"perform this configuration manually, or if your database has already been "
+"installed and configured, you should refuse this option. Details on what "
+"needs to be done should most likely be provided in /usr/share/doc/${pkg}."
+msgstr ""
+"あなたが上級データベース管理者で、手動でこの設定を実行することがわかっている"
+"場合、あるいはデータベースのインストールと設定が完了している場合は、このオプ"
+"ションを拒否するべきです。何をすべきかの詳細は、/usr/share/doc/${pkg} で提供"
+"されている可能性が最も高いです。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid "Otherwise, you should probably choose this option."
+msgstr "そうでなければ、おそらくこのオプションを選ぶべきです。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid "Reinstall database for ${pkg}?"
+msgstr "${pkg} 用のデータベースを再インストールしますか?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Since you are reconfiguring ${pkg}, you may also want to reinstall the "
+"database which it uses."
+msgstr ""
+"${pkg} を再設定する場合、それが使うデータベースを再インストールすることがあり"
+"ます。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"If you wish to reinstall the database for ${pkg}, you should select this "
+"option. If you do not wish to do so (if you are reconfiguring the package "
+"for unrelated reasons), you should not select this option."
+msgstr ""
+"${pkg} 用のデータベースを再インストールしたい場合は、このオプションを選ぶべき"
+"です。そうしたくない場合 (関係ない理由でパッケージを再設定しているとき) は、"
+"このオプションを選ぶべきではありません。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Warning: if you opt to reinstall the database and install it under a name "
+"that already exists, the old database will be dropped without further "
+"questions. In that case a backup of the original database is made in /var/"
+"tmp/."
+msgstr ""
+"警告: データベースの再インストール、特に既に存在する名前の下にインストールす"
+"ることを選択した場合、追加の質問なしで古いデータベースが削除されます。その場"
+"合、元のデータベースのバックアップが /var/tmp/ の中に作られます。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Warning: if you change the name of the database, the old database will not "
+"be removed. If you change the name of the user that connects to the "
+"database, the privileges of the original user will not be revoked."
+msgstr ""
+"警告: データベースの名前を変更した場合は、古いデータベースは削除されません。"
+"データベースに接続するユーザの名前を変更する場合は、元のユーザーの権限は取り"
+"消されません。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+msgid "Perform upgrade on database for ${pkg} with dbconfig-common?"
+msgstr ""
+"${pkg} 用のデータベースのアップグレードを dbconfig-common で実行しますか?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+msgid ""
+"According to the maintainer for this package, database upgrade operations "
+"need to be performed on ${pkg}. Typically, this is due to changes in how a "
+"new upstream version of the package needs to store its data."
+msgstr ""
+"このパッケージのメンテナによると、データベースのアップグレード操作を ${pkg} "
+"上で実行する必要があります。典型的には、パッケージの新しい開発元のバージョン"
+"がデータの保存方法を変更した場合に起こります。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+msgid ""
+"If you want to handle this process manually, you should refuse this option. "
+"Otherwise, you should choose this option. During the upgrade, a backup of "
+"the database will be made in /var/cache/dbconfig-common/backups, from which "
+"the database can be restored in the case of problems."
+msgstr ""
+"この作業を手動で実行したい場合は、このオプションを選ばないでください。それ以"
+"外は、このオプションを選んでください。アップグレードの間に、問題が起きた場合"
+"にデータベースをリストアできるよう、データベースのバックアップが /var/cache/"
+"dbconfig-common/backups に作られます。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid "Deconfigure database for ${pkg} with dbconfig-common?"
+msgstr "${pkg} 用のデータベースの設定除去を dbconfig-common で行いますか?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid ""
+"Since you are removing ${pkg}, it's possible that you no longer want the "
+"underlying database and the privileges for the user associated with this "
+"package."
+msgstr ""
+"${pkg} を削除しているので、もはやこのパッケージに関連付けられた基礎のデータ"
+"ベースとユーザ用の権限は必要ないでしょう。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid ""
+"Please choose whether database removal and privilege revocation should be "
+"handled with dbconfig-common."
+msgstr ""
+"データベースの削除と権限の取り消しを dbconfig-common で扱うかどうかを選択して"
+"ください。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid ""
+"If you choose this option, dbconfig-common will check if ${pkg} provided "
+"scripts and database commands to undo package specific operations and run "
+"them if they exist. Then it will ask if you want to delete the ${pkg} "
+"database and revoke the standard privileges for the user of ${pkg}. If you "
+"don't want any of this, or if you want to handle this manually, you should "
+"refuse this option."
+msgstr ""
+"このオプションを選択した場合は、dbconfig-common は、${pkg} が加える操作を元に"
+"戻すためのスクリプトとパッケージのデータベースコマンドが提供されているかを"
+"チェックし、それらが存在する場合は実行します。その時、${pkg} データベースの削"
+"除と ${pkg} のユーザのための標準的な権限の取り消しを行うか質問されます。その"
+"いずれかをしたくない、または手動で処理したい場合は、このオプションを拒否する"
+"べきです。"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid "Database type to be used by ${pkg}:"
+msgstr "${pkg} が使うデータベースの種類:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid ""
+"The ${pkg} package can be configured to use one of several database types. "
+"Below, you will be presented with the available choices."
+msgstr ""
+"${pkg} パッケージは、数種類のデータベースの中から一つを使うように設定すること"
+"ができます。以下に、選択可能なもの表示します。"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid ""
+"If other database types are supported by ${pkg} but not shown here, the "
+"reason for their omission is that the corresponding dbconfig-<database type> "
+"packages are not installed. If you know that you want the package to use "
+"another supported database type, your best option is to back out of the "
+"dbconfig-common questions and opt out of dbconfig-common assistance for this "
+"package for now. Install your preferred dbconfig-<database type> option from "
+"the list in the package dependencies, and then \"dpkg-reconfigure ${pkg}\" "
+"to select it."
+msgstr ""
+"ほかの種類のデータベースが ${pkg} によってサポートされているのにここに表示さ"
+"れていない場合、それらが抜けている理由は対応する dbconfig-<database type> "
+"パッケージがインストールされていないからです。サポートされているほかの種類の"
+"データベースを使うためのパッケージが分かっている場合の最良のオプションは、"
+"dbconfig-common の質問を取り消して、今のところはこのパッケージのために "
+"dbconfig-common アシスタンスをオプトアウトすることです。パッケージの依存関係"
+"のリストから好みの dbconfig-<database type> オプションをインストールし、それ"
+"を選択するために「dpkg-reconfigure ${pkg}」を実行します。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+msgid "Delete the database for ${pkg}?"
+msgstr "${pkg} 用のデータベースを削除しますか?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+msgid ""
+"If you no longer need the database for ${pkg} and the privileges of the "
+"database user of ${pkg}, you can choose to delete the database and revoke "
+"the privileges now."
+msgstr ""
+"もはや ${pkg} 用のデータベースと ${pkg} 用のデータベースユーザの権限が必要な"
+"い場合は、今すぐデータベースの削除と権限の取り消しを選ぶことができます。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+msgid ""
+"If you no longer have need of the data being stored by ${pkg}, you should "
+"choose this option. If you want to keep this data, or if you would rather "
+"handle this process manually, you should refuse this option. Either way, it "
+"won't affect your other databases."
+msgstr ""
+"もはや ${pkg} によって保存されたデータが必要ない場合、このオプションを選ぶべ"
+"きです。このデータを保存したい、あるいはこの操作を手動で行いたい場合は、この"
+"オプションを拒否するべきです。いずれにせよ、それはほかのデータベースには影響"
+"しません。"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:10001
+msgid "Back up the database for ${pkg} before upgrading?"
+msgstr "アップグレードの前に ${pkg} 用のデーターベースをバックアップしますか?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:10001
+msgid ""
+"The underlying database for ${pkg} needs to be upgraded as part of the "
+"installation process. Just in case, the database can be backed up before "
+"this is done, so that if something goes wrong, you can revert to the "
+"previous package version and repopulate the database."
+msgstr ""
+"インストールプロセスの一部として、${pkg} の基礎となるデータベースをアップグ"
+"レードする必要があります。もしもの場合のため、アップグレードの前にデータベー"
+"スをバックアップできます。何か問題が起こった場合は、パッケージを前のバージョ"
+"ンに戻して、データベースを再配置できます。"
+
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:11001 ../dbconfig-common.templates:12001
+msgid "Password confirmation:"
+msgstr "パスワードの確認:"
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:13001
+msgid "Password mismatch"
+msgstr "パスワードが一致していません"
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:13001
+msgid "The password and its confirmation do not match."
+msgstr "パスワードとその確認入力が一致しません。"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "abort"
+msgstr "中断する"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "retry"
+msgstr "再試行する"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "retry (skip questions)"
+msgstr "再試行する (質問をスキップする)"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "ignore"
+msgstr "無視する"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:14002
+msgid "Next step for database upgrade:"
+msgstr "データベースのアップグレードのための次のステップ:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:14002
+msgid "An error occurred while upgrading the database:"
+msgstr "データベースをアップグレードしている間にエラーが発生しました:"
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:14002
+msgid ""
+"Fortunately, ${dbfile} should hold a backup of the database, made just "
+"before the upgrade (unless the error occurred during backup creation, in "
+"which case no changes will have been applied yet). Your options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+"幸いにも ${dbfile} はデータベースのバックアップを保持しているでしょう。バック"
+"アップはアップグレードの直前に作られます (バックアップの作成中にエラーが発生"
+"しない限り。バックアップにはまだ変更が適用されていません)。オプションは次の通"
+"りです。\n"
+" * 中止 - 失敗にします。ダウングレード、再インストール、このパッケージ\n"
+"   の再設定を行う必要があります。または、これの使用を続けるために手動で\n"
+"   介入する必要があります。これは通常、インストールの失敗が解決されるま\n"
+"   で、他のパッケージをインストールする能力が要求されるでしょう。\n"
+" * 再試行 - もう一度すべての設定に関する質問が要求されます (見逃してい\n"
+"   るかもしれない debconf 優先度設定を含みます)。そして、操作を実行する\n"
+"   別の試みになります。\n"
+" * 再試行 (質問をスキップする) - すべての質問をスキップして、すぐに操作\n"
+"   を再試行します。これは、エラーが発生した後に根本的な問題を解決した場\n"
+"   合にのみ有効です。\n"
+" * 無視 - dbconfig-common エラーを無視して操作を続行します。これは、\n"
+"   データベース機能がないパッケージのために用意されています。"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:15002
+msgid "Next step for database installation:"
+msgstr "データベースのインストールのための次のステップ:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:15002
+msgid "An error occurred while installing the database:"
+msgstr "データベースをインストールしている間にエラーが発生しました:"
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:15002
+msgid ""
+"Your options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+"オプションは次の通りです。\n"
+" * 中止 - 失敗にします。ダウングレード、再インストール、このパッケージ\n"
+"   の再設定を行う必要があります。または、これの使用を続けるために手動で\n"
+"   介入する必要があります。これは通常、インストールの失敗が解決されるま\n"
+"   で、他のパッケージをインストールする能力が要求されるでしょう。\n"
+" * 再試行 - もう一度すべての設定に関する質問が要求されます (見逃してい\n"
+"   るかもしれない debconf 優先度設定を含みます)。そして、操作を実行する\n"
+"   別の試みになります。\n"
+" * 再試行 (質問をスキップする) - すべての質問をスキップして、すぐに操作\n"
+"   を再試行します。これは、エラーが発生した後に根本的な問題を解決した場\n"
+"   合にのみ有効です。\n"
+" * 無視 - dbconfig-common エラーを無視して操作を続行します。これは、\n"
+"   データベース機能がないパッケージのために用意されています。"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:16002
+msgid "Next step for database removal:"
+msgstr "データベースの削除のための次のステップ:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:16002
+msgid "An error occurred while removing the database:"
+msgstr "データベースを削除している間にエラーが発生しました:"
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:16002
+msgid ""
+"As a result it was not possible to remove the database for ${pkg}. Your "
+"options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave the database and user privileges in place."
+msgstr ""
+"結果として、${pkg} 用のデータベースを削除することができませんでした。オプショ"
+"ンは次の通りです。\n"
+" * 中止 - 失敗にします。ダウングレード、再インストール、このパッケージ\n"
+"   の再設定を行う必要があります。または、これの使用を続けるために手動で\n"
+"   介入する必要があります。これは通常、インストールの失敗が解決されるま\n"
+"   で、他のパッケージをインストールする能力が要求されるでしょう。\n"
+" * 再試行 - もう一度すべての設定に関する質問が要求されます (見逃してい\n"
+"   るかもしれない debconf 優先度設定を含みます)。そして、操作を実行する\n"
+"   別の試みになります。\n"
+" * 再試行 (質問をスキップする) - すべての質問をスキップして、すぐに操作\n"
+"   を再試行します。これは、エラーが発生した後に根本的な問題を解決した場\n"
+"   合にのみ有効です。\n"
+" * 無視 - dbconfig-common エラーを無視して操作を続行します。これは、\n"
+"   データベース機能がないパッケージのために用意されています。"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:17001
+msgid "Next step:"
+msgstr "次のステップ:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:17001
+msgid ""
+"Configuring the database for ${pkg} requires the package ${dbpackage} to be "
+"installed and configured first, which is not something that can be checked "
+"for automatically."
+msgstr ""
+"${pkg} 用のデータベースの設定には、最初に ${dbpackage} パッケージのインストー"
+"ルおよび設定が必要ですが、これは自動的にチェックすることができるものではあり"
+"ません。"
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#. Additionally, ${dbpackage} can be replaced with "mysql-server", so
+#. that length suits, but ${pkg} usually will expand more.
+#: ../dbconfig-common.templates:17001
+msgid ""
+"Your options are:\n"
+" * abort - Choose this when in doubt and install ${dbpackage} before\n"
+"   continuing with the configuration of this package. This causes the\n"
+"   installation of ${pkg} to fail for now.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+"   Choose this if you chose the wrong database type by mistake.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+"オプションは次の通りです。\n"
+" * 中止 - 疑わしい場合はこれを選択して、このパッケージの設定を続ける前に\n"
+"   ${dbpackage} をインストールしてください。今のところ、${pkg} の\n"
+"   インストールで失敗が起きています。\n"
+" * 再試行 - もう一度すべての設定に関する質問が要求されます (見逃してい\n"
+"   るかもしれない debconf 優先度設定を含みます)。そして、操作を実行する\n"
+"   別の試みになります。誤って、間違ったデータベースの種類を選択した場合\n"
+"   は、これを選択してください。\n"
+" * 無視 - dbconfig-common エラーを無視して操作を続行します。これは、\n"
+"   データベース機能がないパッケージのために用意されています。"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:18001
+msgid "Host name of the ${dbvendor} database server for ${pkg}:"
+msgstr "${pkg} 用の ${dbvendor} データベースサーバのホスト名:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:18001
+msgid ""
+"Please select the remote hostname to use, or select \"new host\" to enter a "
+"new host."
+msgstr ""
+"使用するリモートホスト名を選ぶか、「新しいホスト」を選んで新しいホスト名を入"
+"力してください。"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:19001
+msgid "Port number for the ${dbvendor} service:"
+msgstr "${dbvendor} サービスのポート番号:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:19001
+msgid ""
+"Please specify the port the ${dbvendor} database on the remote host is "
+"running on. To use the default port, leave this field blank."
+msgstr ""
+"リモートホスト上の ${dbvendor} データベースが実行中のポートを指定してくださ"
+"い。デフォルトのポートを使用するには、このフィールドを空白のままにします。"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid "Host running the ${dbvendor} server for ${pkg}:"
+msgstr "${pkg} 用の ${dbvendor} サーバが実行しているホスト:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid "Please provide the hostname of a remote ${dbvendor} server."
+msgstr "リモート ${dbvendor} サーバのホスト名を入力してください。"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid ""
+"You must have already arranged for the administrative account to be able to "
+"remotely create databases and grant privileges."
+msgstr ""
+"リモートでデータベースの作成と権限の付与を行えるようにするために、既に管理用"
+"のアカウントが用意されている必要があります。"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:21001
+msgid "${dbvendor} database name for ${pkg}:"
+msgstr "${pkg} 用の ${dbvendor} データベース名:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:21001
+msgid ""
+"Please provide a name for the ${dbvendor} database to be used by ${pkg}."
+msgstr "${pkg} が使用する ${dbvendor} データベースの名前を入力してください。"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid "${dbvendor} username for ${pkg}:"
+msgstr "${pkg} 用の ${dbvendor} ユーザ名:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"Please provide a ${dbvendor} username for ${pkg} to register with the "
+"database server. A ${dbvendor} user is not necessarily the same as a system "
+"login, especially if the database is on a remote server."
+msgstr ""
+"データベースサーバに登録する ${pkg} 用の ${dbvendor} ユーザ名を入力してくださ"
+"い。${dbvendor} ユーザは、システムログインと同じである必要はありません。特に"
+"データベースがリモートーサーバ上にある場合はそうです。"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"This is the user which will own the database, tables, and other objects to "
+"be created by this installation. This user will have complete freedom to "
+"insert, change, or delete data in the database."
+msgstr ""
+"これは、このインストールで作成されるデータベース、テーブル、およびその他のオ"
+"ブジェクトを所有者するユーザです。このユーザは、データベースへデータの挿入、"
+"変更、または削除を完全に自由に行うことができます。"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"If your username contains an @, you need to specify the domain as well (see "
+"below)."
+msgstr ""
+"ユーザ名に @ が含まれている場合は、ドメインも指定する必要があります (下記参"
+"照)。"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"Advanced usage: if you need to define the domain that the user will log in "
+"from, you can write \"username@domain\"."
+msgstr ""
+"高度な使い方: ユーザがログインするドメインを定義する必要がある場合は、"
+"「username@domain」 と書くことができます。"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid "${dbvendor} storage directory for ${pkg}:"
+msgstr "${pkg} 用の ${dbvendor} ストレージディレクトリ:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid ""
+"Please provide a path where the ${dbvendor} database file for ${pkg} should "
+"be installed into."
+msgstr ""
+" ${pkg} 用の ${dbvendor} データベースのファイルがインストールされるパスを入力"
+"してください。"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid ""
+"The permissions for this directory will be set to match the permissions for "
+"the generated database file."
+msgstr ""
+"このディレクトリのパーミッションは、生成されたデータベースファイルのパーミッ"
+"ションと一致するように設定されます。"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:24001 ../dbconfig-common.templates:29001
+msgid "Unix socket"
+msgstr "UNIX ソケット"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:24001 ../dbconfig-common.templates:29001
+msgid "TCP/IP"
+msgstr "TCP/IP"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:24002
+msgid "Connection method for MySQL database of ${pkg}:"
+msgstr "${pkg} の MySQL データベースへの接続方法:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:24002
+msgid ""
+"By default, ${pkg} will be configured to use a MySQL server through a local "
+"Unix socket (this provides the best performance). To connect with a "
+"different method, or to a different server entirely, select the appropriate "
+"option from the choices here."
+msgstr ""
+"デフォルトでは、${pkg} はローカルの UNIX ソケット経由で MySQL サーバを使うよ"
+"うに設定されています (これが最もパフォーマンスが良いやり方です)。ほかの方法で"
+"接続するには、または完全に別のサーバに接続するには、ここでの選択肢から適切な"
+"オプションを選択します。"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:25001
+msgid "MySQL application password for ${pkg}:"
+msgstr "${pkg} 用の MySQL アプリケーションパスワード:"
+
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:25001 ../dbconfig-common.templates:30001
+msgid ""
+"Please provide a password for ${pkg} to register with the database server. "
+"If left blank, a random password will be generated."
+msgstr ""
+"データベースサーバに登録するために ${pkg} 用のパスワードを入力してください。"
+"空白のままにすると、ランダムなパスワードが生成されます。"
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001 ../dbconfig-common.templates:31001
+msgid "Name of the database's administrative user:"
+msgstr "データベースの管理用ユーザの名前:"
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001 ../dbconfig-common.templates:31001
+msgid ""
+"Please provide the name of the account with which this package should "
+"perform administrative actions. This user is the one with the power to "
+"create new database users."
+msgstr ""
+"このパッケージが管理操作を実行するためのアカウント名を入力してください。この"
+"ユーザは新しいデータベースユーザを作成できます。"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001
+msgid ""
+"For MySQL, this is almost always \"root\". Note that this is not the same as "
+"the Unix login \"root\"."
+msgstr ""
+"MySQL の場合、これはほとんどの場合「root」です。注意: これは UNIX ログインの"
+"「root」と同じではありません。"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:27001
+msgid "Password of the database's administrative user:"
+msgstr "データベースの管理用ユーザのパスワード:"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:27001
+msgid ""
+"Please provide the password for the administrative account \"${dbadmin}\" "
+"with which this package should create its MySQL database and user."
+msgstr ""
+"このパッケージが MySQL データベースとユーザを作るために必要な管理用アカウント"
+"「${dbadmin}」のパスワードを入力してください。"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:28001
+#, fuzzy
+#| msgid "Connection method for MySQL database of ${pkg}:"
+msgid "Authentication plugin for MySQL database:"
+msgstr "${pkg} の MySQL データベースへの接続方法:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:28001
+msgid ""
+"Database user accounts can be configured to use a variety of plugins for "
+"authentication with MySQL. If the server default won't work with this "
+"application, it is necessary to specify one that will. Please select one "
+"from the list of available plugins. Leaving the selection set to its "
+"original value should work unless a remote server is using unpredictable "
+"defaults, but other options may not be supported by ${pkg}. If problems "
+"arise, the package's documentation should give hints; see /usr/share/doc/"
+"${pkg}/."
+msgstr ""
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:28001
+msgid ""
+"Your options are:\n"
+" * default - use the default determined by the server.\n"
+" * mysql_native_password - no MySQL authentication plugin is used.\n"
+" * sha256_password - a more secure password encryption algorithm.\n"
+" * caching_sha2_password - SHA2 plus an in-memory authentication cache."
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:29001
+msgid "TCP/IP + SSL"
+msgstr "TCP/IP + SSL"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:29002
+msgid "Connection method for PostgreSQL database of ${pkg}:"
+msgstr "${pkg} の PostgreSQL データベースのための接続方法:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:29002
+msgid ""
+"By default, ${pkg} will be configured to use a PostgreSQL server through TCP/"
+"IP because that method works in most circumstances. To connect with a "
+"different method, select the appropriate option from the choices here."
+msgstr ""
+"デフォルトでは、${pkg} は TCP/IP を通して PostgreSQL サーバを使うように設定さ"
+"れています (その理由はたいていの環境で動作するためです)。ほかの方法で接続する"
+"には、この選択肢から適切なオプションを選んでください。"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:30001
+msgid "PostgreSQL application password for ${pkg}:"
+msgstr "${pkg} 用の PostgreSQL アプリケーションパスワード:"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:30001
+msgid ""
+"If you are using \"ident\" authentication, the supplied password will not be "
+"used and can be left blank. Otherwise, PostgreSQL access may need to be "
+"reconfigured to allow password-authenticated access."
+msgstr ""
+"「ident」認証を使用している場合は、入力したパスワードは使用されないので、空白"
+"のままにすることができます。そうでない場合は、PostgreSQL アクセスはパスワード"
+"認証アクセスを許可するように再設定する必要があるかもしれません。"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+msgid "Password of your database's administrative user:"
+msgstr "データベースの管理用ユーザのパスワード:"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+msgid ""
+"Please provide the password for the ${dbadmin} account with which this "
+"package should perform administrative actions."
+msgstr ""
+"このパッケージが管理操作を行うための {$dbadmin} アカウントのパスワードを入力"
+"してください。"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+msgid ""
+"For a standard PostgreSQL installation, a database password is not required, "
+"since authentication is done at the system level."
+msgstr ""
+"標準的な PostgreSQL のインストールでは、認証はシステムレベルで行われるので、"
+"データベースパスワードは必要ありません。"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:33001 ../dbconfig-common.templates:34001
+msgid "ident"
+msgstr "ident"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:33001 ../dbconfig-common.templates:34001
+msgid "password"
+msgstr "パスワード"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+msgid "Method for authenticating the PostgreSQL administrator:"
+msgstr "PostgreSQL 管理者の認証方法:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+msgid ""
+"PostgreSQL servers provide several different mechanisms for authenticating "
+"connections. Please select what method the administrative user should use "
+"when connecting to the server."
+msgstr ""
+"PostgreSQL サーバは、接続を認証するためにいくつかの異なるメカニズムを提供して"
+"います。管理用ユーザがサーバに接続する際に使う方法を選択してください。"
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+msgid ""
+"With \"ident\" authentication on the local machine, the server will check "
+"that the owner of the Unix socket is allowed to connect. PostgreSQL itself "
+"calls this peer authentication."
+msgstr ""
+"ローカルマシン上の「ident」認証では、サーバが UNIX ソケットの所有者が接続を許"
+"可されていることを確認します。PostgreSQL 自身はこのピア認証を呼び出します。"
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+msgid ""
+"With \"ident\" authentication to remote hosts, RFC-1413-based ident is used "
+"(which can be considered a security risk)."
+msgstr ""
+"リモートホストへの「ident」認証では、RFC 1413 ベースの ident が使用されます "
+"(これはセキュリティ上のリスクと考えることができます)。"
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+msgid ""
+"With \"password\" authentication, a password will be passed to the server "
+"for use with some authentication backend (such as \"MD5\" or \"PAM\"). Note "
+"that the password is still passed in the clear across network connections if "
+"your connection is not configured to use SSL."
+msgstr ""
+"「パスワード」認証では、パスワードは (「MD5」または「PAM」など) いくつかの認"
+"証バックエンドで使用するためにサーバに渡されます。接続が SSL を使用するように"
+"設定されていない場合は、パスワードはネットワーク接続中を平文のまま渡されるこ"
+"とに注意してください。"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+msgid ""
+"For a standard PostgreSQL installation running on the same host, \"ident\" "
+"is recommended."
+msgstr ""
+"同じホスト上で実行している PostgreSQL の標準インストールの場合、「ident」が推"
+"奨されます。"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+msgid "Method for authenticating PostgreSQL user:"
+msgstr "PostgreSQL ユーザの認証方法:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+msgid ""
+"PostgreSQL servers provide several different mechanisms for authenticating "
+"connections. Please select what method the database user should use when "
+"connecting to the server."
+msgstr ""
+"PostgreSQL サーバは、接続を認証するためにいくつかの異なるメカニズムを提供して"
+"います。データベースユーザがサーバに接続する使う方法を選択してください。"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+msgid ""
+"For a standard PostgreSQL installation running on the same host, \"password"
+"\" is recommended, because typically the system username doesn't match the "
+"database username."
+msgstr ""
+"同じホスト上で実行されている PostgreSQL の標準インストールの場合、"
+"「password」が推奨されます。通常、システムのユーザ名は、データベースのユーザ"
+"名と一致しないためです。"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:35001
+msgid "PostgreSQL connection method error"
+msgstr "PostgreSQL 接続方法エラー"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:35001
+msgid ""
+"Unfortunately, it seems that the database connection method you have "
+"selected for ${pkg} will not work, because it requires the existence of a "
+"local user that does not exist."
+msgstr ""
+"残念ながら、存在しないローカルユーザの存在を必要とするため、${pkg} 用に選択し"
+"たデータベース接続方法は、動作しないようです。"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:36001
+msgid "Change PostgreSQL configuration automatically?"
+msgstr "自動的に PostgreSQL の設定を変更しますか?"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:36001
+msgid ""
+"It has been determined that the database installation for ${pkg} cannot be "
+"automatically accomplished without making changes to the PostgreSQL server's "
+"access controls. It is suggested that this be done by dbconfig-common when "
+"the package is installed. If instead you would prefer to do it manually, the "
+"following line needs to be added to your pg_hba.conf:"
+msgstr ""
+"${pkg} 用のデータベースのインストールは、PostgreSQL サーバのアクセス制限を変"
+"更することなく、自動的に行うことができないと判断されました。パッケージがイン"
+"ストールされている場合、これは db-configcommon で行うことが提案されています。"
+"代わりに手動で行いたい場合は、以下の行を pg_hba.conf に追加する必要がありま"
+"す:"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:37001
+msgid "Revert PostgreSQL configuration automatically?"
+msgstr "自動的に PostgreSQL の設定を戻しますか?"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:37001
+msgid ""
+"As ${pkg} is now being removed, it may no longer be necessary to have an "
+"access control entry in the PostgreSQL server's configuration. While keeping "
+"such an entry will not break any software on the system, it may be seen as a "
+"potential security concern. It is suggested that this be done by dbconfig-"
+"common when the package is removed. If instead you would prefer to do it "
+"manually, the following line needs to be removed from your pg_hba.conf:"
+msgstr ""
+"${pkg} は現在削除されているので、PostgreSQL サーバの設定のアクセス制御エント"
+"リは必要ないかもしれません。そのようなエントリを残すことは、システム上のほか"
+"のソフトウェアを壊さないとはいえ、潜在的なセキュリティ上の問題として見ること"
+"ができます。パッケージが削除されたときに、dbconfig-common によって行われるこ"
+"とが提案されています。代わりに手動で行う場合、以下の行を pg_hba.conf から削除"
+"する必要があります:"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:38001
+msgid "Modifications needed in /etc/postgresql/pg_hba.conf"
+msgstr "/etc/postgresql/pg_hba.conf の変更が必要です"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:38001
+msgid ""
+"To get the database for package ${pkg} bootstrapped you have to edit the "
+"configuration of the PostgreSQL server. You may be able to find help in the "
+"file /usr/share/doc/${pkg}/README.Debian."
+msgstr ""
+"起動したパッケージ ${pkg} 用のデータベースを取得するには、PostgreSQL サーバの"
+"設定を編集する必要があります。ファイル /usr/share/doc/${pkg}/README.Debian 中"
+"にヘルプを見つけることができるかもしれません。"
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:39001
+msgid "Empty passwords unsupported with PostgreSQL"
+msgstr "空のパスワードは PostgreSQL でサポートされていません"

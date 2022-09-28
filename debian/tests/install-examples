@@ -1,0 +1,220 @@
+#!/bin/sh
+# Make sure to call this script from the root of the dbconfig-common tree
+
+set -e
+
+FRONTENDS="noninteractive-defaults noninteractive teletype"
+export DEBCONF_DEBUG=developer
+export dbc_debug=true
+
+preseed(){
+    # Maybe a bug in debconf (but not bug 779920) or in dbconfig-common
+    /usr/share/debconf/fix_db.pl 2> /dev/null
+
+    if [ $PRESEED = true ] ; then
+        echo
+        echo CI: preseeding $PACKAGE
+        echo $PACKAGE ${PACKAGE}/dbconfig-install boolean true          | debconf-set-selections
+        # In pbuilder env, installation fails, so don't try during upgrade
+        echo $PACKAGE ${PACKAGE}/dbconfig-upgrade boolean true          | debconf-set-selections
+        if [ "$PACKAGE" = db-test-pgsql-migration ] && \
+               [ "$(dpkg-query -W -f'${db:Status-Status}' $PACKAGE 2>/dev/null)" = installed ] ; then
+            # After migration, the host is bogus and thus not reachable
+            echo $PACKAGE ${PACKAGE}/dbconfig-remove boolean false      | debconf-set-selections
+        else
+            # SQLite stores the db on file, which can always be removed
+            # With MySQL/PostgreSQL in a pbuilder env, installation fails, so
+            # you should inverse the next line
+            echo $PACKAGE ${PACKAGE}/dbconfig-remove boolean true       | debconf-set-selections
+        fi
+        # Next line isn't honored of course
+        # echo $PACKAGE ${PACKAGE}/install-error select ignore            | debconf-set-selections
+        echo $PACKAGE ${PACKAGE}/mysql/app-pass password blabla         | debconf-set-selections
+        echo $PACKAGE ${PACKAGE}/pgsql/app-pass password blabla         | debconf-set-selections
+        if [ "$PACKAGE" = db-test-multidbtype ] ; then
+            echo $PACKAGE ${PACKAGE}/database-type string mysql         | debconf-set-selections
+        fi
+        echo $PACKAGE ${PACKAGE}/remote/host string localhost           | debconf-set-selections
+
+        echo
+        echo CI: debconf state:
+        debconf-show $PACKAGE
+    fi
+}
+
+install_and_purge(){
+    CONF=/etc/dbconfig-common/${PACKAGE}.conf
+    echo
+    echo CI: install_and_purge ${PACKAGE}
+    if [ ! -f ${PACKAGE}_2.0_all.deb ] ; then
+        ./buildpackages.sh
+    fi
+    preseed
+    echo CI: dpkg -i ${PACKAGE} \# 2.0
+    dpkg -i ${PACKAGE}_2.0_all.deb
+    if [ -f $CONF ] ; then
+        echo
+        echo Content of dbc configuration file for $PACKAGE:
+        egrep "^dbc_" $CONF || true
+    fi
+    echo
+    # Preseeding purge does not work during install because dbc will think
+    # it is a reinstallation
+    echo $PACKAGE ${PACKAGE}/purge boolean true                     | debconf-set-selections
+    preseed
+    echo CI: apt-get purge ${PACKAGE}
+    apt-get purge -y ${PACKAGE}
+
+    if [ -f $CONF ] ; then
+        echo
+        echo dbc configuration file for $PACKAGE still exists, which is wrong
+        exit 1
+    fi
+}
+
+cd examples
+
+for FRONTEND in $FRONTENDS ; do
+    if [ "${FRONTEND#*-}" = defaults ] ; then
+        PRESEED=false
+        FRONTEND=${FRONTEND%-*}
+    else
+        PRESEED=true
+    fi
+    export DEBIAN_FRONTEND=$FRONTEND
+
+    echo
+    echo
+    echo "Now running installation with DEBIAN_FRONTEND=$FRONTEND and preseeding=$PRESEED"
+    echo
+
+    PACKAGE=db-test-multidbtype
+    install_and_purge
+
+    PACKAGE=db-test-mysql-frontend
+    install_and_purge
+
+    PACKAGE=db-test-mysql-perl
+    install_and_purge
+
+    PACKAGE=db-test-mysql
+    install_and_purge
+
+    PACKAGE=db-test-pgsql-migration
+    install_and_purge
+
+    PACKAGE=db-test-pgsql
+    install_and_purge
+
+    PACKAGE=db-test-sqlite3
+    install_and_purge
+
+
+    PACKAGE=db-test-multidbtype
+    preseed
+    echo $PACKAGE ${PACKAGE}/database-type string pgsql         | debconf-set-selections
+    echo CI: dpkg -i ${PACKAGE} \# 2.0 pgsql
+    dpkg -i ${PACKAGE}_2.0_all.deb
+    echo $PACKAGE ${PACKAGE}/purge boolean true                     | debconf-set-selections
+    preseed
+    echo CI: apt-get purge ${PACKAGE}
+    apt-get purge -y ${PACKAGE}
+
+
+    PACKAGE=db-test-mysql
+    # Add tests for bug #850190: dumping database can only be done with dbadmin
+    # privileges if procedures are defined by an other user
+    preseed
+    echo CI: dpkg -i ${PACKAGE} \# 2.0
+    dpkg -i ${PACKAGE}_2.0_all.deb
+    echo CI: creating function in database owned by root/debian-sys-maint
+    echo "create function dbtestmysql.hello() returns char(5) deterministic return 'hello';" | mysql --defaults-file=/etc/mysql/debian.cnf -vvv mysql
+    preseed
+    echo CI: dpkg -i ${PACKAGE} \# 2.1
+    dpkg -i ${PACKAGE}_2.1_all.deb
+    echo $PACKAGE ${PACKAGE}/dbconfig-reinstall boolean true        | debconf-set-selections
+    preseed
+    echo CI: dpkg-reconfigure
+    dpkg-reconfigure $PACKAGE
+    echo $PACKAGE ${PACKAGE}/purge boolean true                     | debconf-set-selections
+    preseed
+    echo CI: apt-get purge ${PACKAGE}
+    apt-get purge -y ${PACKAGE}
+
+    preseed
+    echo CI: dpkg -i ${PACKAGE} \# 2.0
+    dpkg -i ${PACKAGE}_2.0_all.deb
+    preseed
+    echo CI: dpkg -i ${PACKAGE} \# 2.1
+    dpkg -i ${PACKAGE}_2.1_all.deb
+    echo $PACKAGE ${PACKAGE}/purge boolean true                     | debconf-set-selections
+    preseed
+    echo CI: apt-get purge ${PACKAGE}
+    apt-get purge -y ${PACKAGE}
+
+    preseed
+    echo CI: dpkg -i ${PACKAGE} \# 2.1
+    dpkg -i ${PACKAGE}_2.1_all.deb
+    echo $PACKAGE ${PACKAGE}/purge boolean true                     | debconf-set-selections
+    preseed
+    echo CI: apt-get purge ${PACKAGE}
+    apt-get purge -y ${PACKAGE}
+
+    # Use a different password, to distinquish from the default. However, it
+    # seems that localhost and 127.0.0.1 are treated as the same host in
+    # mysql.user, and by default localhost sorts before 127.0.0.1, so we need
+    # to delete the user@localhost when we start or use a different user.
+    echo CI: dpkg -i ${PACKAGE} \# 2.0 127.0.0.1
+    preseed
+    echo 'CREATE DATABASE IF NOT EXISTS `dbtestmysql`;' | mysql --defaults-file=/etc/mysql/debian.cnf -vvv mysql
+    {
+        echo "CREATE USER IF NOT EXISTS 'dbtestmysql'@'127.0.0.1';"
+        echo "ALTER USER 'dbtestmysql'@'127.0.0.1' IDENTIFIED BY 'blibli';"
+        echo "GRANT ALL PRIVILEGES ON dbtestmysql.* TO 'dbtestmysql'@'127.0.0.1';"
+        echo "FLUSH PRIVILEGES;"
+    } | mysql --defaults-file=/etc/mysql/debian.cnf -vvv mysql
+    echo $PACKAGE ${PACKAGE}/mysql/app-pass password blibli         | debconf-set-selections
+    echo $PACKAGE ${PACKAGE}/remote/host string "new host"          | debconf-set-selections
+    echo $PACKAGE ${PACKAGE}/remote/newhost string 127.0.0.1        | debconf-set-selections
+    echo $PACKAGE ${PACKAGE}/mysql/method string TCP/IP             | debconf-set-selections
+    echo $PACKAGE ${PACKAGE}/db/app-user string "dbtestmysql@127.0.0.1" | debconf-set-selections
+    echo $PACKAGE ${PACKAGE}/dbconfig-remove boolean false          | debconf-set-selections
+    dpkg -i ${PACKAGE}_2.0_all.deb
+    echo CI: apt-get purge ${PACKAGE}
+    preseed
+    apt-get purge -y ${PACKAGE}
+    # Drop to be sure (purge fails without valid admin credentials)
+    echo 'DROP DATABASE IF EXISTS `dbtestmysql`;' | mysql --defaults-file=/etc/mysql/debian.cnf -vvv mysql
+
+
+    PACKAGE=db-test-pgsql-migration
+    preseed
+    echo CI: dpkg -i ${PACKAGE} \# 1.9
+    dpkg -i ${PACKAGE}_1.9_all.deb
+    preseed
+    echo CI: apt-get purge ${PACKAGE}
+    apt-get purge -y ${PACKAGE}
+    preseed
+    echo CI: dpkg -i ${PACKAGE} \# 1.9
+    dpkg -i ${PACKAGE}_1.9_all.deb
+    preseed
+    echo CI: dpkg -i ${PACKAGE} \# 2.0
+    dpkg -i ${PACKAGE}_2.0_all.deb
+    echo $PACKAGE ${PACKAGE}/purge boolean true                     | debconf-set-selections
+    preseed
+    echo CI: apt-get purge ${PACKAGE}
+    apt-get purge -y ${PACKAGE}
+
+
+    PACKAGE=db-test-pgsql
+    preseed
+    echo CI: dpkg -i ${PACKAGE} \# 2.0
+    dpkg -i ${PACKAGE}_2.0_all.deb
+    preseed
+    echo CI: dpkg -i ${PACKAGE} \# 2.1
+    dpkg -i ${PACKAGE}_2.1_all.deb
+    echo $PACKAGE ${PACKAGE}/purge boolean true                     | debconf-set-selections
+    preseed
+    echo CI: apt-get purge ${PACKAGE}
+    apt-get purge -y ${PACKAGE}
+done

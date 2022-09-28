@@ -1,0 +1,2 @@
+etc/db-test-pgsql-migration
+usr/share/dbconfig-common/data/db-test-pgsql-migration/upgrade/pgsql

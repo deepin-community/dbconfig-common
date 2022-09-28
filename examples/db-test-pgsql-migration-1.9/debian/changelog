@@ -1,0 +1,6 @@
+db-common-example (1.9) unstable; urgency=low
+
+  * initial version to test migrating to dbconfig-common from a previously
+    packaged program
+
+ -- sean finney <seanius@debian.org>  Mon, 31 Jul 2006 23:44:20 -0700

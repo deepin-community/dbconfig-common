@@ -1,0 +1,91 @@
+.TH dbconfig-generate-include "1" "March 2005" "sean finney " "dbconfig-common"
+.SH NAME
+dbconfig-generate-include \- generate custom format db include files
+
+.SH SYNOPSIS
+.B dbconfig\-generate\-include [\-hv] [\-f format] [\-o options] [\-a] [\-d[varname]] [\-u[varname]] [\-p[varname]] [\-s[varname]] [\-P[varname]] [\-t[varname]] [\-C[commentstr]] [\-O owner[:group]] [\-m mode] [\-U] infile [outfile]
+.br
+
+.SH DESCRIPTION
+.B dbconfig\-generate\-include
+is a program to generate custom format include files containing the
+information necessary to connect a program to a database resource.
+
+.SH OPTIONS
+.TP
+infile
+use the given dbconfig\-common config file as input
+.TP
+outfile
+use the given file as output (default: stdout)
+.TP
+\fB\-f\fR|\-\-format
+use the given output format (default: sh)
+.TP
+\fB\-o\fR|\-\-options
+pass options specific to an output format in a semicolon separated list. see
+OUTPUT FORMATS/OPTIONS for more information.
+.TP
+\fB\-a\fR|\-\-all
+include all information in output (default)
+.TP
+\fB\-d\fR|\-\-dbname
+include the dbname in the output
+.TP
+\fB\-p\fR|\-\-dbpass
+include the dbpass in the output
+.TP
+\fB\-s\fR|\-\-dbserver
+include the dbserver in the output
+.TP
+\fB\-P\fR|\-\-dbport
+include the dbport in the output
+.TP
+\fB\-u\fR|\-\-dbuser
+include the dbuser in the output
+.TP
+\fB\-t\fR|\-\-dbtype
+include the dbtype in the output
+.TP
+\fB\-C\fR|\-\-comment
+"comment out" any unset variables, using a string appropriate comment
+string for the programming language in question.  can be overridden
+with an optional parameter as an arbitrary comment.
+.TP
+\fB\-O\fR|\-\-owner
+set the owner:group of the output file
+.TP
+\fB\-m\fR|\-\-mode
+set the permissions on the output file
+.TP
+\fB\-U\fR|\-\-ucf
+register the outputfile with ucf
+.TP
+\fB\-h\fR|\-\-help
+display this helpful message
+.TP
+\fB\-v\fR|\-\-version
+output the version and exit
+
+.SH OUTPUT FORMATS/OPTIONS
+format is one of a list of include\-file style formats for various
+programming languages.  the current list includes:
+.TP
+sh 
+/bin/sh style include file.
+.TP
+perl
+perl parseable include file.
+.TP
+php
+php parseable include file.
+.TP
+template
+a file which contains a series of fields to be replaced with actual
+values.  all substitutable fields consist of the underlying dbc_ variable
+name capitalized and surrounded with underscores.  for example: _DBC_DBUSER_.
+\fB options: \fR template_infile (path to input file containing template)
+.TP
+cpp
+c\-style header file, using #define'd constants.
+

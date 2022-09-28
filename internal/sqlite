@@ -1,0 +1,197 @@
+# -*- mode: sh -*-
+###
+### sqlite bindings for dbconfig-common
+###
+### Author:     Matt Brown <debian@mattb.net.nz>
+###
+###	all variables and functions fall under the namespace "dbc_foo" and
+###	"_dbc_foo", depending on whether or not they are "external"
+###
+
+# get some common functions
+. /usr/share/dbconfig-common/internal/common
+
+check_basepath_permissions(){
+    local line
+    if dpkg-statoverride --list "$dbc_basepath" >/dev/null; then
+        line=$(dpkg-statoverride --list "$dbc_basepath")
+        c_owner=$(echo $line | cut -d' ' -f1,2 | tr ' ' ':')
+        c_perms=$(echo $line | cut -d' ' -f3)
+    fi
+}
+
+##
+## execute a file with sqlite commands
+##
+dbc_sqlite_exec_file(){
+    local l_sqlfile l_retval l_dbfile
+    l_sqlfile=$1
+    l_dbfile="${dbc_basepath}/${dbc_dbname}"
+
+    if [ ! "$l_sqlfile" ]; then
+        dbc_error="no file supplied to execute"
+        return 1
+    fi
+    l_retval=0
+    $dbc_sqlite_cmd "$l_dbfile" < "$l_sqlfile" || l_retval=$?
+    return $l_retval
+}
+
+##
+## execute a specific sqlite command
+##
+##	note this is done without passing any info on the cmdline,
+##  including the command itself
+##
+dbc_sqlite_exec_command(){
+    local statement l_sqlfile l_retval
+    statement="$@"
+    l_retval=0
+    l_sqlfile=$(dbc_mktemp dbconfig-common_sqlfile.XXXXXX)
+    cat << EOF > $l_sqlfile
+$statement
+EOF
+    dbc_sqlite_exec_file "$l_sqlfile" || l_retval=$?
+    rm -f "$l_sqlfile"
+    return $l_retval
+}
+
+##
+## check for the existance of a specified database
+##
+_dbc_sqlite_check_database(){
+    local dbc_dbname l_dbfile
+    dbc_dbname=$1
+    l_dbfile="${dbc_basepath}/${dbc_dbname}"
+    if test -f "$l_dbfile"; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+##
+## creates a new sqlite database file
+##
+##
+dbc_sqlite_createdb(){
+    local ret l_dbfile l_owner l_perms
+
+    _dbc_sanity_check dbname $dbc_dbtype || return 1
+
+    l_dbfile="${dbc_basepath}/${dbc_dbname}"
+
+    # Default to root:root 0640 if the maintainer hasn't hinted otherwise
+    l_owner="root:root"
+    l_perms="0640"
+    if [ -n "$dbc_dbfile_owner" ]; then l_owner="$dbc_dbfile_owner"; fi
+    if [ -n "$dbc_dbfile_perms" ]; then l_perms="$dbc_dbfile_perms"; fi
+
+    dbc_logpart "creating database $dbc_dbname:"
+
+    if _dbc_sqlite_check_database "$dbc_dbname"; then
+        dbc_logline "already exists"
+    else
+        ret=0
+        if [ ! -d "${dbc_basepath}" ]; then
+            # Create the base directory
+            mkdir -p "${dbc_basepath}"
+        fi
+        # Setup permissions on the base directory to match dbfile
+        check_basepath_permissions
+        # Don't set permissions if admin has overriden them
+        if [ ! -n "$c_owner" ]; then
+            chown "$l_owner" "$dbc_basepath"
+        fi
+        if [ ! -n "$c_perms" ]; then
+            chmod "$l_perms" "$dbc_basepath"
+            # Always set execute bits on directories
+            chmod u+x,g+x "$dbc_basepath"
+        fi
+        # Create the database and setup permissions
+        dbc_sqlite_exec_command ".schema" && \
+            chown "$l_owner" "$l_dbfile" && \
+            chmod "$l_perms" "$l_dbfile" || ret=$?
+        if [ "$ret" = "0" ]; then
+            dbc_logline "success"
+            dbc_logpart "verifying database $dbc_dbname exists:"
+            if ! _dbc_sqlite_check_database "$dbc_dbname"; then
+                dbc_logline "failed"
+                dbc_error="Cannot find database after creation"
+                return 1
+            else
+                dbc_logline "success"
+            fi
+        else
+            dbc_logline "failed"
+            dbc_error="Failed to create database"
+            return 1
+        fi
+    fi
+}
+
+##
+## drops the sqlite database file by removing it from the disk
+##
+##
+dbc_sqlite_dropdb(){
+    _dbc_sanity_check dbname || return 1
+
+    dbc_logpart "dropping database $dbc_dbname:"
+
+    if _dbc_sqlite_check_database "$dbc_dbname"; then
+        if rm -f "${dbc_basepath}/${dbc_dbname}"; then
+            dbc_logline "success"
+            dbc_logpart "verifying database $dbc_dbname was dropped:"
+            if _dbc_sqlite_check_database "$dbc_dbname"; then
+                dbc_logline "failed"
+                dbc_error="Database still exists after rm command"
+                return 1
+            else
+                dbc_logline "success"
+            fi
+            if [ "${dbc_basepath}" = "${dbc_default_basepath}" ] ; then
+                # Make sure we clean up any empty directory as well
+                # see bug 775226
+                rmdir --parents --ignore-fail-on-non-empty "${dbc_basepath}"
+            fi
+        else
+            dbc_logline "failed"
+            dbc_error="Database removal failed"
+            return 1
+        fi
+    else
+        dbc_logline "database does not exist"
+    fi
+}
+
+##
+## basic installation check
+##
+dbc_sqlite_db_installed(){
+    command -v sqlite >/dev/null
+}
+
+dbc_sqlite3_db_installed(){
+    command -v sqlite3 >/dev/null
+}
+
+##
+## dump a sqlite database
+##
+dbc_sqlite_dump(){
+    local dumpfile ret old_umask
+    dumpfile=$1
+    old_umask=$(umask)
+    _dbc_sanity_check dbname $dbc_dbtype || return 1
+    if _dbc_sqlite_check_database "$dbc_dbname"; then
+        umask 0066
+        dbc_sqlite_exec_command ".dump" > "$dumpfile"
+        ret=$?
+        umask $old_umask
+        return $ret
+    else
+        dbc_logline "database does not exist"
+        return 0
+    fi
+}

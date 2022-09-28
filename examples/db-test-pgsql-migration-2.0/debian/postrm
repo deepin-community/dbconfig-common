@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+#set -x
+
+if [ -f /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+fi
+if [ -f /usr/share/dbconfig-common/dpkg/postrm.pgsql ]; then
+	. /usr/share/dbconfig-common/dpkg/postrm.pgsql 
+fi
+dbc_go db-test-pgsql-migration "$@"
+
+if [ "$1" = "purge" ]; then
+	rm -f /etc/db-test-pgsql-migration/db.new.conf
+	if command -v ucf >/dev/null; then
+		ucf --purge /etc/db-test-pgsql-migration/db.new.conf
+		ucfr --purge db-test-pgsql-migration /etc/db-test-pgsql-migration/db.new.conf
+	fi
+fi
+
+#DEBHELPER#

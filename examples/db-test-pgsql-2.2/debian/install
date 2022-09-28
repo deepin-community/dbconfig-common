@@ -1,0 +1,4 @@
+#! /usr/bin/dh-exec
+pgsql.sql             => usr/share/dbconfig-common/data/db-test-pgsql/install/pgsql
+pgsql-upgrade_2.1.sql => usr/share/dbconfig-common/data/db-test-pgsql/upgrade/pgsql/2.1
+pgsql-upgrade_2.2.sql => usr/share/dbconfig-common/data/db-test-pgsql/upgrade/pgsql/2.2

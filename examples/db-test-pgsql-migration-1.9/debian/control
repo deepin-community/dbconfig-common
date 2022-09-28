@@ -1,0 +1,18 @@
+Source: db-common-example
+Section: misc
+Priority: optional
+Maintainer: Paul Gevers <elbrus@debian.org>
+Build-Depends-Indep: debhelper (>= 9), dh-exec
+Standards-Version: 3.9.6
+
+Package: db-test-pgsql-migration
+Architecture: all
+Depends: ${misc:Depends}
+Recommends: postgresql-client
+Suggests: postgresql
+Description: a package to test dbconfig-common (migration version)
+ This is a package to test the dbconfig-common package.
+ .
+ This version should work with postgresql database servers, and
+ also illustrates how to migrate a package that was previously
+ not using dbconfig-common.

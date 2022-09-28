@@ -1,0 +1,584 @@
+# -*- mode: sh -*-
+common_check_connect(){
+    log_tc "successful connect"
+    [ "$skip_mock" ] || mockup -i ${mock_command}
+    _dbc_${test_dbtype}_check_connect </dev/null
+    assertTrue "${test_dbtype}_check_connect failed" $?
+
+    [ "$skip_mock" ] && startSkipping
+    subst_tmpfile dbconfig-common_my.cnf.XXXXXX "$mockup_cmdline"
+    assertFilesEqual ./data/${test_dbtype}_check_connect.txt "$mockup_cmdline"
+    assertFileEmpty "unexpected input to ${test_dbtype}_check_connect" "$mockup_inputfile"
+    [ "$skip_mock" ] && endSkipping
+
+    log_tc "fail to connect with error code"
+    dbc_dbadmin="invalidadmin"
+    dbc_dbadmpass="blablablabla"
+    [ "$skip_mock" ] || mockup -r 1 ${test_dbtype}
+    _dbc_${test_dbtype}_check_connect </dev/null 2>/dev/null
+    assertFalse "${test_dbtype}_check_connect should have failed" $?
+}
+
+dbc_common_exec_file(){
+    local _dbc_nodb sql
+
+    sql=$(mktemp -t)
+    echo "$withdb_command" > "$sql"
+
+    [ "$skip_mock" ] || mockup -i ${mock_command}
+    [ "$skip_mock" ] && dbc_${test_dbtype}_createdb > /dev/null 2>&1
+
+    log_tc "expected behaviour for existing file"
+    dbc_${test_dbtype}_exec_file "$sql" >/dev/null
+    assertTrue "dbc_${test_dbtype}_exec_file (withdb) failed" $?
+    [ "$skip_mock" ] && dbc_${test_dbtype}_dropdb > /dev/null 2>&1
+
+    [ "$skip_mock" ] && startSkipping
+    subst_tmpfile dbconfig-common_my.cnf.XXXXXX "$mockup_cmdline"
+    assertFilesEqual ./data/dbc_${test_dbtype}_exec_file.withdb.txt "$mockup_cmdline"
+    [ "$skip_mock" ] && endSkipping
+
+    log_tc "expected behaviour for missing file"
+    dbc_${test_dbtype}_exec_file "does not exist.sql" >/dev/null
+    assertFalse "dbc_${test_dbtype}_exec_file (withdb) should have failed" $?
+
+    [ "$skip_mock" ] && startSkipping
+    subst_tmpfile dbconfig-common_my.cnf.XXXXXX "$mockup_cmdline"
+    assertFilesEqual ./data/dbc_${test_dbtype}_exec_file.withdb.txt "$mockup_cmdline"
+    [ "$skip_mock" ] && endSkipping
+
+    [ "$skip_mock" ] || mockup -i ${mock_command}
+
+    # same as before, but with _dbc_nodb set
+    echo "$nodb_command" > "$sql"
+    _dbc_nodb=yes
+    log_tc "expected behaviour for existing file, no database"
+    dbc_${test_dbtype}_exec_file "$sql" > /dev/null
+    assertTrue "dbc_${test_dbtype}_exec_file (nodb) failed" $?
+
+    [ "$skip_mock" ] && startSkipping
+    subst_tmpfile dbconfig-common_my.cnf.XXXXXX "$mockup_cmdline"
+    assertFilesEqual ./data/dbc_${test_dbtype}_exec_file.nodb.txt "$mockup_cmdline"
+    [ "$skip_mock" ] && endSkipping
+
+    log_tc "expected behaviour for missing file, no database"
+    dbc_${test_dbtype}_exec_file "does not exist.sql" >/dev/null
+    assertFalse "dbc_${test_dbtype}_exec_file (nodb) should have failed" $?
+
+    [ "$skip_mock" ] && startSkipping
+    subst_tmpfile dbconfig-common_my.cnf.XXXXXX "$mockup_cmdline"
+    assertFilesEqual ./data/dbc_${test_dbtype}_exec_file.nodb.txt "$mockup_cmdline"
+    [ "$skip_mock" ] && endSkipping
+
+    rm -f "$sql"
+}
+
+common_exec_command(){
+    mockup -i ${mock_command}
+    dbc_${test_dbtype}_exec_command "select * from foo where bar = 1"
+    assertTrue "dbc_${test_dbtype}_exec_command failed" $?
+
+    assertFilesEqual ./data/${test_dbtype}_exec_command.sql.txt "$mockup_inputfile"
+}
+
+dbc_common_check_database(){
+    mockup -i -o ./data/dbc_${test_dbtype}_check_database.exists.stdout.txt ${test_dbtype}
+    log_tc "database exists"
+    _dbc_${test_dbtype}_check_database "$dbc_dbname"
+    assertTrue "_dbc_${test_dbtype}_check_database failed to find db" $?
+
+    log_tc "database does not exist"
+    dbc_dbname="thisDbDoesNotExist"
+    mockup -i -o ./data/dbc_${test_dbtype}_check_database.missing.stdout.txt ${test_dbtype}
+    _dbc_${test_dbtype}_check_database "$dbc_dbname"
+    assertFalse "_dbc_${test_dbtype}_check_database shouldn't have found db" $?
+}
+
+dbc_common_check_user(){
+    log_tc "existing user, with grant, localhost"
+    mockup -i -o ./data/dbc_${test_dbtype}_check_user.localhost.exists.stdout.txt ${test_dbtype}
+    dbc_${test_dbtype}_check_user
+    assertTrue "dbc_${test_dbtype}_check_user failed to find user" $?
+
+    log_tc "user does not exist at all"
+    mockup -i ${mock_command}
+    dbc_${test_dbtype}_check_user
+    assertFalse "dbc_${test_dbtype}_check_user shouldn't have found user" $?
+
+    log_tc "user exists, does not have grant"
+    mockup -i -o ./data/dbc_${test_dbtype}_check_user.localhost.nogrant.stdout.txt ${test_dbtype}
+    dbc_${test_dbtype}_check_user
+    assertFalse "dbc_${test_dbtype}_check_user shouldn't have found grant" $?
+
+    log_tc "user exists on remote host"
+    dbc_dballow="host2"
+    mockup -i -o ./data/dbc_${test_dbtype}_check_user.remote.exists.stdout.txt ${test_dbtype}
+    dbc_${test_dbtype}_check_user
+    assertTrue "dbc_${test_dbtype}_check_user failed to find user on remote" $?
+}
+
+dbc_common_createdb(){
+    local tmp_dbadmin output
+    tmp_dbadmin="$dbc_dbadmin"
+    dbc_authplugin="default"
+
+    log_tc "checksanity fails"
+    dbc_dbadmin=""
+    [ "$skip_mock" ] || mockup -r 1 _dbc_sanity_check
+    dbc_${test_dbtype}_createdb >/dev/null 2>&1
+    assertFalse "dbc_${test_dbtype}_createdb (checksanity) should have failed" $?
+    dbc_dbadmin="$tmp_dbadmin"
+
+    log_tc "checkconnect fails"
+    dbc_dbadmin="blablabla"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup -r 1 _dbc_${test_dbtype}_check_connect
+    dbc_${test_dbtype}_createdb >/dev/null 2>&1
+    assertFalse "dbc_${test_dbtype}_createdb (checkconnect) should have failed" $?
+    dbc_dbadmin="$tmp_dbadmin"
+
+    # Let's do this one first, so we can use the database in the next test
+    log_tc "database does not exist, creation successful"
+    cat </dev/null > "$_dbc_logfile"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup -r 1 _dbc_${test_dbtype}_check_database
+    if [ "${test_dbtype}" = mysql ] ; then
+        [ "$skip_mock" ] || mockup dbc_${test_dbtype}_exec_command
+    else
+        [ "$skip_mock" ] || mockup _dbc_createdb
+    fi
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_database
+    dbc_${test_dbtype}_createdb >/dev/null 2>&1
+    assertTrue "dbc_${test_dbtype}_createdb failed" $?
+    assertFilesEqual "./data/dbc_${test_dbtype}_createdb.verifyok.txt" "$_dbc_logfile"
+
+    log_tc "database already exists"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_database
+    output=$(dbc_${test_dbtype}_createdb 2>&1)
+    assertTrue "dbc_${test_dbtype}_createdb (exists) failed" $?
+    assertEquals "creating database testdbname: already exists." "$output"
+
+    # The next tests would require a dropdb first and still some mockups to
+    # make sure things fail. As they are already tested with mockups, skip
+    # them "for real".
+    [ "$skip_mock" ] && startSkipping
+
+    log_tc "database does not exist, creation failed"
+    cat </dev/null > "$_dbc_logfile"
+    [ "$skip_mock" ] ||	mockup _dbc_sanity_check
+    [ "$skip_mock" ] ||	mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] ||	mockup -r 1 _dbc_${test_dbtype}_check_database
+    if [ "${test_dbtype}" = mysql ] ; then
+        [ "$skip_mock" ] ||	mockup -r 1 dbc_${test_dbtype}_exec_command
+    else
+        [ "$skip_mock" ] ||	mockup -r 1 _dbc_createdb
+    fi
+    output=$(dbc_${test_dbtype}_createdb 2>&1)
+    assertFalse "dbc_${test_dbtype}_createdb should have failed" $?
+    assertEquals "creating database testdbname: failed." "$output"
+
+    log_tc "database does not exist, creation ok, verify failed"
+    [ "$skip_mock" ] ||	mockup _dbc_sanity_check
+    [ "$skip_mock" ] ||	mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup -r 1 _dbc_${test_dbtype}_check_database
+    if [ "${test_dbtype}" = mysql ] ; then
+        [ "$skip_mock" ] || mockup dbc_${test_dbtype}_exec_command
+    else
+        [ "$skip_mock" ] || mockup _dbc_createdb
+    fi
+    [ "$skip_mock" ] || mockup -r 1 _dbc_${test_dbtype}_check_database
+    cat </dev/null > "$_dbc_logfile"
+    dbc_${test_dbtype}_createdb >/dev/null 2>&1
+    assertFalse "dbc_${test_dbtype}_createdb should have failed" $?
+    assertFilesEqual "./data/dbc_${test_dbtype}_createdb.verifyfail.txt" "$_dbc_logfile"
+
+    [ "$skip_mock" ] && endSkipping
+}
+
+dbc_common_dropdb(){
+    local tmp_dbadmin output
+    tmp_dbadmin="$dbc_dbadmin"
+
+    log_tc "unable to connect"
+    dbc_dbadmin="blablabla"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup -r 1 _dbc_${test_dbtype}_check_connect
+    dbc_${test_dbtype}_dropdb 2> /dev/null
+    assertFalse "dbc_${test_dbtype}_dropdb should have failed to connect" $?
+    dbc_dbadmin="$tmp_dbadmin"
+
+    # Let's do this one first, so we can use success in the next test
+    log_tc "database exists, drop successful"
+    cat </dev/null > "$_dbc_logfile"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_database
+    [ "$skip_mock" ] || mockup dbc_${test_dbtype}_exec_command
+    [ "$skip_mock" ] || mockup -r 1 _dbc_${test_dbtype}_check_database
+
+    output=$(dbc_${test_dbtype}_dropdb 2>&1)
+    assertTrue "dbc_${test_dbtype}_dropdb failed" $?
+    assertFilesEqual "./data/dbc_${test_dbtype}_dropdb.verifyok.txt" "$_dbc_logfile"
+
+    log_tc "database does not exist"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup -r 1 _dbc_${test_dbtype}_check_database
+    output=$(dbc_${test_dbtype}_dropdb 2>&1)
+    assertTrue "dbc_${test_dbtype}_dropdb failed" $?
+    assertEquals "dropping database testdbname: database does not exist." "$output"
+
+    # The next tests would still some mockups to make sure things fail. As
+    # they are already tested with mockups, skip them "for real".
+    [ "$skip_mock" ] && startSkipping
+
+    log_tc "database exists, drop failed"
+    cat </dev/null > "$_dbc_logfile"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_database
+    [ "$skip_mock" ] || mockup -r 1 dbc_${test_dbtype}_exec_command
+
+    output=$(dbc_${test_dbtype}_dropdb 2>&1)
+    assertFalse "dbc_${test_dbtype}_dropdb should have failed" $?
+    assertEquals "dropping database testdbname: failed." "$output"
+
+    log_tc "database exists, drop ok, verify failed"
+    cat </dev/null > "$_dbc_logfile"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_database
+    [ "$skip_mock" ] || mockup dbc_${test_dbtype}_exec_command
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_database
+    output=$(dbc_${test_dbtype}_dropdb 2>&1)
+    assertFalse "dbc_${test_dbtype}_dropdb should have failed" $?
+    assertFilesEqual "./data/dbc_${test_dbtype}_dropdb.verifyfailed.txt" "$_dbc_logfile"
+
+    [ "$skip_mock" ] && endSkipping
+}
+
+dbc_common_createuser(){
+    local output sqllog tmp_dbadmin
+    local dbc_dballow dbc_dbserver
+    dbc_dballow=localhost
+    tmp_dbadmin="$dbc_dbadmin"
+
+    # what's being checked, roughly:
+    # connecting with no hostname
+    #    grant input
+    # connecting with hostname
+    #    grant input
+    # connecting with no hostname
+    #   user exists
+    #   user does not exist
+    #    grant input
+    #     creation succeeds
+    #       verify succeeds
+    #         log message
+    #       verify fails
+    #         log message
+    #     creation fails
+    #       log message
+    # connecting with hostname
+    #   user exists
+    #   user does not exist
+    #    grant input
+    #     creation succeeds
+    #       verify succeeds
+    #         log message
+    #       verify fails
+    #         log message
+    #     creation fails
+    #       log message
+
+    log_tc "connect fails"
+    dbc_dbadmin="blablabla"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup -r 1 _dbc_${test_dbtype}_check_connect
+    output=$(dbc_${test_dbtype}_createuser 2>&1)
+    assertFalse "dbc_${test_dbtype}_createuser should have failed to connect" $?
+    dbc_dbadmin="$tmp_dbadmin"
+
+    log_tc "local host, user does not exist, creation success, verify ok"
+    cat </dev/null > "$_dbc_logfile"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup -r 1 dbc_${test_dbtype}_check_user
+    if [ "$test_dbtype" = "mysql" ] ; then
+        [ "$skip_mock" ] || mockup -r 1 dbc_${test_dbtype}_check_user
+    fi
+    [ "$skip_mock" ] || mockup -i ${mock_command}
+    sqllog="${mockup_inputfile}"
+    [ "$skip_mock" ] || mockup dbc_${test_dbtype}_check_user
+    output=$(dbc_${test_dbtype}_createuser 2>&1)
+    assertTrue "dbc_${test_dbtype}_createuser failed" $?
+    [ "$skip_mock" ] && startSkipping
+    assertFilesEqual "./data/dbc_${test_dbtype}_createuser.nohost.sql.txt" "${sqllog}"
+    [ "$skip_mock" ] && endSkipping
+    assertFilesEqual "data/dbc_${test_dbtype}_createuser.nohost.log.verifyok.txt" "$_dbc_logfile"
+
+    [ "$skip_mock" ] && startSkipping # Let's not try to check remote for real
+    log_tc "remote host, user does not exist, creation success, verify ok"
+    cat </dev/null > "$_dbc_logfile"
+    dbc_dballow="host2"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup -r 1 dbc_${test_dbtype}_check_user
+    if [ "$test_dbtype" = "mysql" ] ; then
+        [ "$skip_mock" ] || mockup -r 1 dbc_${test_dbtype}_check_user
+    fi
+    [ "$skip_mock" ] || mockup -i ${mock_command}
+    sqllog="${mockup_inputfile}"
+    [ "$skip_mock" ] || mockup dbc_${test_dbtype}_check_user
+    output=$(dbc_${test_dbtype}_createuser 2>&1)
+    assertTrue "dbc_${test_dbtype}_createuser failed" $?
+    assertFilesEqual "./data/dbc_${test_dbtype}_createuser.remote.sql.txt" "${sqllog}"
+    assertFilesEqual "data/dbc_${test_dbtype}_createuser.remote.log.verifyok.txt" "$_dbc_logfile"
+    [ "$skip_mock" ] && endSkipping
+
+    log_tc "local host, user exists"
+    cat </dev/null > "$_dbc_logfile"
+    dbc_dballow="localhost"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup dbc_${test_dbtype}_check_user
+    output=$(dbc_${test_dbtype}_createuser 2>&1)
+    assertTrue "dbc_${test_dbtype}_createuser failed" $?
+    assertFilesEqual "data/dbc_${test_dbtype}_createuser.localhost.log.exists.txt" "$_dbc_logfile"
+
+    [ "$skip_mock" ] && startSkipping # Let's not try to check this for real
+
+    log_tc "local host, user does not exist, creation success, verify fails"
+    cat </dev/null > "$_dbc_logfile"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup -r 1 dbc_${test_dbtype}_check_user
+    if [ "$test_dbtype" = "mysql" ] ; then
+        [ "$skip_mock" ] || mockup -r 1 dbc_${test_dbtype}_check_user
+    fi
+    [ "$skip_mock" ] || mockup -i -o ./data/dbc_${test_dbtype}_check_user.localhost.exists.stdout.txt ${test_dbtype}
+    [ "$skip_mock" ] || mockup -r 1 dbc_${test_dbtype}_check_user
+    output=$(dbc_${test_dbtype}_createuser 2>&1)
+    assertFalse "dbc_${test_dbtype}_createuser should have failed" $?
+    assertFilesEqual "data/dbc_${test_dbtype}_createuser.nohost.log.verifyfail.txt" "$_dbc_logfile"
+
+    log_tc "local host, user does not exist, creation fails"
+    cat </dev/null > "$_dbc_logfile"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup -r 1 dbc_${test_dbtype}_check_user
+    if [ "$test_dbtype" = "mysql" ] ; then
+        [ "$skip_mock" ] || mockup -r 1 dbc_${test_dbtype}_check_user
+    fi
+    [ "$skip_mock" ] || mockup -r 1 dbc_${test_dbtype}_exec_file
+    output=$(dbc_${test_dbtype}_createuser 2>&1)
+    assertFalse "dbc_${test_dbtype}_createuser should have failed" $?
+    assertFilesEqual "data/dbc_${test_dbtype}_createuser.localhost.log.createfail.txt" "$_dbc_logfile"
+
+    log_tc "remote host, user exists"
+    cat </dev/null > "$_dbc_logfile"
+    export dbc_dballow="host2"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup dbc_${test_dbtype}_check_user
+    output=$(dbc_${test_dbtype}_createuser 2>&1)
+    assertTrue "dbc_${test_dbtype}_createuser failed" $?
+    assertFilesEqual "data/dbc_${test_dbtype}_createuser.remote.log.exists.txt" "$_dbc_logfile"
+
+    log_tc "remote host, user does not exist, creation success, verify fails"
+    cat </dev/null > "$_dbc_logfile"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup -r 1 dbc_${test_dbtype}_check_user
+    if [ "$test_dbtype" = "mysql" ] ; then
+        [ "$skip_mock" ] || mockup -r 1 dbc_${test_dbtype}_check_user
+    fi
+    [ "$skip_mock" ] || mockup dbc_${test_dbtype}_exec_file
+    [ "$skip_mock" ] || mockup -r 1 dbc_${test_dbtype}_check_user
+    output=$(dbc_${test_dbtype}_createuser 2>&1)
+    assertFalse "dbc_${test_dbtype}_createuser should have failed" $?
+    assertFilesEqual "data/dbc_${test_dbtype}_createuser.remote.log.verifyfail.txt" "$_dbc_logfile"
+
+    log_tc "remote host, user does not exist, creation fails"
+    cat </dev/null > "$_dbc_logfile"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup -r 1 dbc_${test_dbtype}_check_user
+    if [ "$test_dbtype" = "mysql" ] ; then
+        [ "$skip_mock" ] || mockup -r 1 dbc_${test_dbtype}_check_user
+    fi
+    [ "$skip_mock" ] || mockup -r 1 dbc_${test_dbtype}_exec_file
+    output=$(dbc_${test_dbtype}_createuser 2>&1)
+    assertFalse "dbc_${test_dbtype}_createuser should have failed" $?
+    assertFilesEqual "data/dbc_${test_dbtype}_createuser.remote.log.createfail.txt" "$_dbc_logfile"
+
+    [ "$skip_mock" ] && endSkipping
+}
+
+dbc_common_dropuser(){
+    local output dbc_dballow dbc_dbserver tmp_dbadmin
+    dbc_dballow=localhost
+    tmp_dbadmin="$dbc_dbadmin"
+
+    # to check:
+    # connect failure
+    # connecting with no hostname
+    #   user doesn't exist
+    #   user exists
+    #     revoke input
+    #     revoke fails
+    #         log msg
+    #     revoke succeeds
+    #       verifying revoke succeeds
+    #         log msg
+    #       verifying revoke fails
+    #         log msg
+    # connecting with hostname
+    #   user doesn't exist
+    #   user exists
+    #     revoke input
+    #     revoke fails
+    #       log msg
+    #     revoke succeeds
+    #       verifying revoke succeeds
+    #         log msg
+    #       verifying revoke fails
+    #         log msg
+
+    log_tc "connect fails"
+    dbc_dbadmin="tomptydom"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup -r 1 _dbc_${test_dbtype}_check_connect
+    dbc_${test_dbtype}_dropuser 2>/dev/null
+    assertFalse "dbc_${test_dbtype}_dropuser should have failed to connect" $?
+    dbc_dbadmin="$tmp_dbadmin"
+
+    [ "$skip_mock" ] && startSkipping # Any idea how to test this for real?
+    . ${_dbc_root}/internal/${test_dbtype} # I don't really know why; maybe only mocked
+    log_tc "localhost, user exists, revoke fails"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup dbc_${test_dbtype}_check_user
+    [ "$skip_mock" ] || mockup -i -r 1 ${test_dbtype}
+    dbc_${test_dbtype}_dropuser >/dev/null 2>&1
+    assertFalse "dbc_${test_dbtype}_dropuser should have failed" $?
+    assertFilesEqual ./data/dbc_${test_dbtype}_dropuser.nohost.sql.txt ${mockup_inputfile}
+    assertFilesEqual ./data/dbc_${test_dbtype}_dropuser.nohost.log.fail.txt $_dbc_logfile
+    [ "$skip_mock" ] && endSkipping
+
+    [ "$skip_mock" ] && dbc_${test_dbtype}_createuser >/dev/null 2>&1 # Needed for next command to succeed
+    log_tc "localhost, user exists, revoke succeeds, (TODO verify ok)"
+    cat </dev/null > "$_dbc_logfile"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup dbc_${test_dbtype}_check_user
+    [ "$skip_mock" ] || mockup dbc_${test_dbtype}_exec_file
+    dbc_${test_dbtype}_dropuser >/dev/null 2>&1
+    assertTrue "dbc_${test_dbtype}_dropuser should not have failed" $?
+    assertFilesEqual ./data/dbc_${test_dbtype}_dropuser.nohost.log.verifyok.txt $_dbc_logfile
+
+    [ "$skip_mock" ] && startSkipping # Let's not test remote for real
+
+    . ${_dbc_root}/internal/${test_dbtype} # I don't really know why; maybe only mocked
+    rm -f ./tmp/mockup/mockup.control # huh?
+    export dbc_dballow="host2"
+    cat </dev/null > "$_dbc_logfile"
+    log_tc "remote, user exists, revoke fails"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup dbc_${test_dbtype}_check_user
+    [ "$skip_mock" ] || mockup -i -r 1 ${test_dbtype}
+    dbc_${test_dbtype}_dropuser >/dev/null 2>&1
+    assertFalse "dbc_${test_dbtype}_dropuser should have failed" $?
+    assertFilesEqual ./data/dbc_${test_dbtype}_dropuser.remote.sql.txt ${mockup_inputfile}
+    assertFilesEqual ./data/dbc_${test_dbtype}_dropuser.remote.log.fail.txt $_dbc_logfile
+
+    log_tc "remote, user exists, revoke succeeds, (TODO verify ok)"
+    cat </dev/null > "$_dbc_logfile"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup dbc_${test_dbtype}_check_user
+    [ "$skip_mock" ] || mockup dbc_${test_dbtype}_exec_file
+    dbc_${test_dbtype}_dropuser >/dev/null 2>&1
+    assertTrue "dbc_${test_dbtype}_dropuser should not have failed" $?
+    [ "$skip_mock" ] && startSkipping
+    assertFilesEqual ./data/dbc_${test_dbtype}_dropuser.remote.log.verifyok.txt $_dbc_logfile
+
+    log_tc "TODO remote, user exists, revoke fails"
+
+    [ "$skip_mock" ] && endSkipping
+}
+
+dbc_common_dump(){
+    # to check:
+    # ${test_dbtype}dump cmdline
+    # ${test_dbtype}dump succeeds
+    #   log msg
+    # ${test_dbtype}dump fails
+    #   log msg
+    . ${_dbc_root}/internal/${test_dbtype}
+    rm -f ./tmp/mockup/mockup.control
+
+    [ "$skip_mock" ] && dbc_${test_dbtype}_createdb > /dev/null 2>&1
+    log_tc "${test_dbtype}dump succeeds"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_database
+    [ "$skip_mock" ] || mockup -o ./data/dbc_logline.simple.txt ${test_dbtype}dump
+    # tmpfile needs to be writable by postgres user
+    dbc_${test_dbtype}_dump ${TMPDIR}/good > /dev/null 2>&1
+    assertTrue "${test_dbtype} dump should have succeeded" $?
+    assertTrue "${test_dbtype} dump should have created a dumpfile" "[ -s ${TMPDIR}/good ]"
+
+    log_tc "${test_dbtype}dump fails"
+    [ "$skip_mock" ] || mockup _dbc_sanity_check
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_connect
+    [ "$skip_mock" ] || mockup _dbc_${test_dbtype}_check_database
+    [ "$skip_mock" ] || mockup -r 1 -o ./data/dbc_logline.simple.txt ${test_dbtype}dump
+    # tmpfile needs to be writable by postgres user
+    dbc_${test_dbtype}_dump ${TMPDIR}/bad > /dev/null 2>&1
+    [ "$skip_mock" ] && startSkipping # Don't know how to test this reasonably without mockup
+    assertFalse "${test_dbtype} dump should have failed" $?
+    [ "$skip_mock" ] && endSkipping
+    assertTrue "${test_dbtype} dump should have created a dumpfile" "[ -s ${TMPDIR}/bad ]"
+
+    rm -f ${TMPDIR}/good ${TMPDIR}/bad
+}
+
+dbc_common_db_installed(){
+
+    log_tc "${test_dbtype}d in path"
+    touch ./tmp/${test_dbtype}d
+    chmod +x ./tmp/${test_dbtype}d
+    if [ "$skip_mock" ] ; then
+        ( PATH="/bin:/usr/sbin:/usr/bin"; dbc_${test_dbtype}_db_installed )
+    else
+        # we need /usr/bin because else posh can't find printf
+        ( PATH="/bin:/usr/bin:./tmp"; dbc_${test_dbtype}_db_installed )
+    fi
+    assertTrue "${test_dbtype}d should have been found" $?
+    rm -f ./tmp/${test_dbtype}d
+}
+
+dbc_common_escape_str(){
+    local str t
+
+    t=$(mktemp)
+    # normal string
+    log_tc "escaping normal string"
+    str=$(dbc_${test_dbtype}_escape_str "this is a normal string")
+    assertTrue "error escaping string" "[ '$str' = 'this is a normal string' ]"
+    # string with \
+    log_tc "escaping string w/backslash"
+    dbc_${test_dbtype}_escape_str 'should have 1 backslash (\) but escape to 2' > "$t"
+    assertFilesEqual ./data/${test_dbtype}_escape_str.backslash.txt "$t"
+    # string with '
+    log_tc "escaping string w/single quote"
+    dbc_${test_dbtype}_escape_str "it isn't unusual to find quotes" > "$t"
+    assertFilesEqual ./data/${test_dbtype}_escape_str.quote.txt "$t"
+
+    rm -f "$t"
+}

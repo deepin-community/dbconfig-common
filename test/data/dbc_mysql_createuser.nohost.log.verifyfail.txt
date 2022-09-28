@@ -1,0 +1,3 @@
+checking privileges on database testdbname for testdbuser@localhost: user creation needed.
+granting access to database testdbname for testdbuser@localhost: success.
+verifying access for testdbuser@localhost: failed.

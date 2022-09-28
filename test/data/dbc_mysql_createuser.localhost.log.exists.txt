@@ -1,0 +1,1 @@
+checking privileges on database testdbname for testdbuser@localhost: ok.

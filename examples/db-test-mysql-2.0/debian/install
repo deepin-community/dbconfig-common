@@ -1,0 +1,2 @@
+#! /usr/bin/dh-exec
+mysql.sql => usr/share/dbconfig-common/data/db-test-mysql/install/mysql

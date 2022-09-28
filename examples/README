@@ -1,0 +1,48 @@
+hello!
+
+this directory contains a number of example packages which show
+how dbconfig-common can be used in various situations:
+
+- db-test-mysql 
+
+	a simple mysql database application.
+
+- db-test-mysql-perl
+
+	like the above, but instead of using dbconfig-common's native
+	setup code, the information is gathered and passed to a
+	maintainer-provided or upstream-provided script.
+
+- db-test-mysql-frontend
+
+    a "read-only frontend" package.  this package prompts for all the
+    pertinent information, but performs no database-modifying actions.
+
+- db-test-pgsql
+
+	like db-test-mysql, but for applications that work with postgres.
+
+- db-test-pgsql-migration
+
+    the same as above, but provided with a "1.9" version that doesn't
+    use dbconfig-common, which illustrates how in the "2.0" version
+    dbconfig-common can migrate previously existing settings.
+
+- db-test-multidbtype
+
+	this package shows how dbconfig-common can be used to configure
+	applications that work with any number of database types supported
+	by dbconfig-common.  currently this is only mysql/pgsql, but
+	work is in progress to support others, such as oracle and sqlite.
+
+also, you probably see that one of the packages (db-test-mysql) has
+two versions available.  this simply shows how dbconfig-common can
+support application upgrades that require making modifications to
+the underlying database.
+
+you can build all these packages at once by simply running the
+provided ./buildpackages.sh script if you're lazy :)
+
+enjoy!
+
+ -- sean finney <seanius@debian.org>  Sun, 02 Apr 2006 17:35:03 +0200

@@ -1,0 +1,1312 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Atila KOÇ <koc@artielektronik.com.tr>, 2012, 2015, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: dbconfig-common\n"
+"Report-Msgid-Bugs-To: dbconfig-common@packages.debian.org\n"
+"POT-Creation-Date: 2019-08-18 20:35+0200\n"
+"PO-Revision-Date: 2019-08-22 10:34+0300\n"
+"Last-Translator: Atila KOÇ <koc@artielektronik.com.tr>\n"
+"Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid "Will this server be used to access remote databases?"
+msgstr "Bu sunucu uzak veritabanlarına erişmek için kullanılacak mı?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid ""
+"For the database types that support it, dbconfig-common includes support for "
+"configuring databases on remote systems. When installing a package's "
+"database via dbconfig-common, the questions related to remote configuration "
+"are asked with a priority such that they are skipped for most systems."
+msgstr ""
+"Destekleyen veritabanı türleri için, dbconfig-common uzak sistemlerdeki "
+"veritabanlarını yapılandırma desteği içerir. Bir paketin veritabanı dbconfig-"
+"common aracılığı ile kurulurken, uzak yapılandırmaya ilişkin sorular çoğu "
+"sistemde yanıtlamayı gerektirmeyecek şekilde sorulacaktır."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid ""
+"If you select this option, the default behavior will be to prompt you with "
+"questions related to remote database configuration when you install new "
+"packages."
+msgstr ""
+"Eğer bu seçeneği seçerseniz, yeni paketlerinizi kurarken, uzak "
+"veritabanlarına ilişkin yapılandırmalarla ilgili soruların size sorulması "
+"öntanımlı davranış olacaktır."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid "If you are unsure, you should not select this option."
+msgstr "Emin değilseniz, bu seçeneği seçmemelisiniz."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid "Remember database passwords permanently in debconf?"
+msgstr "Veritabanı parolaları debconf içerisinde kalıcı olarak saklansın mı?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid ""
+"When you configure, upgrade, or remove applications with dbconfig-common, "
+"administrator-level database passwords are needed. By default, these "
+"passwords are not stored, so you will be prompted for them each time."
+msgstr ""
+"Uygulamaları dbconfig-common ile yapılandırdığınız, güncellediğiniz ya da "
+"kaldırdığınızda yönetici seviyesi parolalar gerekecektir. Bu parolalar, "
+"öntanımlı olarak saklanmadıklarından, her defasında sizden sorulacaktır."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid ""
+"Alternatively the passwords can be permanently remembered in the debconf "
+"database (which is protected by Unix file permissions), though this is less "
+"secure and thus not the default setting."
+msgstr ""
+"Alternatif olarak bu parolalar, Unix dosya erişim hakları ile korunan "
+"debconf veritabanının içerisinde saklanabilir. Daha az güvenilir olan bu "
+"seçenek öntanımlı değildir."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid ""
+"If you would rather not be bothered for an administrative password every "
+"time you upgrade a database application with dbconfig-common, you should "
+"choose this option. Otherwise, you should refuse this option."
+msgstr ""
+"dbconfig-common ile yapacağınız her veritabanı uygulaması yükseltimi "
+"sırasında yönetimsel parola girmekle uğraşmak istemiyorsanız, bu seçeneği "
+"seçiniz. Aksi durumda, bu seçeneği geri çeviriniz."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid "Configure database for ${pkg} with dbconfig-common?"
+msgstr "${pkg} paketinin veritabanı dbconfig-common ile yapılandırılsın mı?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid ""
+"The ${pkg} package must have a database installed and configured before it "
+"can be used. This can be optionally handled with dbconfig-common."
+msgstr ""
+"${pkg} paketi kullanılmadan önce kurulmuş ve yapılandırılmış bir veritabanı "
+"olmalıdır. Dilerseniz bu işlem dbconfig-common tarafından yürütülebilir."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid ""
+"If you are an advanced database administrator and know that you want to "
+"perform this configuration manually, or if your database has already been "
+"installed and configured, you should refuse this option. Details on what "
+"needs to be done should most likely be provided in /usr/share/doc/${pkg}."
+msgstr ""
+"Eğer deneyimli bir veritabanı yöneticisiyseniz ve bu yapılandırmayı elle "
+"yürütmek istediğinizden eminseniz ya da veritabanı önceden kurulmuş ve "
+"yapılandırılmış ise bu seçeneği geri çevirmelisiniz. Yapılması gerekenler "
+"ile ilgili ayrıntıları genellikle /usr/share/doc/${pkg} dizininde "
+"bulabilirsiniz."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid "Otherwise, you should probably choose this option."
+msgstr "Aksi durumlarda, bu seçeneği seçmeniz önerilir."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid "Reinstall database for ${pkg}?"
+msgstr "${pkg} paketinin veritabanı yeniden kurulsun mu?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Since you are reconfiguring ${pkg}, you may also want to reinstall the "
+"database which it uses."
+msgstr ""
+"${pkg} paketini yeniden yapılandırdığınızdan, bu paketin kullanmakta olduğu "
+"veritabanını da yeniden kurmak isteyebilirsiniz."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"If you wish to reinstall the database for ${pkg}, you should select this "
+"option. If you do not wish to do so (if you are reconfiguring the package "
+"for unrelated reasons), you should not select this option."
+msgstr ""
+"${pkg} paketinin veritabanını yeniden kurmak istiyorsanız, bu seçeneği "
+"seçmelisiniz. İstemiyorsanız (paketi veritabanı ile ilgisi olmayan "
+"nedenlerle yeniden yapılandırıyorsanız), bu seçeneği geri çevirmelisiniz."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Warning: if you opt to reinstall the database and install it under a name "
+"that already exists, the old database will be dropped without further "
+"questions. In that case a backup of the original database is made in /var/"
+"tmp/."
+msgstr ""
+"Uyarı: Eğer veritabanını yeniden kurmayı seçer ve daha önce verilmiş bir ad "
+"ile kurarsanız, eski veritabanı başka bir uyarı verilmeksizin kaldırılacak "
+"ve bir yedeği /var/tmp/ dizinine alınacaktır."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Warning: if you change the name of the database, the old database will not "
+"be removed. If you change the name of the user that connects to the "
+"database, the privileges of the original user will not be revoked."
+msgstr ""
+"Uyarı: Eğer veritabanının adını değiştirirseniz, eski veritabanı "
+"kaldırılmayacaktır. Veritabanına bağlanan kullanıcı adını değiştirirseniz, "
+"eski kullanıcıya ait izinler saklı kalacaktır."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+msgid "Perform upgrade on database for ${pkg} with dbconfig-common?"
+msgstr "${pkg} paketinin veritabanı dbconfig-common ile yükseltilsin mi?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+msgid ""
+"According to the maintainer for this package, database upgrade operations "
+"need to be performed on ${pkg}. Typically, this is due to changes in how a "
+"new upstream version of the package needs to store its data."
+msgstr ""
+"Bakımcısının önerisi üzerine, ${pkg} paketi üzerinde veritabanı yükseltme "
+"işlemleri gerçekleştirilmelidir. Bu yükseltme genellikle paketin yeni bir "
+"sürümünün veri saklama biçiminde yapılan değişiklikler nedeni ile gereklidir."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+msgid ""
+"If you want to handle this process manually, you should refuse this option. "
+"Otherwise, you should choose this option. During the upgrade, a backup of "
+"the database will be made in /var/cache/dbconfig-common/backups, from which "
+"the database can be restored in the case of problems."
+msgstr ""
+"Bu süreci elle yürütmek istiyorsanız, bu seçeneği geri çevirmeli; "
+"istemiyorsanız, seçmelisiniz. Olası sorunlarda yeniden kurulabilmesi için "
+"veritabanının bir kopyası yükseltme sırasında /var/cache/dbconfig-common/"
+"backups dizinine yedeklenecektir."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid "Deconfigure database for ${pkg} with dbconfig-common?"
+msgstr ""
+"${pkg} paketinin veritabanının yapılandırması dbconfig-common ile geri "
+"alınsın mı?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid ""
+"Since you are removing ${pkg}, it's possible that you no longer want the "
+"underlying database and the privileges for the user associated with this "
+"package."
+msgstr ""
+"${pkg} paketini kaldırdığınıza göre onun veritabanına ve kullanıcı "
+"izinlerine de artık gerek duymuyor olabilirsiniz."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid ""
+"Please choose whether database removal and privilege revocation should be "
+"handled with dbconfig-common."
+msgstr ""
+"Lütfen veritabanı ve ilgili izinleri kaldırma işlemlerinin dbconfig-common "
+"ile yapılıp yapılmayacağını seçiniz."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid ""
+"If you choose this option, dbconfig-common will check if ${pkg} provided "
+"scripts and database commands to undo package specific operations and run "
+"them if they exist. Then it will ask if you want to delete the ${pkg} "
+"database and revoke the standard privileges for the user of ${pkg}. If you "
+"don't want any of this, or if you want to handle this manually, you should "
+"refuse this option."
+msgstr ""
+"Eğer bu seçeneği seçerseniz, dbconfig-common ${pkg} paketinin pakete özgü "
+"işlemlerini geri alacak betikler ile veritabanı komutlarını denetleyecek ve "
+"varsa bunları işletecektir. Sonra da size veritabanını silmek ve ${pkg} "
+"paketinin kullanıcısına ait izinleri kaldırmak isteyip istemediğinizi "
+"soracaktır. Bunları yapmasını istemiyor ya da bu işlemi elle gerçekleştirmek "
+"istiyorsanız, bu seçeneği geri çevirmelisiniz."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid "Database type to be used by ${pkg}:"
+msgstr "${pkg} paketinin kullanacağı veritabanı türü:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid ""
+"The ${pkg} package can be configured to use one of several database types. "
+"Below, you will be presented with the available choices."
+msgstr ""
+"${pkg} paketi aşağıda listelenen veritabanı türlerinden herhangi biri ile "
+"çalışacak şekilde yapılandırılabilir."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid ""
+"If other database types are supported by ${pkg} but not shown here, the "
+"reason for their omission is that the corresponding dbconfig-<database type> "
+"packages are not installed. If you know that you want the package to use "
+"another supported database type, your best option is to back out of the "
+"dbconfig-common questions and opt out of dbconfig-common assistance for this "
+"package for now. Install your preferred dbconfig-<database type> option from "
+"the list in the package dependencies, and then \"dpkg-reconfigure ${pkg}\" "
+"to select it."
+msgstr ""
+"${pkg} paketi ile başka veritabanı tipleri de destekleniyor fakat burada "
+"listelenmiyorsa, atlanmalarının nedeni ilgili dbconfig-<database type> "
+"paketlerinin kurulmamış olmasıdır. Eğer pakenizin başka bir veritabanı "
+"türünü kullanmasını istediğinizden eminseniz, şimdilik en iyisi bu paket "
+"için dbconfig-common sorularına aksi yanıtlar verip, yardımından vazgeçmek "
+"olacaktır. Paket bağımlılıkları listesinden tercih ettiğiniz dbconfig-"
+"<database type> türünü kurun ve sonra onu \"dpkg-reconfigure ${pkg}\" komutu "
+"ile seçin."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+msgid "Delete the database for ${pkg}?"
+msgstr "${pkg} paketinin veritabanını silmek istiyor musunuz?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+msgid ""
+"If you no longer need the database for ${pkg} and the privileges of the "
+"database user of ${pkg}, you can choose to delete the database and revoke "
+"the privileges now."
+msgstr ""
+"Artık ${pkg} paketinin veritabanına ve kullanıcısının izinlerine gerek "
+"duymuyorsanız, şu anda veritabanını silmeyi ve izinleri kaldırmayı "
+"seçebilirsiniz."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+msgid ""
+"If you no longer have need of the data being stored by ${pkg}, you should "
+"choose this option. If you want to keep this data, or if you would rather "
+"handle this process manually, you should refuse this option. Either way, it "
+"won't affect your other databases."
+msgstr ""
+"${pkg} tarafından saklanan verilere gerek duymuyorsanız, bu seçeneği "
+"seçmelisiniz. Verileri saklamak istiyor ya da bu süreci elle yürütmek "
+"istiyorsanız, bu seçeneği geri çevirmelisiniz. Her iki seçenek de diğer "
+"veritabanlarınızı etkilemeyecektir."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:10001
+msgid "Back up the database for ${pkg} before upgrading?"
+msgstr ""
+"Yükseltme işleminden önce ${pkg} paketinin veritabanını yedeklemek ister "
+"misiniz?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:10001
+msgid ""
+"The underlying database for ${pkg} needs to be upgraded as part of the "
+"installation process. Just in case, the database can be backed up before "
+"this is done, so that if something goes wrong, you can revert to the "
+"previous package version and repopulate the database."
+msgstr ""
+"Kurulum işleminin bir parçası olarak ${pkg} paketinin veritabanının "
+"güncellenmesi gerekmektedir. Ne olur ne olmaz, bu işlem yapılmadan önce "
+"şimdiki veritabanının yedeklenmesinde fayda vardır. Olur da bir şeyler ters "
+"giderse, paketin önceki sürümüne dönebilir ve veritabanını yeniden devreye "
+"alabilirsiniz."
+
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:11001 ../dbconfig-common.templates:12001
+msgid "Password confirmation:"
+msgstr "Parola doğrulaması:"
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:13001
+msgid "Password mismatch"
+msgstr "Eşleşmeyen parola"
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:13001
+msgid "The password and its confirmation do not match."
+msgstr "Parola ve onun doğrulaması eşleşmedi."
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "abort"
+msgstr "vazgeç"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "retry"
+msgstr "yeniden dene"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "retry (skip questions)"
+msgstr "yeniden dene (soruları atla)"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "ignore"
+msgstr "gözardı et"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:14002
+msgid "Next step for database upgrade:"
+msgstr "Veritabanı yükseltimi için sonraki adım:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:14002
+msgid "An error occurred while upgrading the database:"
+msgstr "Veritabanı yükseltilirken bir hata oluştu:"
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:14002
+msgid ""
+"Fortunately, ${dbfile} should hold a backup of the database, made just "
+"before the upgrade (unless the error occurred during backup creation, in "
+"which case no changes will have been applied yet). Your options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+"Neyse ki, (bu hata yedek alma sırasında oluşmadığı sürece, ki böyle olduysa "
+"da henüz herhangi bir değişiklik uygulamaya geçmedi) ${dbfile} dosyası "
+"veritabanının yükseltmeden hemen önceki bir yedeğini tutuyor olmalıdır. "
+"Seçenekleriniz:\n"
+" * vazgeç - İşlemin başarısız olmasına neden olacak; bu paketin sürümünü\n"
+"   düşürmeniz, yeniden kurmanız veya yapılandırmanız ya da kullanmayı\n"
+"   sürdürmeden önce elle müdahele etmeniz gerekecektir. Bu genellikle,\n"
+"   kurulum hatalarını çözmedikçe, sizin başka paketleri kurmanızı da\n"
+"   engelleyecektir.\n"
+" * yeniden dene - Tüm yapılandırma seçeneklerini (debconf öncelik\n"
+"   seçeneğinize bağlı olarak kaçırmış olduğunuz seçenekler ile birlikte)\n"
+"   tekrar sorar ve işlemi tamamlamak için bir girişimde daha bulunur.\n"
+" * yeniden dene (soruları atla) - Soruları sormadan işlemi yeniden\n"
+"   dener. Eğer hatadan sonra altta yatan sorunu giderdiyseniz, bu\n"
+"   genelde işe yarar.\n"
+" * gözardı et - dbconfig-common hatalarını gözardı eder ve işlemi\n"
+"   sürdürür. Bu seçenek genelde bu paketi işlevsiz bir veritabanı ile\n"
+"   bırakır."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:15002
+msgid "Next step for database installation:"
+msgstr "Veritabanı kurulumu için sonraki adım:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:15002
+msgid "An error occurred while installing the database:"
+msgstr "Veritabanı kurulurken bir hata oluştu:"
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:15002
+msgid ""
+"Your options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+"Seçenekleriniz:\n"
+" * vazgeç - İşlemin başarısız olmasına neden olacak; bu paketin sürümünü\n"
+"   düşürmeniz, yeniden kurmanız veya yapılandırmanız ya da kullanmayı\n"
+"   sürdürmeden önce elle müdahele etmeniz gerekecektir. Bu genellikle,\n"
+"   kurulum hatalarını çözmedikçe, sizin başka paketleri kurmanızı da\n"
+"   engelleyecektir.\n"
+" * yeniden dene - Tüm yapılandırma seçeneklerini (debconf öncelik\n"
+"   seçeneğinize bağlı olarak kaçırmış olduğunuz seçenekler ile birlikte)\n"
+"   tekrar sorar ve işlemi tamamlamak için bir girişimde daha bulunur.\n"
+" * yeniden dene (soruları atla) - Soruları sormadan işlemi yeniden dener.\n"
+"   Eğer hatadan sonra altta yatan sorunu giderdiyseniz, bu genelde işe\n"
+"   yarar.\n"
+" * gözardı et - dbconfig-common hatalarını gözardı eder ve işlemi\n"
+"   sürdürür. Bu seçenek genelde bu paketi işlevsiz bir veritabanı ile\n"
+"   bırakır."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:16002
+msgid "Next step for database removal:"
+msgstr "Veritabanı kaldırma için sonraki adım:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:16002
+msgid "An error occurred while removing the database:"
+msgstr "Veritabanı kaldırılırken bir hata oluştu:"
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:16002
+msgid ""
+"As a result it was not possible to remove the database for ${pkg}. Your "
+"options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave the database and user privileges in place."
+msgstr ""
+"Sonuç olarak ${pkg} paketine ait veritabanı kaldırılamadı. Seçenekleriniz:\n"
+" * vazgeç - İşlemin başarısız olmasına neden olacak; bu paketin sürümünü\n"
+"   düşürmeniz, yeniden kurmanız veya yapılandırmanız ya da kullanmayı\n"
+"   sürdürmeden önce elle müdahele etmeniz gerekecektir. Bu genellikle,\n"
+"   kurulum hatalarını çözmedikçe, sizin başka paketleri kurmanızı da\n"
+"   engelleyecektir.\n"
+" * tekrar dene - Tüm yapılandırma seçeneklerini (debconf öncelik\n"
+"   seçeneğinize bağlı olarak kaçırmış olduğunuz seçenekler ile birlikte)\n"
+"   tekrar sorar ve işlemi tamamlamak için bir girişimde daha bulunur.\n"
+" * yeniden dene (soruları atla) - Soruları sormadan işlemi yeniden dener.\n"
+"   Eğer hatadan sonra altta yatan sorunu giderdiyseniz, bu genelde işe\n"
+"   yarar.\n"
+" * gözardı et - dbconfig-common hatalarını gözardı eder ve işlemi\n"
+"   sürdürür. Bu seçenek genelde veritabanını ve kullanıcı izinlerini\n"
+"   olduğu gibi bırakır."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:17001
+msgid "Next step:"
+msgstr "Sonraki adım:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:17001
+msgid ""
+"Configuring the database for ${pkg} requires the package ${dbpackage} to be "
+"installed and configured first, which is not something that can be checked "
+"for automatically."
+msgstr ""
+"${pkg} paketinin veritabanını yapılandırma işlemi ${dbpackage} paketinin "
+"kurulmuş ve yapılandırılmış olmasına bağlıdır, ki bu durum kendiliğinden "
+"denetlenemez."
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#. Additionally, ${dbpackage} can be replaced with "mysql-server", so
+#. that length suits, but ${pkg} usually will expand more.
+#: ../dbconfig-common.templates:17001
+msgid ""
+"Your options are:\n"
+" * abort - Choose this when in doubt and install ${dbpackage} before\n"
+"   continuing with the configuration of this package. This causes the\n"
+"   installation of ${pkg} to fail for now.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+"   Choose this if you chose the wrong database type by mistake.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+"Seçenekleriniz:\n"
+" * vazgeç - Bu seçeneği şüpheye düştüyseniz ve bu paketin\n"
+"   yapılandırmasını sürdürmeden önce ${dbpackage} paketini kurmak\n"
+"   istiyorsanız seçiniz. Bu durumda ${pkg} paketinin kurulumu\n"
+"   şimdilik başarısız olacaktır.\n"
+" * yeniden dene - Tüm yapılandırma seçeneklerini (debconf öncelik\n"
+"   seçeneğinize bağlı olarak kaçırmış olduğunuz seçenekler ile birlikte)\n"
+"   tekrar sorar ve işlemi tamamlamak için bir girişimde daha bulunur.\n"
+"   Hata ile yanlış veritabanı türünü seçtiyseniz bunu kullanın.\n"
+" * gözardı et - dbconfig-common hatalarını gözardı eder ve işlemi\n"
+"   sürdürür. Bu seçenek genelde bu paketi işlevsiz bir veritabanı ile\n"
+"   bırakır."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:18001
+msgid "Host name of the ${dbvendor} database server for ${pkg}:"
+msgstr "${pkg} paketinin ${dbvendor} veritabanı sunucusu için makine adı:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:18001
+msgid ""
+"Please select the remote hostname to use, or select \"new host\" to enter a "
+"new host."
+msgstr ""
+"Lütfen kullanacağınız uzak sunucu makine adını seçin ya da \"new host\" "
+"seçeneği ile yeni bir makine girin."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:19001
+msgid "Port number for the ${dbvendor} service:"
+msgstr "${dbvendor} hizmetinin kullanacağı port numarası:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:19001
+msgid ""
+"Please specify the port the ${dbvendor} database on the remote host is "
+"running on. To use the default port, leave this field blank."
+msgstr ""
+"Uzak makinede çalışan ${dbvendor} veritabanının port numarasını belirtiniz. "
+"Öntanımlı port numarasını kullanmak için bu alanı boş bırakınız."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid "Host running the ${dbvendor} server for ${pkg}:"
+msgstr "${pkg} paketinin ${dbvendor} hizmetini veren makine:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid "Please provide the hostname of a remote ${dbvendor} server."
+msgstr "Uzak ${dbvendor} sunucusunun makine adını giriniz."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid ""
+"You must have already arranged for the administrative account to be able to "
+"remotely create databases and grant privileges."
+msgstr ""
+"Yönetimsel hesaba uzaktan veritabanı yaratma ve haklarını devretme yetkisini "
+"önceden vermiş olmanız gerekiyor."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:21001
+msgid "${dbvendor} database name for ${pkg}:"
+msgstr "${pkg} paketi için ${dbvendor} veritabanı adı:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:21001
+msgid ""
+"Please provide a name for the ${dbvendor} database to be used by ${pkg}."
+msgstr ""
+"${pkg} paketinin kullanacağı ${dbvendor} veritabanı için bir ad giriniz."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid "${dbvendor} username for ${pkg}:"
+msgstr "${pkg} paketi için ${dbvendor} kullanıcı adı:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"Please provide a ${dbvendor} username for ${pkg} to register with the "
+"database server. A ${dbvendor} user is not necessarily the same as a system "
+"login, especially if the database is on a remote server."
+msgstr ""
+"${pkg} paketinin veritabanı sunucusuna kaydı için bir ${dbvendor} kullanıcı "
+"adı giriniz. Özellikle uzak sunuculardaki veritabanları için olmak üzere, "
+"bir ${dbvendor} kullanıcı adının sistem kullanıcı adı ile aynı olmasına "
+"gerek yoktur."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"This is the user which will own the database, tables, and other objects to "
+"be created by this installation. This user will have complete freedom to "
+"insert, change, or delete data in the database."
+msgstr ""
+"Bu kullanıcı; bu kurulum ile yaratılacak veritabanı, tablolar ve diğer "
+"nesnelerin sahibi olacaktır. Bu kullanıcı veritabanına dilediğince veri "
+"ekleyebilecek, değiştirebilecek ya da silebilecektir."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"If your username contains an @, you need to specify the domain as well (see "
+"below)."
+msgstr ""
+"Kullanıcı adınız @ içeriyorsa, aşağıdaki gibi etki alanını da belirtmeniz "
+"gerekir."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"Advanced usage: if you need to define the domain that the user will log in "
+"from, you can write \"username@domain\"."
+msgstr ""
+"Gelişmiş kullanım: Eğer kullanıcının oturum açtığı etki alanı adını da "
+"tanımlamanız gerekirse, \"username@domain\" biçiminde yazabilirsiniz."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid "${dbvendor} storage directory for ${pkg}:"
+msgstr "${pkg} paketinin ${dbvendor} saklama dizini:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid ""
+"Please provide a path where the ${dbvendor} database file for ${pkg} should "
+"be installed into."
+msgstr ""
+"${pkg} paketi için kurulacak ${dbvendor} veritabanının saklanacağı dizini "
+"giriniz."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid ""
+"The permissions for this directory will be set to match the permissions for "
+"the generated database file."
+msgstr ""
+"Bu dizinin erişim hakları, oluşturulacak veritabanı dosyası erişim hakları "
+"ile eşleşecek şekilde ayarlanacaktır."
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:24001 ../dbconfig-common.templates:29001
+msgid "Unix socket"
+msgstr "Unix soketi"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:24001 ../dbconfig-common.templates:29001
+msgid "TCP/IP"
+msgstr "TCP/IP"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:24002
+msgid "Connection method for MySQL database of ${pkg}:"
+msgstr "${pkg} paketinin MySQL veritabanına bağlanma yöntemi:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:24002
+msgid ""
+"By default, ${pkg} will be configured to use a MySQL server through a local "
+"Unix socket (this provides the best performance). To connect with a "
+"different method, or to a different server entirely, select the appropriate "
+"option from the choices here."
+msgstr ""
+"Öntanımlı olarak ${pkg} paketi MySQL sunucusuna yerel bir Unix soketi "
+"üzerinden bağlanacak şekilde yapılandırılacaktır (bu en iyi başarımı "
+"sağlayacaktır). Bununla birlikte, başka bir yöntemle bağlanmak ya da hepten "
+"başka bir sunucuya bağlanmak isterseniz, aşağıdaki seçeneklerden uygun "
+"olanını seçiniz."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:25001
+msgid "MySQL application password for ${pkg}:"
+msgstr "${pkg} paketi için MySQL uygulama parolası:"
+
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:25001 ../dbconfig-common.templates:30001
+msgid ""
+"Please provide a password for ${pkg} to register with the database server. "
+"If left blank, a random password will be generated."
+msgstr ""
+"${pkg} paketini veritabanı sunucusuna bağlamak için bir parola giriniz. Bu "
+"alanı boş bırakırsanız, rastgele bir parola üretilecektir."
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001 ../dbconfig-common.templates:31001
+msgid "Name of the database's administrative user:"
+msgstr "Veritabanı yönetimsel kullanıcısının adı:"
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001 ../dbconfig-common.templates:31001
+msgid ""
+"Please provide the name of the account with which this package should "
+"perform administrative actions. This user is the one with the power to "
+"create new database users."
+msgstr ""
+"Bu paketin yönetimsel işlemlerini gerçekleştirmek için kullanacağı hesabın "
+"kullanıcı adını giriniz. Bu kullanıcı, yeni veritabanı kullanıcıları "
+"yaratacak yetkide olacaktır."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001
+msgid ""
+"For MySQL, this is almost always \"root\". Note that this is not the same as "
+"the Unix login \"root\"."
+msgstr ""
+"MySQL için bu ad her durumda \"root\" olmalıdır. Dikkat, bu Unix kullanıcısı "
+"olan \"root\" değildir."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:27001
+msgid "Password of the database's administrative user:"
+msgstr "Veritabanı yönetimsel kullanıcısının parolası:"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:27001
+msgid ""
+"Please provide the password for the administrative account \"${dbadmin}\" "
+"with which this package should create its MySQL database and user."
+msgstr ""
+"Bu paketin kendi MySQL veritabanı ve kullanıcısını yaratmak için kullanacağı "
+"\"${dbadmin}\" yönetimsel kullanıcının parolasını giriniz."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:28001
+msgid "Authentication plugin for MySQL database:"
+msgstr "MySQL veritabanı için kimlik doğrulama eklentisi:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:28001
+msgid ""
+"Database user accounts can be configured to use a variety of plugins for "
+"authentication with MySQL. If the server default won't work with this "
+"application, it is necessary to specify one that will. Please select one "
+"from the list of available plugins. Leaving the selection set to its "
+"original value should work unless a remote server is using unpredictable "
+"defaults, but other options may not be supported by ${pkg}. If problems "
+"arise, the package's documentation should give hints; see /usr/share/doc/"
+"${pkg}/."
+msgstr ""
+"Veritabanı kullanıcı hesapları MySQL ile kimlik doğrulaması için çeşitli "
+"eklentileri kullanacak şekilde yapılandırılabilir. Eğer sunucu öntanımlısı "
+"bu uygulama ile çalışmayacaksa, çalısacak bir tanesini belirtmek gereklidir. "
+"Lütfen eldeki eklentilerden birini seçin. Seçimi önerilen değerinde bırakmak "
+"uzak bir sunucu öngörülmeyen öntanımlı bir eklenti kullanmadığı sürece "
+"çalışacaktır; yalnız diğer seçenekleri de ${pkg} deskteklemiyor olabilir. "
+"Sorun yaşarsanız yardım için paketin /usr/share/doc/${pkg}/ dizinide bulunan "
+"belgelerine başvurabilirsiniz."
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:28001
+msgid ""
+"Your options are:\n"
+" * default - use the default determined by the server.\n"
+" * mysql_native_password - no MySQL authentication plugin is used.\n"
+" * sha256_password - a more secure password encryption algorithm.\n"
+" * caching_sha2_password - SHA2 plus an in-memory authentication cache."
+msgstr ""
+"Seçenekleriniz:\n"
+" * default - sunucunun belirlediği öntanımlıyı kullan.\n"
+" * mysql_native_password - hiçbir MySQL kimlik doğrulama eklentisi "
+"kullanma.\n"
+" * sha256_password - daha güvenli bir parola şifreleme algoritması "
+"(algoritma yerine işlem süreci çok mu zorlama olur?).\n"
+" * caching_sha2_password - SHA2'ye ek olarak bir iç bellek kimlik doğrulama "
+"önbelleği."
+
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:29001
+msgid "TCP/IP + SSL"
+msgstr "TCP/IP + SSL"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:29002
+msgid "Connection method for PostgreSQL database of ${pkg}:"
+msgstr "${pkg} paketinin PostgreSQL veritabanına bağlanma yöntemi:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:29002
+msgid ""
+"By default, ${pkg} will be configured to use a PostgreSQL server through TCP/"
+"IP because that method works in most circumstances. To connect with a "
+"different method, select the appropriate option from the choices here."
+msgstr ""
+"Öntanımlı olarak, çoğu durumda çalışacak bir yöntem olduğundan, ${pkg} "
+"paketi bir PostgreSQL sunucusunu TCP/IP üzerinden kullanacak şekilde "
+"yapılandırılacaktır. Başka bir yöntemle bağlanmak isterseniz, aşağıdaki "
+"seçeneklerden birini seçiniz."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:30001
+msgid "PostgreSQL application password for ${pkg}:"
+msgstr "${pkg} paketi için PostgreSQL uygulama parolası:"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:30001
+msgid ""
+"If you are using \"ident\" authentication, the supplied password will not be "
+"used and can be left blank. Otherwise, PostgreSQL access may need to be "
+"reconfigured to allow password-authenticated access."
+msgstr ""
+"Eğer \"ident\" tabanlı yetkilendirme kullanıyorsanız girilen parola "
+"kulanılmayacağından boş bırakılabilir. Aksi durumda, PostgreSQL erişimi "
+"parola-tabanlı erişime olanak tanıyacak şekilde yeniden yapılandırılmalıdır."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+msgid "Password of your database's administrative user:"
+msgstr "Veritabanınızın yönetimsel kullanıcı parolası:"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+msgid ""
+"Please provide the password for the ${dbadmin} account with which this "
+"package should perform administrative actions."
+msgstr ""
+"Bu paketin yönetimsel işlemleri gerçekleştirmek için kullanacağı ${dbadmin} "
+"hesabının parolasını giriniz."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+msgid ""
+"For a standard PostgreSQL installation, a database password is not required, "
+"since authentication is done at the system level."
+msgstr ""
+"Sıradan bir PostgreSQL kurulumunda yetkilendirme sistem seviyesinde "
+"yapıldığı için bir veritabanı parolasına gerek duyulmaz."
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:33001 ../dbconfig-common.templates:34001
+msgid "ident"
+msgstr "ident"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:33001 ../dbconfig-common.templates:34001
+msgid "password"
+msgstr "password"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+msgid "Method for authenticating the PostgreSQL administrator:"
+msgstr "PostgreSQL yöneticisi için doğrulama yöntemi:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+msgid ""
+"PostgreSQL servers provide several different mechanisms for authenticating "
+"connections. Please select what method the administrative user should use "
+"when connecting to the server."
+msgstr ""
+"PostgreSQL sunucuları bağlantıları doğrulamak için çeşitli yöntemler "
+"sağlarlar. Yönetimsel kullanıcının sunucuya bağlanırken kullanacağı yöntemi "
+"seçiniz."
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+msgid ""
+"With \"ident\" authentication on the local machine, the server will check "
+"that the owner of the Unix socket is allowed to connect. PostgreSQL itself "
+"calls this peer authentication."
+msgstr ""
+"Yerel makinede \"ident\" ile doğrulamada, sunucu Unix soketinin sahibinin "
+"bağlanma izni olup olmadığını denetleyecektir. PostgreSQL bu doğrulamayı "
+"kendisi yapar."
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+msgid ""
+"With \"ident\" authentication to remote hosts, RFC-1413-based ident is used "
+"(which can be considered a security risk)."
+msgstr ""
+"Uzak makinelerde \"ident\" doğrulamada RFC 1413 tabanlı tanıtım kullanılır "
+"(ki bu bir güvenlik açığı sayılabilir)."
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+msgid ""
+"With \"password\" authentication, a password will be passed to the server "
+"for use with some authentication backend (such as \"MD5\" or \"PAM\"). Note "
+"that the password is still passed in the clear across network connections if "
+"your connection is not configured to use SSL."
+msgstr ""
+"\"password\" türü doğrulamada, bir parola doğrulama arka ucu (\"MD5 ya da "
+"\"PAM\" gibi) tarafından değerlendirilmek üzere sunucuya gönderilir. Eğer "
+"bağlantılarınız SSL türü katman kullanmıyorsa, parolaların ağ üzerinden açık "
+"metin olarak aktarıldığını unutmayın."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+msgid ""
+"For a standard PostgreSQL installation running on the same host, \"ident\" "
+"is recommended."
+msgstr ""
+"PostgreSQL sunucusu ile aynı makineye yapılacak olağan kurulumlarda, \"ident"
+"\" türü doğrulama önerilir."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+msgid "Method for authenticating PostgreSQL user:"
+msgstr "PostgreSQL kullanıcısı için doğrulama yöntemi:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+msgid ""
+"PostgreSQL servers provide several different mechanisms for authenticating "
+"connections. Please select what method the database user should use when "
+"connecting to the server."
+msgstr ""
+"PostgreSQL sunucuları bağlantıları doğrulamak için çeşitli yöntemler "
+"sağlarlar. Veritabanı kullanıcısının sunucuya bağlanırken kullanacağı "
+"yöntemi seçiniz."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+msgid ""
+"For a standard PostgreSQL installation running on the same host, \"password"
+"\" is recommended, because typically the system username doesn't match the "
+"database username."
+msgstr ""
+"PostgreSQL sunucusu ile aynı makineye yapılacak olağan kurulumlarda, sistem "
+"kullanıcı adı genellikle veritabanı kullanıcı adı ile aynı olmayacağından, "
+"\"password\" türü doğrulama önerilir."
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:35001
+msgid "PostgreSQL connection method error"
+msgstr "PostgreSQL bağlantı yöntemi hatası"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:35001
+msgid ""
+"Unfortunately, it seems that the database connection method you have "
+"selected for ${pkg} will not work, because it requires the existence of a "
+"local user that does not exist."
+msgstr ""
+"Şu anda varolmayan bir yerel kullanıcının varlığını gerektirdiğinden, ne "
+"yazık ki ${pkg} paketi için seçmiş olduğunuz bağlantı yöntemi çalışmayacak "
+"gibi görünüyor."
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:36001
+msgid "Change PostgreSQL configuration automatically?"
+msgstr "PostgreSQL yapılandırması kendiliğinden değiştirilsin mi?"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:36001
+msgid ""
+"It has been determined that the database installation for ${pkg} cannot be "
+"automatically accomplished without making changes to the PostgreSQL server's "
+"access controls. It is suggested that this be done by dbconfig-common when "
+"the package is installed. If instead you would prefer to do it manually, the "
+"following line needs to be added to your pg_hba.conf:"
+msgstr ""
+"${pkg} paketi için veritabanı kurulumunun PostgreSQL sunucusunun erişim "
+"denetimi değiştirilmeden tamamlanmayacağı belirlendi. Bu değişikliğin paket "
+"kurulurken dbconfig-common tarafından yapılması önerilir. Bunun yerine "
+"değişikliği elle yapmak isterseniz, aşağıdaki satırı pg_hba dosyasına "
+"eklemeniz gerekir:"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:37001
+msgid "Revert PostgreSQL configuration automatically?"
+msgstr "PostgreSQL yapılandırması kendiliğinden eski şekline getirilsin mi?"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:37001
+msgid ""
+"As ${pkg} is now being removed, it may no longer be necessary to have an "
+"access control entry in the PostgreSQL server's configuration. While keeping "
+"such an entry will not break any software on the system, it may be seen as a "
+"potential security concern. It is suggested that this be done by dbconfig-"
+"common when the package is removed. If instead you would prefer to do it "
+"manually, the following line needs to be removed from your pg_hba.conf:"
+msgstr ""
+"${pkg} paketi kaldırılmakta olduğundan PostgreSQL sunucusunun "
+"yapılandırmasında erişim denetim içeriği tutmasına gerek kalmamıştır. İlgili "
+"içeriğin yapılandırmada kalması herhangi bir yazılımın başarımını "
+"engellemese de bir güvenlik açığı olarak değerlendirilmelidir. Bu içeriğin "
+"paket kaldırılırken dbconfig-common tarafından temizlenmesi önerilir. Bunun "
+"yerine değişikliği elle yapmak isterseniz, aşağıdaki satırı pg_hba "
+"dosyasından çıkarmanız gerekir:"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:38001
+msgid "Modifications needed in /etc/postgresql/pg_hba.conf"
+msgstr "/etc/postgresql/pg_hba.conf dosyasında yapılması gereken değişiklikler"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:38001
+msgid ""
+"To get the database for package ${pkg} bootstrapped you have to edit the "
+"configuration of the PostgreSQL server. You may be able to find help in the "
+"file /usr/share/doc/${pkg}/README.Debian."
+msgstr ""
+"${pkg} paketine ait veritabanının paket çalışmaya başlamadan önce veri "
+"girişine hazır olması için PostgreSQL sunucusunun yapılandırmasını "
+"düzenlemelisiniz. /usr/share/doc/${pkg}/README.Debian dosyasından yardım "
+"alabilirsiniz."
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:39001
+msgid "Empty passwords unsupported with PostgreSQL"
+msgstr "PostgreSQL boş parolaları desteklemez"
+
+#~ msgid "Keep \"administrative\" database passwords?"
+#~ msgstr "Veritabanı yönetimsel parolaları saklansın mı?"
+
+#~ msgid ""
+#~ "By default, you will be prompted for all administrator-level database "
+#~ "passwords when you configure, upgrade, or remove applications with "
+#~ "dbconfig-common. These passwords will be stored in debconf's "
+#~ "configuration database only for as long as they are needed."
+#~ msgstr ""
+#~ "Öntanımlı olarak, dbconfig-common ile uygulamaları yapılandırır, "
+#~ "yükseltir ya da kaldırırken yönetici-seviyesi veritabanı parolalarını "
+#~ "girmeniz istenecektir. Bu parolalar debconf'un yapılandırma veritabanında "
+#~ "yalnızca gerektiği sürece saklanacaktır."
+
+#~ msgid ""
+#~ "If you know that you do want to keep this database, or if you want to "
+#~ "handle the removal of this database manually, you should refuse this "
+#~ "option."
+#~ msgstr ""
+#~ "Bu veritabanını tutmayı sürdürmek ya da kaldırma işlemini elle yapmak "
+#~ "istiyorsanız, bu seçeneği geri çevirmelisiniz."
+
+#~ msgid ""
+#~ "Fortunately, ${dbfile} holds a backup of the database, made just before "
+#~ "the upgrade."
+#~ msgstr ""
+#~ "Neyse ki veritabanının bir yedeği yükseltme işleminden hemen önce "
+#~ "${dbfile} dosyasına yedeklenmiş."
+
+#~ msgid ""
+#~ "If at this point you choose \"retry\", you will be prompted with all the "
+#~ "configuration questions once more and another attempt will be made at "
+#~ "performing the operation. \"retry (skip questions)\" will immediately "
+#~ "attempt the operation again, skipping all questions.  If you choose "
+#~ "\"abort\", the operation will fail and you will need to downgrade, "
+#~ "reinstall, reconfigure this package, or otherwise manually intervene to "
+#~ "continue using it."
+#~ msgstr ""
+#~ "Bu aşamada \"yeniden dene\" seçeneğini seçerseniz, işlemi gerçekleştirmek "
+#~ "için yeni bir girişimde bulunulacak ve sizden bir kez daha tüm "
+#~ "yapılandırma sorularını yanıtlamanız istenecektir. \"yeniden dene "
+#~ "(soruları atla)\" seçeneği ise, yeni bir girişimde bulunacak fakat soru "
+#~ "sormayacaktır. \"vazgeç\" seçeneği işlemi başarısız kılacak ve sizin bu "
+#~ "paketi kullanmadan önce önceki sürümüne almanız, yeniden kurmanız, "
+#~ "yeniden yapılandırmanız ya da elle düzeltmeniz gerekecektir."
+
+#~ msgid ""
+#~ "If at this point you choose \"retry\", you will be prompted with all the "
+#~ "configuration questions once more and another attempt will be made at "
+#~ "performing the operation. \"retry (skip questions)\" will immediately "
+#~ "attempt the operation again, skipping all questions.  If you choose "
+#~ "\"abort\", the operation will fail and you will need to downgrade, "
+#~ "reinstall, reconfigure this package, or otherwise manually intervene to "
+#~ "continue using it.  If you choose \"ignore\", the operation will "
+#~ "continue, ignoring further errors from dbconfig-common."
+#~ msgstr ""
+#~ "Bu aşamada \"yeniden dene\" seçeneğini seçerseniz, işlemi gerçekleştirmek "
+#~ "için yeni bir girişimde bulunulacak ve sizden bir kez daha tüm "
+#~ "yapılandırma sorularını yanıtlamanız istenecektir. \"yeniden dene "
+#~ "(soruları atla)\" seçeneği ise, yeni bir girişimde bulunacak fakat soru "
+#~ "sormayacaktır. \"vazgeç\" seçeneği işlemi başarısız kılacak ve sizin "
+#~ "paketi kullanmadan önce önceki sürümüne almanız, yeniden kurmanız, "
+#~ "yeniden yapılandırmanız ya da elle düzeltmeniz gerekecektir. Eğer "
+#~ "\"gözardı et\" seçeneğini seçerseniz, işlem dbconfig-common'dan gelecek "
+#~ "hatalara bakılmaksızın sürecektir."
+
+#~ msgid ""
+#~ "For some reason it was not possible to perform some of the actions "
+#~ "necessary to remove the database for ${pkg}.  At this point you have two "
+#~ "options: you can find out what has caused this error and fix it, or you "
+#~ "can refuse the offer for help removing the database (the latter implies "
+#~ "you will have to remove the database manually)."
+#~ msgstr ""
+#~ "${pkg} paketinin veritabanını kaldırmak için gerekli bazı eylemler bir "
+#~ "şekilde yerine getirilemedi. Bu aşamada iki seçeneğiniz var: hatanın "
+#~ "nedenini bulur ve giderirsiniz ya da veritanabını kaldırma önerisini geri "
+#~ "çevirirsiniz (ki bu ikinci seçenekte veritabanını elle kaldırmanız "
+#~ "gerekecektir)."
+
+#~ msgid ""
+#~ "If in doubt, you should choose \"abort\", and install ${dbpackage} before "
+#~ "continuing with the configuration of this package.  If you choose \"retry"
+#~ "\", you will be allowed to choose different answers (in case you chose "
+#~ "the wrong database type by mistake).  If you choose \"ignore\", then "
+#~ "installation will continue as normal."
+#~ msgstr ""
+#~ "Şüpheye düştüğünüzde \"vazgeç\" seçeneğini seçmeli, ${dbpackage} "
+#~ "veritabanı paketini yüklemeli ve daha sonra bu paketin yapılandırmasını "
+#~ "sürdürmelisiniz. \"yeniden dene\" seçeneğini seçerseniz yapılandırma ile "
+#~ "ilgili başka seçenekleri değerlendirebileceksiniz. Eğer \"gözardı et\" "
+#~ "seçeneğini seçerseniz, kurulum olması gerektiği gibi sürecektir."
+
+#~ msgid "tcp/ip"
+#~ msgstr "tcp/ip"
+
+#~ msgid "tcp/ip + ssl"
+#~ msgstr "tcp/ip + ssl"

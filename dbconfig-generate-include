@@ -1,0 +1,438 @@
+#!/bin/sh
+
+# set some defaults
+format="sh"
+dbuser_varname="dbuser"
+dbpass_varname="dbpass"
+dbname_varname="dbname"
+dbserver_varname="dbserver"
+dbport_varname="dbport"
+dbtype_varname="dbtype"
+basepath_varname="basepath"
+
+# the version will always be < the package version
+VERSION="2.0"
+
+version(){
+	prog=$(basename $0)
+	cat << EOF
+
+$prog v$VERSION 
+copyright (c) 2005 sean finney <seanius@debian.org>
+
+EOF
+}
+
+usage(){
+	version
+	cat << EOF
+usage: $prog [-hv] [-f format] [-a] [-d[varname]] [-u[varname]] [-p[varname]] [-s[varname]] [-P[varname]] [-t[varname]] [-C[comment]] [-O owner[:group]] [-m mode] [-U] infile [outfile]
+
+	infile            use the given dbconfig-common config file as input
+	outfile           use the given file as input (default: stdout)
+	-f|--format       use the given output format (default: sh)
+	-o|--options		provide output-format-specific options
+	-a|--all          include all information in output (default)
+	-b|--basepath     include the basepath in the output
+	-d|--dbname       include the dbname in the output
+	-p|--dbpass       include the dbpass in the output
+	-s|--dbserver     include the dbserver in the output
+	-P|--dbport       include the dbport in the output
+	-u|--dbuser       include the dbuser in the output
+	-t|--dbtype       include the dbtype in the output
+	-C|--comment      comment out unset variables
+	-O|--owner        set the owner:group of the output file
+	-m|--mode         set the permissions on the output file
+	-U|--ucf          register the outputfile with ucf
+	-h|--help         display this helpful message
+	-v|--version      output the version and exit
+
+	format is one of a list of include-file style formats for various
+	programming languages.  the current list includes:
+		sh - /bin/sh style include file
+		perl - perl parseable include file
+		php - php parseable include file
+		template - perform pattern substitution on a pre-existing template
+		cpp - c-style header file, using #define'd constants
+
+EOF
+}
+
+check_permissions(){
+	local line
+	if dpkg-statoverride --list "$outputfile" >/dev/null; then
+		line=$(dpkg-statoverride --list "$outputfile")
+		owner=$(echo $line | cut -d' ' -f1,2 | tr ' ' ':')
+		perms=$(echo $line | cut -d' ' -f3)
+	fi
+}
+
+# Protect strings for use in the right hand side of a sed "s" command
+#
+# Without protection, double backslashes are interpreted as one
+# protected backslash, therefore "\\" -> "\\\\"
+# Without protection, an & "refers to that portion of the pattern
+# space which matched", therefore "&" -> "\\&"
+# The / is used as the seperator, so it needs escaping too,
+# therefore "/" -> "\\/"
+sed_rhs_escape(){
+    sed -e 's/\\/\\&/g' -e 's/&/\\&/g' -e 's,/,\\&,g' << EOF
+$1
+EOF
+}
+
+# Protect strings for use in shell files where the variable is
+# quoted in single quotes
+sh_sq_escape(){
+	sed -e "s,','\\\\'',g" << EOF
+$1
+EOF
+}
+
+# Protect strings for use in php files where the variable is
+# quoted in single quotes
+php_sq_escape(){
+	sed -e 's/\\/\\&/g' -e "s,',' . \"'\" . ',g" << EOF
+$1
+EOF
+}
+
+# Protect strings for use in perl files where the variable is
+# quoted in single quotes
+perl_sq_escape(){
+	php_sq_escape "$1"
+}
+
+
+TEMP=$(getopt -o af:hb::d::m:o:p::u::s::t::C::O:P::Uv --long help,dbuser::,dbname::,dbpass::,dbport::,dbserver::,dbtype::,basepath::,output:,format:,options:,comment::,owner:,mode:,ucf,version -n $0 -- "$@")
+
+if [ $? != 0 ] ; then usage >&2 ; exit 1 ; fi
+
+eval set -- "$TEMP"
+
+while true; do
+	case "$1" in
+	-a|--all)
+		use_all="yes"
+		shift
+	;;
+	-b|--basepath)
+		use_basepath="yes"
+		if [ ! -z "$2" ]; then
+			basepath_varname="$2"
+		fi
+		shift 2
+	;;
+	-d|--dbname)
+		use_dbname="yes"
+		if [ ! -z "$2" ]; then
+			dbname_varname="$2"
+		fi
+		shift 2
+	;;
+	-u|--dbuser)
+		use_dbuser="yes"
+		if [ ! -z "$2" ]; then
+			dbuser_varname="$2"
+		fi
+		shift 2
+	;;
+	-p|--dbpass)
+		use_dbpass="yes"
+		if [ ! -z "$2" ]; then
+			dbpass_varname="$2"
+		fi
+		shift 2
+	;;
+	-s|--dbserver)
+		use_dbserver="yes"
+		if [ ! -z "$2" ]; then
+			dbserver_varname="$2"
+		fi
+		shift 2
+	;;
+	-P|--dbport)
+		use_dbport="yes"
+		if [ ! -z "$2" ]; then
+			dbport_varname="$2"
+		fi
+		shift 2
+	;;
+	-t|--dbtype)
+		use_dbtype="yes"
+		if [ ! -z "$2" ]; then
+			dbtype_varname="$2"
+		fi
+		shift 2
+	;;
+	-f|--format)
+		format="$2"
+		shift 2
+	;;
+	-C|--comment)
+		use_comment="yes"
+		if [ ! -z "$2" ]; then
+			comment_string="$2"
+		fi
+		shift 2
+	;;		
+	-O|--owner)
+		owner="$2"
+		shift 2
+	;;		
+	-m|--mode)
+		perms="$2"
+		shift 2
+	;;	
+	-h|--help)
+		usage
+		exit
+	;;
+	-v|--version)
+		version
+		exit
+	;;
+	-U|--ucf)
+		do_ucf=1
+		shift
+	;;
+	-o|--options)
+		eval $2
+		shift 2
+	;;
+	--)
+		shift
+		break
+	;;
+	*)
+		echo "eh? $1" >&2
+		exit 1
+	;;
+	esac
+done
+
+# if they asked for all vars, or didn't ask for anything (which defaults to all)
+if [ "$use_all" ] || [ ! "${use_dbuser}${use_dbpass}${use_basepath}${use_dbname}${use_dbserver}${use_dbtype}${use_dbport}" ]; then
+		use_dbuser="yes"
+		use_dbpass="yes"
+		use_basepath="yes"
+		use_dbname="yes"
+		use_dbserver="yes"
+		use_dbport="yes"
+		use_dbtype="yes"
+fi
+
+inputfile=$1
+outputfile=$2
+
+if [ ! "$inputfile" ]; then
+	echo "you must specify an inputfile" >&2
+	usage >&2
+	exit 1
+fi
+
+if [ "$outputfile" ]; then
+	tmpout=$(mktemp -t dbconfig-generate-include.XXXXXX)
+	if [ ! -f "$tmpout" ]; then
+		echo "unable to create temporary file $tmpout" >&2
+		exit 1
+	fi
+	exec > $tmpout
+fi
+
+if [ ! -f "$inputfile" ] || [ ! -r "$inputfile" ]; then
+	echo "unable to read input file $inputfile" >&2
+	exit 1
+fi
+
+if ! . $inputfile ; then
+	echo "error processing $inputfile, check file contents" >&2
+	exit 1
+fi
+
+# if commenting-out is enabled
+if [ "$use_comment" ]; then
+	# if a comment string was not explicitly specified set a default
+	if [ ! "$comment_string" ]; then
+		case $format in
+		sh|php|perl)
+			comment_string="#"
+		;;
+		cpp)
+			comment_string="//"
+		;;
+		template)
+			echo "E: must specify a comment string for 'template' format" >&2
+			exit 1
+		;;
+		esac
+	fi
+	# now determine which things should be commented out if any
+	[ ! "$dbc_dbuser" ] && comment_dbuser="${comment_string}"
+	[ ! "$dbc_dbpass" ] && comment_dbpass="${comment_string}"
+	[ ! "$dbc_basepath" ] && comment_basepath="${comment_string}"
+	[ ! "$dbc_dbname" ] && comment_dbname="${comment_string}"
+	[ ! "$dbc_dbserver" ] && comment_dbserver="${comment_string}"
+	[ ! "$dbc_dbport" ] && comment_dbport="${comment_string}"
+	[ ! "$dbc_dbtype" ] && comment_dbtype="${comment_string}"
+fi
+
+case $format in
+sh)
+	cat << EOF 
+##
+## database access settings in /bin/sh format
+## automatically generated from $inputfile
+## by $0
+##
+## by default this file is managed via ucf, so you shouldn't have to
+## worry about manual changes being silently discarded.  *however*,
+## you'll probably also want to edit the configuration file mentioned
+## above too.
+##
+
+EOF
+	[ "$use_dbuser" ] && echo "${comment_dbuser}$dbuser_varname='$(sh_sq_escape "$dbc_dbuser")'"
+	[ "$use_dbpass" ] && echo "${comment_dbpass}$dbpass_varname='$(sh_sq_escape "$dbc_dbpass")'"
+	[ "$use_basepath" ] && echo "${comment_basepath}$basepath_varname='$(sh_sq_escape "$dbc_basepath")'"
+	[ "$use_dbname" ] && echo "${comment_dbname}$dbname_varname='$(sh_sq_escape "$dbc_dbname")'"
+	[ "$use_dbserver" ] && echo "${comment_dbserver}$dbserver_varname='$(sh_sq_escape "$dbc_dbserver")'"
+	[ "$use_dbport" ] && echo "${comment_dbport}$dbport_varname='$(sh_sq_escape "$dbc_dbport")'"
+	[ "$use_dbtype" ] && echo "${comment_dbtype}$dbtype_varname='$(sh_sq_escape "$dbc_dbtype")'"
+;;
+
+php)
+	cat << EOF 
+<?php
+##
+## database access settings in php format
+## automatically generated from $inputfile
+## by $0
+##
+## by default this file is managed via ucf, so you shouldn't have to
+## worry about manual changes being silently discarded.  *however*,
+## you'll probably also want to edit the configuration file mentioned
+## above too.
+##
+EOF
+	[ "$use_dbuser" ] && echo "${comment_dbuser}\$$dbuser_varname='$(php_sq_escape "$dbc_dbuser")';"
+	[ "$use_dbpass" ] && echo "${comment_dbpass}\$$dbpass_varname='$(php_sq_escape "$dbc_dbpass")';"
+	[ "$use_basepath" ] && echo "${comment_basepath}\$$basepath_varname='$(php_sq_escape "$dbc_basepath")';"
+	[ "$use_dbname" ] && echo "${comment_dbname}\$$dbname_varname='$(php_sq_escape "$dbc_dbname")';"
+	[ "$use_dbserver" ] && echo "${comment_dbserver}\$$dbserver_varname='$(php_sq_escape "$dbc_dbserver")';"
+	[ "$use_dbport" ] && echo "${comment_dbport}\$$dbport_varname='$(php_sq_escape "$dbc_dbport")';"
+	[ "$use_dbtype" ] && echo "${comment_dbtype}\$$dbtype_varname='$(php_sq_escape "$dbc_dbtype")';"
+	cat << EOF 
+EOF
+;;
+
+perl)
+	cat << EOF 
+##
+## database access settings in perl format
+## automatically generated from $inputfile
+## by $0
+##
+## by default this file is managed via ucf, so you shouldn't have to
+## worry about manual changes being silently discarded.  *however*,
+## you'll probably also want to edit the configuration file mentioned
+## above too.
+##
+EOF
+	[ "$use_dbuser" ] && echo "${comment_dbuser}our \$$dbuser_varname='$(perl_sq_escape "$dbc_dbuser")';"
+	[ "$use_dbpass" ] && echo "${comment_dbpass}our \$$dbpass_varname='$(perl_sq_escape "$dbc_dbpass")';"
+	[ "$use_basepath" ] && echo "${comment_basepath}our \$$basepath_varname='$(perl_sq_escape "$dbc_basepath")';"
+	[ "$use_dbname" ] && echo "${comment_dbname}our \$$dbname_varname='$(perl_sq_escape "$dbc_dbname")';"
+	[ "$use_dbserver" ] && echo "${comment_dbserver}our \$$dbserver_varname='$(perl_sq_escape "$dbc_dbserver")';"
+	[ "$use_dbport" ] && echo "${comment_dbport}our \$$dbport_varname='$(perl_sq_escape "$dbc_dbport")';"
+	[ "$use_dbtype" ] && echo "${comment_dbtype}our \$$dbtype_varname='$(perl_sq_escape "$dbc_dbtype")';"
+	cat << EOF 
+1;
+EOF
+;;
+cpp)
+	cat << EOF 
+/*
+ * database access settings in cpp header format
+ * why you would ever need this, who knows? :)
+ * automatically generated from $inputfile
+ * by $0
+ *
+ * by default this file is managed via ucf, so you shouldn't have to
+ * worry about manual changes being silently discarded.  *however*,
+ * you'll probably also want to edit the configuration file mentioned
+ * above too.
+ *
+ */
+#ifndef _DBCONFIG_COMMON_CONFIG_
+ #define _DBCONFIG_COMMON_CONFIG_
+EOF
+	[ "$use_dbuser" ] && echo " ${comment_dbuser}#define $dbuser_varname \"$dbc_dbuser\";"
+	[ "$use_dbpass" ] && echo " ${comment_dbpass}#define $dbpass_varname \"$dbc_dbpass\";"
+	[ "$use_basepath" ] && echo "${comment_basepath}#define $basepath_varname \"$dbc_basepath\";"
+	[ "$use_dbname" ] && echo " ${comment_dbname}#define $dbname_varname \"$dbc_dbname\";"
+	[ "$use_dbserver" ] && echo " ${comment_dbserver}#define $dbserver_varname \"$dbc_dbserver\";"
+	[ "$use_dbport" ] && echo " ${comment_dbport}#define $dbport_varname \"$dbc_dbport\";"
+	[ "$use_dbtype" ] && echo " ${comment_dbtype}#define $dbtype_varname \"$dbc_dbtype\";"
+	cat << EOF 
+#endif /* _DBCONFIG_COMMON_CONFIG_ */
+EOF
+;;
+template)
+	if [ ! "$template_infile" ]; then
+		cat << EOF >&2
+error: you must specify a template file. for example: '-o template_infile=foo'
+EOF
+		exit 1
+	elif [ ! -f "$template_infile" ]; then
+		echo "error: template infile $template_infile does not exist" >&2
+		exit 1
+	fi
+	sedtmp=$(mktemp -t dbconfig-generate-include.sed.XXXXXX)
+	if [ ! -f "$sedtmp" ]; then
+		echo "unable to create temporary file $sedtmp" >&2
+		exit 1
+	fi
+	# we do not want _DBC_DBSERVER_ to be expanded to "" (which means "use
+	# the best available method to connect to the local db): expand it to
+	# "localhost" if needed
+	if [ -z "$dbc_dbserver" ] ; then
+		_dbc_dbserver="localhost"
+	else
+		_dbc_dbserver="$dbc_dbserver"
+	fi
+	cat << EOF > "$sedtmp"
+s/^\(.*\)_DBC_DBUSER_/${comment_dbuser}\1$(sed_rhs_escape "$dbc_dbuser")/g
+s/^\(.*\)_DBC_DBPASS_/${comment_dbpass}\1$(sed_rhs_escape "$dbc_dbpass")/g
+s/^\(.*\)_DBC_BASEPATH_/${comment_basepath}\1$(sed_rhs_escape "$dbc_basepath")/g
+s/^\(.*\)_DBC_DBNAME_/${comment_dbname}\1$(sed_rhs_escape "$dbc_dbname")/g
+s/^\(.*\)_DBC_DBSERVER_/${comment_dbserver}\1$(sed_rhs_escape "$_dbc_dbserver")/g
+s/^\(.*\)_DBC_DBPORT_/${comment_dbport}\1$(sed_rhs_escape "$dbc_dbport")/g
+s/^\(.*\)_DBC_DBTYPE_/${comment_dbtype}\1$(sed_rhs_escape "$dbc_dbtype")/g
+EOF
+	sed -f "$sedtmp" < "$template_infile" 
+	rm -f "$sedtmp"
+;;
+esac
+
+if [ "$outputfile" ]; then
+	if [ -e "$outputfile" ] ; then
+		# In order to preserve all local attributes of the
+		# original file, copy them to the tmpout file, so that
+		# later on they are copied back (by ucf or mv command).
+		cp --preserve=all --attributes-only "$outputfile" "$tmpout"
+	fi
+	if [ "$do_ucf" ]; then
+		ucf --debconf-ok "$tmpout" "$outputfile" >&2
+		rm -f "$tmpout"
+	else
+		mv "$tmpout" "$outputfile"
+	fi
+	check_permissions
+	if [ -e "$outputfile" ] ; then
+	    [ "$owner" ] && chown $owner $outputfile
+	    [ "$perms" ] && chmod $perms $outputfile
+	fi
+fi
+
+exit 0

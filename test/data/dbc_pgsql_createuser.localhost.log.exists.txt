@@ -1,0 +1,2 @@
+creating postgres user testdbuser:  already exists.
+resetting password:  success.

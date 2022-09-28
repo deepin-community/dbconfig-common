@@ -1,0 +1,293 @@
+# -*- mode: sh -*-
+# mockup: a function to mockup other commands/functions
+#
+# this can be used to simulate a program that records calling arguments,
+# provided input, produces specified output/errors, and exits with a specified
+# return code.  very useful for unit testing!
+#
+# simple usage:
+#  $ echo file1 file2 file3 > ls.output.txt
+#  $ mockup -o ls.output.txt ls
+#  $ ls
+#  file1 file2 file3
+#
+# more advanced features are possible, such as multiple different invocations
+# and support for running in parallel under pipes.  see the nonexistant
+# documentation for examples
+set -u
+
+MOCKUP_WORKDIR=${MOCKUP_WORKDIR:-${TMPDIR:-}/mockup-$$}
+
+# record internal mockup program failure
+mockup_fail(){
+    echo "    MOCKUP ERROR: ${@:-}" >> "${errorfile:-/dev/stderr}"
+    return 127
+}
+
+# helpful usage stmts
+mockup_help(){
+    cat << EOF
+mockup: create "mock" programs/functions for unit testing shell scripts.
+
+usage:
+  mockup -h
+  mockup [-i] [-o file] [-e file] [-r code] command
+
+  command:   command-line program or shell function to override.
+
+  options:
+  -h:        print this useful help message.
+  -i:        record the input provided on stdin (to mockup.<n>.input.<cmd>)
+  -o FILE:   print the contents of FILE on standard output.
+  -e FILE:   print the contents of FILE on standard error.
+  -r CODE:   return with status CODE.
+EOF
+}
+
+# main function, called from test suite
+mockup(){
+    local args efile input ofile rcode
+    local n cmd envfile
+    args=$(getopt -o e:hio:r: -n mockup -- "${@:-}")
+    test $? = 0 || mockup_fail invalid options passed to mockup
+    eval set -- "$args"
+
+    # do something that will always be true without using true
+    # thus allowing even the "true" command to be mocked up :)
+    while [ "true" ]; do
+        case "$1" in
+            -e)
+                efile="$2"
+                shift
+                ;;
+            -h)
+                mockup_help
+                return 0
+                ;;
+            -i)
+                input=yes
+                ;;
+            -o)
+                ofile="$2"
+                shift
+                ;;
+            -r)
+                rcode="$2"
+                shift
+                ;;
+            --)
+                shift
+                break
+                ;;
+            *)
+                mockup_help >&2;
+                mockup_fail invalid arguments passed to mockup
+                return 127
+                ;;
+        esac
+        shift
+    done
+    if [ ! -e "$MOCKUP_WORKDIR" ]; then
+        mockup_fail "${MOCKUP_WORKDIR} not found, create or set MOCKUP_WORKDIR"
+        return 127
+    elif [ $# -ne 1 ]; then
+        mockup_help 2>&1
+        mockup_fail "$# $* need command name to mockup"
+        return 127
+    fi
+
+    cmd=$1
+
+    # to support multiple invokations, organize filenames in a queue
+    n=$(mockup_next_available "$MOCKUP_WORKDIR" "$cmd")
+
+    mockup_print "$cmd" "$n"
+
+    envfile=$MOCKUP_WORKDIR/$n.env.$cmd
+    if [ -f "$envfile" ]; then
+        . "$envfile"
+    else
+        mockup_fail "env file for $cmd (iteration $n) not found"
+        return 127
+    fi
+
+    return 0
+}
+
+# utility function for the case where a program might be called
+# multiple times in the same test suite but it's desired to
+# have different behaviours on each invokation
+mockup_next_available(){
+    local wd="$1"
+    local cmd="$2"
+    local n=0;
+    while [ -f "$wd/$n.script.$cmd" ] || [ -f "$wd/done.$n.script.$cmd" ]; do
+        n=$(expr $n + 1)
+    done
+    echo $n
+}
+
+# likewise but opposite: find the next to be evaluated
+mockup_next_evaluated(){
+    local wd="$1"
+    local cmd="$2"
+    local n=0;
+    local next oldnext
+
+    n=$(ls "$wd" | grep -E "^[0-9]*.script.$cmd" 2>/dev/null | head -1)
+    n=$(basename "$n" ".script.$cmd")
+    echo ${n:-0}
+}
+
+# utility function to quote cmdline arguments distinctly wrt whitespace
+# it can also replace certain environment variables with a template value,
+# i.e. s/$TMPDIR/<TMPDIR>/ for easy comparison
+mockup_escape(){
+    local esc_tmpdir
+    esc_tmpdir=$(echo $TMPDIR | sed -e 's,\\,\\\\,g')
+    sed -e "s,$esc_tmpdir,<TMPDIR>,g" 2>"$errorfile" -e "s/'/'\\\\''/g" << EOF
+$1
+EOF
+}
+
+# create the mock wrappers etc for the selected program/function
+mockup_print(){
+    local n scriptfile cmdlinefile errorfile mockup_control envfile
+    local cmd="$1"
+    local next oldnext
+    n="$2"
+
+    # the actual hook
+    scriptfile="$MOCKUP_WORKDIR/$n.script.$cmd"
+    donescriptfile="$MOCKUP_WORKDIR/done.$n.script.$cmd"
+    # where any received input is put
+    inputfile="$MOCKUP_WORKDIR/$n.input.$cmd"
+    doneinputfile="$MOCKUP_WORKDIR/done.$n.input.$cmd"
+    # where the cmdline with which the hook was called is stored
+    cmdlinefile="$MOCKUP_WORKDIR/$n.cmdline.$cmd"
+    donecmdlinefile="$MOCKUP_WORKDIR/done.$n.cmdline.$cmd"
+    # where the mockup-internal errors are stored
+    errorfile="$MOCKUP_WORKDIR/$n.errors.$cmd"
+    doneerrorfile="$MOCKUP_WORKDIR/done.$n.errors.$cmd"
+    # env file (see below)
+    envfile="$MOCKUP_WORKDIR/$n.env.$cmd"
+    doneenvfile="$MOCKUP_WORKDIR/done.$n.env.$cmd"
+    # master hook function control file for mockup scripts
+    mockup_control="$MOCKUP_WORKDIR/mockup.control"
+
+    # create an environment file to store all of this, but in the
+    # form of after it's run (so it can be sourced for comparisons later)
+    cat << EOF >"$envfile"
+mockup_cmdline="$donecmdlinefile"
+mockup_scriptfile="$donescriptfile"
+mockup_errorfile="$doneerrorfile"
+mockup_inputfile="$doneinputfile"
+EOF
+
+    # see if the mockup script already has a mockup hook registered
+    # and if not, add it, and re-source it.  this hook doesn't actually
+    # do the real work, as there's an extra level of indirection (argh,
+    # meta-meta-shell programming makes teh hedz hurt) to support
+    # multiple sequential invokations
+    if ! grep -q "^$cmd(){" "$mockup_control" 2>/dev/null; then
+        cat << EOF >> "${mockup_control}"
+
+$cmd(){
+  local next n oldnext ret
+  local errorfile
+  errorfile="$errorfile"
+  unset -f mock_$cmd >/dev/null 2>&1
+  n="\$(mockup_next_evaluated "\$MOCKUP_WORKDIR" "$cmd")"
+  if [ \$? -ne 0 ] || [ -z "\$n" ]; then
+    mockup_fail "no mockup script to execute for $cmd"
+    return 127
+  fi
+  next="\$MOCKUP_WORKDIR/\$n.script.$cmd"
+  if [ -f  "\$next" ]; then
+    . "\${next}"
+  else
+    mockup_fail "sourcing \${next}"
+    return 127
+  fi
+  mock_$cmd "\${@:-}"
+  ret=\$?
+  (
+  cd \$MOCKUP_WORKDIR
+  for f in \$n.*.$cmd; do
+    mv "\$f" "done.\$f"
+    if [ \$? -ne 0 ]; then
+      mockup_fail "rotating out \${next}"
+      return 127
+    fi
+  done
+  )
+  return \$ret
+}
+
+EOF
+    fi
+    . "$mockup_control"
+
+    # okay, now this is the real meat and potatoes of the mockup work
+    # this gets put into the sequential script file, and is called by
+    # the main hook above.
+    cat << EOF > "$scriptfile"
+mock_$cmd(){
+  local escaped cmdline
+  local errorfile="$errorfile"
+
+  # record the cmdline
+  set $cmd "\${@:-}"
+  while [ \$# -gt 0 ]; do
+    escaped=\$(mockup_escape "\$1")
+    if [ -n "\${cmdline:-}" ]; then
+      cmdline="\$cmdline '\$escaped'"
+    else
+      cmdline="'\$escaped'"
+    fi
+    shift
+  done
+  set "\$cmdline"
+  echo "\${@:-}" > "$cmdlinefile"
+  if [ \$? -ne 0 ]; then
+    mockup_fail failed recording cmdlinefile
+    return 127
+  fi
+
+  # record input
+  if [ -n "${input:-}" ]; then
+    cat > "${inputfile:-}" 2>>"$errorfile"
+    if [ \$? -ne 0 ]; then
+      mockup_fail failed recording input
+      return 127
+    fi
+  fi
+
+  # produce output
+  if [ -n "${ofile:-}" ]; then
+    cat < "${ofile:-}" 2>>"$errorfile"
+    if [ \$? -ne 0 ]; then
+      mockup_fail failed producing output
+      return 127
+    fi
+  fi
+
+  # produce errors
+  if [ -n "${efile:-}" ]; then
+    if [ ! -f "${efile:-}" ]; then
+      mockup_fail failed to find error output file
+      return 127
+    else
+      cat < "${efile:-}" >&2
+    fi
+    if [ \$? -ne 0 ]; then
+      mockup_fail failed producing error output
+      return 127
+    fi
+  fi
+
+  # and return requested value
+  return ${rcode:-0}
+}
+EOF
+}

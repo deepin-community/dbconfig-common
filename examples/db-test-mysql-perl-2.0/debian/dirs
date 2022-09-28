@@ -1,0 +1,2 @@
+etc/db-test-mysql-perl
+usr/share/dbconfig-common/scripts/db-test-mysql-perl/upgrade/mysql

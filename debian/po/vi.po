@@ -1,0 +1,1376 @@
+# Vietnamese Translation for dbconfig-common.
+# Copyright © 2009 Free Software Foundation, Inc.
+# Clytie Siddall <clytie@riverland.net.au>, 2005-2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: dbconfig-common 1.8.41\n"
+"Report-Msgid-Bugs-To: dbconfig-common@packages.debian.org\n"
+"POT-Creation-Date: 2019-08-18 20:35+0200\n"
+"PO-Revision-Date: 2009-02-12 18:00+0930\n"
+"Last-Translator: Clytie Siddall\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: LocFactoryEditor 1.8\n"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid "Will this server be used to access remote databases?"
+msgstr ""
+"Máy phục vụ này sẽ được dùng để truy cập cơ sở dữ liệu từ xa phải không?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+#, fuzzy
+#| msgid ""
+#| "For the database types that support it, dbconfig-common includes support "
+#| "for configuring databases on remote systems.  When installing a package's "
+#| "database via dbconfig-common, the questions related to remote "
+#| "configuration are asked with a priority such that they are skipped for "
+#| "most systems."
+msgid ""
+"For the database types that support it, dbconfig-common includes support for "
+"configuring databases on remote systems. When installing a package's "
+"database via dbconfig-common, the questions related to remote configuration "
+"are asked with a priority such that they are skipped for most systems."
+msgstr ""
+"Đối với những kiểu cơ sở dữ liệu có phải hỗ trợ nó, gói dbconfig-common cũng "
+"có hỗ trợ khả năng cấu hình cơ sở dữ liệu trên hệ thống ở xa. Khi cài đặt cơ "
+"sở dữ liệu của gói thông qua dbconfig-common, những câu hỏi liên quan đến "
+"việc cấu hình từ xa được hỏi với cấp pu tiên gây ra chúng bị bỏ qua bởi phần "
+"lớn hệ thống."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid ""
+"If you select this option, the default behavior will be to prompt you with "
+"questions related to remote database configuration when you install new "
+"packages."
+msgstr ""
+"Bật tùy chọn này thì ứng xử mặc định là nhắc bạn với câu hỏi liên quan đến "
+"việc cấu hình cơ sở dữ liệu từ xa khi bạn cài đặt gói mới."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:2001
+msgid "If you are unsure, you should not select this option."
+msgstr "Chưa chắc thì không nên bật tùy chọn này."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid "Remember database passwords permanently in debconf?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+msgid ""
+"When you configure, upgrade, or remove applications with dbconfig-common, "
+"administrator-level database passwords are needed. By default, these "
+"passwords are not stored, so you will be prompted for them each time."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+#, fuzzy
+#| msgid ""
+#| "This behavior can be disabled, in which case the passwords will remain in "
+#| "the database.  That database is protected by Unix file permissions, "
+#| "though this is less secure and thus not the default setting."
+msgid ""
+"Alternatively the passwords can be permanently remembered in the debconf "
+"database (which is protected by Unix file permissions), though this is less "
+"secure and thus not the default setting."
+msgstr ""
+"Ứng xử này có thể bị tắt, trong trường hợp đó những mật khẩu sẽ còn lại "
+"trong cơ sở dữ liệu. Cơ sở dữ liệu đó được bảo vệ bằng quyền hạn tập tin "
+"UNIX, dù trường hợp này ít bảo mật hơn thì không phải thiết lập mặc định."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:3001
+#, fuzzy
+#| msgid ""
+#| "If you would rather not be bothered for an administrative password every "
+#| "time you upgrade a database application with dbconfig-common, you should "
+#| "choose this option.  Otherwise, you should refuse this option."
+msgid ""
+"If you would rather not be bothered for an administrative password every "
+"time you upgrade a database application with dbconfig-common, you should "
+"choose this option. Otherwise, you should refuse this option."
+msgstr ""
+"Bật tùy chọn này nếu bạn không muốn nhập mật khẩu cấp quản trị mỗi lần nâng "
+"cấp một ứng dụng cơ sở dữ liệu bằng dbconfig-common. Không thì từ chối nó."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid "Configure database for ${pkg} with dbconfig-common?"
+msgstr "Cấu hình cơ sở dữ liệu cho ${pkg} bằng dbconfig-common không?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+#, fuzzy
+#| msgid ""
+#| "The ${pkg} package must have a database installed and configured before "
+#| "it can be used.  This can be optionally handled with dbconfig-common."
+msgid ""
+"The ${pkg} package must have a database installed and configured before it "
+"can be used. This can be optionally handled with dbconfig-common."
+msgstr ""
+"Để sử dụng gói ${pkg} thì trước tiên cần phải cài đặt và cấu hình một cơ sở "
+"dữ liệu. Việc này cũng có thể được quản lý bằng dbconfig-common."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+#, fuzzy
+#| msgid ""
+#| "If you are an advanced database administrator and know that you want to "
+#| "perform this configuration manually, or if your database has already been "
+#| "installed and configured, you should refuse this option.  Details on what "
+#| "needs to be done should most likely be provided in /usr/share/doc/${pkg}."
+msgid ""
+"If you are an advanced database administrator and know that you want to "
+"perform this configuration manually, or if your database has already been "
+"installed and configured, you should refuse this option. Details on what "
+"needs to be done should most likely be provided in /usr/share/doc/${pkg}."
+msgstr ""
+"Nếu bạn là quản trị cơ sở dữ liệu cấp cao và muốn tự chạy tiến trình cấu "
+"hinh này, hoặc nếu cơ sở dữ liệu của bạn đã được cài đặt và cấu hình, bạn "
+"nên từ chối tùy chọn này. Rất có thể là tài liệu trong « /usr/share/doc/"
+"${pkg} » chứa chi tiết về phương pháp cần thiết."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:4001
+msgid "Otherwise, you should probably choose this option."
+msgstr "Không thì bạn rất có thể nên bật tùy chọn này."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid "Reinstall database for ${pkg}?"
+msgstr "Cài đặt lại cơ sở dữ liệu cho ${pkg} ?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Since you are reconfiguring ${pkg}, you may also want to reinstall the "
+"database which it uses."
+msgstr ""
+"Trong khi cấu hình lại ${pkg}, cũng có thể cài đặt lại cơ sở dữ liệu nó dùng."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+#, fuzzy
+#| msgid ""
+#| "If you wish to reinstall the database for ${pkg}, you should select this "
+#| "option.  If you do not wish to do so (if you are reconfiguring the "
+#| "package for unrelated reasons), you should not select this option."
+msgid ""
+"If you wish to reinstall the database for ${pkg}, you should select this "
+"option. If you do not wish to do so (if you are reconfiguring the package "
+"for unrelated reasons), you should not select this option."
+msgstr ""
+"Muốn cài đặt lại cơ sở dữ liệu cho gói ${pkg} thì nên bật tùy chọn này. "
+"Không muốn (nếu cấu hình gói này vì lý do không liên quan) thì không nên."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Warning: if you opt to reinstall the database and install it under a name "
+"that already exists, the old database will be dropped without further "
+"questions. In that case a backup of the original database is made in /var/"
+"tmp/."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:5001
+msgid ""
+"Warning: if you change the name of the database, the old database will not "
+"be removed. If you change the name of the user that connects to the "
+"database, the privileges of the original user will not be revoked."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+msgid "Perform upgrade on database for ${pkg} with dbconfig-common?"
+msgstr "Nâng cấp cơ sở dữ liệu cho ${pkg} bằng dbconfig-common không?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+#, fuzzy
+#| msgid ""
+#| "According to the maintainer for this package, database upgrade operations "
+#| "need to be performed on ${pkg}.  Typically, this is due to changes in how "
+#| "a new upstream version of the package needs to store its data."
+msgid ""
+"According to the maintainer for this package, database upgrade operations "
+"need to be performed on ${pkg}. Typically, this is due to changes in how a "
+"new upstream version of the package needs to store its data."
+msgstr ""
+"Theo nhà duy trì gói này, thao tác nâng cấp cơ sở dữ liệu cần phải được thực "
+"hiện với gói ${pkg}. Bình thường, trường hợp này do thay đổi trong phương "
+"pháp cất giữ dữ liệu của một phiên bản mới của gói này trong dự án gốc."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:6001
+#, fuzzy
+#| msgid ""
+#| "If you want to handle this process manually, you should refuse this "
+#| "option.  Otherwise, you should choose this option. During the upgrade, a "
+#| "backup of the database will be made in /var/cache/dbconfig-common/"
+#| "backups, from which the database can be restored in the case of problems."
+msgid ""
+"If you want to handle this process manually, you should refuse this option. "
+"Otherwise, you should choose this option. During the upgrade, a backup of "
+"the database will be made in /var/cache/dbconfig-common/backups, from which "
+"the database can be restored in the case of problems."
+msgstr ""
+"Nếu bạn muốn tự quản lý tiến trình này, hãy từ chối tùy chọn này. Không thì "
+"nên bật nó. Trong khi nâng cấp, một bản sao lưu của cơ sở dữ liệu sẽ được "
+"tạo trong thư mục « /var/cache/dbconfig-common/backups », từ đó cũng có thể "
+"phục hồi cơ sở dữ liệu trong trường hợp có vấn đề."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid "Deconfigure database for ${pkg} with dbconfig-common?"
+msgstr "Bỏ cấu hình cơ sở dữ liệu cho ${pkg} bằng dbconfig-common không?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+#, fuzzy
+#| msgid ""
+#| "Since you are removing ${pkg}, it's possible that you no longer want the "
+#| "underlying database."
+msgid ""
+"Since you are removing ${pkg}, it's possible that you no longer want the "
+"underlying database and the privileges for the user associated with this "
+"package."
+msgstr ""
+"Vì bạn đang gỡ bỏ gói ${pkg}, cũng có thể không còn muốn lại cơ sở dữ liệu "
+"cơ bản."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+#, fuzzy
+#| msgid "If you like, database removal can be handled with dbconfig-common."
+msgid ""
+"Please choose whether database removal and privilege revocation should be "
+"handled with dbconfig-common."
+msgstr "Cũng có thể gỡ bỏ cơ sở dữ liệu bằng dbconfig-common."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:7001
+msgid ""
+"If you choose this option, dbconfig-common will check if ${pkg} provided "
+"scripts and database commands to undo package specific operations and run "
+"them if they exist. Then it will ask if you want to delete the ${pkg} "
+"database and revoke the standard privileges for the user of ${pkg}. If you "
+"don't want any of this, or if you want to handle this manually, you should "
+"refuse this option."
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid "Database type to be used by ${pkg}:"
+msgstr "Kiểu cơ sở dữ liệu ${pkg} cần dùng:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid ""
+"The ${pkg} package can be configured to use one of several database types. "
+"Below, you will be presented with the available choices."
+msgstr ""
+"Gói ${pkg} có thể được cấu hình để sử dụng một của vài kiểu cơ sở dữ liệu "
+"khác nhau. Dưới đây, bạn sẽ thấy những lựa chọn sẵn sàng."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:8001
+msgid ""
+"If other database types are supported by ${pkg} but not shown here, the "
+"reason for their omission is that the corresponding dbconfig-<database type> "
+"packages are not installed. If you know that you want the package to use "
+"another supported database type, your best option is to back out of the "
+"dbconfig-common questions and opt out of dbconfig-common assistance for this "
+"package for now. Install your preferred dbconfig-<database type> option from "
+"the list in the package dependencies, and then \"dpkg-reconfigure ${pkg}\" "
+"to select it."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+#, fuzzy
+#| msgid "Do you want to purge the database for ${pkg}?"
+msgid "Delete the database for ${pkg}?"
+msgstr "Muốn tẩy cơ sở dữ liệu cho ${pkg} không?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+#, fuzzy
+#| msgid ""
+#| "If you no longer need the database for ${pkg}, you can choose to remove "
+#| "it now."
+msgid ""
+"If you no longer need the database for ${pkg} and the privileges of the "
+"database user of ${pkg}, you can choose to delete the database and revoke "
+"the privileges now."
+msgstr ""
+"Không còn cần lại cơ sở dữ liệu cho ${pkg} thì bạn có dịp gỡ bỏ nó ngay bây "
+"giờ."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:9001
+#, fuzzy
+#| msgid ""
+#| "If you no longer have need of the data being stored by ${pkg}, you should "
+#| "choose this option.  If you want to keep this data, or if you would "
+#| "rather handle this process manually, you should refuse this option."
+msgid ""
+"If you no longer have need of the data being stored by ${pkg}, you should "
+"choose this option. If you want to keep this data, or if you would rather "
+"handle this process manually, you should refuse this option. Either way, it "
+"won't affect your other databases."
+msgstr ""
+"Bật tùy chọn này nếu bạn không còn cần lại dữ liệu được ${pkg} lưu trữ. Vẫn "
+"còn muốn giữ dữ liệu này, hoặc bạn thích tự quản lý quá trình này, thì bạn "
+"nên từ chối tuỳ chọn này."
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:10001
+#, fuzzy
+#| msgid "Do you want to back up the database for ${pkg} before upgrading?"
+msgid "Back up the database for ${pkg} before upgrading?"
+msgstr "Muốn sao lưu cơ sở dữ liệu cho ${pkg} trước khi nâng cấp ?"
+
+#. Type: boolean
+#. Description
+#: ../dbconfig-common.templates:10001
+#, fuzzy
+#| msgid ""
+#| "The underlying database for ${pkg} needs to be upgraded as part of the "
+#| "installation process.  Just in case, the database can be backed up before "
+#| "this is done, so that if something goes wrong, you can revert to the "
+#| "previous package version and repopulate the database."
+msgid ""
+"The underlying database for ${pkg} needs to be upgraded as part of the "
+"installation process. Just in case, the database can be backed up before "
+"this is done, so that if something goes wrong, you can revert to the "
+"previous package version and repopulate the database."
+msgstr ""
+"Cơ sở dữ liệu bên dưới cho ${pkg} cũng cần phải được nâng cấp trong quá "
+"trình cài đặt. Để cẩn thận, cơ sở dữ liệu có thể được sao lưu về trước, do "
+"đó trong trường hợp gặp lỗi bạn có khả năng phục hồi phiên bản gói trước và "
+"điền lại vào cơ sở dữ liệu."
+
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:11001 ../dbconfig-common.templates:12001
+msgid "Password confirmation:"
+msgstr "Xác nhận mật khẩu :"
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:13001
+msgid "Password mismatch"
+msgstr "Hai mật khẩu không trùng"
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:13001
+msgid "The password and its confirmation do not match."
+msgstr "Mật khẩu gõ trước và mật khẩu gõ sau không trùng với nhau."
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "abort"
+msgstr "hủy bỏ"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "retry"
+msgstr "thử lại"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "retry (skip questions)"
+msgstr "thử lại (bỏ qua các câu hỏi)"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:14001 ../dbconfig-common.templates:15001
+#: ../dbconfig-common.templates:16001
+msgid "ignore"
+msgstr "bỏ qua"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:14002
+msgid "Next step for database upgrade:"
+msgstr "Bước kế tiếp nâng cấp cơ sở dữ liệu :"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:14002
+msgid "An error occurred while upgrading the database:"
+msgstr "Gặp lỗi trong khi nâng cấp cơ sở dữ liệu :"
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:14002
+msgid ""
+"Fortunately, ${dbfile} should hold a backup of the database, made just "
+"before the upgrade (unless the error occurred during backup creation, in "
+"which case no changes will have been applied yet). Your options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:15002
+msgid "Next step for database installation:"
+msgstr "Bước kế tiếp cài đặt cơ sở dữ liệu :"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:15002
+msgid "An error occurred while installing the database:"
+msgstr "Gặp lỗi trong khi cài đặt cơ sở dữ liệu :"
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:15002
+msgid ""
+"Your options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:16002
+msgid "Next step for database removal:"
+msgstr "Bước kế tiếp gỡ bỏ cơ sở dữ liệu :"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:16002
+msgid "An error occurred while removing the database:"
+msgstr "Gặp lỗi trong khi gỡ bỏ cơ sở dữ liệu :"
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:16002
+msgid ""
+"As a result it was not possible to remove the database for ${pkg}. Your "
+"options are:\n"
+" * abort - Causes the operation to fail; you will need to downgrade,\n"
+"   reinstall, reconfigure this package, or otherwise manually intervene\n"
+"   to continue using it. This will usually also impact your ability to\n"
+"   install other packages until the installation failure is resolved.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+" * retry (skip questions) - Immediately attempts the operation again,\n"
+"   skipping all questions. This is normally useful only if you have\n"
+"   solved the underlying problem since the time the error occurred.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave the database and user privileges in place."
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:17001
+msgid "Next step:"
+msgstr "Bước kế tiếp:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:17001
+msgid ""
+"Configuring the database for ${pkg} requires the package ${dbpackage} to be "
+"installed and configured first, which is not something that can be checked "
+"for automatically."
+msgstr ""
+"Để cấu hình cơ sở dữ liệu cho ${pkg} thì trước tiên cũng cần cài đặt và cấu "
+"hình gói ${dbpackage}: không thể tự động kiểm tra nếu gói này đã được cài "
+"đặt/cấu hình chưa."
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#. Additionally, ${dbpackage} can be replaced with "mysql-server", so
+#. that length suits, but ${pkg} usually will expand more.
+#: ../dbconfig-common.templates:17001
+msgid ""
+"Your options are:\n"
+" * abort - Choose this when in doubt and install ${dbpackage} before\n"
+"   continuing with the configuration of this package. This causes the\n"
+"   installation of ${pkg} to fail for now.\n"
+" * retry - Prompts once more with all the configuration questions\n"
+"   (including ones you may have missed due to the debconf priority\n"
+"   setting) and makes another attempt at performing the operation.\n"
+"   Choose this if you chose the wrong database type by mistake.\n"
+" * ignore - Continues the operation ignoring dbconfig-common errors.\n"
+"   This will usually leave this package without a functional database."
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:18001
+msgid "Host name of the ${dbvendor} database server for ${pkg}:"
+msgstr "Tên máy của máy phục vụ cơ sở dữ liệu ${dbvendor} cho ${pkg}:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:18001
+msgid ""
+"Please select the remote hostname to use, or select \"new host\" to enter a "
+"new host."
+msgstr ""
+"Hãy chọn tên máy ở xa cần sử dụng, hoặc chọn « máy mới » để nhập máy mới."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:19001
+msgid "Port number for the ${dbvendor} service:"
+msgstr "Số hiệu cổng cho dịch vụ ${dbvendor}:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:19001
+#, fuzzy
+#| msgid ""
+#| "Please specify the port the ${dbvendor} database on the remote host is "
+#| "running on.  To use the default port, leave this field blank."
+msgid ""
+"Please specify the port the ${dbvendor} database on the remote host is "
+"running on. To use the default port, leave this field blank."
+msgstr ""
+"Hãy chỉ định cổng trên đó chạy cơ sở dữ liệu ${dbvendor} trên máy ở xa. Để "
+"sử dụng cổng mặc định, bỏ trống trường này."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid "Host running the ${dbvendor} server for ${pkg}:"
+msgstr "Máy chạy máy phục vụ ${dbvendor} cho ${pkg}:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid "Please provide the hostname of a remote ${dbvendor} server."
+msgstr "Hãy nhập tên máy của máy phục vụ ${dbvendor} ở xa."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:20001
+msgid ""
+"You must have already arranged for the administrative account to be able to "
+"remotely create databases and grant privileges."
+msgstr ""
+"Để có khả năng tạo cơ sở dữ liệu và cấp quyền truy cập một cách từ xa, trước "
+"tiên bạn cần phải thiết lập tài khoản quản trị."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:21001
+msgid "${dbvendor} database name for ${pkg}:"
+msgstr "Tên cơ sở dữ liệu ${dbvendor} cho ${pkg}:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:21001
+msgid ""
+"Please provide a name for the ${dbvendor} database to be used by ${pkg}."
+msgstr "Hãy nhập tên cho cơ sở dữ liệu ${dbvendor} dùng bởi ${pkg}."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid "${dbvendor} username for ${pkg}:"
+msgstr "Tên người dùng ${dbvendor} cho ${pkg}:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+#, fuzzy
+#| msgid ""
+#| "Please provide a ${dbvendor} username for ${pkg} to register with the "
+#| "database server.  A ${dbvendor} user is not necessarily the same as a "
+#| "system login, especially if the database is on a remote server."
+msgid ""
+"Please provide a ${dbvendor} username for ${pkg} to register with the "
+"database server. A ${dbvendor} user is not necessarily the same as a system "
+"login, especially if the database is on a remote server."
+msgstr ""
+"Hãy nhập tên người dùng ${dbvendor} cho ${pkg} đăng ký với máy phục vụ cơ sở "
+"dữ liệu. Người dùng ${dbvendor} không nhất thiết là trùng với sự đăng nhập "
+"hệ thống, nhất là nếu cơ sở dữ liêu nằm trên máy phục vụ ở xa."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+#, fuzzy
+#| msgid ""
+#| "This is the user which will own the database, tables and other objects to "
+#| "be created by this installation.  This user will have complete freedom to "
+#| "insert, change or delete data in the database."
+msgid ""
+"This is the user which will own the database, tables, and other objects to "
+"be created by this installation. This user will have complete freedom to "
+"insert, change, or delete data in the database."
+msgstr ""
+"Đây là người dùng sẽ sở hữu cơ sơ dữ liệu, các bảng và đối tượng đều sẽ được "
+"tạo trong việc cài đặt này. Người dùng này sẽ có mọi quyền chèn, thay đổi và "
+"xóa dữ liệu trong cơ sở dữ liệu."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"If your username contains an @, you need to specify the domain as well (see "
+"below)."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:22001
+msgid ""
+"Advanced usage: if you need to define the domain that the user will log in "
+"from, you can write \"username@domain\"."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid "${dbvendor} storage directory for ${pkg}:"
+msgstr "Thư mục cất giữ ${dbvendor} cho ${pkg}:"
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid ""
+"Please provide a path where the ${dbvendor} database file for ${pkg} should "
+"be installed into."
+msgstr ""
+"Hãy nhập đường dẫn đến thư mục vào đó cần cài đặt tập tin cơ sở dữ liệu "
+"${dbvendor} cho ${pkg}."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:23001
+msgid ""
+"The permissions for this directory will be set to match the permissions for "
+"the generated database file."
+msgstr ""
+"Quyền hạn cho thư mục này sẽ được đặt để khớp với quyền hạn cho tập tin cơ "
+"sở dữ liệu được tạo ra."
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:24001 ../dbconfig-common.templates:29001
+#, fuzzy
+#| msgid "unix socket"
+msgid "Unix socket"
+msgstr "ổ cắm UNIX"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:24001 ../dbconfig-common.templates:29001
+msgid "TCP/IP"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:24002
+msgid "Connection method for MySQL database of ${pkg}:"
+msgstr "Phương pháp kết nối cho cơ sở dữ liêu MySQL của ${pkg}:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:24002
+#, fuzzy
+#| msgid ""
+#| "By default, ${pkg} will be configured to use a MySQL server through a "
+#| "local unix socket (this provides the best performance). However, if you "
+#| "would like to connect with a different method, or to a different server "
+#| "entirely, select an option from the choices below."
+msgid ""
+"By default, ${pkg} will be configured to use a MySQL server through a local "
+"Unix socket (this provides the best performance). To connect with a "
+"different method, or to a different server entirely, select the appropriate "
+"option from the choices here."
+msgstr ""
+"Mặc định là ${pkg} sẽ được cấu hình để dùng máy phục vụ MySQL thông qua một "
+"ổ cắm UNIX cục bộ (thiết lập này làm hiệu năng tốt nhất). Tuy nhiên, nếu bạn "
+"muốn kết nối bằng phương pháp khac, hoặc đến máy phục vụ khác, hãy chọn một "
+"tùy chọn trong những mục bên dưới."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:25001
+msgid "MySQL application password for ${pkg}:"
+msgstr "Mật khẩu ứng dụng MySQL cho ${pkg}:"
+
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:25001 ../dbconfig-common.templates:30001
+#, fuzzy
+#| msgid ""
+#| "Please provide a password for ${pkg} to register with the database "
+#| "server.  If left blank, a random password will be generated."
+msgid ""
+"Please provide a password for ${pkg} to register with the database server. "
+"If left blank, a random password will be generated."
+msgstr ""
+"Hãy nhập mật khẩu cho ${pkg} đăng ký với máy phục vụ cơ sở dữ liệu. Bỏ trống "
+"thì một mật khẩu ngẫu nhiên sẽ được tạo ra."
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001 ../dbconfig-common.templates:31001
+msgid "Name of the database's administrative user:"
+msgstr "Tên người dùng quản trị cơ sở dữ liệu :"
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001 ../dbconfig-common.templates:31001
+#, fuzzy
+#| msgid ""
+#| "Please provide the name of the account with which this package should "
+#| "perform administrative actions.  This user is the one which is able to "
+#| "create new database users."
+msgid ""
+"Please provide the name of the account with which this package should "
+"perform administrative actions. This user is the one with the power to "
+"create new database users."
+msgstr ""
+"Hãy cung cấp tên của tài khoản từ đó gói này nên thực hiện các hành vi quản "
+"trị. Người dùng này là người dùng có khả năng tạo người dùng cơ sở dữ liệu "
+"mới."
+
+#. Type: string
+#. Description
+#: ../dbconfig-common.templates:26001
+#, fuzzy
+#| msgid ""
+#| "For MySQL, this is almost always \"root\".  Note that this is NOT the "
+#| "same as the UNIX login \"root\"."
+msgid ""
+"For MySQL, this is almost always \"root\". Note that this is not the same as "
+"the Unix login \"root\"."
+msgstr ""
+"Đối với MySQL, đây gần lúc nào cũng là « root » (người chủ). Ghi chú là đây "
+"KHÔNG phải trùng với sự đăng nhập UNIX 'root'."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:27001
+msgid "Password of the database's administrative user:"
+msgstr "Mật khẩu của người dùng quản trị cơ sở dữ liệu :"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:27001
+#, fuzzy
+#| msgid ""
+#| "Please provide the password for the administrative account with which "
+#| "this package should create its MySQL database and user."
+msgid ""
+"Please provide the password for the administrative account \"${dbadmin}\" "
+"with which this package should create its MySQL database and user."
+msgstr ""
+"Hãy cung cấp mật khẩu cho tài khoản quản trị từ đó gói này nên tạo cơ sở dữ "
+"liệu MySQL và người dùng riêng tương ứng."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:28001
+#, fuzzy
+#| msgid "Connection method for MySQL database of ${pkg}:"
+msgid "Authentication plugin for MySQL database:"
+msgstr "Phương pháp kết nối cho cơ sở dữ liêu MySQL của ${pkg}:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:28001
+msgid ""
+"Database user accounts can be configured to use a variety of plugins for "
+"authentication with MySQL. If the server default won't work with this "
+"application, it is necessary to specify one that will. Please select one "
+"from the list of available plugins. Leaving the selection set to its "
+"original value should work unless a remote server is using unpredictable "
+"defaults, but other options may not be supported by ${pkg}. If problems "
+"arise, the package's documentation should give hints; see /usr/share/doc/"
+"${pkg}/."
+msgstr ""
+
+#. Type: select
+#. Description
+#. Translators, note that the bullets have a leading space which means
+#. that debconf will not word-wrap those lines. This means that you
+#. will have to make sure that all lines in the list end with \n and
+#. you will have to keep the lines below 72 characters to avoid problems.
+#: ../dbconfig-common.templates:28001
+msgid ""
+"Your options are:\n"
+" * default - use the default determined by the server.\n"
+" * mysql_native_password - no MySQL authentication plugin is used.\n"
+" * sha256_password - a more secure password encryption algorithm.\n"
+" * caching_sha2_password - SHA2 plus an in-memory authentication cache."
+msgstr ""
+
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:29001
+msgid "TCP/IP + SSL"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:29002
+msgid "Connection method for PostgreSQL database of ${pkg}:"
+msgstr "Phương pháp kết nối cho cơ sở dữ liệu PostgreSQL của ${pkg}:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:29002
+#, fuzzy
+#| msgid ""
+#| "By default, ${pkg} will be configured to use a PostgreSQL server through "
+#| "a local unix socket (this provides the best performance). However, if you "
+#| "would like to connect with a different method, or to a different server "
+#| "entirely, select an option from the choices below."
+msgid ""
+"By default, ${pkg} will be configured to use a PostgreSQL server through TCP/"
+"IP because that method works in most circumstances. To connect with a "
+"different method, select the appropriate option from the choices here."
+msgstr ""
+"Mặc định là ${pkg} sẽ được cấu hình để dùng máy phục vụ PostgreSQL thông qua "
+"một ổ cắm Unix cục bộ (thiết lập này làm hiệu năng tốt nhất). Tuy nhiên, nếu "
+"bạn muốn kết nối bằng phương pháp khac, hoặc đến máy phục vụ khác, hãy bật "
+"một tùy chọn trong những mục bên dưới."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:30001
+msgid "PostgreSQL application password for ${pkg}:"
+msgstr "Mật khẩu ứng dụng PostgreSQL cho ${pkg}:"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:30001
+#, fuzzy
+#| msgid ""
+#| "If you are using \"ident\" based authentication, the supplied password "
+#| "will not be used and can be left blank.  Otherwise, PostgreSQL access may "
+#| "need to be reconfigured to allow password-authenticated access."
+msgid ""
+"If you are using \"ident\" authentication, the supplied password will not be "
+"used and can be left blank. Otherwise, PostgreSQL access may need to be "
+"reconfigured to allow password-authenticated access."
+msgstr ""
+"Xác thực dựa vào « ident » thì không sử dụng mật khẩu đã cung cấp: chỉ bỏ "
+"rỗng trường này. Khác thì truy cập PostgreSQL có thể cần phải được cấu hình "
+"lại để cho phép truy cập bằng mật khẩu."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+msgid "Password of your database's administrative user:"
+msgstr "Mật khẩu của người dùng quản trị cơ sở dữ liệu :"
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+#, fuzzy
+#| msgid ""
+#| "Please provide the password for the account with which this package "
+#| "should perform administrative actions."
+msgid ""
+"Please provide the password for the ${dbadmin} account with which this "
+"package should perform administrative actions."
+msgstr ""
+"Hãy cung cấp mật khẩu cho tài khoản từ đó gói này nên thực hiện các hành vi "
+"quản trị."
+
+#. Type: password
+#. Description
+#: ../dbconfig-common.templates:32001
+#, fuzzy
+#| msgid ""
+#| "For a standard PostgreSQL package installation, a database password is "
+#| "not required, since authentication is done at the system level."
+msgid ""
+"For a standard PostgreSQL installation, a database password is not required, "
+"since authentication is done at the system level."
+msgstr ""
+"Đối với một quá trình cài đặt gói PostgreSQL tiêu chuẩn, không cần nhập mật "
+"khẩu cơ sở dữ liệu, vì việc xác thực xảy ra ở cấp hệ thống."
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:33001 ../dbconfig-common.templates:34001
+msgid "ident"
+msgstr "ident"
+
+#. Type: select
+#. Choices
+#. Type: select
+#. Choices
+#: ../dbconfig-common.templates:33001 ../dbconfig-common.templates:34001
+msgid "password"
+msgstr "mật khẩu"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+msgid "Method for authenticating the PostgreSQL administrator:"
+msgstr "Phương pháp xác thực quản trị PostgreSQL:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+#, fuzzy
+#| msgid ""
+#| "PostgreSQL servers provide several different mechanisms for "
+#| "authenticating connections.  Please select what method the administrative "
+#| "user should use when connecting to the server."
+msgid ""
+"PostgreSQL servers provide several different mechanisms for authenticating "
+"connections. Please select what method the administrative user should use "
+"when connecting to the server."
+msgstr ""
+"Máy phục vụ PostgreSQL cung cấp vài cơ chế khác nhau để xác thực trong khi "
+"kết nối. Hãy chọn phương pháp nào người dùng quản trị nên sử dụng khi kết "
+"nối đến máy phục vụ."
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+#, fuzzy
+#| msgid ""
+#| "With \"ident\" authentication on the local machine, the server will check "
+#| "that the owner of the unix socket is allowed to connect."
+msgid ""
+"With \"ident\" authentication on the local machine, the server will check "
+"that the owner of the Unix socket is allowed to connect. PostgreSQL itself "
+"calls this peer authentication."
+msgstr ""
+"Khi máy cục bộ xác thực « ident », máy phục vụ sẽ kiểm tra người sở hữu ổ "
+"cắm UNIX có quyền kết nối không."
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+#, fuzzy
+#| msgid ""
+#| "With \"ident\" authentication to remote hosts, RFC 1413 based ident is "
+#| "used (note this can be considered a security risk)."
+msgid ""
+"With \"ident\" authentication to remote hosts, RFC-1413-based ident is used "
+"(which can be considered a security risk)."
+msgstr ""
+"Xác thực cách « ident » đến máy ở xa thì dùng ident dựa vào RFC 1413 (cũng "
+"có thể rủi ro bảo mật)."
+
+#. Type: select
+#. Description
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002 ../dbconfig-common.templates:34002
+#, fuzzy
+#| msgid ""
+#| "With \"password\" authentication, a password will be passed to the server "
+#| "for use with some authentication backend (such as \"md5\" or \"pam\").  "
+#| "Note that the password is still passed in the clear across network "
+#| "connections if your connection is not configured to use SSL."
+msgid ""
+"With \"password\" authentication, a password will be passed to the server "
+"for use with some authentication backend (such as \"MD5\" or \"PAM\"). Note "
+"that the password is still passed in the clear across network connections if "
+"your connection is not configured to use SSL."
+msgstr ""
+"Xác thực cách mật khẩu thì gửi mật khẩu cho máy phục vụ để sử dụng với hậu "
+"phương xác thực (như « md5 » hay « pam »). Ghi chú là mật khẩu này vẫn còn "
+"được gửi trực tiếp, không có mật mã, qua kết nối dựa vào mạng, nếu bạn không "
+"cấu hình kết nối dùng SSL."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:33002
+#, fuzzy
+#| msgid ""
+#| "For a standard PostgreSQL package installation running on the same host, "
+#| "\"ident\" is recommended."
+msgid ""
+"For a standard PostgreSQL installation running on the same host, \"ident\" "
+"is recommended."
+msgstr ""
+"Đối với một quá trình cài đặt gói PostgreSQL tiêu chuẩn chạy trên cùng máy, "
+"« ident » khuyến khích."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+msgid "Method for authenticating PostgreSQL user:"
+msgstr "Phương pháp xác thực người dùng PostgreSQL:"
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+#, fuzzy
+#| msgid ""
+#| "PostgreSQL servers provide several different mechanisms for "
+#| "authenticating connections.  Please select what method the database user "
+#| "should use when connecting to the server."
+msgid ""
+"PostgreSQL servers provide several different mechanisms for authenticating "
+"connections. Please select what method the database user should use when "
+"connecting to the server."
+msgstr ""
+"Máy phục vụ PostgreSQL cung cấp vài cơ chế khác nhau để xác thực trong khi "
+"kết nối. Hãy chọn phương pháp nào người dùng cơ sở dữ liệu nên sử dụng khi "
+"kết nối đến máy phục vụ."
+
+#. Type: select
+#. Description
+#: ../dbconfig-common.templates:34002
+#, fuzzy
+#| msgid ""
+#| "For a standard PostgreSQL package installation running on the same host, "
+#| "\"ident\" is recommended."
+msgid ""
+"For a standard PostgreSQL installation running on the same host, \"password"
+"\" is recommended, because typically the system username doesn't match the "
+"database username."
+msgstr ""
+"Đối với một quá trình cài đặt gói PostgreSQL tiêu chuẩn chạy trên cùng máy, "
+"« ident » khuyến khích."
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:35001
+msgid "PostgreSQL connection method error"
+msgstr "Lỗi phương pháp kết nối PostgreSQL"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:35001
+msgid ""
+"Unfortunately, it seems that the database connection method you have "
+"selected for ${pkg} will not work, because it requires the existence of a "
+"local user that does not exist."
+msgstr ""
+"Tiếc là hình như bạn đã chọn cho ${pkg} một phương pháp kết nối cơ sở dữ "
+"liệu sẽ không làm việc được, vì nó cần thiết một người dùng cục bộ không tồn "
+"tại."
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:36001
+msgid "Change PostgreSQL configuration automatically?"
+msgstr "Tự động thay đổi cấu hình PostgreSQL không?"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:36001
+#, fuzzy
+#| msgid ""
+#| "It has been determined that the database installation for ${pkg} can not "
+#| "be automatically accomplished without making changes to the PostgreSQL "
+#| "server's access controls.  It is suggested that this be done by dbconfig-"
+#| "common when the package is installed.  If instead you would prefer it "
+#| "done manually, the following line needs to be added to your pg_hba.conf:"
+msgid ""
+"It has been determined that the database installation for ${pkg} cannot be "
+"automatically accomplished without making changes to the PostgreSQL server's "
+"access controls. It is suggested that this be done by dbconfig-common when "
+"the package is installed. If instead you would prefer to do it manually, the "
+"following line needs to be added to your pg_hba.conf:"
+msgstr ""
+"Phần mềm đã phát hiện rằng quá trình cài đặt cơ sở dữ liệu cho ${pkg} không "
+"thể được tự động thực hiện mà không sửa đổi các điều khiển truy cập của "
+"trình phục vụ PostgreSQL. Khuyên quản trị cho phép dbconfig-common làm việc "
+"này trong khi cài đặt gói. Quản trị muốn tự làm việc này thì cần phải thêm "
+"vào tập tin « pg_hba.conf » dòng theo đây:"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:37001
+msgid "Revert PostgreSQL configuration automatically?"
+msgstr "Tự động hoàn nguyên cấu hình PostgreSQL không?"
+
+#. Type: boolean
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:37001
+#, fuzzy
+#| msgid ""
+#| "As ${pkg} is now being removed, it may no longer be necessary to have an "
+#| "access control entry in the PostgreSQL server's configuration. While "
+#| "keeping such an entry will not break any software on the system, it may "
+#| "be seen as a potential security concern.  It is suggested that this be "
+#| "done by dbconfig-common when the package is removed. If instead you would "
+#| "prefer it done manually, the following line needs to be removed from your "
+#| "pg_hba.conf:"
+msgid ""
+"As ${pkg} is now being removed, it may no longer be necessary to have an "
+"access control entry in the PostgreSQL server's configuration. While keeping "
+"such an entry will not break any software on the system, it may be seen as a "
+"potential security concern. It is suggested that this be done by dbconfig-"
+"common when the package is removed. If instead you would prefer to do it "
+"manually, the following line needs to be removed from your pg_hba.conf:"
+msgstr ""
+"Vì ${pkg} đang bị gỡ bỏ, có lẽ không còn cần lại một mục nhập điều khiển "
+"truy cập nằm trong cấu hình của trình phục vụ PostgreSQL. Dù giữ mục nhập "
+"như vậy sẽ không phá vỡ phần mềm nào trên hệ thống, nó cũng có thể rủi ro "
+"bảo mật. Khuyên quản trị cho dbconfig-common làm việc này trong khi gỡ bỏ "
+"gói. Quản trị muốn tự làm việc này thì cần phải gỡ bỏ khỏi tập tin « pg_hba."
+"conf » dòng theo đây:"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:38001
+msgid "Modifications needed in /etc/postgresql/pg_hba.conf"
+msgstr "Cần sửa đổi « /etc/postgresql/pg_hba.conf »"
+
+#. Type: note
+#. Description
+#. This template is currently unused
+#: ../dbconfig-common.templates:38001
+msgid ""
+"To get the database for package ${pkg} bootstrapped you have to edit the "
+"configuration of the PostgreSQL server. You may be able to find help in the "
+"file /usr/share/doc/${pkg}/README.Debian."
+msgstr ""
+"Để hiệu lực chức năng nạp và khởi động cơ sở dữ liệu cho gói ${pkg}, bạn cần "
+"phải sửa đổi cấu hình của trình phục vụ PostgreSQL. Cũng có thể tìm trợ giúp "
+"trong tập tin Đọc Đi « /usr/share/doc/${pkg}/README.Debian »."
+
+#. Type: error
+#. Description
+#: ../dbconfig-common.templates:39001
+msgid "Empty passwords unsupported with PostgreSQL"
+msgstr "Không hỗ trợ dùng mật khẩu trống với PostgreSQL"
+
+#~ msgid "Keep \"administrative\" database passwords?"
+#~ msgstr "Giữ mật khẩu cơ sở dữ liệu quản trị ?"
+
+#, fuzzy
+#~| msgid ""
+#~| "By default, you will be prompted for all administrator-level database "
+#~| "passwords when you configure, upgrade, or remove applications with "
+#~| "dbconfig-common.  These passwords will not be stored in the "
+#~| "configuration database (debconf) for any longer than they are needed."
+#~ msgid ""
+#~ "By default, you will be prompted for all administrator-level database "
+#~ "passwords when you configure, upgrade, or remove applications with "
+#~ "dbconfig-common. These passwords will be stored in debconf's "
+#~ "configuration database only for as long as they are needed."
+#~ msgstr ""
+#~ "Mặc đinh là bạn sẽ được nhắc nhập mỗi mật khẩu cấp quản trị trong khi cấu "
+#~ "hình, nâng cấp hay gỡ bỏ ứng dụng bằng dbconfig-common. Những mật khẩu "
+#~ "này sẽ không được cất giữ trong cơ sở dữ liệu cấu hình (debconf) sau khi "
+#~ "cần thiết."
+
+#~ msgid ""
+#~ "If you know that you do want to keep this database, or if you want to "
+#~ "handle the removal of this database manually, you should refuse this "
+#~ "option."
+#~ msgstr ""
+#~ "Còn nêu bạn muốn giữ cơ sở dữ liệu này, hoặc muốn tự gỡ bỏ nó, có nên từ "
+#~ "chối tùy chọn này."
+
+#~ msgid ""
+#~ "Fortunately, ${dbfile} holds a backup of the database, made just before "
+#~ "the upgrade."
+#~ msgstr ""
+#~ "May la tập tin #{dbfile} chứa một bản sao lưu của cơ sở dữ liệu, được tạo "
+#~ "đúng trước khi nâng cấp."
+
+#~ msgid ""
+#~ "If at this point you choose \"retry\", you will be prompted with all the "
+#~ "configuration questions once more and another attempt will be made at "
+#~ "performing the operation. \"retry (skip questions)\" will immediately "
+#~ "attempt the operation again, skipping all questions.  If you choose "
+#~ "\"abort\", the operation will fail and you will need to downgrade, "
+#~ "reinstall, reconfigure this package, or otherwise manually intervene to "
+#~ "continue using it."
+#~ msgstr ""
+#~ "Tại thời điểm này, bạn có ba tùy chọn:\n"
+#~ " • thử lại\n"
+#~ "\tnhắc lại bạn với mọi câu hỏi cấu hình, và trình này sẽ thử lại thực "
+#~ "hiện thao tác này.\n"
+#~ " • thử lại (bỏ qua các câu hỏi)\t\n"
+#~ "\tngay thử thực hiện lại thao tác này, còn bỏ qua các hỏi câu.\n"
+#~ " • hủy bỏ\n"
+#~ "\tlàm cho thao tác bị lỗi: bạn sẽ cần phải hạ cấp, cài đặt lại hay cấu "
+#~ "hình lại gói này, hoặc tự làm gì cách khác, để tiếp tục sử dụng nó."
+
+#~ msgid ""
+#~ "If at this point you choose \"retry\", you will be prompted with all the "
+#~ "configuration questions once more and another attempt will be made at "
+#~ "performing the operation. \"retry (skip questions)\" will immediately "
+#~ "attempt the operation again, skipping all questions.  If you choose "
+#~ "\"abort\", the operation will fail and you will need to downgrade, "
+#~ "reinstall, reconfigure this package, or otherwise manually intervene to "
+#~ "continue using it.  If you choose \"ignore\", the operation will "
+#~ "continue, ignoring further errors from dbconfig-common."
+#~ msgstr ""
+#~ "Tại thời điểm này, bạn có bốn tùy chọn:\n"
+#~ " • thử lại\n"
+#~ "\tnhắc lại bạn với mọi câu hỏi cấu hình, và trình này sẽ thử lại thực "
+#~ "hiện thao tác này.\n"
+#~ " • thử lại (bỏ qua các câu hỏi)\t\n"
+#~ "\tngay thử thực hiện lại thao tác này, còn bỏ qua các hỏi câu.\n"
+#~ " • hủy bỏ\n"
+#~ "\tlàm cho thao tác bị lỗi: bạn sẽ cần phải hạ cấp, cài đặt lại hay cấu "
+#~ "hình lại gói này, hoặc tự làm gì cách khác, để tiếp tục sử dụng nó.\n"
+#~ " • bỏ qua\n"
+#~ "\tthao tác sẽ tiếp tục lại, cũng bỏ qua lỗi thêm nữa nào từ dbconfig-"
+#~ "common."
+
+#~ msgid ""
+#~ "For some reason it was not possible to perform some of the actions "
+#~ "necessary to remove the database for ${pkg}.  At this point you have two "
+#~ "options: you can find out what has caused this error and fix it, or you "
+#~ "can refuse the offer for help removing the database (the latter implies "
+#~ "you will have to remove the database manually)."
+#~ msgstr ""
+#~ "Vì lý do nào, không thể thực hiện một số hành vi cần thiết để gỡ bỏ cơ sở "
+#~ "dữ liệu cho ${pkg}. Ở thời điểm này, bạn có hai tùy chọn:\n"
+#~ " • tìm lỗi và sửa chữa\n"
+#~ " • từ chối chương trình giúp đỡ gỡ bỏ cơ sở dữ liệu (thì cần phải tự gỡ "
+#~ "bỏ nó)."
+
+#~ msgid ""
+#~ "If in doubt, you should choose \"abort\", and install ${dbpackage} before "
+#~ "continuing with the configuration of this package.  If you choose \"retry"
+#~ "\", you will be allowed to choose different answers (in case you chose "
+#~ "the wrong database type by mistake).  If you choose \"ignore\", then "
+#~ "installation will continue as normal."
+#~ msgstr ""
+#~ "Chưa chắc thì bạn nên chọn mục « hủy bỏ » và cài đặt gói ${dbpackage} "
+#~ "trước khi tiếp tục cấu hình gói này. Chọn mục « thử lại » thì có dịp chọn "
+#~ "các đáp ứng khác (trong trường hợp bạn tình cờ chọn loại cơ sở dữ liệu "
+#~ "không đúng); chọn mục « bỏ qua » thì tiến trình cài đặt sẽ tiếp tục như "
+#~ "thông thường."
+
+#~ msgid "tcp/ip"
+#~ msgstr "TCP/IP"
+
+#~ msgid "tcp/ip + ssl"
+#~ msgstr "TCP/IP + SSL"

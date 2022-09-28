@@ -1,0 +1,14 @@
+# -*- mode: sh -*-
+###
+### what happens in this script:
+###
+### nothing.  unfortunately we can't reliably be run out of a package's
+### preinst script without pre-dependencies, and we don't really need
+### to anyway.
+###
+dbc_go(){
+    if [ -f /usr/share/dbconfig-common/dpkg/common ]; then
+        . /usr/share/dbconfig-common/dpkg/common
+        dbc_logline "W: use of dbc preinst hooks is now unnecesary and deprecated"
+    fi
+}

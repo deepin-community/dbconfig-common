@@ -1,0 +1,19 @@
+Test-Command: TMPDIR=${AUTOPKGTEST_TMP} test/runtests.sh
+Depends: dbconfig-common, mksh, posh, shunit2, zsh
+Restrictions: needs-root, breaks-testbed
+
+Test-Command: TMPDIR=${AUTOPKGTEST_TMP} dbc_test_with_client=true test/runtests.sh
+Depends: dbconfig-common, mksh, mysql-server, posh, postgresql, shunit2, zsh
+Restrictions: needs-root, breaks-testbed, isolation-container, skip-not-installable
+
+Test-Command: TMPDIR=${AUTOPKGTEST_TMP} dbc_test_with_client=true test/runtests.sh
+Depends: dbconfig-common, mksh, mariadb-server, posh, postgresql, shunit2, zsh
+Restrictions: needs-root, breaks-testbed, isolation-container, skip-not-installable
+
+Tests: install-examples
+Depends: build-essential, dbconfig-common, dbconfig-mysql, dbconfig-pgsql, dbconfig-sqlite3, debhelper, dh-exec, fakeroot, libdbd-mysql-perl, mysql-client, mysql-server, postgresql
+Restrictions: needs-root, breaks-testbed, allow-stderr, isolation-container, skip-not-installable
+
+Tests: install-examples
+Depends: build-essential, dbconfig-common, dbconfig-mysql, dbconfig-pgsql, dbconfig-sqlite3, debhelper, dh-exec, fakeroot, libdbd-mysql-perl, mariadb-client, mariadb-server, postgresql
+Restrictions: needs-root, breaks-testbed, allow-stderr, isolation-container, skip-not-installable

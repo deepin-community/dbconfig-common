@@ -1,0 +1,2 @@
+#! /usr/bin/dh-exec
+sqlite.sql => usr/share/dbconfig-common/data/db-test-sqlite3/install/sqlite3

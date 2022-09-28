@@ -1,0 +1,1575 @@
+dbconfig-common (2.0.20) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Remove constraints unnecessary since buster
+
+  [ Guilhem Moulin ]
+  * Replace `which` calls with `command -v`. (Closes: #995957)
+
+ -- Paul Gevers <elbrus@debian.org>  Sun, 10 Oct 2021 21:48:00 +0200
+
+dbconfig-common (2.0.19) unstable; urgency=medium
+
+  [ Simon Hollenbach ]
+  * Fix mysql grant for db names containing hyphens
+
+ -- Paul Gevers <elbrus@debian.org>  Sat, 06 Mar 2021 20:56:28 +0100
+
+dbconfig-common (2.0.18) unstable; urgency=medium
+
+  [ Chris Halls ]
+  * Add missing quotes around dbc_dbtype (Closes: #936020)
+
+ -- Paul Gevers <elbrus@debian.org>  Fri, 29 Jan 2021 21:34:31 +0100
+
+dbconfig-common (2.0.17) unstable; urgency=medium
+
+  * Fix sqlite3 example postrm which causes autopkgtest regression exposed
+    by the sqlite removal
+
+ -- Paul Gevers <elbrus@debian.org>  Sat, 14 Nov 2020 19:51:35 +0100
+
+dbconfig-common (2.0.16) unstable; urgency=medium
+
+  * Missed on occurence of sqlite (in the autopkgtest suite)
+
+ -- Paul Gevers <elbrus@debian.org>  Fri, 13 Nov 2020 20:29:47 +0100
+
+dbconfig-common (2.0.15) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Bump debhelper from old 11 to 12.
+  * Set debhelper-compat version in Build-Depends.
+
+  [ Paul Gevers ]
+  * Drop dbconfig-sqlite, but keep most logic in place in case
+    people still have sqlite installed (Closes: #972125)
+  * Fix version of helper programs (Closes: #928479)
+
+ -- Paul Gevers <elbrus@debian.org>  Thu, 12 Nov 2020 15:13:32 +0100
+
+dbconfig-common (2.0.14) unstable; urgency=medium
+
+  * dbconfig-generate-include: move copying attributes of original file to
+    later (Closes: #965219)
+
+ -- Paul Gevers <elbrus@debian.org>  Wed, 07 Oct 2020 21:23:02 +0200
+
+dbconfig-common (2.0.13) unstable; urgency=medium
+
+  * Update Korean, thanks Changwoo Ryu (Closes: #935060)
+  * Update Spanish, thanks jonatan porras
+  * Update Russian, thanks Yuri Kozlov (Closes: #935110)
+  * Update German, thanks Helge Kreutzmann (Closes: #935623)
+  * Update Portuguese, thanks Miguel Figueiredo (Closes: #935696)
+  * Update Italian, thanks Giuseppe Sacco (Closes: #937734)
+  * Update Turkish, thanks Atila KOÇ (Closes: #936028)
+  * Update Brazilian Portuguese, thanks Adriano Rafael Gomes (Closes:
+    #938991)
+  * Update French, thanks Jean-Pierre Giraud (Closes: #939159)
+  * Update Dutch, thanks Maarten (Closes: #939162)
+  * [tests] use /bin/sh to catch issues like #934027
+
+ -- Paul Gevers <elbrus@debian.org>  Thu, 19 Sep 2019 19:57:32 +0200
+
+dbconfig-common (2.0.12) unstable; urgency=medium
+
+  [ Rafael David Tinoco ]
+  * ALTER + GRANT MySQL commands are now split into CREATE and ALTER
+    commands due to MySQL having NO_AUTO_CREATE_USER as default setting
+    now.
+  * MySQL generated config files cannot have empty port variables now.
+    Variable is either $dbc_port or the default "3306" value.
+  * MySQL authentication plugin can now be configured through debconf
+    variable "mysql/dbc_authplugin" OR by declaring "dbc_authplugin"
+    variable before calling dbc_go (to guarantee compatibility with
+    packages not using libmysqlclient directly).
+
+  [ Paul Gevers ]
+  * Improve new template text, thanks go to Justin B Rye
+
+  [ Marius Burkard ]
+  * Fix regression with /bin/sh pointing to bash due to changes in its
+    POSIX behaviour (Closes: #934027)
+
+ -- Paul Gevers <elbrus@debian.org>  Sun, 18 Aug 2019 20:36:30 +0200
+
+dbconfig-common (2.0.11) unstable; urgency=medium
+
+  [ Sunil Mohan Adapa ]
+  * pgsql: Fix issue with su on systems with restricted logins (Closes:
+    #914887)
+
+ -- Paul Gevers <elbrus@debian.org>  Thu, 13 Dec 2018 10:32:33 +0100
+
+dbconfig-common (2.0.10) unstable; urgency=medium
+
+  * [tests] improve unstable-to-testing migration testing (also in Ubuntu)
+  * Bump Standards to 4.1.2
+  * Set rules-requires-root to no
+  * Use secure URL in d/copyright
+  * Adapt VCS-* fields for move to salsa
+  * Drop postinst stanza with recursive chmod as the required change
+    happened in stable (thanks Lintian for this and the other warnings)
+  * Bump debhelper compat level
+
+ -- Paul Gevers <elbrus@debian.org>  Thu, 04 Oct 2018 13:41:49 +0200
+
+dbconfig-common (2.0.9) unstable; urgency=medium
+
+  * honor $dbc_sql_substitutions during upgrades (Closes: #863154) Thanks
+    to Joerg Steffens.
+
+ -- Paul Gevers <elbrus@debian.org>  Mon, 03 Jul 2017 21:26:38 +0200
+
+dbconfig-common (2.0.8) unstable; urgency=medium
+
+  * Update translations, thanks to:
+    - Atila KOÇ (Closes: #849049)
+    - Iñaki Larrañaga Murgoitio (Closes: #850044)
+    - Javier Fernandez-Sanguino (Closes: #849112)
+    - Julien Patriarca (Closes: #849190)
+    - Miguel Figueiredo (Closes: #849274)
+  * Improve reproducibility by forcing SOURCE_DATE_EPOCH in PostScript
+    documentation
+  * Ask for administrator credentials in case dumping a database as user
+    doesn't work (Closes: #850190)
+
+ -- Paul Gevers <elbrus@debian.org>  Sat, 14 Jan 2017 08:19:23 +0100
+
+dbconfig-common (2.0.7) unstable; urgency=medium
+
+  * Let dbconfig-mysql Depends/Suggests default-mysql-* instead of
+    mysql/mariadb (Closes: #848468)
+  * Bump compat level to 10
+  * Add backticks to MySQL DROP command (Closes: #838159)
+  * Improve debconf question about administrative password (Closes:
+    #831726)
+  * Minor tweaks to documentation (Closes: #844614)
+  * Update translations, thanks to:
+    - Adriano Rafael Gomes (Closes: #848870)
+    - Benedict Verheyen
+    - Changwoo Ryu (Closes: #848176)
+    - Helge Kreutzmann (Closes: #848495)
+    - Innocent De Marchi (Closes: #849006)
+    - Ivan Masár (Closes: #848226)
+    - Javier Fernandez-Sanguino
+    - Joe Dalton (Closes: #848376)
+    - Yuri Kozlov (Closes: #848248)
+    - victory
+
+ -- Paul Gevers <elbrus@debian.org>  Wed, 21 Dec 2016 21:27:37 +0100
+
+dbconfig-common (2.0.6) unstable; urgency=medium
+
+  * Fix dbc_dbname preseeding regression caused by the fix for LP#689327
+    (Closes: #835987)
+  * [tests] Fixed failure on CI.d.n and autopkgtest.u.c (Closes: #835981)
+  * Update lintian overrides for recent PostgreSQL upgrade example package
+
+ -- Paul Gevers <elbrus@debian.org>  Thu, 01 Sep 2016 22:33:34 +0200
+
+dbconfig-common (2.0.5) unstable; urgency=medium
+
+  * Minor fixes to the documentation, thanks to Carsten Leonhardt
+  * Update Brazilian, thanks Adriano Rafael Gomes (Closes: #824329)
+  * Add libdbd-mysql-perl dependency for the install-examples tests
+  * Prevent empty dbc_dbname in dbc_read_package_debconf (LP: #689327)
+  * Don't forget app-pass during reconfigure/error (Closes: #825517)
+  * Improve installation and reconfigure situation in the cases where
+    database administrator rights are not needed. This enables most
+    packages to be installed using a database server where the user is
+    already created and has enough privileges. (Closes: #475829)
+  * Prevent empty MySQL port as MySQL 5.7 doesn't support it anymore
+    (Closes: #824537)
+  * Make sure that debconf questions regarding multidbs can be backed up
+    properly (Closes: #663234)
+  * Check existing mysql privileges and behave according to the answer
+    (Closes: #439078)
+  * Bump Standards (no changes)
+  * Fix PostgreSQL Unix socket use: it was always using TCP (Closes:
+    #834294)
+  * Fail PostgreSQL case when using ident for authentication but the
+    system user with the name of the dbuser name doesn't exist. Mapping
+    isn't supported (yet) (Closes: #830888)
+  * [tests] Drop posh testing for now, seems like a test framework issue
+    i.s.o a dbconfig issue
+  * [tests] Add MySQL/MariaDB TCP/IP no-admin testcase
+
+ -- Paul Gevers <elbrus@debian.org>  Fri, 26 Aug 2016 17:04:14 +0200
+
+dbconfig-common (2.0.4) unstable; urgency=medium
+
+  * Update Japanese translation, thanks to Takuma Yamada (Closes: #816068)
+  * Make sure that after one loop in the error handling we are for sure
+    going to raise the error above the priority level.
+  * Ask the administrator if backups should be made on upgrade (Closes:
+    #463100)
+  * Terminate PostgreSQL connections before dropping db (Closes: #755908)
+  * Fix typo in MySQL logic introduced in 2.0.3 (Closes: #817889)
+
+ -- Paul Gevers <elbrus@debian.org>  Mon, 14 Mar 2016 20:19:13 +0100
+
+dbconfig-common (2.0.3) unstable; urgency=medium
+
+  * Drop socket def and other duplication from mysql connection definition
+  * Add mariadb-client to alternatives for dbconfig-mysql
+  * Remove warnings for dbconfig-<dbtype> not being installed (Closes:
+    #813923, #813040)
+  * Revert MySQL default dbadmin for localhost as this isn't valid for
+    MariaDB (Closes: #813421)
+  * Obtain dbc_dbadmin from /etc/mysql/debian.cnf (only) on localhost
+    setups
+  * Update templates with default localhost (missed that in 1.8.55)
+  * Fix Vcs-git URL
+  * Bump standards to 3.9.7 (no changes)
+
+ -- Paul Gevers <elbrus@debian.org>  Sun, 21 Feb 2016 19:39:33 +0100
+
+dbconfig-common (2.0.2) unstable; urgency=medium
+
+  * Fix CI dependencies
+  * Update logic of already created backups: only change permissions and
+    ownership when upgrading from versions before 2.0.0 (but not from
+    versions after jessies update).
+  * Reverse order of mysql-client/virtual-mysql-client for dbconfig-mysql
+    (thanks lintian)
+  * Update git URL for debian packaging (thanks lintian)
+  * Add ${misc:Depend} to Depends of dbconfig-<dbtype> packages (thanks
+    lintian)
+  * Add one lintian override for the changelog of our example packages
+
+ -- Paul Gevers <elbrus@debian.org>  Wed, 27 Jan 2016 20:53:13 +0100
+
+dbconfig-common (2.0.1) unstable; urgency=medium
+
+  * Use debian-sys-maint as default admin for MySQL when on localhost and
+    try to retrieve password from /etc/mysql/debian.cnf (Closes: #556174)
+  * Convert of `` to $() (Closes: #810846)
+  * Tests now include posh and lksh as /bin/sh (not yash as that doesn't
+    respect local variables)
+  * Fix internal/pgsql for leaving cruft behind
+  * Add dh-exec to requirements for autopkg-testing to fix current
+    failures
+  * Fix typo in warning message (original report in #812156)
+  * Update Basque translation (Closes: #809486) (Thanks Dooteo)
+
+ -- Paul Gevers <elbrus@debian.org>  Tue, 26 Jan 2016 21:08:24 +0100
+
+dbconfig-common (2.0.0) unstable; urgency=medium
+
+  * New major release as there are now 5 additional packages build:
+    dbconfig-<dbtype> and dbconfig-no-thanks that improve and simplify
+    dependency handling (Closes: #353617, #511441)
+  * Update examples to short dh style and use new framework
+  * Improve detection of localhost for PostgreSQL use (Closes: #807246)
+  * Improve wording in remove/purge questions (Closes: #805455)
+  * Minor fix in install-examples test
+  * Drop ancient version of ucf in d/control
+  * Repair permissions of already created backups
+  * Update translations (Closes: #808245, #808553, #808647, #808594, #808650):
+    - Catalan (Thanks Innocent De Marchi)
+    - Dutch (me)
+    - French (Thanks Julien Patriarca)
+    - German (Thanks Helge Kreutzmann)
+    - Italian (Thanks Giuseppe Sacco)
+    - Russian (Thanks Yuri Kozlov)
+    - Turkish (Thanks Atila KOÇ)
+  * Improve error handling in case dbc_go is part of if-statement or left
+    side of ||-statement by adding loads of "|| return $?" (hope I didn't
+    miss any important ones) (Closes: #803090, #807353)
+  * Added some missing checks for the ignore answer in error handling
+
+ -- Paul Gevers <elbrus@debian.org>  Mon, 21 Dec 2015 20:44:50 +0100
+
+dbconfig-common (1.8.58) unstable; urgency=medium
+
+  * Fix permission of PostgreSQL backup files, thanks Simon Ruderich
+    (Closes: #805638)
+
+ -- Paul Gevers <elbrus@debian.org>  Sat, 21 Nov 2015 21:21:34 +0100
+
+dbconfig-common (1.8.57) unstable; urgency=medium
+
+  * Update Brazilian Portuguese translation, thanks Adriano Rafael Gomes
+    (Closes: #803992)
+  * Fix auto-pkg-test failure as the second test case was missing
+    needs-root requirement
+
+ -- Paul Gevers <elbrus@debian.org>  Tue, 10 Nov 2015 21:45:25 +0100
+
+dbconfig-common (1.8.56) unstable; urgency=medium
+
+  * Fix auto-pkg-test failure as TMPDIR wasn't hardcoded since last
+    upload, but ADT doesn't set it, causing the mockup script to try and
+    write in /share which isn't allowed.
+
+ -- Paul Gevers <elbrus@debian.org>  Fri, 06 Nov 2015 15:58:58 +0100
+
+dbconfig-common (1.8.55) unstable; urgency=medium
+
+  * Convert nearly all leading chars to Caps in
+    doc/dbconfig-common.sgml
+  * Remove alioth project link from documentation as that isn't the
+    place to find accurate info
+  * Drop _dbc_asuser from list of local variables in _dbc_generate_mycnf
+    (Closes: #801427)
+  * Improve pgsql peer/ident/password situation for dbadmin and dbuser
+    (Closes: #703277, #509627, #703374)
+  * Fix ordering of thanks for reproducible builds
+  * Check for existence of sql input file in dbc_pgsql_exec_file
+  * Multiple $x -> ${x:-} replacements to ensure the regression test
+    can run with empty variables
+  * Tests:
+    - Use shunit testcases with real databases (mysql only for now)
+    - Enhance and extend mysql/postgresql testsuite
+    - TMPDIR wasn't really required, just appeared to be
+    - check that providing dbadmin password changes correctly from
+      peer to passwd based login
+  * Update translations for changes in templates; Thanks to
+    - Giuseppe Sacco
+    - Helge Kreutzmann (Closes: #803627)
+    - Innocent De Marchi (Closes: #803785)
+    - Joe Dalton (Closes: #803561)
+    - Julien Patriarca (Closes: #803931)
+    - Miroslav Kure (Closes: #803775)
+    - Yuri Kozlov (Closes: #803539)
+
+ -- Paul Gevers <elbrus@debian.org>  Tue, 03 Nov 2015 13:51:48 +0100
+
+dbconfig-common (1.8.54) unstable; urgency=medium
+
+  * Fix missing dependencies in install-examples autopkgtest
+    (Closes: #799913)
+
+ -- Paul Gevers <elbrus@debian.org>  Fri, 25 Sep 2015 11:58:36 +0200
+
+dbconfig-common (1.8.53) unstable; urgency=medium
+
+  * Add Breaks: bandwidthd-pgsql (<< 2.0.1+cvs20090917-9~)
+    (Closes: #791622)
+  * Rename install_examples.sh and add it to autopkgtest list
+  * Add extended regression tests to autopkgtest list
+  * Extend error message upon script error (Closes: #506510)
+  * Fix preseeding by package (Closes: #793816)
+  * Allow noninteractive remove mode to fail (Closes: #793599)
+  * Update documentation with a note that packages depending on
+    dbconfig-common are recommended to depend on the command line
+    client required for the database they support. The solution to
+    fix this (bug 353617) is quite involved, so it needs some proper
+    preparation.
+  * Bump debhelper compat level to 9
+  * Remove convenience targets in d/rules (adt-run does a better job)
+
+ -- Paul Gevers <elbrus@debian.org>  Mon, 21 Sep 2015 20:35:32 +0200
+
+dbconfig-common (1.8.52) unstable; urgency=medium
+
+  * Forgot to install dbconfig-common for the CI tests
+  * Update French translation by Julien Patriarca (Closes: #789908)
+
+ -- Paul Gevers <elbrus@debian.org>  Fri, 26 Jun 2015 13:42:50 +0200
+
+dbconfig-common (1.8.51) unstable; urgency=medium
+
+  * Upload to unstable
+  * Extend regression tests
+  * Fix typo in manpage of dbconfig-generate-inlude (Closes: #782280)
+  * Minor improvement to the templates + updated translations
+    - Basque by Iñaki Larrañaga Murgoitio (Closes: #788371)
+    - Brazilian Portuguese by Adriano Rafael Gomes (Closes: #787216)
+    - Catalan by Innocent De Marchi (Closes: #787307)
+    - Danish by Joe Hansen (Closes: #787370)
+    - Dutch by me
+    - French by Julien Patriarca (Closes: #788309)
+    - German by Helge Kreutzmann (Closes: #787296)
+    - Italian by Giuseppe Sacco
+    - Korean by Changwoo Ryu (Closes: #785769)
+    - Russian by Yuri Kozlov (Closes: #786451)
+    - Turkish by Atila KOÇ (Closes: #787401)
+
+ -- Paul Gevers <elbrus@debian.org>  Thu, 11 Jun 2015 20:22:58 +0200
+
+dbconfig-common (1.8.50) experimental; urgency=medium
+
+  * Prevent running upgrades twice on error (Closes: #708339)
+  * Revert (undocumented) purge logic change in 1.8.48.
+  * Fix and unify error handling (Closes: #581646, #497035, #723885)
+  * Move reset internal/reconfiguring from postinst to dbc_postinst_cleanup
+  * Replace all debconf priorities with a variable (Closes: #607171)
+  * Raise priorities when retrying after error
+  * Check for existance of dbc_logfile before writing (Closes: #705335)
+  * Remove some unneeded code
+  * Drop database during reinstall (Closes: #665742)
+  * Check if database exists before dropping
+  * Fix for #573524 was incomplete, also forget passwords in debconf during
+    reconfigure (they can be filled during dbc_preseed_package_debconf)
+  * Only ask for dbadmin password if needed for updates (Closes: 599896)
+  * Fix typo in dbc_migrate: password-confirm -> app-password-confirm
+  * Fix prerm to ask admin_pass if needed during maintainer code
+    (Closes: #705222)
+  * Unify the error handling; also (Closes: #723885)
+  * Make check for DEBIAN_FRONTEND case insensitive (LP: #1406700)
+  * Don't use dbc_dballow as variable name in dbconfig-generate-include
+    (Closes: #533777)
+  * Fix regression in one of the previous uploads which broke preseeding
+    by packages using dbconfig-common
+  * Allow the admin to specify the domain for the GRANT calls (MySQL)
+    (Closes: #673840, #506511)
+  * Allow backup from password questions (Closes: #703365)
+  * Insert the name of the dbadmin into the debconf templates to avoid
+    confusion
+  * Improvements to the test script
+  * Update d/copyright to machine-readable format
+  * Update TODO
+  * Update Debconf templates, including review from debian-l10n. No
+    call for review on purpose yet.
+
+ -- Paul Gevers <elbrus@debian.org>  Mon, 30 Mar 2015 20:46:21 +0200
+
+dbconfig-common (1.8.49) experimental; urgency=medium
+
+  * More preseeding fixes (Closes: #619362)
+  * Allow packages to backup during config from dbconfig-common state
+    machine (Closes: #504983)
+  * Convert sqlite to SQLite in description (Closes: #570332)
+  * Quote $@ just to be safe (Closes: #750412)
+  * Remove date from the d-g-i generated config files, to reduce
+    any ucf noise (Closes: #727653)
+  * Move debian packaging VCS to collab-maint
+  * Add date string to backup filename to prevent overwriting good
+    backup in case of issues (Closes: #708511)
+  * Add test script and d/rules logic to install the examples for
+    debugging (to be converted into an autopkgtest eventually)
+  * Fix postrm script of db-test-pgsql-migration-2.0 to remove
+    configuration file and unregister from ucf
+  * Clean up empty directories where the SQLite database lived
+    (Closes: #775226)
+  * Reset password during reconfigure (Closes: #573524)
+  * Re-register templates after database type selection (Closes: #570178)
+
+ -- Paul Gevers <elbrus@debian.org>  Wed, 18 Feb 2015 16:12:20 +0100
+
+dbconfig-common (1.8.48) experimental; urgency=medium
+
+  * New maintainer (Closes: #773433)
+  * Bump Standards to 3.9.6 (no changes)
+  * Convert to 3.0 (native) source format
+  * Run test suite via autopkgtest
+    - Update test suite info (missed in 1.8.47)
+  * Dump routines during upgrade. Thanks to pdf (Closes: #570098,
+    LP: #520872)
+  * Raise priority upon errors when no localhost server is found, such
+    that db method is asked. Thanks to Vincent Danjean (Closes: #505007)
+  * Fix multiple db support install. Thanks to Sylvain Garcia and Soren
+    Hansen (LP: #252882)
+  * Quote $dbc_dbpass in internal/mysql to allow passwords with space
+    (LP: #584943)
+  * Honor preseeding of ${pkg}/dbconfig-install on initial installation
+    of ${pkg} and (thus) allow the creation of a proper config file with
+    preseeding (Closes: #476946)
+  * Thanks to lintian:
+    - Remove unused-overrides for lintian
+    - Add overrides for package-contains-empty-directory and
+      unused-debconf-template
+    - Update Vcs-* fields in d/control
+    - Add build-* targets to d/rules
+    - Fix typo in man page
+    - Add doc-base registration
+
+ -- Paul Gevers <elbrus@debian.org>  Sat, 03 Jan 2015 19:36:43 +0100
+
+dbconfig-common (1.8.47+nmu3) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Fix regression introduced in the previous upload, now really
+    preserve permissions during upgrade, thanks to Simon Bruder for
+    reporting and Dominik George for helping triage. (Closes: #767248)
+
+ -- Paul Gevers <elbrus@debian.org>  Sun, 02 Nov 2014 19:19:40 +0100
+
+dbconfig-common (1.8.47+nmu2) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Fix pending l10n issues. Debconf translations:
+    - Brazilian Portuguese (Adriano Rafael Gomes) (Closes: #764777)
+    - Turkish (Atila KOÇ) (Closes: #662778)
+  * Leave ownership and permissions of configuration files as they were
+    (Closes: #720517)
+  * Escape database name in create command (Closes: #556507)
+
+ -- Paul Gevers <elbrus@debian.org>  Mon, 13 Oct 2014 21:01:26 +0200
+
+dbconfig-common (1.8.47+nmu1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Fix pending l10n issues. Debconf translations:
+    - Danish (Joe Hansen).  Closes: #618407
+    - Dutch; (Jeroen Schot).  Closes: #626902
+    - Catalan; (Innocent De Marchi).  Closes: #630074
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 24 Dec 2011 09:26:05 +0100
+
+dbconfig-common (1.8.47) unstable; urgency=low
+
+  * make _dbc_find_upgrades set -u safe
+  * Fix version sorting logic bug on upgrade files in postinst.
+    Thanks to Ghislain Mokolomboka <mghislain@dvidea.com> (Closes: #611820)
+  * Use defaults-file instead of defaults-extra-file when calling mysql.
+    Thanks to Glennie Vignarajah <glennie@glennie.fr> (Closes: #576533)
+  * Source dpkg/common (conditionally) in preinst before calling dbc_logline.
+    Thanks to Klaus Zerwes <kzerwes@web.de> (Closes: #608500)
+  * Fix for dbc_mysql_createdb_encoding is missing.
+    Thanks to Jérémy Lal <kapouer@melix.org> (Closes: #599374)
+  * updates to (fi) debconf translations.
+    Thanks to Esko Arajärvi <edu@iki.fi> (Closes: #475417)
+  * updates to (de) debconf translations.
+    Thanks to Raphael Bossek <bossekr@debian.org> (Closes: #591849)
+
+ -- Sean Finney <seanius@debian.org>  Sun, 13 Feb 2011 13:48:57 +0000
+
+dbconfig-common (1.8.46) unstable; urgency=low
+
+  * Fix error removing postgres databases and users (Closes: #573069)
+    - thanks to "J.M.Roth" <jmroth+debbug@iip.lu>
+  * Numerous fixes to unit test internals.
+  * New unit tests covering some of the pgsql support.
+  * Various misc fixes to pgsql support found by said unit tests :)
+  * Fix pgsql createdb code to use template0 when encoding is specified
+    - thanks to John Goerzen <jgoerzen@complete.org> (Closes: #546246)
+  * A few quotation and unset shell variable related fixes in mysql
+    support found by updated unit tests.
+  * Fix zsh support with unit tests
+  * Remove test/tmp directory in debian/rules clean target
+
+ -- Sean Finney <seanius@debian.org>  Sun, 28 Mar 2010 17:14:26 +0200
+
+dbconfig-common (1.8.45) unstable; urgency=low
+
+  * Change behavior for automated installs when no local database is
+    available (Closes: #542381)
+  * Make sure the admin always sees the "purge database?" question
+    - thanks to Brett Profitt <brett.profitt@gmail.com> (Closes: #525371).
+  * Remove original fix for #542381, as the second fix is better.
+  * Bump debhelper compatibility level to 5
+  * Update lintian overrides
+  * Update Standards-Version to 3.8.4 (no changes needed)
+  * Use the upgrade prompt for migrating from non-dbc versions.
+    (Closes: #569139)
+  * Fix overzealous error checking which causes some settings not to
+    migrate (Closes: #443279).
+
+ -- Sean Finney <seanius@debian.org>  Tue, 23 Feb 2010 21:45:36 +0100
+
+dbconfig-common (1.8.44) unstable; urgency=high
+
+  * Fix bashism in dpkg/config. (Closes: #567402)
+    - thanks to Sylvain Le Gall <gildor@debian.org>
+  * Bashism causes install failures, so urgency bumped.
+
+ -- Sean Finney <seanius@debian.org>  Mon, 15 Feb 2010 22:09:21 +0100
+
+dbconfig-common (1.8.43) unstable; urgency=low
+
+  * Pass --debconf-ok to ucf call for global config file.
+    (Closes: #513142, #566570)
+
+ -- Sean Finney <seanius@debian.org>  Sun, 24 Jan 2010 02:22:46 +0100
+
+dbconfig-common (1.8.42) unstable; urgency=low
+
+  * Register all internal ucf-managed files with ucfr (Closes: #514346)
+  * Manage global config file /etc/dbconfig-common/config with ucf
+  * Fix an incorrect bug reference in the previous upload's changelog entry
+  * New Japanese debconf translations. (Closes: #525201, #561937)
+    - thanks to "Hideki Yamane (Debian-JP)" <henrich@debian.or.jp>
+  * Updated spanish debconf translations (Closes: #525548)
+    - thanks to Javier Fernández-Sanguino Peña
+  * Prevent remove/reinstall from seeming to be an upgrade (Closes: #529365)
+    - thanks to Florian Grandel
+  * Clarify documentation regarding paths for update code (Closes: #529963)
+    - thanks to Kiss Gabor
+  * Fix documented path for removal SQL (Closes: #563907)
+    - thanks to Thijs Kinkhorst <thijs@debian.org>
+  * Fix for "fails to install" in noninteractive mode (Closes: #542381)
+    - thanks to Thijs Kinkhorst <thijs@uvt.nl>
+  * Fix "french translation for deconfiguration dialog really unclear"
+    (Closes: #529316)
+    - thanks to Olivier Berger <olivier.berger@it-sudparis.eu>
+
+ -- Sean Finney <seanius@debian.org>  Sat, 23 Jan 2010 20:00:11 +0100
+
+dbconfig-common (1.8.41) unstable; urgency=low
+
+  * Fix for a location in the code where ucf was not being called with the
+    now requisite --debconf-ok (closes: #513753).
+  * New postinst maintainer variable: dbc_dgi_on_manual.  Allows the
+    packager to disable creation of the d-g-i generated files when the
+    admin opts for manual installation (closes: #514347).
+  * Incorporate suggested rewrite of package description and debconf templates
+    from Christian Perrier and the debian-l10n-english contributors
+    (closes: #513909).
+  * new/updated debconf translations:
+    - Basque, thanks to Piarres Beobide (closes: #516118).
+    - Czech, thanks to Miroslav Kure (closes: #514441).
+    - Finnish, thanks to Esko Arajärvi (closes: #516623).
+    - French, thanks to Christian Perrier (closes: #515932).
+    - German, thanks to Helge Kreutzmann (Closes: #514783).
+    - Italian, thanks to Giuseppe Sacco (closes: #514574).
+    - Korean, thanks to Changwoo Ryu (closes: #514354).
+    - Norwegian Bokmål, thanks to Bjørn Steensrud and Christian Perrier
+      (closes: #514368).
+    - Portuguese, thanks to Miguel Figueiredo (closes: #516643).
+    - Russian, thanks to Yuri Kozlov and Christian Perrier (closes: #514896).
+    - Slovak, thanks to helix84 (closes: #514357).
+    - Swedish, thanks to Daniel Nylander (closes: #516606).
+    - Vietnamese, thanks to Clytie Siddall and Christian Perrier
+      (closes: #514503)
+  * dbconfig-common is now maintained in git.  Update control info
+    accordingly, and introduce a gbp.conf in the debian subdir for
+    git-buildpackage.
+  * Misc lintian fixes:
+    - update Standards-Version to 3.8.1 (no changes needed).
+    - fix Build-Depends for gs -> ghostscript
+    - remove Build-Depends alternatives on packages that were only needed
+      for etch (tetex-bin, tetex-extra).
+
+ -- Sean Finney <seanius@debian.org>  Sun, 15 Mar 2009 11:08:39 +0100
+
+dbconfig-common (1.8.40) unstable; urgency=low
+
+  * Fixes from Thijs Kinkhorst:
+    - fix for spelling error in debian/po/nl.po
+    - fix for typo in internal/common
+    - update documentation and examples to be more explicit about dependencies,
+      recommends, and suggests (closes: #498226).
+    - add Vcs-* headers to control file (closes: #498226).
+
+ -- Sean Finney <seanius@debian.org>  Mon, 08 Sep 2008 18:36:54 +0200
+
+dbconfig-common (1.8.39) unstable; urgency=high
+
+  * fix for package failing to purge, thanks to Michael Tautschnig for
+    reporting this (closes: #476949).
+  * rc bugfix, high urgency upload.
+  * a few more more bugs/fixes from Niko Tyni:
+    - fix for empty substitution in dbc_upgrade_error (closes: #473028).
+    - ensure TODO gets installed, since the docs reference it (closes: #472946).
+
+ -- Sean Finney <seanius@debian.org>  Sat, 05 Jul 2008 01:07:31 +0200
+
+dbconfig-common (1.8.38) unstable; urgency=low
+
+  * the "TLC" release
+  * ACK NMU from Stephen Gran, thanks!
+  * slight changes to the NMU diff, namely using local variables and a fix
+    for a corner case where the umask might not be reset.
+  * more bugs/fixes from Niko Tyni (thanks!)
+    - fix for malformed log messages (closes: #472993).
+    - fix for catching upgrade errors when calling dbc_dump (closes: #473026).
+    - fix for empty dumps from postgres upgrades (closes: #473013).
+    - fix for ucf/debconf/stdout redirection problems (closes: #435143).
+    - fix for db server/client installed status differences (closes: #448804).
+    - allow specifying preferred order in dbtype selection (closes: #469832).
+    - find with -xtype instead of -type to allow symlinks (closes: #472944).
+    - fix for allowing users to opt-in again to our help (closes: #475068).
+  * update documentation wrt dbtype selection
+  * centralize definition of dbc.log location
+  * a test suite! now using shunit2 for unit tests, implemented some
+    basic tests for logging as a proof-of-concept.
+  * various fixes found from new unit tests
+  * new/updated debconf translations:
+    - Basque, from Piarres Beobide (closes: #472266).
+    - Finnish, from Esko Arajärvi (closes: #472949).
+  * lintian fixes:
+    - bump standards version to 3.7.3
+    - swap binary-arch and binary-indep target build scripts
+    - spelling fixes in description
+    - add ignore for empty directory where we instruct packages to
+      place install/upgrade files and scripts
+    - remove .Xc from manpages as it seems an unsupported extension.
+
+ -- Sean Finney <seanius@debian.org>  Fri, 11 Apr 2008 19:44:58 +0200
+
+dbconfig-common (1.8.37-0.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Set umask before dump creation (closes: #473131)
+
+ -- Stephen Gran <sgran@debian.org>  Sat, 05 Apr 2008 00:53:49 +0100
+
+dbconfig-common (1.8.37) unstable; urgency=low
+
+  * Fix from Niko Tyni for dpkg-reconfigure failures due to missing database
+    admin password.  Thanks! (closes: #439081).
+  * Fix from Niko Tyni for problems with opting out in preconfiguration
+    scenarios (closes: #469728).
+  * Fix from Niko Tyni for choosing a more sane default for authmethod
+    with remote questions in pgsql installations (closes: #443985).
+  * Remove default logfile path/dir on purge (closes: #455018).
+
+ -- Sean Finney <seanius@debian.org>  Thu, 06 Mar 2008 23:37:03 +0100
+
+dbconfig-common (1.8.36) unstable; urgency=low
+
+  * added documentation and support for removal logic, to allow the
+    packager to have arbitrary sql/scripts run when the package is
+    being removed.  thanks to Stefano Zacchiroli for the suggestion
+    and testing (closes: #429722).
+  * another internal change or two needed for webapps-common.
+  * modified build-dependencies related to tetex/texlive.
+  * new Slovak debconf translations thanks to Ivan Masár (closes: #437671).
+
+ -- sean finney <seanius@debian.org>  Sun, 02 Sep 2007 13:30:50 +0200
+
+dbconfig-common (1.8.35) unstable; urgency=low
+
+  * New Mayalalam debconf translations from Praveen A (closes: #426220).
+  * Updated Vietnamese debconf translations from Clytie Siddall
+    (closes: #426841).
+  * initial attempt at handling more gracefully situations where a
+    database was not installed before the package was installed.  The
+    text is not yet marked translatable since i don't think it's final yet.
+  * do some more under-the-hood stuff for multi-instance support in the up
+    and coming webapps-common package.
+  * make sure the _DBC_DBSERVER_ substitution in d-g-i does not result in an
+    empty string, as is done elsewhere.  thanks to Stefano Zacchiroli for
+    the patch (closes: #429841).
+  * clean up an extra tmpfile that wasn't being deleted by d-g-i, thanks
+    again to Stefano for the patch (closes: #429854).
+
+ -- sean finney <seanius@debian.org>  Mon, 18 Jun 2007 18:15:29 +0100
+
+dbconfig-common (1.8.34) unstable; urgency=low
+
+  * new support for sqlite3, thanks to the patch from Vincent Bernat!
+    (closes: #425262).
+  * create leading elements of purge-time data dump, if necessary.
+
+ -- sean finney <seanius@debian.org>  Sun, 20 May 2007 23:13:33 +0200
+
+dbconfig-common (1.8.33) unstable; urgency=low
+
+  * include a long-neglected fix from Adam Lebsack, which seems to fix the
+    problems prevents dbconfig-common from working with dash (closes: #406127).
+    this was also likely the cause of dbconfig appearing to attempt creating
+    the database/user in the wrong order (closes: #418479).
+  * remove some extra straggler bashisms, and use printf instead of echo
+    for the dbc_log functions.
+  * change function names for some internal debugging/logging functions.
+  * now dbc defaults to logging to /var/log/dbconfig-common/dbc.log, which
+    can perhaps make it a bit easier to get debugging info from folks who
+    experience bugs.
+
+ -- sean finney <seanius@debian.org>  Sun, 13 May 2007 15:06:01 +0200
+
+dbconfig-common (1.8.32) unstable; urgency=low
+
+  * incorporated the suggested grammatical corrections to debconf templates,
+    doing my best to avoid fuzzying current translations.  thanks to
+    Helge Kreutzmann for finding these (closes: #400784).
+  * fixed random password generating code so that passwords are always
+    12 characters long.  previously a newline character from /dev/urandom
+    could cause it to be truncated.
+  * correction version number in sample sql script for the db-test-mysql-2.1
+    example package.  thanks to Niko Tyni (closes: #421009).
+  * fixed typo in french debconf translations, thanks to Frédéric Bothamy
+    for pointing this out (closes: #422196).
+  * small fix for created nested subdirectories, which will be used by
+    the soon-coming webapps-common package.
+
+ -- sean finney <seanius@debian.org>  Sat, 12 May 2007 14:41:27 +0200
+
+dbconfig-common (1.8.31) unstable; urgency=low
+
+  * tons of new/updated translations:
+    * Swedish, thanks to Andreas Henriksson and Daniel Nylander
+      (closes: #407852, #412012).
+    * Galician, thanks to Jacobo Tarrio (closes: #412025).
+    * Portuguese, thanks to Miguel Figueiredo (closes: #412177).
+    * Norwegian Bokmål, thanks to Bjørn Steensrud (closes: #412308).
+    * Italian, thanks to Giuseppe Sacco (closes: #412172).
+    * Korean, thanks to Sunjae Park (closes: #412780).
+    * Russian, thanks to Yuriy Talakan' (closes: #412788).
+    * German, thanks to Helge Kreutzmann (closes: #400799).
+
+ -- sean finney <seanius@debian.org>  Sun, 04 Mar 2007 12:59:08 +0100
+
+dbconfig-common (1.8.30) unstable; urgency=medium
+
+  * remove some "-a" and "-o" bashisms.
+  * dbconfig-load-include now returns the exit status of the "exec"
+    format (where the output is based on running a script), if appropriate.
+    thanks to Matt Brown for the patch (closes: #397089).
+  * single-quote settings in /etc/dbconfig-common/package.conf instead
+    of double-quoting them, and make sure any single quotes in the
+    settings are properly escaped when written.
+  * escape SQL-sensitive character sequences in passwords for user
+    creation SQL snippits.
+  * escape shell/sed sensitive character sequences that are used in
+    dbconfig-generate-include (closes: #405598).
+  * another dpkg order-of-operations corner case: if unpacked but not
+    (pre-)configured, our debconf templates aren't registered yet, so
+    if some dependant package tries to use us in such a state (i.e. its
+    config is run before ours), fail gracefully and let its postinst
+    script pick up the work with a second config run.
+
+ -- sean finney <seanius@debian.org>  Sun, 21 Jan 2007 20:14:36 +0100
+
+dbconfig-common (1.8.29) unstable; urgency=medium
+
+  * Fabio Tranchitella discovered that in some environments passwords
+    could be generated with illegal UTF8 characters.  the fix was simple
+    enough, anyway, thanks.  Closes: #397288.
+
+ -- sean finney <seanius@debian.org>  Sat, 11 Nov 2006 17:58:57 +0100
+
+dbconfig-common (1.8.28) unstable; urgency=low
+
+  * update package decscription to include mention of sqlite support.
+  * preseeding values were still being dropped if debconf priority
+    was set to >= high.  should be fixed now.  thanks to Finn Smith
+    for his continued vigilance :)
+
+ -- sean finney <seanius@debian.org>  Mon, 30 Oct 2006 14:05:46 +0100
+
+dbconfig-common (1.8.27) unstable; urgency=high
+
+  * the "patch to fix the patch to fix the patch to fix the bug" release
+  * unregistered pgsql questions were being asked even in mysql packages,
+    causing confusion, breakage, chaos, riots, etc.  fixed.
+    closes: #393124.
+
+ -- sean finney <seanius@debian.org>  Sun, 15 Oct 2006 18:42:24 +0200
+
+dbconfig-common (1.8.26) unstable; urgency=high
+
+  * the previous upload included a changelog entry that closed the
+    wrong bug.  it should have read "(closes: #391960)".
+  * preseeding for apt-preconfigured packages was broken, at the very
+    least for multidbtype packages but i suspect it was completely
+    broken.  should be fixed now.  (closes: #392681).
+  * previous version hasn't made it to testing, and these are all nasty
+    bugs we want out of etch <=> urgency stays high.
+  * Updated Catalan debconf template
+
+ -- sean finney <seanius@debian.org>  Fri, 13 Oct 2006 10:29:34 +0200
+
+dbconfig-common (1.8.25) unstable; urgency=high
+
+  * fixed bugs found by Finn Smith:
+    - multidbtype packages would fail to install if the admin declined
+      our help (closes: #391160).
+    - preseed values for dbc_authmethod_foo were being ignored for
+      multidbtype packages (closes: #391997).
+    - don't bother offering our assistance at purge time if the admin
+      never opted for our help in the first place.
+  * previous version hasn't made it to testing, <=> urgency stays high.
+
+ -- sean finney <seanius@debian.org>  Tue, 10 Oct 2006 11:30:34 +0200
+
+dbconfig-common (1.8.24) unstable; urgency=high
+
+  * updated spanish debconf translations from Javier Fernández-Sanguino Peña
+    (closes: #391557)
+  * don't try to chown a non-existant file in _dbc_pg_dump().  thanks to
+    Torsten Werner for finding this (closes: #391379).
+  * rc bugfix <=> high priority.
+
+ -- sean finney <seanius@debian.org>  Sat, 07 Oct 2006 14:37:48 +0200
+
+dbconfig-common (1.8.23) unstable; urgency=low
+
+  * Thijs Kinkhorst noticed a discrepancy in the documenation about
+    the config file later on in the documenation.  also, since
+    dbconfig-common depends on debconf, it's not necessary for the
+    package in question to depend on debconf if it doesn't explicitly
+    need it (closes: #388249).
+
+ -- sean finney <seanius@debian.org>  Tue, 19 Sep 2006 14:33:55 +0200
+
+dbconfig-common (1.8.22) unstable; urgency=low
+
+  [ sean finney ]
+  * added note about needing to check for dbconfig-common in the config
+    script before sourcing the shell library (for situations where
+    apt or similar utilities preconfigure the package before dependencies
+    are unpacked).
+  * updated examples as well.
+  * updated build-depends to include po-debconf
+  * updated danish translations by Claus Hindsgaul (closes: #385688).
+  * updated czech translations by Miroslav Kure (closes: #386022).
+
+  translations
+  * Updated Dutch translations by Bart Cornelis
+
+ -- sean finney <seanius@debian.org>  Mon, 18 Sep 2006 21:12:08 +0200
+
+dbconfig-common (1.8.21) unstable; urgency=low
+
+  [sean finney]
+  * fix sourcing incorrect shell library in sqlite example, and make
+    check for ucf in purge section.
+  * make sure all sh references to /dev/stderr go to &2 instead.  thanks
+    to Aidas Kasparas for finding this (closes: #383988).
+
+  [Matt Brown]
+  * Default the basepath for creating sqlite databases to
+    /var/lib/dbconfig-common/sqlite/<pkgname>
+  * Set the permissions on the basepath to match those of the dbfile.
+
+ -- sean finney <seanius@debian.org>  Mon, 21 Aug 2006 23:30:03 +0200
+
+dbconfig-common (1.8.20) unstable; urgency=low
+
+  [ sean finney ]
+  * added more information about what needs to be done by packagers
+    wrt the postrm script hooks.
+  * added some additional overrides for the new sample packages.
+
+  [ Matt Brown ]
+  * Added support for SQLite databases. closes: #379796.
+
+  translations
+  * Updated Dutch translation by Bart Cornelis.
+
+ -- sean finney <seanius@debian.org>  Sat, 19 Aug 2006 00:37:25 +0200
+
+dbconfig-common (1.8.19) unstable; urgency=high
+
+  [ sean finney ]
+  * dbconfig-common and the documentation/examples were not policy complaint
+    wrt the postrm script hooks.  thanks to Anthony DeRobertis for catching
+    this before it was too late.  this fixes an RC bug report with
+    dbconfig-common, so urgency=high.  bugs may need to be filed
+    seperately against packages that used the examples verbatim.
+  * incorporate the "frontend" feature for read-only packages, where
+    someone may want to ask the questions but not take the actions.
+    see docs for details.  thanks to Thomas Huriaux and Michael
+    Ablassmeier for the prompting on this one.  closes: #373188.
+  * when doing upgrades, only ask for the administrative password
+    if there are upgrades to be applied.  thanks to Michael Ablassmeier
+    for pointing this out.  closes: #379730.
+  * merge debian/TODO and TODO into just TODO.
+  * dbconfig-generate-include was using tempfiles without removing
+    them afterwards.  thanks to Thijs Kinkhorst for pointing this out.
+  * change dbconfig-generate-include to respect permissions that are
+    locally modified via dpkg-statoverride.  thanks to Thijs Kinkhorst
+    and Matt Brown for realizing this.
+  * no longer depend on pwgen(1) for generating random passwords, and
+    instead use sed and cut from /dev/urandom.
+  * new spanish debconf translation from Javier Fernández-Sanguino Peña
+    closes: #382969.
+
+ -- sean finney <seanius@debian.org>  Tue, 15 Aug 2006 08:27:04 +0200
+
+dbconfig-common (1.8.18) unstable; urgency=low
+
+  [ sean finney ]
+  * no longer end php-style generated files with a ?>, as it's
+    superfluous and can reportedly cause problems (closes: #379979).
+    thanks to Thijs Kinkhorst for pointing this out.
+  * other changes/fixes from Thijs Kinkhorst:
+    - utf8 fix in changelog
+    - update standards version to 3.7.2
+    - lintian overrides for false-positives due to the example packages
+    closes: #380353
+  * updated danish debconf translations from Claus Hindsgaul, thanks.
+    closes: #378769
+  * fixed/improved pgsql authentication method autodetection.
+  * new db-test-pgsql-migration-{1.9,2.0} packages to both show and
+    test how to migrate from previous non-dbc packaging.
+  * fix for sh-format include files from dbconfig-load-include.  thanks
+    to Torsten Werner for finding this problem.
+  * remove import-oldsettings template, i don't think the need
+    merits having it.
+  * packages that migrate to dbconfig-common no longer get the confusing
+    installation question.
+  * remove date from the d-g-i generated config files, to reduce
+    any ucf noise.
+
+  [ Bart Cornelis (cobaco) ]
+  * Updated Dutch translation
+
+ -- sean finney <seanius@debian.org>  Wed, 02 Aug 2006 17:08:29 -0700
+
+dbconfig-common (1.8.17) unstable; urgency=low
+
+  [ sean finney ]
+  * now provide a global configuration option which affects the priority of
+    questions related to remote database configuration.
+  * updated spanish debconf translations, thanks to
+    Javier Fernández-Sanguino Peña (closes: #372650).
+  * provide a fix for over-zealous sanity-checking breakage with packages that
+    support multiple database types.  this should remove the need for any
+    ugly workarounds.  thanks to David Gil (closes: #372948).
+  * dbconfig-common was not respecting manual changes to its global config
+    file.  whoops, fixed.
+
+  [ Bart Cornelis (cobaco) ]
+  * Updated Dutch translation
+
+ -- sean finney <seanius@debian.org>  Tue, 13 Jun 2006 19:34:53 +0200
+
+dbconfig-common (1.8.16) unstable; urgency=low
+
+  * when determining the local user as which to interact with postgres,
+    additionally check that the account exists before attempting to
+    su/chown stuff to it.  this should make postgres work "out of the box"
+    for both applications that use a system account and those that don't.
+    thanks to stephen gran for the suggestion.  closes: #368854
+  * updated the pgsql password prommpt question to mention this.
+  * when reconfiguring a package, change the "install with dbconfig-common?"
+    question to "reinstall with dbconfig-common?", and default to false.
+    this should make dbconfig-common packages' maintainer scripts idempotent,
+    which could otherwise be considered a policy bug.
+  * bugfix in sql dumping logic (upgrades and purges) for both mysql
+    and pgsql.
+
+ -- sean finney <seanius@debian.org>  Fri, 09 Jun 2006 02:31:09 +0200
+
+dbconfig-common (1.8.15) unstable; urgency=low
+
+  [sean finney]
+  * Michael Ablassmeier noticed the the various upgrade files were
+    not being applied in "version" sorted order (and were instead in
+    "sort -n" sorted order).  fixed with an O(n^2) chunk of code that
+    would make any computer scientist cry, if only it were used for
+    sorting more than a small number of files :) closes: #370252.
+
+ -- sean finney <seanius@debian.org>  Sun, 04 Jun 2006 19:03:00 +0200
+
+dbconfig-common (1.8.14) unstable; urgency=low
+
+  [sean finney]
+  * provide a new hint option dbc_sql_substitutions, which will pipe
+    all provided sql files through the template-based substitution
+    filter of dbconfig-generate-include before being processed
+    (closes: #366761).
+  * andrew mcmillan found a spelling error, so i ran aspell over all
+    the documentation :)
+  * provide a new hint option dbc_authmethod_user for the packager
+    to provide the "sane default" for how the application's database
+    user should authenticate for pgsql applications (closes: #368219).
+    we'll soon provide a better (automagic) detection, but it shouldn't
+    break things if you start using this feature before then.
+  * extra sanity check for a glob that might not expand in some circumstances,
+    from matt brown (closes: #368714).
+  * more code consolidation, configfile-vs-debconf fixes, removal of some
+    obsolete code/templates.
+
+ -- sean finney <seanius@debian.org>  Tue, 30 May 2006 23:15:35 +0200
+
+dbconfig-common (1.8.13) unstable; urgency=low
+
+  [sean finney]
+  * now support a dbc_pgsql_createdb_encoding hint option in the postinst
+    for supporting specific encodings (closes: #366758).
+  * updated czech translation from Miroslav Kure (closes: #366261).
+  * a third fix for GRANT command construction hiding in the prerm
+    support script.  thanks again to Radu (closes: #362571).
+  * added a check for the version of createuser to prevent the
+    createuser cmd from stopping the install question with a
+    prompt about roles (defaulting to not giving users the
+    role granting privs).
+  * change the authmethod-user question to medium priority, but
+    we really need a way to let the maintainers specify the default
+    authentication method.
+  * fix typo in postinst support code that always logs "administrative
+    sql" even when it's doing normal sql.
+  * error checking when dumping the database in prerm.  needs a bit
+    more work still as we end up going back through the postinst/configure
+    code again which isn't smart enough to realize what's going on sometimes.
+  * fix some internal pgsql code where $extra was tossed around too much
+    in the wrong scope.
+  * support for postgresql-8.1.
+
+ -- sean finney <seanius@debian.org>  Fri, 12 May 2006 19:21:48 +0200
+
+dbconfig-common (1.8.12) unstable; urgency=low
+
+  [sean finney]
+  * dbconfig-common is now migrated to svn.debian.org.
+  * two fixes for GRANT command construction from Radu Spineanu:
+    - if dbc_dbserver is localhost, then dbc_dballow should
+      also be set to localhost (currently it's set to the output of
+      `hostname`, just like with remote connections)
+    - if connecting to a remote host, use the fqdn (`hostname -f`)
+      instead of the node name.
+    (closes: #362571).
+  * the source package in ./examples is now split into several
+    smaller source packages, one per binary.  this should hopefully
+    make things much easier to understand for developers interested
+    in using dbconfig-common.  thanks to Jelle Boomstra for the
+    suggestion (closes: #350588).
+  * fix a documentation bug on where installation files should
+    be placed.  thanks to Uwe Steinmann for pointing this out
+    (closes: #348720).
+  * Cameron Dale noticed that a mix of script/sql/admin sql upgrades
+    would not necessarily be applied in sorted order with respect
+    to each other.  this *should* be fixed now, but i'm sure i'll
+    hear if it isn't.
+  * added missing build-depend on gs.
+  * added a debugging and logging function, and started using it
+    in various places as i add more code.  to get a little more
+    info on what goes on, export dbc_debug=1 before installing
+    a dbc-using package.
+  * logic fix for install/upgrades in postinst that would otherwise
+    result in installation code being run when it shouldn't, which
+    can be really annoying.  now everything *should* work the way
+    it ought to...
+
+ -- sean finney <seanius@debian.org>  Mon, 24 Apr 2006 01:26:02 +0200
+
+dbconfig-common (1.8.11) unstable; urgency=low
+
+  [sean finney]
+  * arrgh.  mysql 5.0 has changed the output from SHOW GRANTS, so
+    we need to have a slightly more liberal grep statement in
+    dbc_mysql_check_user().  the positive side of this is that
+    this also gives the local admin to restrict the privileges
+    of the db user, i guess....
+
+  [ Bart Cornelis (cobaco) ]
+  * Updated Dutch translation
+
+ -- Bart Cornelis (cobaco) <cobaco@linux.be>  Sun, 19 Feb 2006 19:12:42 +0100
+
+dbconfig-common (1.8.10) unstable; urgency=high
+
+  [sean finney]
+  * dbc was not telling dbconfig-generate-include to register output
+    files with ucf, and thus bad things could happen for people who
+    wanted to configure their systems manually, or otherwise customize
+    such files.  this causes rc behavior in packages that use dbc, so
+    the urgency is thus set to high (closes: #343691).
+  * updated Danish debconf translations from
+    Claus Hindsgaul (closes: #343609).
+
+  [christian perrier]
+  * corrected typo in French translation
+
+ -- sean finney <seanius@debian.org>  Tue, 20 Dec 2005 01:03:07 +0100
+
+dbconfig-common (1.8.9) unstable; urgency=low
+
+  [sean finney]
+  * unregister questions at dpkg purge time.
+  * provide a new -C option for d-g-i to "comment out" unset options.
+  [translations]
+  * updated swedish translations from daniel nylander (closes: #341631).
+  * updated vietnamese translations from clytie siddall (closes: #341947).
+
+ -- sean finney <seanius@debian.org>  Mon, 05 Dec 2005 11:00:59 +0100
+
+dbconfig-common (1.8.8) unstable; urgency=low
+
+  [Sean Finney]
+  * import documentation into debiandoc format, and update build-depends
+    accordingly.
+  * new swedish debconf translations from daniel nylander (closes: #339784).
+  * dbconfig-generate-include was accidentally bailing out when -U
+    was invoked.  fixed thanks to Matthijs Mohlmann (closes: #339881).
+  * Thijs Kinkhorst pointed out that the manpages/help output would
+    recommend calling d-g-i and d-l-i with optional arguments like
+    "-t [varname]", when in fact it will not work unless invoked
+    "-t[varname]" (closes: #341028).
+  * also from Thijs: mandate that a format is chosen with d-l-i.
+
+  [Christian Perrier]
+  * Make Choices translatable in debconf templates
+    Closes: #338342
+
+ -- sean finney <seanius@debian.org>  Sat, 19 Nov 2005 21:12:03 +0100
+
+dbconfig-common (1.8.7) unstable; urgency=low
+
+  * Tobias Grimm noticed that internal/mysql/dbc_mysql_exec_file()
+    didn't properly catch/return error values.  fixed.
+  * dbconfig-generate-include and dbconfig-load-include didn't actually
+    implement --dbname.  fixed.
+  * don't flash the message about importing old settings if a
+    program is being installed for the first time.
+  * initial support for an "ignore" option during installation, to
+    give the admin a way to bludgeon us into submission if we cause
+    the package to get into some kind of uninstallable/unremovable wedge
+    state, or if the admin tries to install the same version twice.
+    thanks to craig small for the suggestion (closes: #333611).
+  * an "improvement" to the upgrade logic, so dbc won't get clever and
+    try and do stuff it shouldn't during an upgrade.
+
+ -- sean finney <seanius@debian.org>  Mon, 07 Nov 2005 20:17:40 +0100
+
+dbconfig-common (1.8.6) unstable; urgency=low
+
+  [ sean finney ]
+  * with multidb support, subsequent installs would override the
+    chosen dbtype and default to what the autodetection found.  thanks
+    to Craig Small for pointing this out (closes: #333109).
+  * similar to above, dbc_authmethod_user was being overridden by
+    a "default" value.  fixed.
+  * in pgsql, if dbc_authmethod_admin is ident and dbc_authmethod_user
+    is set to password, the admin would be prompted on the terminal
+    for the dbuser's password because of a bug in internal/pgsql.
+  * removed duplicate and unneccesary call to mktemp in _dbc_psql.
+  * Translations:
+    - updated Czech translations from Miroslav Kure.
+    - updated Portuguese translations from Miguel Figueiredo.
+    - updated Vietnamese translations from Clytie Siddall.
+    - updated Dutch translation from Bart Cornelis
+
+  [ Christian Perrier ]
+  * Translations:
+    - updated French translations by the French team. Closes: #331616
+
+ -- sean finney <seanius@debian.org>  Tue, 11 Oct 2005 08:32:57 +0200
+
+dbconfig-common (1.8.5) unstable; urgency=low
+
+  * Sean Finney:
+    - make sure *all* cvs directories are removed from the final
+      package.  thanks to Tim Olsen for pointing a few had slipped
+      through (closes: #325745).
+    - the postgres user now defaults to /bin/false as a shell, so
+      we explicitly add '-s /bin/sh' when su'ing to postgres.  thanks
+      to Craig Small for finding this.
+    - added "-c" option to credit-xlators for my own convenience.
+    - debconf template updates.
+    - there was some leakage/spillage of the dbc_dbname environment
+      variable that messed things up for postgres users.  this should
+      fix that issue.  thanks to Craig Small for all the help
+      (closes: #329730).
+  * Bart Cornelis:
+    - Spelling fixes and some translations for new strings sent in by
+      Thijs Kinkhorst.
+  * Translations:
+    - updated Danish translation by Claus Hindsgaul.
+    - updated German translation by Andreas Tille.
+
+ -- sean finney <seanius@debian.org>  Tue, 27 Sep 2005 15:18:55 +0200
+
+dbconfig-common (1.8.4) unstable; urgency=low
+
+  * Sean Finney:
+    - add support for 'template' output format in dbc_generate_include.
+    - dbc no longer provides preinst hooks, as we can't promise
+      dbconfig-common will be there without pre-depends.  turns out
+      there was a more graceful way to handle what we wanted to do
+      in there anyway.  also updated example packages accordingly.
+      thanks to Miguel (as well as Marc 'HE' Brockschmidt)
+      for finding this (closes: #323620).
+    - updated vi.po fro clytie siddall (closes: #322281).
+
+ -- sean finney <seanius@debian.org>  Thu, 25 Aug 2005 15:41:02 +0200
+
+dbconfig-common (1.8.3) unstable; urgency=low
+
+  * Miguel Gea Milvaques:
+    - Correct typo in dbconfig-load-include man page (closes: #320659)
+    - changed populating order in internal/pgsql (1.scripts, 2.admin 3.user)
+    - add support for an "upgrade-dbadmin" data directory, which functions
+      like the "upgrade" directory except it guarantees to be run as the
+      database administrator).
+  * Sean Finney:
+    - updated Standards-Version to 3.6.2
+    - typo in control, Suggests postgresl-client should be postgresql-client.
+    - updated documentation for debugging.
+    - don't use login shells for su in internal/pgsql.  thanks to andreas
+      for pointing this out.
+    - now providing the source packages for the db-test family of
+      packages underneath /usr/share/doc/dbconfig-common/examples.
+  * Translations:
+    - updated German debconf translations from andreas tille.
+    - updated Czech debconf translations from miroslav kure (closes: #318321).
+    - updated French translation by Christian Perrier
+    - updated Danish translation by Claus Hindsgaul (closes: #319030).
+    - updated italian translation by Giuseppe Sacco
+
+ -- sean finney <seanius@debian.org>  Wed, 03 Aug 2005 04:12:30 -0400
+
+dbconfig-common (1.8.2) unstable; urgency=low
+
+  * First release targeted at unstable.  w00t!
+  * Sean Finney
+    - Initial Support for importing configurations from packages that
+      may have had pre-existing configs before using dbc, via the
+      dbconfig-load-include script.
+    - removed a bunch of duplicated pgsql code in internal/common.
+    - su to $dbc_dbadmin if connecting to localhost via ident authentication,
+      instead of postgres.  for all other methods, don't change userid
+      (stay as root).
+    - add support for an "install-dbadmin" data directory, which functions
+      like the "install" directory except it guarantees to be run as the
+      database administrator (only really applicable for some pgsql
+      applications currently).
+    - various updates to documentation and "best-practices" policy draft.
+    - removed unused empty directories from the list of directories to
+      install.
+    - added the note about random password generation to the postgres
+      app-pass template too.
+    - updated TODO a bit.
+    - include a manpage for dbconfig-load-include.
+    - other cosmetic lintian-discovered fixes.
+  * Miguel Gea Milvaques:
+    - Support for an abort/retry option when something goes
+      wrong in the install, upgrade, or remove operations.
+  * Translations:
+    - typographical fix in one of the templates, thanks to Clytie Siddall
+      (closes: #308423).
+    - updated german translation from tobias grimm.
+    - French updated
+    - Danish debconf updated by Claus Hindsgaul
+
+ -- sean finney <seanius@debian.org>  Mon, 11 Jul 2005 14:16:33 -0400
+
+dbconfig-common (1.8.1) experimental; urgency=low
+
+  * the mysql verify user/db functions were broken in 1.8 thanks to my "better
+    error notification" fix.
+  * changed a couple references of upgrade_error to dbc_upgraded error,
+    as pointed out by tobias.  there was also an remove_error that should
+    be dbc_remove_error
+  * various fixes for postgresql remote connections
+  * don't allow empty admin passwords in pgsql, since they don't work anyway.
+  * don't repeat asking for the admin password.
+  * use the return status of the execute sql/script functions, not the
+    value of dbc_status, which is not consistant and probably on its way
+    out.  thanks to tobias for pointing this out.
+  * return 0, not exit 0 in dbc_go functions, as it will otherwise
+    halt the entire maintainer script.
+  * added three new maintainer-specifiable variables:
+      - dbc_generate_include_owner
+      - dbc_generate_include_perms
+      - dbc_generate_include_args
+    which are passed to dbconfig-generate-include and do just what you'd
+    expect.  Thanks to Miguel Gea Milvaques for the idea and initial patch.
+  * updated THANKS.
+  * Translations:
+    - Catalan translations from Miguel Gea Milvaques.
+    - New Czech translations from Miroslav Kure (closes: #307160).
+    - New Vietnamese translations from Clytie Siddall (closes: #307635).
+
+ -- sean finney <seanius@debian.org>  Wed, 04 May 2005 14:06:17 -0400
+
+dbconfig-common (1.8) experimental; urgency=low
+
+  * dbconfig-common now defaults to blank passwords implying the
+    admin wants a random password (this makes automatic installations
+    even easier) thanks to Tobias Grimm <tobias.grimm@e-tobi.net> for
+    the inspiration.
+  * the admin is prompted only once if the app. password is blank.  thanks
+    to tobias for the idea.
+  * added dependency on pwgen for generating passwords.
+  * the manpage for dbconfig-generate-include was never built into
+    the binary.  d'oh!
+  * character encoding fix in the changelog to make lintian happy.
+  * limit mysql usernames to 16 characters long, as that's a built
+    in limit.
+  * the dbc_log functions now always produce output, as it's actually
+    helpful to see what's going on.
+  * dbconfig-generate-include has changed behavior.  -P/--dbport is now for
+    port and -m/--mode is for mode (was -P/--perms, but i can't think of
+    a good name for port otherwise!).
+  * forget the host/port responses if reconfigured to use a local connection.
+    otherwise that causes confusion.
+  * better error notification in the internal mysql code.
+  * if something goes wrong in the install process, forget that we've
+    seen the relevant debconf questions (so they will be asked again).
+
+ -- sean finney <seanius@debian.org>  Wed, 27 Apr 2005 19:42:01 -0400
+
+dbconfig-common (1.7) experimental; urgency=low
+
+  * dbconfig-generate-include now honors the owner/perms arguments.
+  * fixes for more breakage from shrinking the similar debconf
+    questions.  thanks to Tobias Grimm <tobias.grimm@e-tobi.net> for
+    pointing these out.
+  * Translations:
+    - French updated by Steve Petruzzello
+
+ -- sean finney <seanius@debian.org>  Sun, 24 Apr 2005 18:03:33 -0400
+
+dbconfig-common (1.6) experimental; urgency=low
+
+  * added a substitutable ${dbvendor} variable in the questions, which allows
+    me to drastically shrink a number of similar mysql/pgsql questions.
+  * drastically shrank a number of similar mysql/pgsql questions :)
+  * added a neat little script to credit the translators.
+  * spanish translation from Javier Fernández-Sanguino Peña <jfs@computer.org>.
+  * french translation from Steve <dlist@bluewin.ch> (closes: #303005).
+  * Danish translation by Claus Hindsgaul <claus_h@image.dk>
+  * minor typographical corrections from Javier.
+  * updated german translations from Andreas Tille <tillea@rki.de>.
+  * the consolidation in 1.5.1 missed a question or two it seems.  fixed.
+    thanks to Miguel Gea Milvaques <debian@miguelgea.com> (closes: #305092).
+  * better error detection/notification for mysql database creation.
+  * better error detection/notification and misc bug fixes for pgsql code
+
+ -- sean finney <seanius@debian.org>  Sun, 17 Apr 2005 23:23:18 -0400
+
+dbconfig-common (1.5.1) experimental; urgency=low
+
+  * add a depends on ucf, and a suggests for mysql-client or
+    postgresql-client.  thanks to Miguel Gea Milvaques <debian@miguelgea.com>
+    for pointing this out (closes: #301497).
+  * many, many debconf style corrections and suggestions from
+    Christian Perrier <bubulle@debian.org>.  thanks!
+  * consolidation of some more or less duplicated debconf questions
+    to make translators' jobs a little easier.
+
+ -- sean finney <seanius@debian.org>  Wed, 30 Mar 2005 22:50:59 -0500
+
+dbconfig-common (1.5) experimental; urgency=low
+
+  * debconf config questions support "back".
+  * provide dbc_config_include to scripts for convenience
+  * handle the app db pass a little more effectively
+  * ucf now purges config files when package is purged.
+
+ -- sean finney <seanius@debian.org>  Tue, 08 Mar 2005 23:25:59 -0500
+
+dbconfig-common (1.4) experimental; urgency=low
+
+  * this should be the feature-complete-now-fix-bugs release.
+  * full support for installs/upgrades via the script method
+
+ -- sean finney <seanius@debian.org>  Fri, 04 Mar 2005 00:27:49 -0500
+
+dbconfig-common (1.3) experimental; urgency=low
+
+  * pgsql now supports ssl, modified README.pgsql to reflect this.
+  * random incoherent updates to TODO.
+  * updated german translation from andreas tille.
+  * dbconfig-generate-include is now a functional script, complete
+    with ucf support.
+  * dbconfig-generate-include support now included in maintainer
+    hook scripts.
+  * updates to documentation, though parts are still incomplete.
+  * simplified some error checking in postinst hook.
+
+ -- sean finney <seanius@debian.org>  Wed, 09 Feb 2005 22:17:29 -0500
+
+dbconfig-common (1.2) experimental; urgency=low
+
+  * config file / debconf interaction fixes
+  * additional support for different postgres authentication methods
+  * debconf template updates
+
+ -- sean finney <seanius@debian.org>  Wed, 02 Feb 2005 23:56:09 -0500
+
+dbconfig-common (1.1) experimental; urgency=low
+
+  * huge re-write of internal db management code.  this fixes a lot
+    of things from the TODO that couldn't be done with dbconfig-common,
+    as well as addressing some security concerns presented (passing
+    passwords and other data on the cmdline).
+  * api change, so the major version number does as well.
+  * updated documentation for api changes
+  * german debconf translations, thanks to andreas tille.
+
+ -- sean finney <seanius@debian.org>  Wed, 19 Jan 2005 18:16:33 -0500
+
+dbconfig-common (0.9) experimental; urgency=low
+
+  * we now support for packages that support multiple underlying
+    database types, such as webapps that use db-independant code.
+    see documentation for details.
+  * postgres support upgraded from "initial" to "basic".  all the
+    basic operations (install, upgrade, remove) work on a default
+    debian postgres installation running on the same machine.  pretty
+    much everything else still doesn't
+  * error code is now more consolidated, providing more information
+    to the user, and generally more robust.  there's still plenty of
+    room for improvement.
+  * we no longer default to keeping admin and app passwords stored
+    in debconf.  by default they're removed after they're no longer
+    needed by the postinst.  this can be overridden via a global config
+    setting, though they're never stored in a config file.
+  * the dbpass setting is no longer stored in the per-package config.
+  * prompting for the admin and user passwords is now consolidated
+    into two functions, which should help prevent code duplication
+    in future situations where we need to ask for the information
+    again (errors, include-file generators).
+  * initial version of dbconfig-generate-include, for taking db
+    configuration to generate code scriptlets (php, perl, et c) with
+    the db configuration needed to use the database.
+  * documentation updated to reflect changes
+
+ -- sean finney <seanius@debian.org>  Fri, 24 Dec 2004 01:25:58 -0800
+
+dbconfig-common (0.8) experimental; urgency=low
+
+  * intial code abstraction for multiple database types.
+  * initial support for postgresql.
+
+ -- sean finney <seanius@debian.org>  Sat, 04 Dec 2004 20:43:42 -0500
+
+dbconfig-common (0.7) experimental; urgency=low
+
+  * slight change to the api.  see updated docs.
+  * incorporated debconf related suggestions from andreas tille
+  * updated policy and documentation about "opting out" by the
+    local administrator for install, upgrade, and remove operations.
+  * debconf responses were being overrided by contents of config
+    files instead of being pre-seeded with them.  fixed.
+  * support for install, upgrade, and removal in mysql
+    nearly complete.
+  * support for (cleartext) tcp/ip nearly complete.
+  * misc debconf template changes
+  * misc lintian fixes.
+
+ -- sean finney <seanius@debian.org>  Tue, 23 Nov 2004 21:02:12 -0500
+
+dbconfig-common (0.6) experimental; urgency=low
+
+  * package has been renamed dbconfig-common
+  * added/modified debconf templates
+  * now shipping with much needed documentation
+  * now managed within alioth
+
+ -- sean finney <seanius@debian.org>  Sun, 21 Nov 2004 19:14:38 -0500
+
+dbconfig-common (0.5) experimental; urgency=low
+
+  * reworked how this package interacts with maintainer scripts. now
+    there's a /usr/share/dbconfig-common/dpkg/postinst.mysql, etc.
+  * added mysql script helpers for config, preinst, postinst, and prerm.
+    not yet complete, but more or less designed.
+  * intial support for mysql upgrades and removal
+
+ -- sean finney <seanius@debian.org>  Tue, 02 Nov 2004 00:08:40 -0500
+
+dbconfig-common (0.4) experimental; urgency=low
+
+  * for the time being, database "driver" scripts are going in
+    /usr/share/dbconfig-common/db.d/$dbtype/.  this might change.
+  * starting off with a mysql adduser and createdb script
+  * also, for the time being, we're going to depend on wwwconfig-common's
+    pre-existing scripts for the dirty work :)
+  * added additional debconf templates
+
+ -- sean finney <seanius@debian.org>  Mon, 25 Oct 2004 18:07:20 -0400
+
+dbconfig-common (0.3) experimental; urgency=low
+
+  * added an "upgrade-backup" template
+  * added "method", "host" and "newhost" templates, making "location"
+    and "location_new" obsolete.
+  * changed */app_password and */admin_pw to a common *_pass
+  * postrm set to include debhelper stuff
+
+ -- sean finney <seanius@debian.org>  Mon, 18 Oct 2004 00:38:10 -0400
+
+dbconfig-common (0.2) experimental; urgency=low
+
+  * incorporated postgresql-specific debconf templates, along with other
+    changes and suggestions from oliver elphick <olly@lfix.co.uk>
+  * changed the wording in for "host" to "location".
+
+ -- sean finney <seanius@debian.org>  Mon, 18 Oct 2004 00:38:10 -0400
+
+dbconfig-common (0.1) experimental; urgency=low
+
+  * initial release.
+
+ -- sean finney <seanius@debian.org>  Mon, 11 Oct 2004 20:31:10 -0400

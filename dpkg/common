@@ -1,0 +1,1103 @@
+# -*- mode: sh -*-
+###
+### common shell include for dbconfig-common aware packages.
+###
+# usage: /usr/share/dbconfig-common/dpkg/common $package $dpkg_argv
+# (where $dpkg_argv is $@ as passed to the maintainer scripts)
+
+#set -x
+
+# get some internal helper functions, like _dbc_sanity_check
+. /usr/share/dbconfig-common/internal/common
+
+dbc_config(){
+    _dbc_debug "dbc_config() $@"
+    ###
+    ### some global variables
+    ###
+    dbc_share="/usr/share/dbconfig-common"
+    dbc_package="$1"
+    dbc_basepackage=$(echo $dbc_package | cut -d_ -f1)
+    dbc_command="$2"
+    dbc_oldversion="$3"
+
+    if ! _dbc_sanity_check package command; then
+        dbc_install_error "determining package or command" || return $?
+        [ "$dbc_tried_again" ] && return 0
+    fi
+
+    dbc_confdir="/etc/dbconfig-common"
+    dbc_globalconfig="$dbc_confdir/config"
+    dbc_packageconfig="$dbc_confdir/$dbc_package.conf"
+
+    ###
+    ### some internal variables
+    ###
+    # templates common to all database types
+    dbc_standard_templates="database-type dbconfig-install dbconfig-upgrade dbconfig-remove dbconfig-reinstall password-confirm app-password-confirm purge upgrade-backup passwords-do-not-match install-error upgrade-error remove-error internal/reconfiguring internal/skip-preseed missing-db-package-error"
+
+    # templates common to mysql database types
+    dbc_mysql_templates="mysql/authplugin mysql/method remote/host remote/newhost mysql/app-pass mysql/admin-user mysql/admin-pass remote/port db/dbname db/app-user"
+
+    # templates common to postgresql database types
+    dbc_pgsql_templates="pgsql/method remote/host remote/newhost pgsql/app-pass pgsql/admin-user pgsql/admin-pass remote/port pgsql/authmethod-admin pgsql/authmethod-user pgsql/changeconf pgsql/manualconf db/dbname db/app-user pgsql/no-empty-passwords"
+
+    # templates common to sqlite database types
+    dbc_sqlite_templates="db/dbname db/basepath"
+
+    # database types supporting authenticated access
+    dbc_authenticated_dbtypes="mysql pgsql"
+
+    # database types supporting remote access
+    dbc_remote_dbtypes="mysql pgsql"
+
+    # database types storing files on the filesystem
+    dbc_fs_dbtypes="sqlite sqlite3"
+
+    ###
+    ### source the pre-existing config, if it exists
+    ###
+    if [ -f $dbc_globalconfig ]; then
+        . $dbc_globalconfig
+    fi
+
+    ###
+    ### Allow priorities to be flexible
+    ###
+    if [ ! "$dbc_prio_low" ] ; then
+        dbc_prio_low="low"
+    fi
+    if [ ! "$dbc_prio_medium" ] ; then
+        dbc_prio_medium="medium"
+    fi
+    if [ ! "$dbc_prio_high" ] ; then
+        dbc_prio_high="high"
+    fi
+    if [ ! "$dbc_prio_critical" ] ; then
+        dbc_prio_critical="critical"
+    fi
+
+    # set the priority of "remote database" related questions for
+    # the database types that support it
+    if [ "$dbc_remote_questions_default" = "true" ]; then
+        dbc_remote_questions_priority=$dbc_prio_high
+        dbc_default_pgsql_authmethod_admin="password"
+    else
+        dbc_remote_questions_priority=$dbc_prio_low
+        dbc_default_pgsql_authmethod_admin="ident"
+    fi
+
+    dbc_set_dbtype_defaults $dbc_dbtype
+}
+
+dbc_set_dbtype_defaults(){
+    local happy supported_dbtypes comma
+    _dbc_debug "dbc_set_dbtype_defaults() $@"
+
+    # if dbtype isn't set, but dbc_hardcoded_dbtype is set, set dbtype to that
+    if [ "$dbc_hardcoded_dbtype" ]; then
+        dbc_dbtype="$dbc_hardcoded_dbtype"
+    fi
+
+    # If dbc_dbtypes only has one installed client, set dbtype to that. While
+    # we are at it let's also update dbc_dbtypes with only those dbtypes that
+    # are both supported and installed.
+    if [ "$dbc_dbtypes" ] ; then
+        # This code was originally in dpgk/config
+        supported_dbtypes=$(echo $dbc_dbtypes | sed 's/,/ /g')
+        dbc_dbtypes=""
+        comma="" # Prevent comma before first field
+        for db in $supported_dbtypes ; do
+            if dbc_detect_installed_dbtype $db; then
+                if [ ! "$happy" ] ; then
+                    dbc_default_dbtype=$db
+                fi
+                dbc_dbtypes="$dbc_dbtypes$comma$db"
+                comma=", "
+                happy="yes"
+            fi
+        done
+
+        # If we are not happy I am pretty sure there is a bug in the calling
+        # package.
+        if [ ! "$happy" ] ; then
+            dbc_error="Multiple database support detected, but apparently missing Depends on relevant dbconfig-<databasetype> packages. Please report this issue to the package maintainer."
+            dbc_install_error "analyzing supported database types" || return $?
+            [ "$dbc_tried_again" ] && return 0
+        fi
+
+        # Only one installed supported dbtype found, let's use it.
+        if ! echo "$dbc_dbtypes" | grep -q "," ; then
+            dbc_dbtype=$dbc_default_dbtype
+        fi
+    fi
+
+    ###
+    ### dbtype-specific variable section
+    ###
+    dbc_default_basepath=""
+
+    # now set some variables based on the dbtype
+    dbc_db_installed_cmd="dbc_${dbc_dbtype}_db_installed"
+    case $dbc_dbtype in
+        mysql)
+            . /usr/share/dbconfig-common/internal/mysql
+            dbc_createuser_cmd='dbc_mysql_createuser'
+            dbc_checkuser_cmd='dbc_mysql_check_user'
+            dbc_createdb_cmd='dbc_mysql_createdb'
+            dbc_dropdb_cmd='dbc_mysql_dropdb'
+            dbc_dropuser_cmd='dbc_mysql_dropuser'
+            dbc_sqlexec_cmd='dbc_mysql_exec_command'
+            dbc_sqlfile_cmd='dbc_mysql_exec_file'
+            dbc_dump_cmd='dbc_mysql_dump'
+            dbc_register_templates="$dbc_standard_templates $dbc_mysql_templates"
+            dbc_default_admin="root"
+            dbc_default_dbuser=$(echo $dbc_package | tr -d +. | cut -c -16);
+            dbc_default_port="3306"
+            dbc_dbvendor="MySQL"
+            dbc_dbpackage="mysql-server"
+            dbc_dbclientpackage="mysql-client"
+            ;;
+        pgsql)
+            . /usr/share/dbconfig-common/internal/pgsql
+            dbc_createuser_cmd='dbc_pgsql_createuser'
+            dbc_checkuser_cmd='dbc_pgsql_check_user'
+            dbc_createdb_cmd='dbc_pgsql_createdb'
+            dbc_dropdb_cmd='dbc_pgsql_dropdb'
+            dbc_dropuser_cmd='dbc_pgsql_dropuser'
+            dbc_sqlexec_cmd='dbc_pgsql_exec_command'
+            dbc_sqlfile_cmd='dbc_pgsql_exec_file'
+            dbc_dump_cmd='dbc_pgsql_dump'
+            dbc_register_templates="$dbc_standard_templates $dbc_pgsql_templates"
+            dbc_default_admin="postgres"
+            dbc_default_dbuser=$(echo $dbc_package | tr -d +-.);
+            dbc_use_dbuser="false"
+            dbc_dbvendor="PostgreSQL"
+            dbc_dbpackage="postgresql"
+            dbc_dbclientpackage="postgresql-client"
+            ;;
+        sqlite|sqlite3)
+            . /usr/share/dbconfig-common/internal/sqlite
+            dbc_createuser_cmd=true
+            dbc_checkuser_cmd=false
+            dbc_createdb_cmd='dbc_sqlite_createdb'
+            dbc_dropdb_cmd='dbc_sqlite_dropdb'
+            dbc_dropuser_cmd=true
+            dbc_sqlexec_cmd='dbc_sqlite_exec_command'
+            dbc_sqlfile_cmd='dbc_sqlite_exec_file'
+            dbc_dump_cmd='dbc_sqlite_dump'
+            dbc_register_templates="$dbc_standard_templates $dbc_sqlite_templates"
+            dbc_default_admin=""
+            dbc_default_dbuser="";
+            dbc_default_basepath="/var/lib/dbconfig-common/$dbc_dbtype/$dbc_package"
+            dbc_use_dbuser="false"
+            dbc_dbvendor="SQLite"
+            dbc_sqlite_cmd="/usr/bin/$dbc_dbtype"
+            dbc_dbpackage="$dbc_dbtype"
+            dbc_dbclientpackage="$dbc_dbtype"
+            ;;
+        *)
+            dbc_register_templates="$dbc_standard_templates $dbc_mysql_templates $dbc_pgsql_templates $dbc_sqlite_templates"
+            ;;
+    esac
+
+    # but if this is a frontend-only app, reset some of the above to noops
+    if [ "$dbc_frontend" ]; then
+        dbc_createuser_cmd=true
+        dbc_checkuser_cmd=false
+        dbc_createdb_cmd=true
+        dbc_dropdb_cmd=true
+        dbc_dropuser_cmd=true
+        dbc_sqlexec_cmd=true
+        dbc_sqlfile_cmd=true
+        dbc_dump_cmd=true
+    fi
+}
+
+
+###
+### functions
+###
+
+###
+### dump global configuration to a config file
+###
+dbc_write_global_config(){
+    local tfile
+    _dbc_debug "dbc_write_global_config() $@"
+
+    tfile=$(dbc_mktemp)
+    cat << EOF > "$tfile"
+# dbconfig-common system-wide configuration options
+
+# dbc_remember_admin_pass: should we cache administrative passwords?
+#	set to "true" to keep admin passwords cached in debconf
+dbc_remember_admin_pass='$dbc_remember_admin_pass'
+
+# dbc_remote_questions_default: will we be likely to install on remote servers?
+#	set to "true" to raise the priority of debconf questions related to
+#   database installation on remote servers (for database types that support this)
+dbc_remote_questions_default='$dbc_remote_questions_default'
+
+EOF
+    ucf --debconf-ok "$tfile" "$dbc_globalconfig"
+    ucfr dbconfig-common "$dbc_globalconfig"
+    rm -f "$tfile"
+}
+
+dbc_read_package_config(){
+    local _tmp_dbuser _tmp_basepath _tmp_dbname
+    _dbc_debug "dbc_read_package_config() $@"
+    _dbc_sanity_check package packageconfig || dbc_install_error || return $?
+    [ "$dbc_tried_again" ] && return 0
+
+    # first we set some defaults, which will be overridden by the config
+    # This is the crucial place where things can go wrong when preseeding
+    # on first install because dbc_install will just be set to true. Just
+    # a note, preseeding on further reinstall/reconfigure doesn't make
+    # sense, just edit the configuration files appropriately.
+    # See bug 476946
+    dbc_install=true
+    dbc_upgrade=true
+
+    if [ -f $dbc_packageconfig ]; then
+        . $dbc_packageconfig
+    else
+        # If we are here, there was no previous dbc configuration file
+        # found so I think we can trust debconf
+        # Turns out we cannot fully... According to the documentation
+        # package maintainers can provide several variables in their config.
+        if [ "$dbc_dbuser" ] ; then _tmp_dbuser="$dbc_dbuser" ; fi
+        if [ "$dbc_basepath" ] ; then _tmp_basepath="$dbc_basepath" ; fi
+        if [ "$dbc_dbname" ] ; then _tmp_dbname="$dbc_dbname" ; fi
+        dbc_read_package_debconf
+        if [ ! "$dbc_dbuser" ] ; then dbc_dbuser="$_tmp_dbuser" ; fi
+        if [ ! "$dbc_basepath" ] ; then dbc_basepath="$_tmp_basepath" ; fi
+        if [ ! "$dbc_dbname" ] ; then dbc_dbname="$_tmp_dbname" ; fi
+        # But let's just make sure we don't alter the debconf state, e.g.
+        # for preseeded values that haven't been properly identified
+        # No, we shouldn't as then the above values will not be preseeded
+        #db_set $dbc_package/internal/skip-preseed true
+    fi
+
+    # This probably should go into dbc_read_package_debconf.
+    if [ ! "$dbc_dballow" ] ; then
+        # Fallback in case the dbc_dballow isn't determined yet
+        # if dbserver is unset, that means localhost.
+        if [ -z "$dbc_dbserver" ] || [ "$dbc_dbserver" = "localhost" ]; then
+            # if the server is local, only allow connections from localhost
+            dbc_dballow="localhost"
+        else
+            # otherwise, only tell the remote database to allow from us
+            dbc_dballow=$(hostname -f)
+        fi
+    fi
+}
+
+###
+### this function is responsible for setting all debconf values based
+### on the contents of on-system config files, so that we can avoid
+### the "Debconf is Not a Registry" dilemma.
+###
+dbc_preseed_package_debconf(){
+    local skip_preseed tmp_dbtypes
+    _dbc_debug "dbc_preseed_package_debconf() $@"
+    _dbc_sanity_check package || dbc_install_error || return $?
+    [ "$dbc_tried_again" ] && return 0
+
+    # if we've pre-configured the package and are running config
+    # for the second time via dpkg, then there is no on-disk
+    # configuration to preseed with, and we would in fact nuke
+    # the previous answers.  so we check to avoid that.
+    db_get $dbc_package/internal/skip-preseed && skip_preseed="$RET"
+    db_reset $dbc_package/internal/skip-preseed
+    if [ "$skip_preseed" = "true" ]; then
+        dbc_read_package_debconf
+        return 0
+    fi
+
+    # set whether they want our help
+    db_set $dbc_package/dbconfig-install "$dbc_install"
+    db_set $dbc_package/dbconfig-upgrade "$dbc_upgrade"
+    db_set $dbc_package/dbconfig-remove "$dbc_remove"
+
+    # set the dbtype
+    db_set $dbc_package/database-type "$dbc_dbtype"
+
+    # the following db-specific settings always need to be preseeded unless
+    # we specifically know we're not configuring for the given database type
+    #
+    # set the psql authentication method
+    if [ -z "$dbc_dbtype" ] || [ "$dbc_dbtype" = "pgsql" ]; then
+        if [ "$dbc_authmethod_admin" ]; then
+            db_set $dbc_package/pgsql/authmethod-admin "$dbc_authmethod_admin"
+        elif [ "$dbc_default_pgsql_authmethod_admin" ]; then
+            db_set $dbc_package/pgsql/authmethod-admin "$dbc_default_pgsql_authmethod_admin"
+        fi
+        if [ "$dbc_authmethod_user" ]; then
+            db_set $dbc_package/pgsql/authmethod-user "$dbc_authmethod_user"
+        fi
+    fi
+
+    # for authenticated-only dbtypes.  also catches empty (multidb) type.
+    if echo "$dbc_authenticated_dbtypes" | grep -q "$dbc_dbtype"; then
+        # set app user
+        if [ "$dbc_dbuser" ]; then
+            db_set $dbc_package/db/app-user "$dbc_dbuser""@""$dbc_dballow"
+        fi
+
+        # In case dbc_dbtype is empty, we need to loop over all
+        # authenticated_dbtypes. See LP: #252882
+        if [ -z "$dbc_dbtype" ]; then
+            tmp_dbtypes="$dbc_authenticated_dbtypes"
+        else
+            tmp_dbtypes="$dbc_dbtype"
+        fi
+
+        for tmp_dbtype in $tmp_dbtypes ; do
+
+            # set the app user password
+            if [ "$dbc_dbpass" ]; then
+                db_set $dbc_package/$tmp_dbtype/app-pass "$dbc_dbpass"
+            fi
+
+            # set the database administrator name
+            if [ "$dbc_dbadmin" ]; then
+                db_set $dbc_package/$tmp_dbtype/admin-user "$dbc_dbadmin"
+            fi
+
+        done
+    fi
+
+    # for remote-capable dbtypes
+    if echo "$dbc_remote_dbtypes" | grep -q "$dbc_dbtype"; then
+        # set the remote server/port
+        if [ "$dbc_dbserver" ]; then
+            db_set $dbc_package/remote/host "$dbc_dbserver"
+        fi
+        if [ "$dbc_dbport" ]; then
+            db_set $dbc_package/remote/port "$dbc_dbport"
+        fi
+    fi
+
+    # for fs-based dbtypes only (sqlite)
+    if echo "$dbc_fs_dbtypes" | grep -qa "$dbc_dbtype"; then
+        # set the directory that the database file is found in
+        if [ "$dbc_basepath" ]; then
+            db_set $dbc_package/db/basepath "$dbc_basepath"
+        fi
+    fi
+
+    # set the name of the database to be created
+    if [ "$dbc_dbname" ]; then
+        db_set $dbc_package/db/dbname "$dbc_dbname"
+    fi
+
+    case $dbc_dbtype in
+        "pgsql")
+            # peer/ident based auth doesn't need a password
+            if [ "$dbc_authmethod_admin" != "ident" ]; then
+                # set the database administrator pass
+                db_set $dbc_package/pgsql/admin-pass "$dbc_dbadmpass"
+            fi
+            if [ "$dbc_authmethod_user" != "ident" ]; then
+                # set the database user pass
+                db_set $dbc_package/pgsql/app-pass "$dbc_dbpass"
+            fi
+
+            # set whether or not they want to force SSL
+            if [ "$dbc_ssl" = "true" ]; then
+                db_set $dbc_package/pgsql/method "TCP/IP + SSL"
+            fi
+            ;;
+    esac
+}
+
+
+###
+### this function is responsible for reading in everything
+### with respect to the package's configuration and dbconfig-common.
+###
+dbc_read_package_debconf(){
+    local tmp_dballow
+    _dbc_debug "dbc_read_package_debconf() $@"
+    _dbc_sanity_check package || dbc_install_error || return $?
+    [ "$dbc_tried_again" ] && return 0
+
+    # gracefully fetch this to support multi-dbtype packages
+    # During initial installation dbc_dbtype may be empty after
+    # this step if this is not preseeded.
+    if [ ! "$dbc_hardcoded_dbtype" ]; then
+        db_get $dbc_package/database-type && dbc_dbtype="$RET"
+    fi
+    # dbconfig needs to be reloaded at this point for multi-dbtype apps
+    dbc_set_dbtype_defaults $dbc_dbtype
+
+    # get whether they want our help with various stuff
+    db_get $dbc_package/dbconfig-install && dbc_install="$RET"
+    db_get $dbc_package/dbconfig-upgrade && dbc_upgrade="$RET"
+    db_get $dbc_package/dbconfig-remove && dbc_remove="$RET"
+
+    # If dbc_dbtype is not preseeded for multi-dbtype packages, we
+    # assume that also the other db specific templates are not
+    # preseeded. So, if dbc_dbtype is still empty here, we are going
+    # to skip the items that depend on the dbtype. Note that the other
+    # items are processed.
+    if echo "$dbc_authenticated_dbtypes" | grep -q "$dbc_dbtype"; then
+        # get app user; since dbc 1.8.50 we allow the admin to provide
+        # the domain for the grant call. Unfortunately at least MySQL allows
+        # the app-user to contain an at, so we need to be careful.
+        db_get $dbc_package/db/app-user
+        dbc_dbuser=$(echo "$RET" | sed 's/\(.*\)@\([^@]*\)/\1/')
+        tmp_dballow=$(echo "$RET" | sed -e 's/^[^@]*$//' -e 's/.*@\([^@]*\)/\1/')
+        if [ $tmp_dballow ] ; then
+            dbc_dballow=$tmp_dballow
+        fi
+
+        if [ "$dbc_dbtype" ] ; then
+            # get the app user password
+            db_get $dbc_package/$dbc_dbtype/app-pass && dbc_dbpass="$RET"
+
+            # get the database administrator name
+            db_get $dbc_package/$dbc_dbtype/admin-user && dbc_dbadmin="$RET"
+
+            # get the database administrator pass
+            db_get $dbc_package/$dbc_dbtype/admin-pass && dbc_dbadmpass="$RET"
+        fi
+    fi
+
+    if echo "$dbc_remote_dbtypes" | grep -q "$dbc_dbtype"; then
+
+        # get the db server/port
+        db_get $dbc_package/remote/host && dbc_dbserver="$RET"
+        db_get $dbc_package/remote/port && dbc_dbport="$RET"
+
+        # MySQL 5.7 doesn't support empty port anymore. Instead fill in the
+        # default if no port was given or found. For other dbs, this may be
+        # empty, effectively doing nothing here.
+        if [ ! "$dbc_dbport" ] ; then
+            dbc_dbport="$dbc_default_port"
+        fi
+    fi
+
+    if echo "$dbc_fs_dbtypes" | grep -qa "$dbc_dbtype"; then
+        # get the directory that the database file is found in
+        db_get $dbc_package/db/basepath && dbc_basepath="$RET"
+    fi
+
+    # get the name of the database to be created
+    db_get $dbc_package/db/dbname && dbc_dbname="$RET"
+
+    # DEBIAN_FRONTEND=readline doesn't use our "preseeded" default (LP #689327)
+    # similar code in dpkg/config but also checking for _tmp_dbname here to
+    # prevent overwriting potential preseeded values of dbc_dbname
+    if [ -z "$dbc_dbname" ] && [ -z "$_tmp_dbname" ]; then
+        dbc_dbname=$(echo $dbc_package | tr -d +-.);
+    fi
+
+    # a few db-specific things
+    case $dbc_dbtype in
+        "pgsql")
+            # get the psql authentication method
+            db_get $dbc_package/pgsql/authmethod-admin && dbc_authmethod_admin="$RET"
+            db_get $dbc_package/pgsql/authmethod-user && dbc_authmethod_user="$RET"
+
+            # get whether or not they want to force SSL
+            db_get $dbc_package/pgsql/method && dbc_method="$RET"
+            if [ "$dbc_method" = "TCP/IP + SSL" ]; then
+                dbc_ssl="true"
+            fi
+            ;;
+        "mysql")
+            # if the dbconfig-common consumer specifies a mysql authentication
+            # plugin to be used, all users created through dbconfig-common, for
+            # that consumer, will use the given authentication plugin.
+            if [ ! "$dbc_authplugin" ]; then
+                db_get $dbc_package/mysql/authplugin && dbc_authplugin="$RET"
+            fi
+            ;;
+    esac
+
+    if [ "$dbc_debug" ]; then
+        _dbc_debug "settings determined from dbc_read_package_debconf:"
+        _dbc_debug "\tdbc_install=$dbc_install"
+        _dbc_debug "\tdbc_upgrade=$dbc_upgrade"
+        _dbc_debug "\tdbc_remove=$dbc_remove"
+        _dbc_debug "\tdbc_dbtype=$dbc_dbtype"
+        _dbc_debug "\tdbc_dbuser=$dbc_dbuser"
+        _dbc_debug "\tdbc_dbpass=$dbc_dbpass"
+        _dbc_debug "\tdbc_dballow=$dbc_dballow"
+        _dbc_debug "\tdbc_dbadmin=$dbc_dbadmin"
+        _dbc_debug "\tdbc_dbadmpass=$dbc_dbadmpass"
+        _dbc_debug "\tdbc_dbserver=$dbc_dbserver"
+        _dbc_debug "\tdbc_dbport=$dbc_dbport"
+        _dbc_debug "\tdbc_dbname=$dbc_dbname"
+        _dbc_debug "\tdbc_authmethod_admin=$dbc_authmethod_admin"
+        _dbc_debug "\tdbc_authmethod_user=$dbc_authmethod_user"
+        _dbc_debug "\tdbc_ssl=$dbc_ssl"
+    fi
+}
+
+###
+### dump package configuration to a config file
+###
+dbc_write_package_config(){
+    local iformat ofile tfile
+    _dbc_debug "dbc_write_package_config() $@"
+    _dbc_sanity_check packageconfig || dbc_install_error || return $?
+    [ "$dbc_tried_again" ] && return 0
+    echo "dbconfig-common: writing config to $dbc_packageconfig" >&2
+
+    tfile=$(dbc_mktemp dbconfig-package-config.XXXXXX)
+
+    # a quick check if this is a multi-dbtype app
+    if [ "$dbc_hardcoded_dbtype" ]; then
+        dbc_dbtype="$dbc_hardcoded_dbtype"
+    fi
+    # and a check for ssl
+    if [ "$dbc_method" = "TCP/IP + SSL" ]; then
+        dbc_ssl="true"
+    fi
+
+    cat << EOF > $tfile
+# automatically generated by the maintainer scripts of $dbc_package
+# any changes you make will be preserved, though your comments
+# will be lost!  to change your settings you should edit this
+# file and then run "dpkg-reconfigure $dbc_package"
+
+# dbc_install: configure database with dbconfig-common?
+#              set to anything but "true" to opt out of assistance
+dbc_install='$(dbc_sq_escape $dbc_install)'
+
+# dbc_upgrade: upgrade database with dbconfig-common?
+#              set to anything but "true" to opt out of assistance
+dbc_upgrade='$(dbc_sq_escape $dbc_upgrade)'
+
+# dbc_remove: deconfigure database with dbconfig-common?
+#             set to anything but "true" to opt out of assistance
+dbc_remove='$(dbc_sq_escape $dbc_remove)'
+
+# dbc_dbtype: type of underlying database to use
+#	this exists primarily to let dbconfig-common know what database
+#	type to use when a package supports multiple database types.
+#	don't change this value unless you know for certain that this
+#	package supports multiple database types
+dbc_dbtype='$(dbc_sq_escape $dbc_dbtype)'
+
+# dbc_dbuser: database user
+#	the name of the user who we will use to connect to the database.
+dbc_dbuser='$(dbc_sq_escape $dbc_dbuser)'
+
+# dbc_dbpass: database user password
+#	the password to use with the above username when connecting
+#	to a database, if one is required
+dbc_dbpass='$(dbc_sq_escape $dbc_dbpass)'
+
+# dbc_dballow: allowed host to connect from
+#       only for database types that support specifying the host from
+#       which the database user is allowed to connect from
+#       this string defines for which host the dbc_dbuser is allowed
+#       to connect
+#       this value is only really used again when you reconfigure the
+#       package
+dbc_dballow='$(dbc_sq_escape $dbc_dballow)'
+
+# dbc_dbserver: database host.
+#	leave unset to use localhost (or a more efficient local method
+#	if it exists).
+dbc_dbserver='$(dbc_sq_escape $dbc_dbserver)'
+
+# dbc_dbport: remote database port
+#	leave unset to use the default.  only applicable if you are
+#	using a remote database.
+dbc_dbport='$(dbc_sq_escape $dbc_dbport)'
+
+# dbc_dbname: name of database
+#	this is the name of your application's database.
+dbc_dbname='$(dbc_sq_escape $dbc_dbname)'
+
+# dbc_dbadmin: name of the administrative user
+#	this is the administrative user that is used to create all of the above
+#	The exception is the MySQL/MariaDB localhost case, where this value is
+#	ignored and instead is determined from /etc/mysql/debian.cnf.
+dbc_dbadmin='$(dbc_sq_escape $dbc_dbadmin)'
+
+# dbc_basepath: base directory to hold database files
+#	leave unset to use the default.  only applicable if you are
+#	using a local (filesystem based) database.
+dbc_basepath='$(dbc_sq_escape $dbc_basepath)'
+
+##
+## postgresql specific settings.  if you don't use postgresql,
+## you can safely ignore all of these
+##
+
+# dbc_ssl: should we require ssl?
+#	set to "true" to require that connections use ssl
+dbc_ssl='$(dbc_sq_escape $dbc_ssl)'
+
+# dbc_authmethod_admin: authentication method for admin
+# dbc_authmethod_user: authentication method for dbuser
+#	see the section titled "AUTHENTICATION METHODS" in
+#	/usr/share/doc/dbconfig-common/README.pgsql for more info
+dbc_authmethod_admin='$(dbc_sq_escape $dbc_authmethod_admin)'
+dbc_authmethod_user='$(dbc_sq_escape $dbc_authmethod_user)'
+
+##
+## end postgresql specific settings
+##
+
+EOF
+    # apps registered via webapps-common might use nested directories, so
+    # we should make sure the directories exist
+    mkdir -p "$(dirname "$dbc_packageconfig")"
+    ucf --debconf-ok "$tfile" "$dbc_packageconfig"
+    ucfr "$dbc_package" "$dbc_packageconfig"
+    rm -f "$tfile"
+    # generate the requested d-g-i config files unless it's a manual install
+    # and we've been explicitly told to avoid doing this
+    if [ "$dbc_install" != "true" ] && [ "$dbc_dgi_on_manual" != "true" ]; then
+        return 0
+    elif [ "$dbc_generate_include" ]; then
+        if echo $dbc_generate_include | grep -q -E "^[^:]*:"; then
+            iformat=$(echo $dbc_generate_include | cut -d: -f1)
+            ofile=$(echo $dbc_generate_include | cut -d: -f2)
+
+            # Changing the owner and perms should only be done during installation,
+            # as administrator changes to configuration files must be respected.
+            # Therefor, only processing owner and perms items when the target
+            # file does not exist. This also works correctly when the configuration
+            # file is removed alltogether, as ucf won't create the file.
+            # This change can be done with all the Oct 2014 usage of dbconfig-common
+            # (Checked with http://codesearch.debian.net), as long as no package
+            # starts asking for the ownership or permissions and expects it to be
+            # changed.
+            # See BTS: #720517
+            if [ ! -e "$ofile" ]; then
+                if [ "$dbc_generate_include_owner" ]; then
+                    dbc_generate_include_args="$dbc_generate_include_args -O $dbc_generate_include_owner"
+                fi
+                if [ "$dbc_generate_include_perms" ]; then
+                    dbc_generate_include_args="$dbc_generate_include_args -m $dbc_generate_include_perms"
+                fi
+            fi
+
+            dbconfig-generate-include -a -f "$iformat" $dbc_generate_include_args -U "$dbc_packageconfig" "$ofile"
+            ucfr "$dbc_package" "$dbc_packageconfig"
+        else
+            dbc_error="maintainer did not properly set dbc_generate_include"
+            dbc_install_error "writing package config" || return $?
+            [ "$dbc_tried_again" ] && return 0
+        fi
+    fi
+}
+
+
+dbc_abort(){
+    # forget that we've seen all the debconf questions
+    for f in $dbc_register_templates; do
+        db_fset $dbc_package/$f seen false
+    done
+
+    echo "dbconfig-common: $dbc_package $dbc_command: aborted." >&2
+    dbc_postinst_cleanup
+    return 1
+}
+
+
+##
+## what to do if mysql-server etc are not installed
+##
+dbc_missing_db_package_error(){
+    local question
+    echo "warning: database package not installed?" >&2
+    question="$dbc_package/missing-db-package-error"
+    db_subst $question dbpackage $1
+    dbc_retry_after_error=missing_db_package
+    _dbc_recover_error || return $?
+}
+
+##
+## what to do when something goes wrong during install
+##
+dbc_install_error(){
+    local question
+    echo "error encountered $1:" >&2
+    echo $dbc_error >&2
+    question="$dbc_package/install-error"
+    db_subst $question error $dbc_error
+    dbc_retry_after_error=install
+    _dbc_recover_error || return $?
+}
+
+##
+## what to do when something goes wrong during upgrade
+##
+dbc_upgrade_error(){
+    local question
+    echo "error encountered $1:" >&2
+    echo $dbc_error >&2
+    question="$dbc_package/upgrade-error"
+    db_subst $question error $dbc_error
+    db_subst $question dbfile $dbc_dumpfile
+    dbc_retry_after_error=upgrade
+    _dbc_recover_error || return $?
+}
+
+##
+## what to do when something goes wrong during remove
+##
+dbc_remove_error(){
+    local question
+    echo "error encountered $1:" >&2
+    echo $dbc_error >&2
+    question="$dbc_package/remove-error"
+    db_subst $question error $dbc_error
+    dbc_retry_after_error=remove
+    _dbc_recover_error || return $?
+}
+
+#
+# Generic code called by dbc_*_error
+#
+_dbc_recover_error(){
+    local _debian_frontend
+    if [ "$_dbc_no_act" ]; then
+        return 0;
+    fi
+    # Several actions set _dbc_asuser before calling the functions that can
+    # cause the error to occur, so we need to make sure it is unset to start
+    # with for the retry options.
+    if [ "${_dbc_asuser:-}" ] ; then
+        _dbc_asuser=""
+    fi
+    
+    db_fset $question seen false
+    db_input $dbc_prio_critical $question || true
+    db_go || true
+    db_get $question
+    _dbc_on_error_option="$RET"
+
+    if [ "$dbc_retry_after_error" != "upgrade" ] ; then
+        # It seems $DEBIAN_FRONTEND is sometimes spelled Noninteractive
+        # see LP: #1406700
+        _debian_frontend="$(echo ${DEBIAN_FRONTEND:-} | tr '[:upper:]' '[:lower:]')"
+        if [ "$_debian_frontend" = "noninteractive" ]; then
+            echo "dbconfig-common: $dbc_package $dbc_command: noninteractive fail." >&2
+            _dbc_on_error_option="ignore"
+        fi
+    fi
+
+    if [ "$_dbc_on_error_option" = "abort" ]; then
+        dbc_abort || return $?
+    fi
+
+    if [ "$_dbc_on_error_option" = "retry" ]; then
+        # forget that we've seen all the debconf questions
+        for f in $dbc_register_templates; do
+            db_fset $dbc_package/$f seen false
+        done
+        echo "dbconfig-common: $dbc_package $dbc_command: trying again." >&2
+        . /usr/share/dbconfig-common/dpkg/config
+        dbc_go $dbc_package $dbc_command $dbc_oldversion || return $?
+        # remove errors shouldn't call postinst
+        if [ "$dbc_retry_after_error" != "remove" ] ; then
+            . /usr/share/dbconfig-common/dpkg/postinst
+        else
+            . /usr/share/dbconfig-common/dpkg/prerm
+        fi
+        dbc_go $dbc_package $dbc_command $dbc_oldversion || return $?
+        dbc_tried_again="yes"
+    fi
+
+    if [ "$_dbc_on_error_option" = "retry (skip questions)" ]; then
+        echo "dbconfig-common: $dbc_package $dbc_command: trying again (skip questions)." >&2
+        # remove errors shouldn't call postinst
+        if [ "$dbc_retry_after_error" != "remove" ] ; then
+            . /usr/share/dbconfig-common/dpkg/postinst
+        else
+            . /usr/share/dbconfig-common/dpkg/prerm
+        fi
+        dbc_go $dbc_package $dbc_command $dbc_oldversion || return $?
+        dbc_tried_again="yes"
+    fi
+
+    if [ "$_dbc_on_error_option" = "ignore" ]; then
+        echo "dbconfig-common: $dbc_package $dbc_command: ignoring errors from here forwards" 2>&1
+        # XXX this would be better
+        _dbc_no_act="true"
+        dbc_checkuser_cmd=true
+        dbc_createdb_cmd=true
+        dbc_createuser_cmd=true
+        dbc_dbvendor=true
+        dbc_default_admin=true
+        dbc_default_dbuser=true
+        dbc_dropdb_cmd=true
+        dbc_dropuser_cmd=true
+        dbc_dump_cmd=true
+        dbc_register_templates=""
+        dbc_sqlexec_cmd=true
+        dbc_sqlfile_cmd=true
+        dbc_use_dbuser=true
+        return 0
+    fi
+}
+
+##
+## exactly what you'd think
+##
+dbc_forget_dbadmin_password(){
+    _dbc_debug "dbc_forget_dbadmin_password() $@"
+    echo dbconfig-common: flushing administrative password >&2
+    db_reset $dbc_package/$dbc_dbtype/admin-pass || true
+    db_fset $dbc_package/$dbc_dbtype/admin-pass seen false || true
+    db_reset $dbc_package/password-confirm || true
+    db_fset $dbc_package/password-confirm seen false || true
+}
+
+##
+## exactly what you'd think
+##
+dbc_forget_app_password(){
+    _dbc_debug "dbc_forget_app_password() $@"
+    db_reset $dbc_package/$dbc_dbtype/app-pass || true
+    db_fset $dbc_package/$dbc_dbtype/app-pass seen false || true
+    db_reset $dbc_package/app-password-confirm || true
+    db_fset $dbc_package/app-password-confirm seen false || true
+}
+
+##
+## exactly what you'd think
+##
+##	usage: dbc_get_admin_pass package dbtype
+##
+dbc_get_admin_pass(){
+    local have_admin_pass pass1 _tmp_dbadmin
+    _dbc_debug "dbc_get_admin_pass() $@"
+
+    # Frontends don't need the admin password as they don't put anything in the
+    # database.
+    if [ "$dbc_frontend" ]; then
+        return 0
+    fi
+
+    # Non-authenticated dbtypes aren't using passwords.
+    if echo "$dbc_authenticated_dbtypes" | grep -qv "$dbc_dbtype"; then
+        return 0
+    fi
+    
+    # (PostgreSQL) peer/ident doesn't need the admin password.
+    if [ "$dbc_authmethod_admin" = "ident" ]; then
+        return 0
+    fi
+    
+    db_fget $dbc_package/$dbc_dbtype/admin-pass seen
+    if [ "$RET" = "true" ]; then
+        have_admin_pass="yes"
+    fi
+
+    # make sure the passwords are the same, safely
+    while [ ! "$have_admin_pass" ]; do
+        # To prevent mistakes where people forgot which admin-user they used
+        # let's put the account name into the template.
+        db_get $dbc_package/$dbc_dbtype/admin-user && _tmp_dbadmin="$RET"
+        db_subst $dbc_package/$dbc_dbtype/admin-pass dbadmin "$_tmp_dbadmin"
+        # get the administrative password
+        db_input $dbc_prio_high $dbc_package/$dbc_dbtype/admin-pass || true
+        if [ $dbc_statefull ] ; then
+            db_go || return $?
+        else
+            db_go || true
+        fi
+        db_get $dbc_package/$dbc_dbtype/admin-pass
+        pass1="$RET"
+
+        if [ "$dbc_dbtype" = "pgsql" ] && [ ! "$pass1" ]; then
+            db_input $dbc_prio_high $dbc_package/pgsql/no-empty-passwords || true
+            db_reset $dbc_package/$dbc_dbtype/admin-pass
+            db_fset $dbc_package/$dbc_dbtype/admin-pass seen false
+            if [ $dbc_statefull ] ; then
+                db_go || return $?
+            else
+                db_go || true
+            fi
+        else
+            have_admin_pass="yes"
+        fi
+    done
+
+    db_get $dbc_package/$dbc_dbtype/admin-pass
+    dbc_dbadmpass="$RET"
+}
+
+##
+## exactly what you'd think
+##
+##	usage: dbc_get_app_pass package dbtype
+##
+dbc_get_app_pass(){
+    local have_app_pass pass1 pass2
+    _dbc_debug "dbc_get_app_pass() $@"
+
+    db_fget $dbc_package/$dbc_dbtype/app-pass seen
+    if [ "$RET" = "true" ]; then
+        have_app_pass="yes"
+        db_get $dbc_package/$dbc_dbtype/app-pass
+        dbc_dbpass="$RET"
+    fi
+
+    # make sure the passwords are the same, safely
+    while [ ! "$have_app_pass" ]; do
+        # forget the password-confirm question first, as it's shared
+        db_reset $dbc_package/app-password-confirm
+        db_fset $dbc_package/app-password-confirm seen false
+
+        # get the appistrative password
+        # do we really want/need prio high (maybe prio_remote_question)
+        # same prio as below
+        db_input $dbc_prio_high $dbc_package/$dbc_dbtype/app-pass || true
+        if [ $dbc_statefull ] ; then
+            db_go || return $?
+        else
+            db_go || true
+        fi
+        db_get $dbc_package/$dbc_dbtype/app-pass
+        pass1="$RET"
+
+        # get the password again, if it is not empty
+        if [ "$pass1" ]; then
+            # do we really want/need prio high (maybe prio_remote_question)
+            # same prio as above
+            db_input $dbc_prio_high $dbc_package/app-password-confirm || true
+            if [ $dbc_statefull ] ; then
+                db_go || return $?
+            else
+                db_go || true
+            fi
+            db_get $dbc_package/app-password-confirm
+            pass2="$RET"
+        fi
+
+        # test to see if the passwords match
+        if [ "$pass1" = "$pass2" ]; then
+            dbc_dbpass="$pass1"
+            have_app_pass="yes"
+        else
+            # tell them the passwords didn't match, loop again
+            db_reset $dbc_package/$dbc_dbtype/app-pass
+            db_fset $dbc_package/$dbc_dbtype/app-pass seen false
+            db_input $dbc_prio_high $dbc_package/passwords-do-not-match || true
+            if [ $dbc_statefull ] ; then
+                db_go || return $?
+            else
+                db_go || true
+            fi
+        fi
+    done
+
+    if [ ! "$dbc_dbpass" ]; then
+        dbc_dbpass=$(env LANG=C LC_ALL=C tr -dc "[:alnum:]" < /dev/urandom | dd bs=1 count=12 2>/dev/null)
+        db_set $dbc_package/$dbc_dbtype/app-pass "$dbc_dbpass"
+        db_set $dbc_package/app-password-confirm "$dbc_dbpass"
+    fi
+}
+
+##
+## perform any necessary cleanup before exiting the postinst
+##
+dbc_postinst_cleanup(){
+    _dbc_debug "dbc_postinst_cleanup() $@"
+    if echo "$dbc_authenticated_dbtypes" | grep -q "$dbc_dbtype"; then
+        if [ "$dbc_remember_admin_pass" != "true" ]; then
+            dbc_forget_dbadmin_password
+        fi
+        if [ "$dbc_remember_app_pass" != "true" ]; then
+            dbc_forget_app_password
+        fi
+    fi
+    db_reset $dbc_package/internal/skip-preseed
+    db_reset $dbc_package/internal/reconfiguring
+}
+
+##
+## determine whether a db is supported by a package
+##
+dbc_detect_supported_dbtype(){
+    local query_dbtype
+    _dbc_debug "dbc_detect_supported_dbtype() $@"
+    query_dbtype=$1
+    # see if the package says it's supported
+    if echo $dbc_dbtypes | grep -qE "(^|,[[:space:]]*)$query_dbtype(\$|,)"; then
+        return 0
+    fi
+    return 1
+}
+
+##
+## determine whether a db is installed on the system
+##
+dbc_detect_installed_dbtype(){
+    _dbc_debug "dbc_detect_installed_dbtype() $@"
+    _dbc_detect_installed_dbtype "$@"
+}
+
+###
+### register all the necessary debconf templates
+###
+dbc_register_debconf(){
+    local f local
+    _dbc_debug "dbc_register_debconf() $@"
+
+    for f in $dbc_register_templates; do
+        # register the question, but bail if it doesn't (yet) exist
+        # failure is gracefully handled elsewhere
+        if ! db_register dbconfig-common/$f $dbc_package/$f >/dev/null 2>&1; then
+            return 1
+        fi
+        # perform some basic customizing substitutions
+        if [ "$dbc_packagetitle" ]; then
+            db_subst $dbc_package/$f pkg $dbc_packagetitle
+        else
+            db_subst $dbc_package/$f pkg $dbc_package
+        fi
+        if [ "$dbc_dbvendor" ]; then
+            db_subst $dbc_package/$f dbvendor $dbc_dbvendor
+        fi
+    done
+    if [ "$dbc_dbtypes" ]; then
+        db_subst $dbc_package/database-type database_types $dbc_dbtypes
+    fi
+}
+
+###
+### dbc_sq_escape: escape any single quotes present in a string
+###
+###	this will safely escape a string which is to be stored inside
+### single quotes.  that is  as'df -> as'\''df
+###
+dbc_sq_escape(){
+    sed -e "s,','\\\\'',g" << EOF
+$@
+EOF
+}
+
+###
+### dbc_no_thanks: check if dbconfig-no-thanks is (going to be) installed
+###
+### dbconfig-no-thanks is meant to allow opting out of dbc help. However,
+### according to policy 3.9.1 the maintainer scripts may be called before the
+### package is unpacked, so we can't just check for files.
+###
+dbc_no_thanks(){
+    local no_thanks_status
+
+    # db:Status-Want requires dpkg 1.17.11
+    no_thanks_status=$(dpkg-query -W -f='${db:Status-Want}' dbconfig-no-thanks 2>/dev/null)
+
+    if [ "${no_thanks_status}" = install ] || [ "${no_thanks_status}" = hold ] ; then
+        _dbc_debug "dbconfig-no-thanks is installed. Nothing to do for dbconfig-common."
+        return 0
+    else
+        return 1
+    fi
+}

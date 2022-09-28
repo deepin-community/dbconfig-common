@@ -1,0 +1,23 @@
+Document: dbapp-policy
+Title: Best practices for packaging database applications
+Author: Sean Finney
+Abstract:
+ This draft describes a set of guidelines and best practices to be
+ implemented by the maintainers of database application packages.
+ Pending a final draft, desire, and acceptance by the developer
+ community at large, this may serve as the foundation for an
+ official policy--or it may simply remain as it is.
+Section: Debian
+
+Format: HTML
+Index: /usr/share/doc/dbconfig-common/dbapp-policy.html/index.html
+Files: /usr/share/doc/dbconfig-common/dbapp-policy.html/index.html
+
+Format: PDF
+Files: /usr/share/doc/dbconfig-common/dbapp-policy.pdf.gz
+
+Format: Text
+Files: /usr/share/doc/dbconfig-common/dbapp-policy.txt.gz
+
+Format: PostScript
+Files: /usr/share/doc/dbconfig-common/dbapp-policy.ps.gz

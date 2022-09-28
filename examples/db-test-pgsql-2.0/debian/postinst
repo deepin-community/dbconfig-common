@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+#set -x
+
+. /usr/share/debconf/confmodule
+. /usr/share/dbconfig-common/dpkg/postinst.pgsql 
+
+# you can set the default database encoding to something else
+dbc_pgsql_createdb_encoding="UTF8"
+dbc_go db-test-pgsql "$@"
+
+#DEBHELPER#

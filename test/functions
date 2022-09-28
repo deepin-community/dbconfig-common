@@ -1,0 +1,161 @@
+# -*- mode: sh -*-
+# override the installation root
+_dbc_root="$(dirname "$0")/.."
+
+# print out a tab-indented line informing of what's happening in a test
+log_tc(){
+    tc_case_no=$(expr $tc_case_no + 1)
+    printf "\\tcase $tc_case_no: $1\\n"
+}
+
+# takes a single argument and escapes it literally in a fashion that
+# allows it to be used without further quoting
+escape(){
+    #echo "$1" | sed -e 's/\([$`\!]\)/\\\1/g'
+    echo "$1" | sed -e "s/'/'\\\''/g" -e "s/^/'/" -e "s/\$/'/"
+}
+
+dq_escape(){
+    echo "$1" | sed -e 's/\([$`\!]\)/\\\1/g'
+}
+
+# replaces any occurrence of a tmpfile made from a mktemp-like template
+# to the "template" form, i.e. foo.A5jfN4 -> foo.XXXXXX
+# also will call normalize_tmpdir on the logfile
+#
+# helpful for comparing testcase output that includes these testfiles
+subst_tmpfile(){
+    local template match logfile
+    template="$1"
+    logfile="$2"
+    match="$(echo "$template" | sed -e 's/XXXXXX/....../')"
+    # Don't do the substitution when we're skipping in case the file doesn't exist
+    (isSkipping && [ ! -f "$logfile" ]) || sed -i -e "s,$match,$template,g" "$logfile"
+}
+
+assertFileExists(){
+    local f msg
+    if [ $# -eq 2 ]; then
+        msg="$1"
+        shift
+    fi
+    f="$1"
+    msg="${msg:-File $f does not exist}"
+
+    assertTrue "$msg" '[ -f "$f" ]'
+}
+
+assertFileEmpty(){
+    local f msg
+    if [ $# -eq 2 ]; then
+        msg="$1"
+        shift
+    fi
+    f="$1"
+    msg="${msg:-File $f does not exist or is nonempty}"
+    [ -f "$f" ] && [ ! -s "$f" ]
+    ret=$?
+
+    assertTrue "$msg" $ret
+    [ $ret -eq 0 ] || isSkipping || head "$f" >&2
+}
+
+assertDirectoryEmpty(){
+    local d msg
+    if [ $# -eq 2 ]; then
+        msg="$1"
+        shift
+    fi
+    d="$1"
+    msg="${msg:-Directory $d is not empty}"
+
+    [ -d "$d" ] && [ -z "$(ls "$d")" ]
+    ret=$?
+    assertTrue "$msg" $ret
+    [ $ret -eq 0 ] || isSkipping || ls "$d" >&2
+}
+
+assertFilesEqual(){
+    local msg outfile errfile oldargs f1 f2
+    outfile=./tmp/assertFilesEqual.stdout
+    errfile=./tmp/assertFilesEqual.stderr
+    if [ $# -eq 3 ]; then
+        msg="$1"
+        shift
+    else
+        msg="Files not equal"
+    fi
+    f1=$1
+    f2=$2
+    eval set ${DIFF:-diff -Nu}
+    "$@" "$f1" "$f2" > $outfile 2>$errfile
+    assertTrue "$msg" "[ $? -eq 0 ]"
+    if [ -s "$errfile" ]; then
+        isSkipping || cat $errfile
+    fi
+    if [ -s "$outfile" ]; then
+        isSkipping || cat $outfile
+    fi
+}
+
+oneTimeSetUp(){
+    local curdir basedir
+    curdir="$(pwd)"
+    basedir=$(readlink -f $(dirname "$0"))
+
+    # make sure we're called from the test dir, even if we weren't
+    if [ "$curdir" != "$basedir" ]; then
+        cd "$basedir"
+        exec "./$(basename $0)"
+    fi
+
+    . ${curdir}/mockup-functions
+
+    # Originily set a really strange TMPDIR to see if it causes problems.
+    # However, passing pgsql commands via here files fails because one can't
+    # properly escape the command.
+    # export TMPDIR="${curdir}/tmp/\`\`it's a '\$funny\\' path!\""
+    if [ "${TMPDIR:-}" ] ; then
+        export TMPDIR="${TMPDIR}/dbcdummy"
+    else
+        export TMPDIR="/tmp/dbcdummy"
+    fi
+
+    # override the dbc logfile location
+    _dbc_logfile="${curdir}/tmp/dbc.log"
+
+    # specify where the mockup logs should go
+    MOCKUP_WORKDIR="${curdir}/tmp/mockup"
+}
+
+purge_tmp(){
+    rm -rf ./tmp
+    mkdir -p "$TMPDIR" "$MOCKUP_WORKDIR"
+    # for convenience, since we make a really ugly TMPDIR for tests
+    ln -s "$TMPDIR" ./tmp/tmpdir
+    touch $_dbc_logfile
+}
+
+setUp(){
+    # Probably all database type tests are going to overload this function
+    # they probably need a copy of whatever is below, so keep in sync
+    purge_tmp
+    tc_case_no=0
+}
+
+tearDown(){
+    if ls "$MOCKUP_WORKDIR" | grep -qE '^(done)?[0-9]*\.errors\.'; then
+        for f in $(ls $MOCKUP_WORKDIR/*.errors.*); do
+            test -s "$f"
+            ret=$?
+            assertFalse "mockup errors found" $ret
+            [ $ret -ne 0 ] || ( echo "  $f:"; cat "$f" )
+        done
+    fi
+    # To ensure that all mocked up functions are removed again
+    # so that any next test can call the real thing again
+    if [ -f "$MOCKUP_WORKDIR"/mockup.control ] ; then
+        unset -f $(grep "(){$" "$MOCKUP_WORKDIR"/mockup.control | sed 's/(){//')
+    fi
+    assertDirectoryEmpty "cruft files left behind" "$TMPDIR"
+}

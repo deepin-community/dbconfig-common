@@ -1,0 +1,11 @@
+This is the source package that generates the test binaries used as examples
+for what dbconfig-common can do. For more info please see the rest of the
+documentation in the dbconfig-common package:
+
+/usr/share/doc/dbconfig-common/dbconfig-common-design.html
+/usr/share/doc/dbconfig-common/dbapp-policy.html/index.html
+/usr/share/doc/dbconfig-common/dbconfig-common.html/index.html
+
+Enjoy!
+
+ -- Paul Gevers <elbrus@debian.org>, Fri, 30 Oct 2015 16:11:39 +0100

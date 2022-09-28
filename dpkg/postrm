@@ -1,0 +1,31 @@
+# -*- mode: sh -*-
+###
+### source common stuff
+###
+dbc_go(){
+    . /usr/share/dbconfig-common/dpkg/common
+    local cfg
+    _dbc_debug "(postrm) dbc_go() $@"
+    dbc_config "$@" || return $?
+
+    if [ "$dbc_command" = "upgrade" ]; then
+        ## With dbconfig-no-thanks installed we don't need to do anything.
+        if dbc_no_thanks ; then
+            return 0
+        fi
+        dbc_read_package_config || return $?
+        dbc_preseed_package_debconf || return $?
+    elif [ "$dbc_command" = "purge" ]; then
+        # remove the dbc configuration file
+        rm -f /etc/dbconfig-common/$dbc_package.conf || true
+        if command -v ucf >/dev/null; then
+            cfg="/etc/dbconfig-common/$dbc_package.conf"
+            ucf -p "$cfg" || true
+            ucfr -p "$dbc_package" "$cfg"
+        fi
+        # forget everything we ever knew related to debconf+dbc
+        for t in $dbc_register_templates; do
+            db_unregister $dbc_package/$t || true
+        done
+    fi
+}

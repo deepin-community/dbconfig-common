@@ -1,0 +1,578 @@
+<!doctype debiandoc public "-//DebianDoc//DTD DebianDoc//EN">
+<book>
+<title>
+    <package>dbconfig-common</package> documentation
+<author>
+    Sean Finney
+<abstract>
+    <package>dbconfig-common</package> is an implementation of the "best
+    practices for database applications" draft, which provides debian packagers
+    with an easy, reliable, and consistent method for managing databases used
+    by debian packages.
+<copyright>
+    Copyright &copy; 2005 sean finney <email>seanius@debian.org</email> and
+    2015 Paul Gevers <email>elbrus@debian.org</email>.
+    <p>This document is licensed under the
+    <url id="https://spdx.org/licenses/AFL-2.1.html" name="Academic Free License, Version 2.1">
+
+<toc sect1>
+
+<chapt id="intro">Introduction
+    <p>
+    <package>dbconfig-common</package> can:
+    <list>
+        <item>support MySQL, PostgreSQL and SQLite based applications
+        <item>create databases and database users
+        <item>access local or remote databases
+        <item>upgrade/modify databases when upstream changes
+        database structure
+        <item>remove databases and database users
+        <item>generate config files in many formats with the
+        database info
+        <item>import configs from packages previously managing
+        databases on their own
+        <item>prompt users with a set of normalized,
+        pre-translated questions
+        <item>handle failures gracefully, with an option to retry.
+        <item>do all the hard work automatically
+        <item>work for package maintainers with little effort
+        on their part
+        <item>work for local admins with little effort on
+        their part
+        <item>comply with an agreed upon set of standards for
+        behavior
+        <item>do absolutely nothing if it is the whim of the
+        local admin
+        <item>perform all operations from within the standard
+        flow of debian package maintenance (no additional skill
+        is required of the local admin)
+    </list>
+
+<chapt id="tryitout">Try it out!
+    <p>
+    If you're interested in trying it out, go ahead and check out
+    <ref id="develguide">, which will teach you how to get your packages
+    working with <package>dbconfig-common</package>.
+    <p>
+    If you'd like to see some basic examples
+    of <package>dbconfig-common</package> in action, check out the sample
+    packages available in
+    <file>/usr/share/doc/dbconfig-common/examples</file>. In this
+    directory you'll find debian source directories to build the
+    binary packages, so you can see not only how the packages work
+    when they are installed, but also how they are built. Take
+    a look at the README file in this directory for more information.
+
+<chapt id="develguide">Using <package>dbconfig-common</package> in your packages
+    <sect id="quickndirty">Quick and dirty: what to do
+        <p>
+        There are three things you will have to do as a package maintainer if
+        you want to use <package>dbconfig-common</package>: provide the
+        database code/scripts to setup the data base, source the maintainer
+        script libraries and launch <package>dbconfig-common</package>.
+        <package>dbconfig-common</package> will take care of everything else,
+        including all debconf related questions, database/database-user creation,
+        upgrade/remove/purge logic, etc. After all, the goal
+        of <package>dbconfig-common</package> is to make life easier for both
+        the local admin <em>and</em> the package maintainer :)
+        <sect1 id="depends">Update package dependencies
+            <p>
+            If your package just supports a single database type supported by
+            dbconfig-common, your package needs to depend on the matching
+            <package>dbconfig-&lt;database-type&gt;</package> package as well
+            as have the <package>dbconfig-no-thanks</package> as an alternative
+            to that. E.g. packages that need a PostgreSQL database must
+            have the following in their Depends field: <example>
+Depends: dbconfig-pgsql | dbconfig-no-thanks
+            </example> Packages that support multiple database types (see more
+            about that in the <ref id="multidbtype">) must alternatively depend on all the
+            matching <package>dbconfig-&lt;database-type&gt;</package> packages
+            as well as have <package>dbconfig-no-thanks</package> as an
+            alternative to that. E.g. packages that need a PostgreSQL or
+            SQLite3 database must have the following in their Depends
+            field: <example>
+Depends: dbconfig-pgsql | dbconfig-sqlite3 | dbconfig-no-thanks
+            </example>
+        <sect1 id="hooks">Putting hooks into the maintainer scripts
+            <p>
+            In the <var>config</var>, <var>postinst</var>,
+            <var>prerm</var>, and <var>postrm</var> scripts for your package,
+            you will need to source the libraries which perform most of the
+            work for you (you do not need to do so in your
+            <var>preinst</var> script). If you are not currently using debconf
+            in your package, you will be now, and the debconf libraries need to
+            be sourced first. You will need to use dh_installdebconf or
+            otherwise install your <var>config</var> script into your deb file
+            if you're not already doing so. For example, here's what it
+            might look like in a <var>config</var> script for an imaginary
+            <package>foo-mysql</package> package:
+            <example>
+#!/bin/sh
+# config maintainer script for foo-mysql
+
+# source debconf stuff
+. /usr/share/debconf/confmodule
+# source dbconfig-common shell library, and call the hook function
+if [ -f /usr/share/dbconfig-common/dpkg/config.mysql ]; then
+    . /usr/share/dbconfig-common/dpkg/config.mysql
+    dbc_go foo-mysql "$@"
+fi
+
+# ... rest of your code ...
+            </example>
+            <p>
+            <var>dbc_go</var> is a function defined in every maintainer script
+            hook to execute the appropriate code based on which maintainer
+            script is being run. Note that it is passed two
+            arguments. <package>foo-mysql</package>, the name of the package
+            (there's sadly no clean way to figure this out automatically),
+            and <var>$@</var> (the arguments which were passed to the
+            maintainer script).
+            <p>
+            <em>NOTE</em>: you do not need to conditionally test for the
+            existance of the shell library in the <var>postinst</var>
+            and <var>prerm</var> scripts, but to stay compliant with Policy
+            section 7.2 you do need to do so at least in your <var>config</var>
+            and <var>postrm</var> scripts.
+            <p>
+            Note that if your package does not use debconf, you will need to
+            explicitly install the <var>config</var> script in your
+            package. The easiest way to do so is to call dh_installdebconf
+            from <file>debian/rules</file>.
+        <sect1 id="bootstrap">Supplying the data/code for your database
+            <p>
+            There are three locations in which you can place code for
+            installing the databases of your package:
+
+            <list>
+            <item><file>/usr/share/dbconfig-common/data/PACKAGE/install/DBTYPE</file>
+            <item><file>/usr/share/dbconfig-common/data/PACKAGE/install-dbadmin/DBTYPE</file>
+            <item><file>/usr/share/dbconfig-common/scripts/PACKAGE/install/DBTYPE</file>
+            </list>
+
+            <p>
+            where <var>PACKAGE</var> is the name of the package,
+            <var>DBTYPE</var> is the type of data (mysql, pgsql, etc). The full
+            location should be a file containing the proper data.
+
+            <p>
+            The first location is for the majority of situations, in which the
+            database can be constructed from it's native language (SQL for
+            MySQL/PostgreSQL, for example). The data will be fed to the
+            underlying database using the credentials of the database user. The
+            second location is like the first location, but will be run using
+            the credentials of the database administrator. <em>Warning</em>:
+            use of this second location should only be done when there are
+            excerpts of database code that <em>must</em> be run as the database
+            administrator (such as some language constructs in postgresql) and
+            should otherwise be avoided. The third location is for databases
+            that require a more robust solution, in which executable programs
+            (shell/perl/python scripts, or anything else) can be placed.
+
+            <p>
+            This code will only be executed on new installs and reconfiguration
+            of failed installs. In the case of SQL databases, in the data
+            directory you would find the simple create and insert statements
+            needed to create tables and populate the database.
+            <em>You do not need to create the underlying database, only
+            populate it</em>. The scripts directory contains
+            shell/perl/python/whatever scripts, which are passed the same
+            arguments as <var>dbc_go</var>. If you need database connection
+            information (username, password, etc) in your scripts, you can
+            source the <file>/bin/sh</file> format package config file, or you
+            can instruct <package>dbconfig-common</package> to generate one in
+            your programming language of choice (see the advanced tips
+            section).
+
+            <p>
+            If files exist in both data and scripts, they will both be executed
+            in an unspecified order.
+
+            <p>
+            That's it! The rest of what needs to be done is handled
+            by <package>dbconfig-common</package>, which should keep all the
+            work (and bugs) in one place. Happy packaging! Of course, it's
+            recommended you take a quick look through the rest of the document,
+            just to get an idea of other things that
+            <package>dbconfig-common</package> can do for you in case you have
+            special needs.
+
+    <sect id="advanced">Advanced usage.
+        <sect1 id="genconfig">Generating custom configuration files with
+        database information
+            <p>
+            Your database application will probably require a username and
+            password in order to function. Every package that
+            uses <package>dbconfig-common</package> already has a /bin/sh
+            includable format config file, but it may be more convenient to
+            have something in the native language of the package. For example,
+            packaging a php/MySQL web app would be a lot easier if there were
+            already a file existing with all the information in php includable
+            format.
+
+            <p>
+            Using <package>dbconfig-common</package>, you can do this with
+            little effort. In your <var>postinst</var> script, define the
+            variable <var>dbc_generate_include</var> to a value that follows
+            the form
+            <var>format:location</var> where <var>format</var> is one of the
+            supported output formats of
+            <var>dbconfig-generate-include</var> (list them with -h) and
+            location is the absolute location where you want your config file
+            to go. There are also some extra
+            variables <var>dbc_generate_include_owner</var>,
+            <var>dbc_generate_include_perms</var>, and
+            <var>dbc_generate_include_args</var> which do what you would expect
+            them to. <em>Note: you will be responsible for removing this file
+            in your <var>postrm</var> script</em>. <em>Note2: the ownership and
+            permissions will only be used when creating the file, so don't rely
+            on this feature if your packages wants to change existing ownership
+            and/or permissions.</em> When your scripts are run, this
+            environment variable will be exported to your scripts, as well as a
+            variable
+            <var>dbc_config_include</var> which has the same value, but with
+            the leading <var>format:</var> stripped away for convenience.
+
+            <em>NOTE</em> if you use this feature, you should also ensure that
+            the generated file is properly removed in the <var>postrm</var>
+            script. dbconfig-common can not handle this itself, unfortunately,
+            because it may be possible that it is purged before your package is
+            purged.  therefore, you should do the following in
+            your <var>postrm</var> script:
+            <example>
+if [ "$1" = "purge" ]; then
+    rm -f yourconfigfile
+    if command -v ucf >/dev/null; then
+        ucf --purge yourconfigfile
+        ucfr --purge yourpackage yourconfigfile
+    fi
+fi
+            </example>
+
+        <sect1 id="import">Importing <package>dbconfig-common</package> into an
+        existing package
+            <p>
+            If your package is already part of debian,
+            <package>dbconfig-common</package> provides some support to load
+            pre-existing settings from a specified config by setting two
+            variables:
+            <var>dbc_first_version</var> and
+            <var>dbc_load_include</var>.
+
+            <p>
+            <var>dbc_load_include</var> should be specified in
+            the <var>config</var> script and be of the format
+            <var>format:inputfile</var>. <var>format</var> is one of the
+            languages understood by
+            <var>dbconfig-load-include</var>, and <var>inputfile</var> is
+            either the config file in <var>format</var> language, or a script
+            file in <var>format</var> language that otherwise determines the
+            values and sets them.
+
+            <p>
+            <var>dbc_first_version</var> should be specified in both
+            the <var>config</var> <em>and</em> <var>postinst</var> scripts, and
+            should contain the first version in which
+            <package>dbconfig-common</package> was introduced. When the package
+            is installed, if it is being upgraded from a version less than this
+            value it will attempt to bootstrap itself with the values.
+
+        <sect1 id="updates">Database changes in new versions of your package
+            <p>
+            Occasionally, the upstream authors will modify the underlying
+            databases between versions of their software. For example, in MySQL
+            applications column names may change, move to new tables, or the
+            data itself may need to be modified in newer upstream versions of a
+            package.
+
+            <p>
+            In order to cope with this, a second set of file locations exists
+            for providing packagers ways to modify the databases during package
+            upgrades:
+
+            <list>
+            <item><file>/usr/share/dbconfig-common/data/PACKAGE/upgrade/DBTYPE/VERSION</file>
+            <item><file>/usr/share/dbconfig-common/data/PACKAGE/upgrade-dbadmin/DBTYPE/VERSION</file>
+            <item><file>/usr/share/dbconfig-common/scripts/PACKAGE/upgrade/DBTYPE/VERSION</file>
+            </list>
+
+            <p>
+            where <var>VERSION</var> is the version at which the upgrade should
+            be applied, and the respective path contains the upgrade
+            code/data. When a package upgrade occurs, all instances of
+            <var>VERSION</var> which are newer than the previously installed
+            version will be applied, in order. There is also an automatically
+            included set of safeguards and behavior provided by
+            <package>dbconfig-common</package>, so as the packager you
+            shouldn't need to worry about most of the error-handling.
+
+            <p>
+            As with installation, scripts will be passed the same cmdline
+            arguments as were passed to dbc_go.
+
+        <sect1 id="multidbtype">Packages that support multiple types of
+        databases
+            <p>
+            Sometimes, a particular package may support multiple database
+            types. This is common with perl or php based web applications,
+            which frequently use some form of database abstraction layer (pear
+            DB for php, the DBD family for perl).
+
+            <p>
+            <package>dbconfig-common</package> provides support for such
+            applications in a relatively straightforward fashion, allowing the
+            local admin to select which database type to use when configuring a
+            database for a package
+
+            <p>
+            To take advantage of this feature, you will want to use the
+            "generic" maintainer script hooks, and additionally hint the
+            debconf <var>config</var> script with the types of databases your
+            package supports. For example, the <var>postinst</var> script would
+            now look like this:
+
+            <example>
+#!/bin/sh
+# postinst maintainer script for foo-mysql
+
+# source debconf stuff
+. /usr/share/debconf/confmodule
+# source dbconfig-common stuff
+. /usr/share/dbconfig-common/dpkg/postinst
+dbc_go foo-mysql "$@"
+
+# ... rest of your code ...
+            </example>
+
+            <p>
+            Unfortunately, specifying the proper dependencies on the
+            right <package>dbconfig-&lt;database-type&gt;</package> packages,
+            as discussed earlier, is not enough for dbconfig-common to figure
+            out which database types your package supports. Therefore you need
+            to let dbconfig-common know via the <var>config</var> script. It
+            needs to contain an additional variable called "dbc_dbtypes", which
+            is a comma-separated list of supported database types:
+
+            <p>
+            <example>
+#!/bin/sh
+# config maintainer script for foo-mysql
+
+# source debconf stuff
+. /usr/share/debconf/confmodule
+if [ -f /usr/share/dbconfig-common/dpkg/config ]; then
+    # we support mysql and pgsql
+    dbc_dbtypes="mysql, pgsql"
+
+    # source dbconfig-common stuff
+    . /usr/share/dbconfig-common/dpkg/config
+    dbc_go foo-mysql "$@"
+fi
+
+# ... rest of your code ...
+            </example>
+
+        <sect1 id="frontends">Packages that connect to but should not create
+        databases (read-only frontends)
+            <p>
+            Some packages provide multiple frontend packages to a single
+            backend package. Furthermore, sometimes these frontend packages
+            are installed on a seperate system from the actual database
+            application, and should not manage the databases on their own.
+
+            <p>
+            For example, if the frontend were to be installed on multiple
+            servers (perhaps load balancing or similar), it would not be wise
+            to attempt to install/upgrade the database on each client.
+            Instead, it would be wiser to simply prompt for the information and
+            leave the database management to the single central package.
+
+            <p>
+            If the above scenario matches one of your packages, there are a
+            seperate set of maintainer hooks for you to use. For
+            example, <file>frontend.config</file>
+            or <file>frontend.config.mysql</file>. Using these
+            hooks, <package>dbconfig-common</package> will know enough to not
+            take any actions apart from prompting the local administrator for
+            the pertinent information.
+
+        <sect1 id="removal">Packages that require extra logic during removal
+            <p>
+            Sometimes, it may be that your install sql/scripts perform
+            operations that aren't automatically undone by package removal. For
+            example, if your package gives extra grants to a user (such as
+            triggers) it's possible that grants will not automatically be
+            revoked, which could cause problems for later installations as well
+            as potential security concerns. For this and any other use you may
+            need it for, you can place files in the following locations for
+            "removal" maintainer code:
+
+            <list>
+            <item><file>/usr/share/dbconfig-common/data/PACKAGE/remove/DBTYPE</file>
+            <item><file>/usr/share/dbconfig-common/scripts/PACKAGE/remove/DBTYPE</file>
+            </list>
+
+            <p>
+            This works just like the install/upgrade code, only it always runs
+            as the dbadmin. This code is run by default, unless the local admin
+            opts out of deconfiguration assistance (note that this is seperate
+            from database purging, which does not happen by default). Note
+            that if you need to perform template substitution, you should set
+            dbc_sql_substitutions to "yes" in your prerm maintainer script as
+            well.
+
+        <sect1 id="defaults">Hinting defaults and advanced control of
+        configuration/installation
+            <p>
+            <package>dbconfig-common</package> has a set of pre-defined default
+            values for most of the questions with which it prompts the user,
+            most of which are variations on the name of the package. However,
+            as a packager you can override some these values and set defaults
+            that you feel are more appropriate, as well as otherwise modify the
+            behavior of some parts of <package>dbconfig-common</package>.
+
+            <p>
+            The following table lists the variables you can hint in
+            your <var>config</var> script, as well as some other variables you
+            can use to have a finer level of control
+            over <package>dbconfig-common</package>. <em>You must use these
+            variables exactly (and only) where directed in this table</em>.
+
+        <taglist>
+            <tag>dbc_dbuser (used in: <var>config</var>)
+                <item>Name to use when connecting to database. (defaults to:
+                package name)
+            <tag>dbc_basepath (used in: <var>config</var>)
+                <item>Database storage directory for local (filesystem) based
+                database types. Not applicable for RDBMs like MySQL and
+                postgres. (defaults to: /var/lib/dbconfig-common)
+            <tag>dbc_dbname (used in: <var>config</var>)
+                <item>Name of database resource to which to connect. (defaults
+                to: package name)
+            <tag>dbc_dbtypes (used in: <var>config</var>)
+                <item>Database types supported by the package, in order of
+                maintainers' preference. (defaults to: empty)
+            <tag>dbc_dbfile_owner (used in: <var>postinst</var>)
+                <item>Set the owner:group for the generated database file. This
+                option is only valid for databases like SQLite that use a
+                single file for storage and is not prompted via debconf.
+                (defaults to: root:root)
+            <tag>dbc_dbfile_perms (used in: <var>postinst</var>)
+                <item>Set the permissions for the generated database file. This
+                option is only valid for databases like SQLite that use a
+                single file for storage and is not prompted via debconf.
+                (defaults to: 0640)
+            <tag>dbc_generate_include (used in: <var>postinst</var>)
+                <item>format:outputfile pair for an extra config to be
+                generated by
+                <var>dbconfig-generate-include</var>. (defaults to: empty)
+            <tag>dbc_generate_include_owner (used in: <var>postinst</var>)
+                <item>Set the owner:group of include files generated
+                by <var>dbconfig-generate-include</var>. (defaults to: empty)
+            <tag>dbc_generate_include_perms (used in: <var>postinst</var>)
+                <item>Set the permissions of include files generated
+                by <var>dbconfig-generate-include</var>. (defaults to: empty)
+            <tag>dbc_generate_include_args (used in: <var>postinst</var>)
+                <item>Arguments passed directly to
+                <var>dbconfig-generate-include</var>. (defaults to: empty)
+            <tag>dbc_dgi_on_manual (used in: <var>postinst</var>)
+                <item>Control whether config files should be generated by
+                <var>dbconfig-generate-include</var> when the admin opts for
+                manual installation. (defaults to: true)
+            <tag>dbc_first_version (used
+            in: <var>config</var>,<var>postinst</var>)
+                <item>The first version in which
+                <package>dbconfig-common</package> was introduced in the
+                package. (defaults to: empty)
+            <tag>dbc_load_include (used in: <var>config</var>)
+                <item>format:includefile pair for a config to be read in
+                by <var>dbconfig-load-include</var>. (defaults to: empty)
+            <tag>dbc_load_include_args (used in: <var>config</var>)
+                <item>Arguments passed directly to
+                <var>dbconfig-load-include</var>. (defaults to: empty)
+            <tag>dbc_pgsql_createdb_encoding (used in: <var>postinst</var>)
+                <item>Specifies encoding for created postgres databases.
+                (defaults to: empty/system default)
+            <tag>dbc_mysql_createdb_encoding (used in: <var>postinst</var>)
+                <item>Specifies encoding for created MySQL databases. (defaults
+                to: empty/system default)
+            <tag>dbc_sql_substitutions (used in: <var>postinst</var>,
+                                        sometimes <var>prerm</var>)
+                <item>If nonempty, specifies that sql files should be piped
+                through a template substitution filter
+                (<var>dbconfig-generate-include -f template</var>) before being
+                executed. (defaults to: empty)
+            <tag>dbc_authmethod_user (used in <var>config</var>)
+                <item>If set to "ident", dbconfig-common will set the
+                default postgres authentication method for the package's
+                database user to "ident". (defaults to: empty)
+            <tag>dbc_config_allow_backup (used in <var>config</var>)
+                <item>If nonempty, dbconfig-common will allow its state machine
+                to backup past the beginning, such that packages allowing
+                backup in there own config script to work transparently.
+            <tag>dbc_prio_low / dbc_prio_medium / dbc_prio_high /
+                dbc_prio_critical (used everywhere)
+                <item>If nonempty, dbconfig-common will use the values of these
+                variables to set the priority of its debconf questions. You
+                can use this if you think that the default levels of
+                dbconfig-common are not well defined for your package. Be
+                comforted thou that the priority will be raised automatically
+                on errors and that all error handling allows the sysadmin to be
+                asked the questions again.
+            <tag>dbc_authplugin (used in <var>config</var>)
+                <item>This option defines which MySQL authentication plugin
+                should be set to default whenever dbconfig-common creates a user
+                in the database on behalf of the package using it. Choices are:
+                <list>
+                <item>default: use the default auth plugin for installed MySQL server.
+                <item>mysql_native_password: no MySQL authentication plugin is used.
+                <item>sha256_password: more secure password encryption than native.
+                <item>caching_sha2_password: in-memory authentication cache.
+                </list>
+                dbc_authplugin should be set in .config file, right before calling
+                dbc_go function. It can also be configured by user during package
+                installation, or during dpkg-reconfigure, if debconf questions
+                priority is set to low.
+                <p>Be careful when changing this. There are some differences
+                in between MySQL and MariaDB and some options might not be
+                available on one or another. As up to MariaDB 10.4, its default
+                authentication plugin is "mysql_native_password" while, for
+                MySQL 8.0, the new default authentication plugin is the
+                "caching_sha2_password".
+        </taglist>
+
+        <sect1 id="debugging"> Debugging problems
+        with <package>dbconfig-common</package>
+            <p>
+            In the event that your package is having trouble working
+            with <package>dbconfig-common</package>, the first thing you should
+            try is to export and set the shell variable <var>dbc_debug</var> to
+            a nonempty value before installing your package. This will provide
+            a slightly larger amount of information about what's going on.
+
+            <p>
+            In the event that this does not provide enough information, the
+            next thing to do will provide much, much, more information; enough
+            that you will probably want to redirect stderr into a temporary
+            output file. In the file
+            <file>/usr/share/dbconfig-common/dpkg/common</file>, uncomment
+            the <var>set -x</var> line near the top of the file. This will
+            show you all the shell commands and logic as they are executed. If
+            you have a good idea of where the problem is occurring, you can
+            also insert your own <var>set -x</var> lines elsewhere followed
+            by <var>set +x</var> lines to reduce the amount of input.
+            
+<chapt id="moreinfo">More Information (and how to help)
+    <p>
+    Currently, there's a fair amount of work left to be done:
+
+    <list>
+    <item>more translators/translations are needed for the templates
+    <item>developers are needed to volunteer their packages with
+          <package>dbconfig-common</package>
+    <item>volunteers are needed to test the new packages
+    <item>support for other database formats would be nice
+    <item>more scheduled features are listed in
+          <file>/usr/share/doc/dbconfig-common/TODO</file>
+    </list>
+</book>
